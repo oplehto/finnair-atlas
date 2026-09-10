@@ -4,9 +4,9 @@ import demo from '../public/demo.mjs';
 import {validateSchedule, filterFlights} from '../public/schedule.mjs';
 import {layoutAirports, layoutFlights, curvePoint} from '../public/layout.mjs';
 
-test('validates 20 codeshare destinations and partner flights', () => {
-  assert.equal(demo.codeshareAirports.length, 20);
-  assert.equal(demo.codeshareFlights.length, 40);
+test('validates 38 codeshare destinations and partner flights', () => {
+  assert.equal(demo.codeshareAirports.length, 38);
+  assert.equal(demo.codeshareFlights.length, 76);
 
   const validated = validateSchedule({
     ...demo,
@@ -14,28 +14,28 @@ test('validates 20 codeshare destinations and partner flights', () => {
     flights: [...demo.flights, ...demo.codeshareFlights]
   });
 
-  assert.equal(validated.airports.length, 142);
-  assert.equal(validated.flights.length, 516);
+  assert.equal(validated.airports.length, 160);
+  assert.equal(validated.flights.length, 552);
 });
 
 test('partner codeshares include Qatar Airways and Qantas connections', () => {
   const qatarFlights = demo.codeshareFlights.filter(f => f.operator === 'Qatar Airways');
   const qantasFlights = demo.codeshareFlights.filter(f => f.operator === 'Qantas');
-  assert.ok(qatarFlights.length >= 20, 'Includes Qatar Airways flights via Doha');
-  assert.ok(qantasFlights.length >= 10, 'Includes Qantas flights via Singapore/LAX');
+  assert.ok(qatarFlights.length >= 30, 'Includes Qatar Airways flights via Doha');
+  assert.ok(qantasFlights.length >= 15, 'Includes Qantas flights via Singapore/LAX');
 
-  const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL'];
+  const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL', 'CBR', 'CHC'];
   for (const code of australasia) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Australasia destination ${code}`);
   }
 
-  const africa = ['JNB', 'CPT', 'NBO', 'CAI'];
+  const africa = ['JNB', 'CPT', 'NBO', 'CAI', 'ZNZ'];
   for (const code of africa) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Africa destination ${code}`);
   }
 });
 
-test('combined 142-airport network layout has zero box overlaps', () => {
+test('combined 160-airport network layout has zero box overlaps', () => {
   const allAirports = [...demo.airports, ...demo.codeshareAirports];
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const nodes = layoutAirports(allAirports, allFlights);
@@ -70,6 +70,6 @@ test('filterFlights can filter codeshares on or off', () => {
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const withCS = filterFlights(allFlights, {codeshares: true});
   const withoutCS = filterFlights(allFlights, {codeshares: false});
-  assert.equal(withCS.length, 516);
+  assert.equal(withCS.length, 552);
   assert.equal(withoutCS.length, 476);
 });

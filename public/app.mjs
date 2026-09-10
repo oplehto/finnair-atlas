@@ -94,11 +94,28 @@ function render(){
   );
 
   const label=labels.get(f.id);
-  if(label)g.append(el('text',{x:label.x,y:label.y,'dominant-baseline':'central','text-anchor':'middle',class:label.hidden?'crowded-label':'',transform:`rotate(${label.angle*180/Math.PI} ${label.x} ${label.y})`},label.text));
-  g.addEventListener('click',()=>select(f.id));
-  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(f.id);}});
+  if(label){
+   const deg=label.angle*180/Math.PI;
+   const labelG=el('g',{class:`label-plate${label.hidden?' crowded-label':''}`,transform:`rotate(${deg} ${label.x} ${label.y})`});
+   labelG.append(
+    el('rect',{x:label.x-label.width/2-3,y:label.y-8.5,width:label.width+6,height:17,fill:'#f8f7ef',class:'label-bg',rx:2}),
+    el('text',{x:label.x,y:label.y,'dominant-baseline':'central','text-anchor':'middle',class:'flight-label'},label.text)
+   );
+   g.append(labelG);
+  }
   svg.append(g);
  }
+
+ svg.addEventListener('click',e=>{
+  const target=e.target.closest('.flight');
+  if(target?.dataset.id)select(target.dataset.id);
+ });
+ svg.addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){
+   const target=e.target.closest('.flight');
+   if(target?.dataset.id){e.preventDefault();select(target.dataset.id);}
+  }
+ });
 
  // Airport rectangles & typography
  for(const a of points){
@@ -109,30 +126,27 @@ function render(){
    g.append(
     a.polygonPoints ? el('polygon',{points:a.polygonPoints,class:'hub-outer'}) : el('rect',{x:-a.width/2,y:-a.height/2,width:a.width,height:a.height,class:'hub-outer'}),
     a.innerPolygonPoints ? el('polygon',{points:a.innerPolygonPoints,class:'hub-inner'}) : el('rect',{x:-a.width/2+8,y:-a.height/2+8,width:a.width-16,height:a.height-16,class:'hub-inner'}),
-    el('text',{x:0,y:-75,'text-anchor':'middle',class:'hub-title code'},'HELSINKI'),
-    el('text',{x:0,y:25,'text-anchor':'middle',class:'hub-subtitle name'},'HELSINGFORS'),
-    el('text',{x:0,y:85,'text-anchor':'middle',class:'hub-tag total'},'HEL · FINNAIR CENTRAL HUB · KESKUSLENTOASEMA'),
-    el('text',{x:0,y:130,'text-anchor':'middle',class:'hub-services-count'},`${a.services} SCHEDULED SERVICES / REITTILENTOA`)
+    el('text',{x:0,y:-55,'text-anchor':'middle',class:'hub-title code'},'HELSINKI'),
+    el('text',{x:0,y:35,'text-anchor':'middle',class:'hub-subtitle name'},'HELSINGFORS'),
+    el('text',{x:0,y:95,'text-anchor':'middle',class:'hub-tag total'},'HEL · FINNAIR CENTRAL HUB · KESKUSLENTOASEMA')
    );
   }else{
    g.append(a.polygonPoints ? el('polygon',{points:a.polygonPoints}) : el('rect',{x:-a.width/2,y:-a.height/2,width:a.width,height:a.height}));
    if(isCS){
     g.append(
-     el('text',{x:0,y:-20,'text-anchor':'middle',class:'city-name code'},a.name.toUpperCase()),
-     el('text',{x:0,y:0,'text-anchor':'middle',class:'city-alt name'},(a.alt||a.partner||'CODESHARE').toUpperCase()),
-     el('text',{x:0,y:20,'text-anchor':'middle',class:'city-cs-badge'},`VIA ${a.hub||'HUB'} · ${a.partner||'ONEWORLD'}`),
-     el('text',{x:0,y:38,'text-anchor':'middle',class:'city-info total'},`${a.code} · ${a.services} ${a.services===1?'LENTO':'LENTOA'}`)
+     el('text',{x:0,y:-16,'text-anchor':'middle',class:'city-name code'},a.name.toUpperCase()),
+     el('text',{x:0,y:4,'text-anchor':'middle',class:'city-alt name'},(a.alt||a.code).toUpperCase()),
+     el('text',{x:0,y:22,'text-anchor':'middle',class:'city-cs-badge'},`VIA ${a.hub||'HUB'} · ${a.partner||'ONEWORLD'}`)
     );
    }else if(a.alt){
     g.append(
-     el('text',{x:0,y:-16,'text-anchor':'middle',class:'city-name code'},a.name.toUpperCase()),
-     el('text',{x:0,y:4,'text-anchor':'middle',class:'city-alt name'},a.alt.toUpperCase()),
-     el('text',{x:0,y:24,'text-anchor':'middle',class:'city-info total'},`${a.code} · ${a.services} ${a.services===1?'LENTO':'LENTOA'}`)
+     el('text',{x:0,y:-8,'text-anchor':'middle',class:'city-name code'},a.name.toUpperCase()),
+     el('text',{x:0,y:14,'text-anchor':'middle',class:'city-alt name'},a.alt.toUpperCase())
     );
    }else{
     g.append(
      el('text',{x:0,y:-8,'text-anchor':'middle',class:'city-name code'},a.name.toUpperCase()),
-     el('text',{x:0,y:16,'text-anchor':'middle',class:'city-info total'},`${a.code} · ${a.services} ${a.services===1?'LENTO':'LENTOA'}`)
+     el('text',{x:0,y:14,'text-anchor':'middle',class:'city-alt name'},a.code)
     );
    }
   }
@@ -214,16 +228,33 @@ function render(){
  $('count').textContent=`${points.length} lentoasemaa / ${visible.length} lentoa`;
  $('scale').textContent=`${Math.round(scale*100)}%`;
  $('flights').innerHTML=visible.map(f=>`<button class="service${f.codeshare?' codeshare-service':''}${selected===f.id?' selected':''}" data-id="${escape(f.id)}"><strong>${escape(f.from)} — ${escape(f.to)} <b>${clockTime(f.departure)}</b></strong><span>${escape(f.number||f.id)} · ${escape(f.days||f.frequency||'#')} · ${escape(f.operator||f.airline||'Aircraft unspecified')}</span></button>`).join('');
- for(const button of $('flights').children)button.onclick=()=>select(button.dataset.id);
  detail();
 }
 
+$('flights').addEventListener('click',e=>{
+ const btn=e.target.closest('.service');
+ if(btn?.dataset.id)select(btn.dataset.id);
+});
+
 function select(id){
  document.querySelector('.services').open=true;
+ const prev=selected;
  selected=selected===id?null:id;
- for(const node of document.querySelectorAll('.flight,.service,.edge-times')){
-  node.classList.toggle('selected',node.dataset.id===selected);
-  node.classList.toggle('dim',!!selected&&(node.classList.contains('flight')||node.classList.contains('edge-times'))&&node.dataset.id!==selected);
+ if(prev){
+  for(const node of document.querySelectorAll(`[data-id="${prev}"]`))node.classList.remove('selected');
+ }
+ if(selected){
+  for(const node of document.querySelectorAll(`[data-id="${selected}"]`)){
+   node.classList.add('selected');
+   if(node.classList.contains('service'))node.scrollIntoView({block:'nearest'});
+  }
+  for(const node of document.querySelectorAll('.flight, .edge-times')){
+   node.classList.toggle('dim',node.dataset.id!==selected);
+  }
+ }else{
+  for(const node of document.querySelectorAll('.flight, .edge-times')){
+   node.classList.remove('dim');
+  }
  }
  detail();
 }
@@ -262,9 +293,17 @@ $('query').oninput=render;
 if($('show-codeshares'))$('show-codeshares').onchange=render;
 $('clear').onclick=()=>select(selected);
 
+let animFrame=null;
 function applyView(){
  $('diagram').style.transform=`translate(${panX}px,${panY}px) scale(${scale})`;
  $('scale').textContent=`${Math.round(scale*100)}%`;
+}
+function scheduleApplyView(){
+ if(animFrame)return;
+ animFrame=requestAnimationFrame(()=>{
+  animFrame=null;
+  applyView();
+ });
 }
 
 function zoomAt(next,x=innerWidth/2,y=innerHeight/2){
@@ -312,12 +351,12 @@ viewport.addEventListener('pointermove',e=>{
    panX+=next.x-old.x;
    panY+=next.y-old.y;
   }
-  applyView();
+  scheduleApplyView();
   pointers.set(e.pointerId,next);
  }
 });
 
-for(const event of ['pointerup','pointercancel'])viewport.addEventListener(event,e=>{pointers.delete(e.pointerId);if(!pointers.size)viewport.classList.remove('dragging');});
+for(const event of ['pointerup','pointercancel'])viewport.addEventListener(event,e=>{pointers.delete(e.pointerId);if(!pointers.size){viewport.classList.remove('dragging');applyView();}});
 viewport.addEventListener('click',e=>{if(dragged){e.stopPropagation();e.preventDefault();}},{capture:true});
 viewport.addEventListener('keydown',e=>{
  const delta={ArrowLeft:[60,0],ArrowRight:[-60,0],ArrowUp:[0,60],ArrowDown:[0,-60]}[e.key];

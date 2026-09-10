@@ -7,31 +7,49 @@ const SCANDINAVIA_CODES = new Set(["ARN","OSL","CPH","KEF","GOT","BGO","TOS","TR
 const EAST_CODES = new Set(["DOH","DXB","DEL","BKK","HKT","SIN","HKG","PVG","ICN","HND","NRT","KIX","NGO","MEL"]);
 
 const CODESHARE_OFFSETS = {
-  // Pacific via LAX
-  SFO: {hub: 'LAX', dx: -500, dy: -140, region: 'west'},
-  HNL: {hub: 'LAX', dx: -500, dy: 140, region: 'west'},
+  // Pacific / US West via LAX
+  SFO: {hub: 'LAX', dx: -450, dy: -240, region: 'west'},
+  DEN: {hub: 'LAX', dx: 0, dy: -240, region: 'west'},
+  LAS: {hub: 'LAX', dx: -450, dy: -80, region: 'west'},
+  PHX: {hub: 'LAX', dx: -450, dy: 80, region: 'west'},
+  SAN: {hub: 'LAX', dx: 0, dy: 240, region: 'west'},
+  HNL: {hub: 'LAX', dx: -450, dy: 240, region: 'west'},
 
-  // South America, South Asia, Africa via DOH
-  EZE: {hub: 'DOH', dx: 450, dy: -700, region: 'east'},
-  GRU: {hub: 'DOH', dx: 450, dy: -400, region: 'east'},
-  BOM: {hub: 'DOH', dx: 450, dy: -140, region: 'east'},
-  CMB: {hub: 'DOH', dx: 450, dy: 140, region: 'east'},
-  MLE: {hub: 'DOH', dx: 450, dy: 420, region: 'east'},
-  CAI: {hub: 'DOH', dx: 0, dy: -350, region: 'east'},
-  NBO: {hub: 'DOH', dx: 0, dy: -650, region: 'east'},
-  JNB: {hub: 'DOH', dx: 0, dy: -950, region: 'east'},
-  CPT: {hub: 'DOH', dx: 0, dy: -1250, region: 'east'},
+  // Middle East, Africa, South Asia, South America via DOH
+  CAI: {hub: 'DOH', dx: -340, dy: -260, region: 'east'},
+  AMM: {hub: 'DOH', dx: -340, dy: -520, region: 'east'},
+  NBO: {hub: 'DOH', dx: -340, dy: -780, region: 'east'},
+  ZNZ: {hub: 'DOH', dx: -340, dy: -1040, region: 'east'},
+  JNB: {hub: 'DOH', dx: -340, dy: -1300, region: 'east'},
+  CPT: {hub: 'DOH', dx: -340, dy: -1560, region: 'east'},
+  MCT: {hub: 'DOH', dx: 0, dy: -260, region: 'east'},
+  RUH: {hub: 'DOH', dx: 0, dy: -520, region: 'east'},
+  JED: {hub: 'DOH', dx: 0, dy: -780, region: 'east'},
+  GRU: {hub: 'DOH', dx: 0, dy: -1040, region: 'east'},
+  EZE: {hub: 'DOH', dx: 0, dy: -1300, region: 'east'},
+  SCL: {hub: 'DOH', dx: 0, dy: -1560, region: 'east'},
+  BOM: {hub: 'DOH', dx: 420, dy: -140, region: 'east'},
+  CMB: {hub: 'DOH', dx: 420, dy: 140, region: 'east'},
+  BLR: {hub: 'DOH', dx: 420, dy: 380, region: 'east'},
+  MLE: {hub: 'DOH', dx: 420, dy: 620, region: 'east'},
+  SEZ: {hub: 'DOH', dx: 420, dy: 860, region: 'east'},
 
   // Southeast Asia & Australasia via SIN
   KUL: {hub: 'SIN', dx: -450, dy: 0, region: 'east'},
-  CGK: {hub: 'SIN', dx: 0, dy: 400, region: 'east'},
-  DPS: {hub: 'SIN', dx: 450, dy: 400, region: 'east'},
-  MNL: {hub: 'SIN', dx: 450, dy: -400, region: 'east'},
-  PER: {hub: 'SIN', dx: 900, dy: 400, region: 'east'},
-  ADL: {hub: 'SIN', dx: 900, dy: 700, region: 'east'},
-  SYD: {hub: 'SIN', dx: 1350, dy: 700, region: 'east'},
-  BNE: {hub: 'SIN', dx: 1350, dy: 1000, region: 'east'},
-  AKL: {hub: 'SIN', dx: 1800, dy: 1000, region: 'east'}
+  PEN: {hub: 'SIN', dx: -450, dy: 180, region: 'east'},
+  SGN: {hub: 'SIN', dx: -450, dy: -180, region: 'east'},
+  HAN: {hub: 'SIN', dx: -450, dy: -360, region: 'east'},
+  CGK: {hub: 'SIN', dx: -240, dy: 360, region: 'east'},
+  DPS: {hub: 'SIN', dx: 0, dy: 440, region: 'east'},
+  MNL: {hub: 'SIN', dx: 450, dy: 400, region: 'east'},
+  TPE: {hub: 'SIN', dx: 450, dy: 660, region: 'east'},
+  PER: {hub: 'SIN', dx: 850, dy: 400, region: 'east'},
+  ADL: {hub: 'SIN', dx: 850, dy: 660, region: 'east'},
+  SYD: {hub: 'SIN', dx: 1250, dy: 400, region: 'east'},
+  CBR: {hub: 'SIN', dx: 1250, dy: 660, region: 'east'},
+  BNE: {hub: 'SIN', dx: 1650, dy: 400, region: 'east'},
+  AKL: {hub: 'SIN', dx: 1650, dy: 660, region: 'east'},
+  CHC: {hub: 'SIN', dx: 1650, dy: 920, region: 'east'}
 };
 
 
@@ -76,8 +94,8 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
       width = hubWidth;
       height = hubHeight;
     } else {
-      width = Math.round(Math.max(220, (a.name || a.code).length * 9 + 40, laneSpace + 40));
-      height = Math.round(Math.max(130, laneSpace + 40));
+      width = Math.round(Math.max(200, (a.name || a.code).length * 8.5 + 32, laneSpace + 24));
+      height = Math.round(Math.max(76, laneSpace + 24));
     }
     return {
       ...a,
@@ -102,16 +120,16 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     ['KTT', 'RVN', 'IVL']
   ];
   const nTierY = [
-    HEL_Y - hubHeight / 2 - 400,
-    HEL_Y - hubHeight / 2 - 950,
-    HEL_Y - hubHeight / 2 - 1500,
-    HEL_Y - hubHeight / 2 - 2050
+    HEL_Y - hubHeight / 2 - 240,
+    HEL_Y - hubHeight / 2 - 580,
+    HEL_Y - hubHeight / 2 - 920,
+    HEL_Y - hubHeight / 2 - 1260
   ];
   nTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const y = nTierY[tIdx];
     const count = present.length;
-    const flare = 400 * tIdx;
+    const flare = 260 * tIdx;
     const xStart = HEL_X - hubWidth / 2 - flare;
     const xEnd = HEL_X + hubWidth / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -128,16 +146,16 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     ['SEA', 'YYZ', 'ORD', 'JFK', 'DFW', 'LAX', 'MIA']
   ];
   const wTierX = [
-    HEL_X - hubWidth / 2 - 600,
-    HEL_X - hubWidth / 2 - 1400,
-    HEL_X - hubWidth / 2 - 2200,
-    HEL_X - hubWidth / 2 - 3100
+    HEL_X - hubWidth / 2 - 440,
+    HEL_X - hubWidth / 2 - 960,
+    HEL_X - hubWidth / 2 - 1500,
+    HEL_X - hubWidth / 2 - 2060
   ];
   wTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const x = wTierX[tIdx];
     const count = present.length;
-    const flare = 250 * tIdx;
+    const flare = 180 * tIdx;
     const yStart = HEL_Y - hubHeight / 2 - flare;
     const yEnd = HEL_Y + hubHeight / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -153,15 +171,15 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     ['HND', 'NRT', 'NGO', 'KIX', 'MEL']
   ];
   const eTierX = [
-    HEL_X + hubWidth / 2 + 650,
-    HEL_X + hubWidth / 2 + 1550,
-    HEL_X + hubWidth / 2 + 2450
+    HEL_X + hubWidth / 2 + 580,
+    HEL_X + hubWidth / 2 + 1300,
+    HEL_X + hubWidth / 2 + 2020
   ];
   eTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const x = eTierX[tIdx];
     const count = present.length;
-    const flare = 200 * tIdx;
+    const flare = 150 * tIdx;
     const yStart = HEL_Y - hubHeight / 2 - flare;
     const yEnd = HEL_Y + hubHeight / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -180,18 +198,18 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     ['FNC', 'TFS', 'LPA', 'FUE', 'ACE', 'CFU', 'ZTH', 'CHQ', 'HER', 'JTR', 'KGS', 'RHO', 'PFO', 'LCA']
   ];
   const sTierY = [
-    HEL_Y + hubHeight / 2 + 500,
-    HEL_Y + hubHeight / 2 + 1150,
-    HEL_Y + hubHeight / 2 + 1800,
-    HEL_Y + hubHeight / 2 + 2450,
-    HEL_Y + hubHeight / 2 + 3150,
-    HEL_Y + hubHeight / 2 + 3850
+    HEL_Y + hubHeight / 2 + 320,
+    HEL_Y + hubHeight / 2 + 700,
+    HEL_Y + hubHeight / 2 + 1100,
+    HEL_Y + hubHeight / 2 + 1520,
+    HEL_Y + hubHeight / 2 + 1960,
+    HEL_Y + hubHeight / 2 + 2420
   ];
   sTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const y = sTierY[tIdx];
     const count = present.length;
-    const flare = 450 * tIdx;
+    const flare = 340 * tIdx;
     const xStart = HEL_X - hubWidth / 2 - flare;
     const xEnd = HEL_X + hubWidth / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -204,9 +222,9 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   
   // Gateway hub sizing for partner connections
   const sin = byCode.get('SIN');
-  if (sin && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sin.height = 280; sin.width = 240; }
+  if (sin && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sin.height = 220; sin.width = 240; }
   const doh = byCode.get('DOH');
-  if (doh && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { doh.height = 280; doh.width = 240; }
+  if (doh && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { doh.height = 220; doh.width = 240; }
   const lax = byCode.get('LAX');
   if (lax && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lax.height = 180; lax.width = 240; }
 
@@ -622,10 +640,10 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
       if (angle > Math.PI / 2) angle -= Math.PI;
       if (angle < -Math.PI / 2) angle += Math.PI;
       const candidate = {
-        x: p.x + Math.sin(angle) * 9,
-        y: p.y - Math.cos(angle) * 9,
+        x: p.x,
+        y: p.y,
         width,
-        height: 17,
+        height: 16,
         angle,
         text,
         hidden: false

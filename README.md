@@ -87,16 +87,18 @@ The map fills the browser window. Drag to pan, scroll or pinch to zoom, and use 
 
 The example network includes all destinations across Europe, the Nordics, Asia, the Middle East and North America, plus all domestic airports (122 direct airports, 476 illustrative services in total with complete frequencies and operating days). Destination reference: [Finavia's summer/autumn 2026 route listing](https://www.finavia.fi/en/newsroom/2026/route-listing-where-can-you-fly-finavia-airports-during-summer-and-autumn-2026) and Finnair global network announcements. Times, operating day frequencies (`#` for daily, `①`–`⑦` for days of week), flight numbers and aircraft assignments reflect Summer/Autumn 2026 timetable patterns. International timestamps use explicit local UTC offsets, including Delhi's half-hour offset.
 
-In addition to the direct network, the atlas includes 20 major global codeshare connections via key oneworld partners Qatar Airways (via Doha `DOH`), Qantas (via Singapore `SIN` and Los Angeles `LAX`), and American Airlines (via `LAX`):
-- **Australasia (Kangaroo Route via SIN)**: Sydney (`SYD`), Brisbane (`BNE`), Perth (`PER`), Adelaide (`ADL`), Auckland (`AKL`).
-- **Southeast Asia (via SIN)**: Denpasar/Bali (`DPS`), Jakarta (`CGK`), Kuala Lumpur (`KUL`), Manila (`MNL`).
-- **Africa (via DOH)**: Cairo (`CAI`), Nairobi (`NBO`), Johannesburg (`JNB`), Cape Town (`CPT`).
-- **Indian Ocean & South Asia (via DOH)**: Mumbai (`BOM`), Colombo (`CMB`), Malé/Maldives (`MLE`).
-- **South America (via DOH)**: São Paulo (`GRU`), Buenos Aires (`EZE`).
-- **Pacific / North America (via LAX)**: San Francisco (`SFO`), Honolulu (`HNL`).
+In addition to the direct network, the atlas includes 38 major global codeshare connections (76 flights) via key oneworld partners Qatar Airways (via Doha `DOH`), Qantas & partners (via Singapore `SIN`), and American Airlines (via Los Angeles `LAX`):
+- **Australasia (via SIN)**: Sydney (`SYD`), Melbourne (`MEL`), Brisbane (`BNE`), Perth (`PER`), Adelaide (`ADL`), Canberra (`CBR`), Auckland (`AKL`), Christchurch (`CHC`).
+- **Southeast & East Asia (via SIN)**: Denpasar/Bali (`DPS`), Jakarta (`CGK`), Kuala Lumpur (`KUL`), Penang (`PEN`), Ho Chi Minh City (`SGN`), Hanoi (`HAN`), Manila (`MNL`), Taipei (`TPE`).
+- **Africa (via DOH)**: Cairo (`CAI`), Nairobi (`NBO`), Johannesburg (`JNB`), Cape Town (`CPT`), Zanzibar (`ZNZ`).
+- **Indian Ocean & South Asia (via DOH)**: Mumbai (`BOM`), Bengaluru (`BLR`), Colombo (`CMB`), Malé/Maldives (`MLE`), Mahé/Seychelles (`SEZ`).
+- **Middle East & South America (via DOH)**: Muscat (`MCT`), Riyadh (`RUH`), Jeddah (`JED`), Amman (`AMM`), São Paulo (`GRU`), Buenos Aires (`EZE`), Santiago (`SCL`).
+- **Western USA & Pacific (via LAX)**: San Francisco (`SFO`), Las Vegas (`LAS`), Phoenix (`PHX`), San Diego (`SAN`), Denver (`DEN`), Honolulu (`HNL`).
 
-A dedicated "Include Partner Codeshares" toggle in the toolbar allows switching between the pure direct Finnair network (122 airports, 476 flights) and the combined global network (142 airports, 516 flights). Codeshare routes are highlighted in vintage amber (`#b36200`) with dashed routing, partner carrier indicators (`op. by Qatar Airways`, `op. by Qantas`), operator flight numbers, and connecting hub badges (`VIA DOH`, `VIA SIN`, `VIA LAX`).
+A dedicated "Include Partner Codeshares" toggle in the toolbar allows switching between the pure direct Finnair network (122 airports, 476 flights) and the combined global network (160 airports, 552 flights). Codeshare routes are highlighted in vintage amber (`#b36200`) with dashed routing, partner carrier indicators (`op. by Qatar Airways`, `op. by Qantas`, `op. by American`), operator flight numbers, and connecting hub badges (`VIA DOH`, `VIA SIN`, `VIA LAX`).
 
-The 1974 timetable reference guides notation: departure and arrival times appear at the corresponding airport edges as `13.35`; flight number and compact aircraft type sit along the line. Paper-coloured gaps separate crossing lines. Worldwide distances are compressed, with geographical ordering and collision constraints keeping the diagram compact. Hub dimensions grow with service volume.
+The 1974 timetable reference guides notation: departure and arrival times appear at the corresponding airport edges as `13.35`; flight numbers and aircraft types sit directly on top of the arrow centerline with a warm paper knockout background plate (`#f8f7ef`). Excessive white space has been eliminated with dense tier positioning and compact ~76px box heights. Paper-coloured gaps separate crossing lines. Worldwide distances are compressed, with geographical ordering and collision constraints keeping the diagram compact.
+
+Rendering performance is optimized for high-density networks: event handling on the SVG map and flight list is fully delegated, viewport transformations are batched via `requestAnimationFrame`, and flight selection uses targeted DOM class toggling without full-tree re-renders.
 
 Airport nodes are rendered as authentic non-rectangular polygons rather than plain rectangles. Cities feature 8-sided faceted octagonal polygons with 45° beveled chamfers, providing extra clearance at diagonal crossings and reflecting vintage technical cartography. The central Helsinki hub features a prominent double-concentric faceted polygon (`hub-outer` and `hub-inner`). The engine also supports architectural stepped/notched polygons (`shape: "stepped"`), hexagons (`shape: "hexagon"`), and custom arbitrary polygon vertex arrays (`polygon: [[x, y], ...]`) via imported schedule files.

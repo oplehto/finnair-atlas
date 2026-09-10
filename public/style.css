@@ -439,6 +439,42 @@ dd {
   display: block;
 }
 
+.label-plate {
+  pointer-events: none;
+}
+
+.label-plate rect.label-bg {
+  fill: #f8f7ef;
+  stroke: #d0cebd;
+  stroke-width: 0.6;
+}
+
+.flight:hover .label-plate rect.label-bg,
+.flight:focus .label-plate rect.label-bg,
+.flight.selected .label-plate rect.label-bg {
+  fill: #ffffff;
+  stroke: var(--active);
+  stroke-width: 1.2;
+}
+
+.flight.codeshare:hover .label-plate rect.label-bg,
+.flight.codeshare:focus .label-plate rect.label-bg,
+.flight.codeshare.selected .label-plate rect.label-bg {
+  stroke: var(--amber-ink);
+}
+
+.flight-label {
+  font: 700 11px 'Roboto Condensed', sans-serif;
+  fill: #222b26;
+  letter-spacing: 0.3px;
+}
+
+.flight:hover .flight-label,
+.flight:focus .flight-label,
+.flight.selected .flight-label {
+  fill: #975114;
+}
+
 .edge-times {
   pointer-events: none;
   font: 700 11px 'Roboto Condensed', sans-serif;
