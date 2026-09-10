@@ -1,10 +1,604 @@
-:root{font-family:'Roboto Condensed','Arial Narrow',sans-serif;color:#303a34;background:#f8f7ef;font-synthesis:none;--blue:#08618c;--paper:#f8f7ef;--rule:#aaa99b}*{box-sizing:border-box}body{margin:0;overflow:hidden}button,input,select{font:inherit;color:inherit}button{background:transparent;border:1px solid #a8ad9f;padding:8px 12px;cursor:pointer}button:hover{background:#e5e8df}:focus-visible{outline:3px solid #de9437;outline-offset:3px}[hidden]{display:none!important}.sheet-wrap{position:fixed;inset:0;overflow:hidden;touch-action:none;cursor:grab;background:var(--paper);background-image:linear-gradient(90deg,transparent 49.8%,#b1a68b16 50%,transparent 50.3%)}.sheet-wrap.dragging{cursor:grabbing}#diagram{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}svg{display:block}.widget{position:fixed;z-index:2;background:#f8f7eff5;border:1px solid #9c9d8e;box-shadow:0 3px 16px #49402b1c}.controls{top:20px;left:20px;width:282px}.services{top:20px;right:20px;width:290px}summary{cursor:pointer;padding:14px 16px;color:var(--blue);font-weight:700;list-style:none;border-bottom:3px double #a7a99a}summary::after{content:'+';float:right}details[open]>summary::after{content:'−'}.brand{font-family:Oswald,sans-serif;font-size:23px;text-transform:uppercase}.fold{display:block;font-size:11px;font-weight:400;color:#58665b;margin-top:3px}.widget-body{padding:16px;max-height:calc(100dvh - 145px);overflow:auto}.edition{font-size:11px;text-transform:uppercase;margin:0 0 6px;color:#526e72}h1{font:600 32px/1.1 Oswald,sans-serif;text-transform:uppercase;color:var(--blue);margin:0 0 20px}.toolbar{display:grid;gap:12px}label{display:grid;gap:5px;font-size:12px;font-weight:700}input,select{width:100%;min-width:0;height:36px;padding:7px;border:1px solid #a8ad9f;border-radius:0;background:var(--paper);font-size:14px}.source{display:grid;gap:4px;margin:18px 0 12px;font-size:11px;color:#58665b}.actions{display:flex;gap:6px}.actions button{font-size:12px;padding:7px 10px}.zoom{bottom:48px;left:20px;display:flex;align-items:center;gap:8px;padding:6px}.zoom button{border:0;font-size:18px;min-width:35px}.zoom output{font-size:12px;min-width:38px;text-align:center}footer{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;gap:16px;background:#f8f7efee;border-top:1px solid #b9bbae;padding:9px 20px;font-size:11px;pointer-events:none}.services summary{font-family:Oswald,sans-serif;font-size:18px;text-transform:uppercase}#count{display:block;font:400 12px 'Roboto Condensed',sans-serif;margin-top:4px}.aside-heading{display:flex;justify-content:space-between;align-items:center}h2{font:600 21px Oswald,sans-serif;text-transform:uppercase;margin:0}h3{font-size:13px;margin-top:24px}#detail{font-size:13px;line-height:1.5}#detail .route{font:600 26px Oswald,sans-serif;color:var(--blue);margin-top:16px}dl{display:grid;grid-template-columns:1fr 1fr;gap:8px}dt{color:#62777e}dd{margin:0;text-align:right}.service{display:block;width:100%;border:0;border-bottom:1px solid #c4c5b5;padding:12px 0;text-align:left}.service strong{display:flex;justify-content:space-between;font-size:15px}.service span{font-size:12px;color:#4f5a51}.service.selected{background:#e1e8df;color:#07567d}#clear{font-size:11px;padding:3px 6px}#message{position:fixed;bottom:106px;left:20px;max-width:360px;background:#fff0d7;padding:15px;z-index:4}#empty{position:fixed;top:48%;left:35%;padding:20px}.airport .code{font-family:Oswald,sans-serif}.airport .name,.airport .total{font-family:'Roboto Condensed',sans-serif}
-.flight{cursor:pointer;outline:none}.flight .ink{stroke-width:1.5;opacity:.66}.flight .hit{stroke:transparent;stroke-width:14;fill:none}.flight text{font-size:10px;fill:#355d6d;paint-order:stroke;stroke:var(--paper);stroke-width:3;stroke-linejoin:round}.flight:hover .ink,.flight:focus .ink,.flight.selected .ink{stroke:#cd7724!important;stroke-width:3;opacity:1}.flight.selected text{fill:#975114}.flight.dim{opacity:.12}.airport rect{fill:var(--paper);stroke:#527684;stroke-width:1.4}.airport .code{font-size:24px;font-weight:750;fill:#165e7b}.airport .name{font-size:12px;fill:#385d6b}.airport .total{font-size:10px;fill:#667c83}.flight text{font:12px 'Roboto Condensed',sans-serif}.flight .crowded-label{display:none}.flight:hover .crowded-label,.flight:focus .crowded-label,.flight.selected .crowded-label{display:block}.airport.hub rect{fill:#e8f1f0;stroke:#165e7b;stroke-width:2}.airport.hub .total{font-size:12px;font-weight:600}
+:root {
+  font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  color: #303a34;
+  background: #f8f7ef;
+  font-synthesis: none;
+  --blue: #08618c;
+  --blue-ink: #09618c;
+  --black-ink: #454940;
+  --amber-ink: #b36200;
+  --ink-dim: #303a34;
+  --paper: #f8f7ef;
+  --rule: #aaa99b;
+  --active: #cd7724;
+}
 
+* {
+  box-sizing: border-box;
+}
 
-.flight .ink{opacity:.82}.flight text{fill:#373b35}.airport rect{stroke:#555c52;stroke-width:1.6}.airport .code{font-family:Oswald,sans-serif;font-weight:600;fill:#303a34}.airport.hub rect{fill:#f4f4e9;stroke:#405f61;stroke-width:2.4}.airport.hub .code{fill:#08618c}@media(max-width:700px){.controls{top:10px;left:10px;width:225px}.services{top:auto;bottom:48px;right:10px;width:235px}.widget-body{max-height:52dvh}summary{padding:10px 12px}.brand{font-size:20px}.services summary{font-size:16px}.zoom{left:10px;bottom:48px;gap:0;padding:3px}footer{padding:8px 10px}footer span:not(:first-child){display:none}h1{font-size:27px}}
-summary{position:relative;padding-right:34px}summary::after{position:absolute;right:14px;top:16px;float:none}
+body {
+  margin: 0;
+  overflow: hidden;
+  background: var(--paper);
+}
 
-.zoom #plus,.zoom #actual,.zoom #fit{font-size:14px;white-space:nowrap}@media(max-width:700px){.zoom{bottom:130px}.zoom button{padding:8px}}
+button, input, select {
+  font: inherit;
+  color: inherit;
+}
 
-.flight .crossing-gap{fill:none;stroke:var(--paper);stroke-width:7;stroke-linejoin:round;pointer-events:none}.edge-times{pointer-events:none;font:11px 'Roboto Condensed',sans-serif}.edge-times.dim{opacity:.15}.edge-times.selected text{fill:#975114}.flight text{stroke-width:5}
+button {
+  background: transparent;
+  border: 1px solid #a8ad9f;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e5e8df;
+}
+
+:focus-visible {
+  outline: 3px solid #de9437;
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sheet-wrap {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  background: var(--paper);
+  background-image: linear-gradient(90deg, transparent 49.8%, #b1a68b16 50%, transparent 50.3%);
+}
+
+.sheet-wrap.dragging {
+  cursor: grabbing;
+}
+
+#diagram {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+svg {
+  display: block;
+}
+
+/* Floating timetable widgets */
+.widget {
+  position: fixed;
+  z-index: 2;
+  background: #f8f7eff5;
+  border: 1px solid #9c9d8e;
+  box-shadow: 0 3px 16px #49402b1c;
+}
+
+.controls {
+  top: 20px;
+  left: 20px;
+  width: 290px;
+}
+
+.services {
+  top: 20px;
+  right: 20px;
+  width: 300px;
+}
+
+summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  color: var(--blue);
+  font-weight: 700;
+  list-style: none;
+  border-bottom: 3px double #a7a99a;
+  position: relative;
+  padding-right: 34px;
+}
+
+summary::after {
+  content: '+';
+  position: absolute;
+  right: 14px;
+  top: 16px;
+}
+
+details[open] > summary::after {
+  content: '−';
+}
+
+.brand {
+  font-family: Oswald, sans-serif;
+  font-size: 23px;
+  text-transform: uppercase;
+}
+
+.fold {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #58665b;
+  margin-top: 3px;
+}
+
+.widget-body {
+  padding: 16px;
+  max-height: calc(100dvh - 145px);
+  overflow: auto;
+}
+
+.edition {
+  font-size: 11px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  color: #526e72;
+}
+
+h1 {
+  font: 600 32px/1.1 Oswald, sans-serif;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 20px;
+}
+
+.toolbar {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.codeshare-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8c4c00;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.codeshare-label input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+}
+
+input, select {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  padding: 7px;
+  border: 1px solid #a8ad9f;
+  border-radius: 0;
+  background: var(--paper);
+  font-size: 14px;
+}
+
+.source {
+  display: grid;
+  gap: 4px;
+  margin: 18px 0 12px;
+  font-size: 11px;
+  color: #58665b;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actions button {
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+.zoom {
+  bottom: 48px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+}
+
+.zoom button {
+  border: 0;
+  font-size: 18px;
+  min-width: 35px;
+}
+
+.zoom #plus, .zoom #actual, .zoom #fit {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.zoom output {
+  font-size: 12px;
+  min-width: 38px;
+  text-align: center;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  background: #f8f7efee;
+  border-top: 1px solid #b9bbae;
+  padding: 9px 20px;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.services summary {
+  font-family: Oswald, sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+#count {
+  display: block;
+  font: 400 12px 'Roboto Condensed', sans-serif;
+  margin-top: 4px;
+}
+
+.aside-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2 {
+  font: 600 21px Oswald, sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+h3 {
+  font-size: 13px;
+  margin-top: 24px;
+}
+
+#detail {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#detail .route {
+  font: 600 26px Oswald, sans-serif;
+  color: var(--blue);
+  margin-top: 16px;
+}
+
+#detail .route.codeshare-route {
+  color: var(--amber-ink);
+}
+
+.codeshare-badge {
+  display: inline-block;
+  background: #faeacc;
+  color: #8a4800;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 4px 8px;
+  border: 1px solid #deb578;
+  margin: 8px 0 12px;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+dt {
+  color: #62777e;
+}
+
+dd {
+  margin: 0;
+  text-align: right;
+}
+
+.service {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #c4c5b5;
+  padding: 12px 0;
+  text-align: left;
+}
+
+.service strong {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.service span {
+  font-size: 12px;
+  color: #4f5a51;
+}
+
+.service.codeshare-service strong {
+  color: #8c4c00;
+}
+
+.service.selected {
+  background: #e1e8df;
+  color: #07567d;
+}
+
+#clear {
+  font-size: 11px;
+  padding: 3px 6px;
+}
+
+#message {
+  position: fixed;
+  bottom: 106px;
+  left: 20px;
+  max-width: 360px;
+  background: #fff0d7;
+  padding: 15px;
+  z-index: 4;
+}
+
+#empty {
+  position: fixed;
+  top: 48%;
+  left: 35%;
+  padding: 20px;
+}
+
+/* --- SVG Diagram Styling (1974 Vintage Print Timetable) --- */
+.flight {
+  cursor: pointer;
+  outline: none;
+}
+
+.flight .hit {
+  stroke: transparent;
+  stroke-width: 14;
+  fill: none;
+}
+
+.flight .crossing-gap {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 8;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.flight .ink {
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+
+.flight.codeshare .ink {
+  stroke: var(--amber-ink);
+  stroke-width: 1.8;
+  stroke-dasharray: 8 3;
+}
+
+.flight text {
+  font: 11px 'Roboto Condensed', sans-serif;
+  fill: #303a34;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.flight:hover .ink,
+.flight:focus .ink,
+.flight.selected .ink {
+  stroke: var(--active) !important;
+  stroke-width: 3;
+  opacity: 1;
+}
+
+.flight.selected text {
+  fill: #975114;
+  font-weight: 700;
+}
+
+.flight.dim {
+  opacity: 0.12;
+}
+
+.flight .crowded-label {
+  display: none;
+}
+
+.flight:hover .crowded-label,
+.flight:focus .crowded-label,
+.flight.selected .crowded-label {
+  display: block;
+}
+
+.edge-times {
+  pointer-events: none;
+  font: 700 11px 'Roboto Condensed', sans-serif;
+}
+
+.edge-times.codeshare text {
+  fill: var(--amber-ink);
+}
+
+.edge-times.dim {
+  opacity: 0.12;
+}
+
+.edge-times.selected text {
+  fill: #975114;
+}
+
+/* Airport boxes */
+.airport rect,
+.airport polygon {
+  fill: #fbfaf5;
+  stroke: #555c52;
+  stroke-width: 1.5;
+}
+
+.airport.hub rect,
+.airport.hub polygon {
+  fill: #f4f4e9;
+  stroke: var(--blue);
+  stroke-width: 2;
+}
+
+.airport.codeshare-airport rect,
+.airport.codeshare-airport polygon {
+  fill: #faf6ea;
+  stroke: #a8793b;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 2;
+}
+
+.airport .city-name {
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  fill: #222b26;
+  letter-spacing: 0.5px;
+}
+
+.airport .city-alt {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  fill: #5a6865;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.airport .city-cs-badge {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  fill: #9c5c10;
+  letter-spacing: 0.5px;
+}
+
+.airport .city-info {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  fill: #687672;
+  letter-spacing: 0.5px;
+}
+
+/* Helsinki Hub */
+.helsinki-hub .hub-outer {
+  fill: #f5f4ea;
+  stroke: var(--blue);
+  stroke-width: 3;
+}
+
+.helsinki-hub .hub-inner {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1.2;
+  stroke-dasharray: 6 3;
+}
+
+.helsinki-hub .hub-title {
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
+  font-size: 96px;
+  fill: var(--blue);
+  letter-spacing: 4px;
+}
+
+.helsinki-hub .hub-subtitle {
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
+  font-size: 52px;
+  fill: var(--black-ink);
+  letter-spacing: 3px;
+}
+
+.helsinki-hub .hub-tag {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  fill: #526e72;
+  letter-spacing: 2px;
+}
+
+.helsinki-hub .hub-services-count {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  fill: var(--blue);
+  letter-spacing: 1.5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .controls {
+    top: 10px;
+    left: 10px;
+    width: 225px;
+  }
+  .services {
+    top: auto;
+    bottom: 48px;
+    right: 10px;
+    width: 235px;
+  }
+  .widget-body {
+    max-height: 52dvh;
+  }
+  summary {
+    padding: 10px 12px;
+  }
+  .brand {
+    font-size: 20px;
+  }
+  .services summary {
+    font-size: 16px;
+  }
+  .zoom {
+    left: 10px;
+    bottom: 130px;
+    gap: 0;
+    padding: 3px;
+  }
+  .zoom button {
+    padding: 8px;
+  }
+  footer {
+    padding: 8px 10px;
+  }
+  footer span:not(:first-child) {
+    display: none;
+  }
+  h1 {
+    font-size: 27px;
+  }
+}

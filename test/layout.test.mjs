@@ -7,7 +7,7 @@ test('sizes hubs by service volume with Helsinki and Oulu visibly larger',()=>{
  const nodes=layoutAirports(demo.airports,demo.flights),get=c=>nodes.find(a=>a.code===c);
  assert.ok(get('HEL').width>get('OUL').width*1.3);
  assert.ok(get('OUL').width>get('VAA').width*1.15);
- assert.equal(get('HEL').services,128);assert.equal(get('OUL').services,8);
+ assert.equal(get('HEL').services,476);assert.equal(get('OUL').services,14);
 });
 test('variable airport rectangles have clear space around every box',()=>{
  const nodes=layoutAirports(demo.airports,demo.flights);
@@ -100,4 +100,33 @@ test('regional groups dock on their assigned Helsinki edges',()=>{
    if(other.region==='north'){assert.ok(other.y+other.height/2<hub.y-hub.height/2);assert.ok(Math.abs(port.y-(hub.y-hub.height/2-8))<.001);}
   }
  }
+});
+
+test('airport polygons are non-rectangular with chamfered, faceted, or stepped geometry', () => {
+ const nodes = layoutAirports(demo.airports, demo.flights);
+ const hel = nodes.find(n => n.code === 'HEL');
+ assert.ok(Array.isArray(hel.polygon));
+ assert.equal(hel.polygon.length, 8, 'Helsinki hub has 8-sided faceted outer polygon');
+ assert.ok(Array.isArray(hel.innerPolygon), 'Helsinki hub has inner concentric polygon');
+ assert.equal(hel.innerPolygon.length, 8);
+ assert.ok(hel.polygonPoints.includes(','), 'Helsinki has SVG polygonPoints attribute');
+
+ const hw = hel.width / 2, hh = hel.height / 2;
+ const hasCutCorner = hel.polygon.some(p => Math.abs(p.x) < hw && Math.abs(p.y) === hh);
+ assert.ok(hasCutCorner, 'polygon vertices bevel the rectangular corners');
+
+ const oul = nodes.find(n => n.code === 'OUL');
+ assert.equal(oul.polygon.length, 8);
+
+ const custom = layoutAirports([
+  {code: 'STP', name: 'Stepped City', lat: 60, lon: 25, shape: 'stepped'},
+  {code: 'HEX', name: 'Hex City', lat: 61, lon: 25, shape: 'hexagon'},
+  {code: 'CST', name: 'Custom City', lat: 62, lon: 25, polygon: [[-50, -30], [50, -30], [60, 0], [50, 30], [-50, 30]]}
+ ], []);
+ const stp = custom.find(n => n.code === 'STP');
+ assert.equal(stp.polygon.length, 12, 'Stepped shape has 12 vertices');
+ const hex = custom.find(n => n.code === 'HEX');
+ assert.equal(hex.polygon.length, 6, 'Hexagon shape has 6 vertices');
+ const cst = custom.find(n => n.code === 'CST');
+ assert.equal(cst.polygon.length, 5, 'Custom polygon preserves 5 vertices');
 });
