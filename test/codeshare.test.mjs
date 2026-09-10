@@ -4,9 +4,9 @@ import demo from '../public/demo.mjs';
 import {validateSchedule, filterFlights} from '../public/schedule.mjs';
 import {layoutAirports, layoutFlights, curvePoint} from '../public/layout.mjs';
 
-test('validates 38 codeshare destinations and partner flights', () => {
-  assert.equal(demo.codeshareAirports.length, 38);
-  assert.equal(demo.codeshareFlights.length, 76);
+test('validates 58 codeshare destinations and partner flights', () => {
+  assert.equal(demo.codeshareAirports.length, 58);
+  assert.equal(demo.codeshareFlights.length, 116);
 
   const validated = validateSchedule({
     ...demo,
@@ -14,28 +14,47 @@ test('validates 38 codeshare destinations and partner flights', () => {
     flights: [...demo.flights, ...demo.codeshareFlights]
   });
 
-  assert.equal(validated.airports.length, 160);
-  assert.equal(validated.flights.length, 552);
+  assert.equal(validated.airports.length, 180);
+  assert.equal(validated.flights.length, 592);
 });
 
-test('partner codeshares include Qatar Airways and Qantas connections', () => {
+test('partner codeshares include key oneworld partner airlines and hubs', () => {
   const qatarFlights = demo.codeshareFlights.filter(f => f.operator === 'Qatar Airways');
   const qantasFlights = demo.codeshareFlights.filter(f => f.operator === 'Qantas');
-  assert.ok(qatarFlights.length >= 30, 'Includes Qatar Airways flights via Doha');
-  assert.ok(qantasFlights.length >= 15, 'Includes Qantas flights via Singapore/LAX');
+  const americanFlights = demo.codeshareFlights.filter(f => f.operator === 'American Airlines');
+  const alaskaFlights = demo.codeshareFlights.filter(f => f.operator === 'Alaska Airlines');
+  const jalFlights = demo.codeshareFlights.filter(f => f.operator === 'Japan Airlines');
+  const cathayFlights = demo.codeshareFlights.filter(f => f.operator === 'Cathay Pacific');
 
-  const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL', 'CBR', 'CHC'];
+  assert.ok(qatarFlights.length >= 28, 'Includes Qatar Airways flights via Doha');
+  assert.ok(qantasFlights.length >= 24, 'Includes Qantas flights via Singapore');
+  assert.ok(americanFlights.length >= 30, 'Includes American Airlines flights via Miami, Dallas, LA');
+  assert.ok(alaskaFlights.length >= 4, 'Includes Alaska Airlines flights via Seattle');
+  assert.ok(jalFlights.length >= 6, 'Includes Japan Airlines flights via Tokyo Haneda');
+  assert.ok(cathayFlights.length >= 2, 'Includes Cathay Pacific flights via Hong Kong');
+
+  const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL', 'CBR', 'CHC', 'CNS', 'DRW', 'HBA', 'OOL'];
   for (const code of australasia) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Australasia destination ${code}`);
+  }
+
+  const southAmerica = ['BOG', 'LIM', 'MDE', 'UIO', 'SCL', 'GIG', 'GRU', 'MVD', 'EZE'];
+  for (const code of southAmerica) {
+    assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes South America destination ${code}`);
   }
 
   const africa = ['JNB', 'CPT', 'NBO', 'CAI', 'ZNZ'];
   for (const code of africa) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Africa destination ${code}`);
   }
+
+  const japan = ['CTS', 'FUK', 'OKA'];
+  for (const code of japan) {
+    assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Japan destination ${code}`);
+  }
 });
 
-test('combined 160-airport network layout has zero box overlaps', () => {
+test('combined 180-airport network layout has zero box overlaps', () => {
   const allAirports = [...demo.airports, ...demo.codeshareAirports];
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const nodes = layoutAirports(allAirports, allFlights);
@@ -70,6 +89,6 @@ test('filterFlights can filter codeshares on or off', () => {
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const withCS = filterFlights(allFlights, {codeshares: true});
   const withoutCS = filterFlights(allFlights, {codeshares: false});
-  assert.equal(withCS.length, 552);
+  assert.equal(withCS.length, 592);
   assert.equal(withoutCS.length, 476);
 });
