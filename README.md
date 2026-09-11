@@ -116,4 +116,12 @@ Code and documentation are released under the [Apache License 2.0](LICENSE); see
 
 ## Publishing
 
-`npm run build` also writes a self-contained static site to `site/` (the page, bundle, fonts and the baked `schedule.json`; the app falls back to that file when there is no `api/schedule`). The workflow in `.github/workflows/pages.yml` tests, builds and deploys it to GitHub Pages on every push to `main`; enable Pages with the "GitHub Actions" source in the repository settings. Any static host that serves the folder as is, such as Cloudflare Pages, works the same way.
+`npm run build` also writes a self-contained static site to `site/`: the page, bundle, fonts, cache and `nosniff` headers, and the baked `schedule.json`. The static page names that file in a `schedule-source` meta tag, so it reads the baked schedule directly and never calls `api/schedule`. Any host that serves the folder as is will work.
+
+The live sheet is deployed to Cloudflare from `wrangler.jsonc`, which serves `site/` as static assets:
+
+```
+npm run deploy
+```
+
+That builds first, then uploads. The workflow in `.github/workflows/pages.yml` deploys the same folder to GitHub Pages instead, and is unused while Cloudflare is the host.
