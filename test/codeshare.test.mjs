@@ -74,6 +74,20 @@ test('combined network layout has zero box overlaps', () => {
   }
 });
 
+// Inside the drawn (convex, chamfered) outline rather than the bounding rectangle: routes may hug a cut corner.
+const insidePolygon = (p, n) => {
+  const poly = (n.polygon || []).map(v => ({x: n.x + v.x, y: n.y + v.y}));
+  if (poly.length < 3) return Math.abs(p.x - n.x) < n.width / 2 && Math.abs(p.y - n.y) < n.height / 2;
+  let sign = 0;
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length];
+    const cross = (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x);
+    if (Math.abs(cross) < 1e-9) continue;
+    if (sign === 0) sign = Math.sign(cross); else if (Math.sign(cross) !== sign) return false;
+  }
+  return true;
+};
+
 test('codeshare routes avoid intersecting unrelated airport boxes', () => {
   const allAirports = [...demo.airports, ...demo.codeshareAirports];
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
@@ -85,7 +99,7 @@ test('codeshare routes avoid intersecting unrelated airport boxes', () => {
       const p = curvePoint(r, i / 100);
       for (const n of nodes) {
         if (n.code !== r.flight.from && n.code !== r.flight.to) {
-          assert.ok(Math.abs(p.x - n.x) >= n.width / 2 || Math.abs(p.y - n.y) >= n.height / 2, `${r.flight.id} crosses ${n.code}`);
+          assert.ok(!insidePolygon(p, n), `${r.flight.id} crosses ${n.code}`);
         }
       }
     }

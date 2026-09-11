@@ -913,7 +913,7 @@ h1 .unofficial {
 
 /* Times at the arrow endpoints, set along the lane like the reference. */
 .edge-times {
-  font: 700 8.5px 'Roboto Condensed', sans-serif;
+  font: 700 7.5px 'Roboto Condensed', sans-serif;
 }
 
 .edge-times text {

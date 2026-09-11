@@ -183,7 +183,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
       // make a wide banner under the hub rather than a square that shadows the European fan.
       const along = laneSpace + 24, across = Math.round(along / 2), wide = reg === 'north' || reg === 'south';
       width = Math.round(Math.max(200, (a.name || a.code).length * 8.5 + 32, wide ? along : across));
-      height = Math.round(Math.max(76, wide ? across : along));
+      height = Math.round(Math.max(a.codeshare ? 76 : 104, wide ? across : along));
     }
     return {
       ...a,
@@ -275,7 +275,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // Hong Kong, clears Taipei, above right of Singapore.
   const eCols = [
     {x: 540, boxes: [['DOH', -1000], ['DXB', -500], ['DEL', 0], ['BKK', 600], ['HKT', 900]]},
-    {x: 1020, boxes: [['ICN', -1380], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['MEL', 1000], ['SIN', 1250]]}
+    {x: 1020, boxes: [['ICN', -1400], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['MEL', 1000], ['SIN', 1250]]}
   ];
   for (const col of eCols) {
     for (const [code, dy] of col.boxes) {
@@ -875,9 +875,14 @@ export function layoutFlights(nodes, flights, {passableCorners = true} = {}) {
       const pa = ports.get(from + ':' + key), pb = ports.get(to + ':' + key);
       const middle = bundlePath(pa.escape, pb.escape, nodes.filter(n => n !== a && n !== b), (services.length - 1) * 7, chamfers);
       const spine = [pa.port, ...middle, pb.port];
-      services.sort((a, b) => a.from.localeCompare(b.from) || a.departure.localeCompare(b.departure) || a.id.localeCompare(b.id));
+      // Lanes are grouped by direction, then ordered by departure clock time; on screen the order runs
+      // earliest to latest left to right (vertical spines) or top to bottom (horizontal spines).
+      const clock = f => f.departure.slice(11, 16);
+      services.sort((a, b) => a.from.localeCompare(b.from) || clock(a).localeCompare(clock(b)) || a.id.localeCompare(b.id));
+      const sdx = spine[1].x - spine[0].x, sdy = spine[1].y - spine[0].y, nx = -sdy, ny = sdx;
+      const flip = Math.abs(nx) >= Math.abs(ny) ? nx < 0 : ny < 0;
       services.forEach((flight, i) => {
-        const offset = (i - (services.length - 1) / 2) * 14, points = offsetPath(spine, offset);
+        const offset = (flip ? -1 : 1) * (i - (services.length - 1) / 2) * 14, points = offsetPath(spine, offset);
         if (flight.from !== from) points.reverse();
         const start = points[0], end = points.at(-1);
         result.push({
@@ -1008,10 +1013,10 @@ export function endpointLabels(route, nodes) {
     const isLargeHub = n && (n.isRegionalHub || (n.width >= 340 && n.height >= 240));
     const vertical = Math.abs(Math.abs(p.y - n.y) - n.height / 2 - 8) < 0.01;
     const nx = vertical ? 0 : Math.sign(p.x - n.x), ny = vertical ? Math.sign(p.y - n.y) : 0;
-    // Direction the text runs away from its anchor: outward for small boxes, inward for hubs.
-    const dx = isLargeHub ? -nx : nx, dy = isLargeHub ? -ny : ny;
-    const along = isLargeHub ? -12 : 11;
-    const side = isLargeHub ? 0 : 6.5;
+    // The text runs inward from the outline at every box, centred on its lane.
+    const dx = -nx, dy = -ny;
+    const along = isLargeHub ? -12 : -8;
+    const side = 0;
     return {
       x: p.x + nx * along + (vertical ? side : 0),
       y: p.y + ny * along + (vertical ? 0 : side),
@@ -1019,7 +1024,7 @@ export function endpointLabels(route, nodes) {
       anchor: vertical ? (dy > 0 ? 'end' : 'start') : (dx > 0 ? 'start' : 'end'),
       hub: !!isLargeHub,
       // The days of operation follow the time at both ends, so each comb reads as a timetable column.
-      text: time.slice(11, 16).replace(':', '.') + ' ' + (route.flight.days || route.flight.frequency || '#')
+      text: time.slice(11, 16).replace(':', '.') + ((route.flight.days || '') && route.flight.days !== '#' ? ' ' + route.flight.days : '')
     };
   });
 }

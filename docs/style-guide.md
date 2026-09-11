@@ -72,7 +72,7 @@ Use the notation in the timing-detail reference:
 - Aircraft appear as timetable codes (A321, A359, E190, AT72, B738, B789); the legend lists the codes present on the sheet with their full names.
 - Blue or black lettering matched to the route's ink; partner codeshares use the amber ink.
 
-Times run along the lane: outside ordinary airport boxes 6.5 units to one side of it starting 11 units beyond the port, inside large hubs centred on the lane axis starting 12 units inside the outline, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
+Times run along the lane inside every box, centred on the lane axis, starting 8 units inside the outline (12 at the hub), with the days of operation after the time when the service is not daily; the city name shifts 14 units away from the edge that carries ports, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
 
 Use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
 
@@ -106,10 +106,10 @@ These are current SVG drawing units, not immutable visual rules. Adjust them tog
 | Turboprop and codeshare route stroke | 1.4, dashed |
 | Paper crossing under-stroke | 7 |
 | Flight label text | 9.5 bold on a 13-unit plate, in route ink, so neighbouring lanes' labels sit side by side |
-| Airport-edge time text | 9 bold, 1.8 paper knockout |
+| Airport-edge time text | 7.5 bold (8 at the hub), 1.8 paper knockout, days after the time when not daily |
 | Arrow endpoint gap outside airport | 8 |
 | Straight approach stub | 40 before lane offsetting |
-| Time label | 11 beyond the port outside small boxes, 6.5 beside the lane; 12 inside hubs, centred on the lane |
+| Time label | inside every box, centred on the lane, 8 inside the outline (12 at hubs), 7.5 px |
 | City name | Oswald 600, 18 |
 | Hub title | width ÷ 14, capped at 320 |
 | Masthead wordmark | 64 × masthead scale |

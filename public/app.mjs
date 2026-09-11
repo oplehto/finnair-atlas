@@ -158,7 +158,13 @@ function render(){
   return;
  }
  const {points,routes,labels}=geometry;
- const byName=code=>points.find(p=>p.code===code)?.name||code;
+ const byCode=new Map(points.map(p=>[p.code,p]));
+ const byName=code=>byCode.get(code)?.name||code;
+ // Which edges of each box carry ports, from the routed endpoints; the city name moves away from them.
+ const portSides=new Map();
+ for(const r of routes)for(const [p,code] of [[r.start,r.flight.from],[r.end,r.flight.to]]){const n=byCode.get(code);if(!n)continue;const s=portSides.get(code)||{top:0,bottom:0};if(Math.abs(p.y-(n.y-n.height/2-8))<0.01)s.top++;else if(Math.abs(p.y-(n.y+n.height/2+8))<0.01)s.bottom++;portSides.set(code,s);}
+ // Name block: centred by default; in the half away from the ports when only one horizontal edge carries them.
+ const nameBlock=a=>{const s=portSides.get(a.code),hh=a.height/2;if(!s||(s.top&&s.bottom)||(!s.top&&!s.bottom))return {name:-7,alt:15};return s.top?{name:hh-30,alt:hh-14}:{name:-hh+24,alt:-hh+40};};
  const partnerOf=new Map((data.codeshareAirports||[]).filter(a=>a.hub&&a.partner).map(a=>[a.hub,a.partner]));
 
  // Sheet geometry: content bounds, then a scale factor so masthead, frame and legend read at the fit view.
@@ -222,16 +228,18 @@ function render(){
    );
   }else{
    g.append(outline(''));
+   const nb=nameBlock(a);
    if(isCS){
+    const dy=nb.name+7;
     g.append(
-     el('text',{x:0,y:-16,'text-anchor':'middle',class:'city-name'},upper(a.name)),
-     el('text',{x:0,y:4,'text-anchor':'middle',class:'city-alt'},upper(a.alt||a.code)),
-     el('text',{x:0,y:22,'text-anchor':'middle',class:'city-cs-badge'},`VIA ${a.hub||'HUB'} · ${upper(a.partner||'partner')}`)
+     el('text',{x:0,y:dy-16,'text-anchor':'middle',class:'city-name'},upper(a.name)),
+     el('text',{x:0,y:dy+4,'text-anchor':'middle',class:'city-alt'},upper(a.alt||a.code)),
+     el('text',{x:0,y:dy+22,'text-anchor':'middle',class:'city-cs-badge'},`VIA ${a.hub||'HUB'} · ${upper(a.partner||'partner')}`)
     );
    }else{
     g.append(
-     el('text',{x:0,y:-7,'text-anchor':'middle',class:'city-name'},upper(a.name)),
-     el('text',{x:0,y:15,'text-anchor':'middle',class:'city-alt'},a.alt?upper(a.alt):a.code)
+     el('text',{x:0,y:nb.name,'text-anchor':'middle',class:'city-name'},upper(a.name)),
+     el('text',{x:0,y:nb.alt,'text-anchor':'middle',class:'city-alt'},a.alt?upper(a.alt):a.code)
     );
    }
   }
