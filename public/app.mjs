@@ -71,7 +71,7 @@ function render(){
   el('text',{x:0,y:60,fill:'#08618c','font-size':64,'font-family':'Oswald','font-weight':600,'letter-spacing':'3px'},'FINNAIR'),
   el('text',{x:250,y:40,fill:'#08618c','font-size':22,'font-family':'Oswald','font-weight':600,'letter-spacing':'1px'},(data.subtitle||'ULKOMAAN JA KOTIMAAN LIIKENNE — UTRIKES- OCH INRIKESTRAFIKEN').toUpperCase()),
   el('text',{x:250,y:64,fill:'#454940','font-size':15,'font-family':'Roboto Condensed','font-weight':700},`${$('date').value || '10.9.2026'} · AIKATAULUT JA REITTIKARTTA / TIMETABLE & ROUTE NETWORK`),
-  el('text',{x:250,y:84,fill:'#62777e','font-size':13,'font-family':'Roboto Condensed'},`${data.demo?'Finnairin ja kumppaneiden reitistö (Qatar & Qantas)':'Aikataulu'} · ${points.length} lentoasemaa / airports · ${visible.length} reittilentoa / flights · Kaikki ajat paikallisaikoja / All times local`),
+  el('text',{x:250,y:84,fill:'#62777e','font-size':13,'font-family':'Roboto Condensed'},`${data.demo?'Finnairin ja kumppaneiden reitistö (oneworld & kumppanit)':'Aikataulu'} · ${points.length} lentoasemaa / airports · ${visible.length} reittilentoa / flights · Kaikki ajat paikallisaikoja / All times local`),
   el('line',{x1:0,y1:104,x2:Math.min(width-160,2800),y2:104,stroke:'#08618c','stroke-width':2}),
   el('line',{x1:0,y1:108,x2:Math.min(width-160,2800),y2:108,stroke:'#08618c','stroke-width':0.75})
  );
@@ -85,11 +85,10 @@ function render(){
   const inkColor=isCodeshare?'#b36200':prop?'#454940':'#09618c';
   const markerId=isCodeshare?'codeshare':prop?'prop':'jet';
 
-  const g=el('g',{class:`flight${isCodeshare?' codeshare':''}${selected===f.id?' selected':selected?' dim':''}`,tabindex:0,role:'button','aria-label':`${f.number||f.id}: ${f.from} to ${f.to}, ${clockTime(f.departure)} to ${clockTime(f.arrival)}`});
+  const g=el('g',{class:`flight${isCodeshare?' codeshare':''}${selected===f.id?' selected':''}`,tabindex:0,role:'button','aria-label':`${f.number||f.id}: ${f.from} to ${f.to}, ${clockTime(f.departure)} to ${clockTime(f.arrival)}`});
   g.dataset.id=f.id;
   g.append(
    el('path',{d:route.path,class:'hit'}),
-   el('path',{d:route.path,class:'crossing-gap'}),
    el('path',{d:route.path,fill:'none',class:'ink',stroke:inkColor,'stroke-dasharray':prop?'7 3':isCodeshare?'8 3':'none','marker-end':`url(#${markerId})`})
   );
 
@@ -160,7 +159,7 @@ function render(){
   const prop=/ATR|Dash|DHC/i.test(f.aircraft||'');
   const inkColor=isCodeshare?'#b36200':prop?'#454940':'#09618c';
 
-  const g=el('g',{class:`edge-times${isCodeshare?' codeshare':''}${selected===f.id?' selected':selected?' dim':''}`});
+  const g=el('g',{class:`edge-times${isCodeshare?' codeshare':''}${selected===f.id?' selected':''}`});
   g.dataset.id=f.id;
   for(const label of endpointLabels(route,points)){
    g.append(el('text',{x:label.x,y:label.y,'text-anchor':'middle','dominant-baseline':'central',fill:inkColor,transform:`rotate(${label.angle} ${label.x} ${label.y})`},label.text));
@@ -211,8 +210,8 @@ function render(){
   el('text',{x:0,y:22,fill:'#303a34','font-size':12,'font-family':'Roboto Condensed'},'13.35 = Lähtö- tai tuloaika / Departure or arrival time (local clock time)'),
   el('text',{x:0,y:42,fill:'#303a34','font-size':12,'font-family':'Roboto Condensed'},'— Sininen viiva: Finnair suora suihkukone (Direct jet service)'),
   el('text',{x:0,y:62,fill:'#303a34','font-size':12,'font-family':'Roboto Condensed'},'╌ Musta katkoviiva: Norra syöttölento (Turboprop feeder)'),
-  el('text',{x:0,y:82,fill:'#b36200','font-size':12,'font-family':'Roboto Condensed','font-weight':700},'┈ Meripihkanvärinen katkoviiva: Yhteistyölento (Codeshare via Qatar & Qantas)'),
-  el('text',{x:0,y:102,fill:'#303a34','font-size':12,'font-family':'Roboto Condensed'},'Pääsolmukohta: Helsinki (HEL) · Vaihtoyhteydet: Doha (DOH), Singapore (SIN), LAX')
+  el('text',{x:0,y:82,fill:'#b36200','font-size':12,'font-family':'Roboto Condensed','font-weight':700},'┈ Meripihkanvärinen katkoviiva: Yhteistyölento (Codeshare via oneworld & partners)'),
+  el('text',{x:0,y:102,fill:'#303a34','font-size':12,'font-family':'Roboto Condensed'},'Pääsolmukohta: Helsinki (HEL) · Vaihtoyhteydet: London (LHR), Doha (DOH), Singapore (SIN), LAX')
  );
  legendG.append(c3);
  svg.append(legendG);
@@ -221,6 +220,7 @@ function render(){
  $('layout-note').textContent=`Lentoasemat mitoitettu liikennemäärän mukaan${hiddenLabels?` · ${hiddenLabels} tiivistä merkintää näkyy valitsemalla`:''}`;
  mapWidth=width;mapHeight=height;
  $('diagram').replaceChildren(svg);
+ $('diagram').classList.toggle('has-selection',!!selected);
  if(!hasFit&&visible.length){fit();hasFit=true;}
  applyView();
  $('diagram').hidden=!visible.length;
@@ -243,17 +243,11 @@ function select(id){
  if(prev){
   for(const node of document.querySelectorAll(`[data-id="${prev}"]`))node.classList.remove('selected');
  }
+ $('diagram').classList.toggle('has-selection',!!selected);
  if(selected){
   for(const node of document.querySelectorAll(`[data-id="${selected}"]`)){
    node.classList.add('selected');
    if(node.classList.contains('service'))node.scrollIntoView({block:'nearest'});
-  }
-  for(const node of document.querySelectorAll('.flight, .edge-times')){
-   node.classList.toggle('dim',node.dataset.id!==selected);
-  }
- }else{
-  for(const node of document.querySelectorAll('.flight, .edge-times')){
-   node.classList.remove('dim');
   }
  }
  detail();
@@ -293,10 +287,14 @@ $('query').oninput=render;
 if($('show-codeshares'))$('show-codeshares').onchange=render;
 $('clear').onclick=()=>select(selected);
 
-let animFrame=null;
+let animFrame=null,lastScaleText='';
 function applyView(){
- $('diagram').style.transform=`translate(${panX}px,${panY}px) scale(${scale})`;
- $('scale').textContent=`${Math.round(scale*100)}%`;
+ $('diagram').style.transform=`translate3d(${panX}px,${panY}px,0) scale(${scale})`;
+ const scaleText=`${Math.round(scale*100)}%`;
+ if(lastScaleText!==scaleText){
+  $('scale').textContent=scaleText;
+  lastScaleText=scaleText;
+ }
 }
 function scheduleApplyView(){
  if(animFrame)return;
@@ -308,10 +306,11 @@ function scheduleApplyView(){
 
 function zoomAt(next,x=innerWidth/2,y=innerHeight/2){
  next=Math.max(0.04,Math.min(5,next));
+ if(next===scale)return;
  panX=x-(x-panX)*next/scale;
  panY=y-(y-panY)*next/scale;
  scale=next;
- applyView();
+ scheduleApplyView();
 }
 
 function fit(){
@@ -331,7 +330,23 @@ const viewport=$('viewport'),pointers=new Map();
 let dragged=false;
 
 viewport.addEventListener('dblclick',e=>{e.preventDefault();zoomAt(scale*1.6,e.clientX,e.clientY);});
-viewport.addEventListener('wheel',e=>{e.preventDefault();zoomAt(scale*Math.exp(-e.deltaY*0.0015),e.clientX,e.clientY);},{passive:false});
+viewport.addEventListener('wheel',e=>{
+ e.preventDefault();
+ const isPinch=e.ctrlKey;
+ const isDiscreteWheel=e.deltaMode!==0||(e.wheelDelta&&Math.abs(e.wheelDelta)%120===0&&e.deltaX===0);
+ if(isPinch||e.metaKey||isDiscreteWheel){
+  const factor=isPinch?Math.exp(-e.deltaY*0.01):Math.exp(-e.deltaY*0.002);
+  zoomAt(scale*factor,e.clientX,e.clientY);
+ }else if(e.shiftKey){
+  panX-=(e.deltaY||e.deltaX);
+  scheduleApplyView();
+ }else{
+  panX-=e.deltaX;
+  panY-=e.deltaY;
+  scheduleApplyView();
+ }
+},{passive:false});
+
 viewport.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragged=false;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});});
 viewport.addEventListener('pointermove',e=>{
  const old=pointers.get(e.pointerId);
@@ -344,7 +359,11 @@ viewport.addEventListener('pointermove',e=>{
   if(pointers.size===2){
    const other=[...pointers.entries()].find(([id])=>id!==e.pointerId)[1];
    const before=Math.hypot(old.x-other.x,old.y-other.y),after=Math.hypot(next.x-other.x,next.y-other.y);
-   zoomAt(scale*after/(before||1),(old.x+other.x)/2,(old.y+other.y)/2);
+   const nextScale=Math.max(0.04,Math.min(5,scale*after/(before||1)));
+   const midX=(old.x+other.x)/2,midY=(old.y+other.y)/2;
+   panX=midX-(midX-panX)*nextScale/scale;
+   panY=midY-(midY-panY)*nextScale/scale;
+   scale=nextScale;
    panX+=(next.x-old.x)/2;
    panY+=(next.y-old.y)/2;
   }else{
@@ -359,8 +378,8 @@ viewport.addEventListener('pointermove',e=>{
 for(const event of ['pointerup','pointercancel'])viewport.addEventListener(event,e=>{pointers.delete(e.pointerId);if(!pointers.size){viewport.classList.remove('dragging');applyView();}});
 viewport.addEventListener('click',e=>{if(dragged){e.stopPropagation();e.preventDefault();}},{capture:true});
 viewport.addEventListener('keydown',e=>{
- const delta={ArrowLeft:[60,0],ArrowRight:[-60,0],ArrowUp:[0,60],ArrowDown:[0,-60]}[e.key];
- if(delta){e.preventDefault();panX+=delta[0];panY+=delta[1];applyView();}
+ const delta={ArrowLeft:[80,0],ArrowRight:[-80,0],ArrowUp:[0,80],ArrowDown:[0,-80]}[e.key];
+ if(delta){e.preventDefault();panX+=delta[0];panY+=delta[1];scheduleApplyView();}
  else if(e.key==='+'||e.key==='=')zoomAt(scale*1.25);
  else if(e.key==='-')zoomAt(scale/1.25);
  else if(e.key==='0')fit();

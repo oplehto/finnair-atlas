@@ -8,7 +8,10 @@ const files={'/':'index.html','/app.mjs':'dist/app.js','/schedule.mjs':'schedule
 for(const name of ['oswald-latin-600-normal.woff2','roboto-condensed-latin-400-normal.woff2','roboto-condensed-latin-700-normal.woff2','oswald-LICENSE.txt','roboto-condensed-LICENSE.txt'])files[`/fonts/${name}`]=`dist/fonts/${name}`;
 let cache, cachedAt=0;
 async function schedule(){
- if(!process.env.SCHEDULE_URL&&!process.env.SCHEDULE_FILE)return demo;
+ if(!process.env.SCHEDULE_URL&&!process.env.SCHEDULE_FILE){
+  const fresh=await import(`./public/demo.mjs?t=${Date.now()}`);
+  return fresh.default;
+ }
  if(cache&&Date.now()-cachedAt<60000)return cache;
  let data;
  if(process.env.SCHEDULE_FILE)data=JSON.parse(await readFile(process.env.SCHEDULE_FILE,'utf8'));

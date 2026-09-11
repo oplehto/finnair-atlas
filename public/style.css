@@ -67,7 +67,7 @@ button:hover {
   left: 0;
   top: 0;
   transform-origin: 0 0;
-  will-change: transform;
+  contain: layout paint;
 }
 
 svg {
@@ -373,23 +373,28 @@ dd {
 }
 
 /* --- SVG Diagram Styling (1974 Vintage Print Timetable) --- */
+.airport,
+.sheet-header,
+.sheet-legend,
+.label-plate {
+  pointer-events: none;
+}
+
 .flight {
   cursor: pointer;
   outline: none;
+  pointer-events: none;
 }
 
 .flight .hit {
   stroke: transparent;
   stroke-width: 14;
   fill: none;
+  pointer-events: stroke;
 }
 
 .flight .crossing-gap {
-  fill: none;
-  stroke: var(--paper);
-  stroke-width: 8;
-  stroke-linejoin: round;
-  pointer-events: none;
+  display: none;
 }
 
 .flight .ink {
@@ -425,7 +430,13 @@ dd {
   font-weight: 700;
 }
 
-.flight.dim {
+.flight.dim,
+.has-selection .flight:not(.selected) {
+  opacity: 0.12;
+}
+
+.edge-times.dim,
+.has-selection .edge-times:not(.selected) {
   opacity: 0.12;
 }
 
