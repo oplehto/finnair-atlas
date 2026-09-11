@@ -120,7 +120,8 @@ function render(){
  for(const a of points){
   const isHub=a.code==='HEL';
   const isCS=!!a.codeshare;
-  const g=el('g',{class:`airport${isHub?' hub helsinki-hub':a.importance>0.2?' hub':''}${isCS?' codeshare-airport':''}`,transform:`translate(${a.x} ${a.y})`,'aria-label':`${a.name}: ${a.services} services`});
+  const isGateway=!!a.isGatewayHub;
+  const g=el('g',{class:`airport${isHub?' hub helsinki-hub':(a.importance>0.2||isGateway)?' hub gateway-hub':''}${isCS?' codeshare-airport':''}`,transform:`translate(${a.x} ${a.y})`,'aria-label':`${a.name}: ${a.services} services`});
   if(isHub){
    g.append(
     a.polygonPoints ? el('polygon',{points:a.polygonPoints,class:'hub-outer'}) : el('rect',{x:-a.width/2,y:-a.height/2,width:a.width,height:a.height,class:'hub-outer'}),
@@ -128,6 +129,13 @@ function render(){
     el('text',{x:0,y:-55,'text-anchor':'middle',class:'hub-title code'},'HELSINKI'),
     el('text',{x:0,y:35,'text-anchor':'middle',class:'hub-subtitle name'},'HELSINGFORS'),
     el('text',{x:0,y:95,'text-anchor':'middle',class:'hub-tag total'},'HEL · FINNAIR CENTRAL HUB · KESKUSLENTOASEMA')
+   );
+  }else if(isGateway){
+   g.append(
+    a.polygonPoints ? el('polygon',{points:a.polygonPoints}) : el('rect',{x:-a.width/2,y:-a.height/2,width:a.width,height:a.height}),
+    el('text',{x:0,y:-20,'text-anchor':'middle',class:'hub-title code',style:'font-size:22px'},a.name.toUpperCase()),
+    el('text',{x:0,y:12,'text-anchor':'middle',class:'hub-subtitle name',style:'font-size:15px'},(a.alt||a.code).toUpperCase()),
+    el('text',{x:0,y:38,'text-anchor':'middle',class:'hub-tag total',style:'font-size:11px'},`${a.code} · ONEWORLD GATEWAY HUB`)
    );
   }else{
    g.append(a.polygonPoints ? el('polygon',{points:a.polygonPoints}) : el('rect',{x:-a.width/2,y:-a.height/2,width:a.width,height:a.height}));
