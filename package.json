@@ -1,7 +1,7 @@
 {
   "name": "airline-atlas",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -18,5 +18,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.28.2"
-  }
+  },
+  "license": "Apache-2.0",
+  "description": "An unofficial weekly Finnair network timetable in the style of the 1974 printed sheet"
 }

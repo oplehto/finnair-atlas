@@ -8,6 +8,8 @@ let panX=0,panY=0,hasFit=false,mapWidth=1200,mapHeight=900;
 let keyboardNav=false;
 document.addEventListener('keydown',e=>{if(e.key==='Tab')keyboardNav=true;},true);
 document.addEventListener('pointerdown',()=>{keyboardNav=false;},true);
+let layoutGeneration=0;
+const nextTask=()=>new Promise(resolve=>setTimeout(resolve,0));
 let data,visible=[],selected=null,focusAirport=null,hovered=null,scale=0.8,imported=false,busy=false,layoutKey='',geometry,needsFit=false;
 const waitText=c=>`${Math.floor(c.wait/60)} h ${String(c.wait%60).padStart(2,'0')} min${c.overnight?' · seuraavana päivänä / next day':''}`;
 const measureContext=document.createElement('canvas').getContext('2d');
@@ -16,6 +18,9 @@ function measure(text,font=LABEL_FONT){measureContext.font=font;return measureCo
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const upper=s=>String(s??'').toUpperCase();
 const dot=t=>t.replace(':','.');
+// FlightAware tracks by ICAO callsign (Finnair AY 431 is FIN431); map the airline prefix, then the number.
+const ICAO={AY:'FIN',BA:'BAW',QR:'QTR',QF:'QFA',AA:'AAL',AS:'ASA',JL:'JAL',CX:'CPA',IB:'IBE',AT:'RAM',MH:'MAS',RJ:'RJA',UL:'ALK',WY:'OMA',SK:'SAS',LH:'DLH',KL:'KLM',AF:'AFR',LX:'SWR',OS:'AUA',N7:'NRA'};
+const trackLink=number=>{const n=String(number||'').replace(/\s+/g,'').toUpperCase();const m=n.match(/^([A-Z0-9]{2})(\d{1,4})[A-Z]?$/);if(!m)return '';const callsign=(ICAO[m[1]]||m[1])+m[2];return `<a class="track" href="https://www.flightaware.com/live/flight/${encodeURIComponent(callsign)}" target="_blank" rel="noopener noreferrer">${escape(flightNumber({number:n}))} on FlightAware ↗</a>`;};
 const inkOf=f=>f.codeshare?'codeshare':/ATR|Dash|DHC|Q400/i.test(f.aircraft||'')?'prop':'jet';
 // Worn-print filter: a little ink mottle, a hair of edge wobble and a soft blur, for the logotype only.
 const WORN_FILTER='<feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" seed="7" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.32 1.1" result="mottle"/><feComposite in="SourceGraphic" in2="mottle" operator="in" result="inked"/><feDisplacementMap in="inked" in2="grain" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="wobbled"/><feGaussianBlur in="wobbled" stdDeviation="0.5"/>';
@@ -45,7 +50,6 @@ function setData(next){
  $('aircraft').replaceChildren(new Option('All aircraft',''),...[...new Set(allFlights.map(f=>f.aircraft).filter(Boolean))].sort().map(a=>new Option(a,a)));
  if([...$('aircraft').options].some(o=>o.value===aircraft))$('aircraft').value=aircraft;
  // Let the masthead and controls paint before the layout work starts.
- $('layout-note').textContent='Laying out the sheet…';
  requestAnimationFrame(()=>setTimeout(render,0));
 }
 
@@ -136,13 +140,22 @@ function render(){
 
  const key=JSON.stringify([activeAirports,visible]);
  if(key!==layoutKey){
-  const codes=new Set(visible.flatMap(f=>[f.from,f.to]));
-  const points=layoutAirports(activeAirports.filter(a=>codes.has(a.code)),visible);
-  const routes=layoutFlights(points,visible);
-  const labels=placeFlightLabels(routes,points,text=>measure(text)+0.3*text.length);
-  geometry={points,routes,labels};
-  needsFit=!!layoutKey;
-  layoutKey=key;
+  const generation=++layoutGeneration,codes=new Set(visible.flatMap(f=>[f.from,f.to]));
+  const snapshot=visible;
+  $('layout-note').textContent='Laying out the sheet…';
+  (async()=>{
+   const points=layoutAirports(activeAirports.filter(a=>codes.has(a.code)),snapshot);
+   await nextTask();if(generation!==layoutGeneration)return;
+   const routes=layoutFlights(points,snapshot);
+   await nextTask();if(generation!==layoutGeneration)return;
+   const labels=placeFlightLabels(routes,points,text=>measure(text)+0.3*text.length);
+   await nextTask();if(generation!==layoutGeneration)return;
+   geometry={points,routes,labels};
+   needsFit=!!layoutKey;
+   layoutKey=key;
+   render();
+  })();
+  return;
  }
  const {points,routes,labels}=geometry;
  const byName=code=>points.find(p=>p.code===code)?.name||code;
@@ -283,7 +296,7 @@ function render(){
  svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const target=e.target.closest('.flight,.airport,.hub-port');if(target){e.preventDefault();activate(target);}}});
  svg.addEventListener('pointerover',e=>{const target=e.target.closest('.flight');if(target)hover(target.dataset.id);});
  svg.addEventListener('pointerout',e=>{const target=e.target.closest('.flight');if(target&&!target.contains(e.relatedTarget))hover(null);});
- svg.addEventListener('focusin',e=>{const target=e.target.closest('.flight');if(target){hover(target.dataset.id);if(keyboardNav)reveal(target.dataset.id,{onlyIfHidden:true});}});
+ svg.addEventListener('focusin',e=>{viewport.scrollLeft=0;viewport.scrollTop=0;const target=e.target.closest('.flight');if(target){hover(target.dataset.id);if(keyboardNav)reveal(target.dataset.id,{onlyIfHidden:true});}});
  svg.addEventListener('focusout',e=>hover(null));
 
  const hiddenLabels=[...labels.values()].filter(l=>l.hidden).length;
@@ -408,7 +421,7 @@ function detail(){
  const name=code=>geometry?.points.find(a=>a.code===code)?.name||code;
  const minutes=Math.round((Date.parse(f.arrival)-Date.parse(f.departure))/60000);
  const zone=t=>t.endsWith('Z')?'UTC':`UTC${t.slice(-6)}`;
- $('detail').innerHTML=`<div class="route ${inkOf(f)}">${escape(f.from)} → ${escape(f.to)}</div><p>${escape(name(f.from))} → ${escape(name(f.to))}</p>${f.codeshare?`<div class="codeshare-badge">Partner codeshare · operated by ${escape(f.operator||'partner')}${f.operatorFlight?` as ${escape(f.operatorFlight)}`:''}</div>`:''}<dl><dt>Flight</dt><dd>${escape(flightNumber(f))}</dd><dt>Airline</dt><dd>${escape(f.operator||f.airline||'Unspecified')}</dd><dt>Days</dt><dd>${escape(f.days||f.frequency||'Daily (#)')}</dd><dt>Departure</dt><dd>${dot(clockTime(f.departure))} <small>${escape(zone(f.departure))}</small></dd><dt>Arrival</dt><dd>${dot(clockTime(f.arrival))}${f.arrival.slice(0,10)>f.departure.slice(0,10)?' <small>+1</small>':''} <small>${escape(zone(f.arrival))}</small></dd><dt>Duration</dt><dd>${Math.floor(minutes/60)} h ${minutes%60} min</dd><dt>Aircraft</dt><dd>${escape(f.aircraft||'Unspecified')}</dd><dt>Status</dt><dd>${escape(f.status||'Scheduled')}</dd>${f.connection?itineraryHtml(f)+`<dt>Connection</dt><dd>${f.connection.direction==='out'?`from ${escape(flightNumber({number:f.connection.number}))}, arrives ${dot(f.connection.time)}`:`to ${escape(flightNumber({number:f.connection.number}))}, departs ${dot(f.connection.time)}`}<br><small>${escape(waitText(f.connection))} at ${escape(f.connection.via)}</small></dd>`:f.via?`<dt>Connection</dt><dd>via ${escape(f.via)}</dd>`:''}</dl>`;
+ $('detail').innerHTML=`<div class="route ${inkOf(f)}">${escape(f.from)} → ${escape(f.to)}</div><p>${escape(name(f.from))} → ${escape(name(f.to))}</p>${f.codeshare?`<div class="codeshare-badge">Partner codeshare · operated by ${escape(f.operator||'partner')}${f.operatorFlight?` as ${escape(f.operatorFlight)}`:''}</div>`:''}<dl><dt>Flight</dt><dd>${escape(flightNumber(f))}</dd><dt>Airline</dt><dd>${escape(f.operator||f.airline||'Unspecified')}</dd><dt>Days</dt><dd>${escape(f.days||f.frequency||'Daily (#)')}</dd><dt>Departure</dt><dd>${dot(clockTime(f.departure))} <small>${escape(zone(f.departure))}</small></dd><dt>Arrival</dt><dd>${dot(clockTime(f.arrival))}${f.arrival.slice(0,10)>f.departure.slice(0,10)?' <small>+1</small>':''} <small>${escape(zone(f.arrival))}</small></dd><dt>Duration</dt><dd>${Math.floor(minutes/60)} h ${minutes%60} min</dd><dt>Aircraft</dt><dd>${escape(f.aircraft||'Unspecified')}</dd><dt>Status</dt><dd>${escape(f.status||'Scheduled')}</dd><dt>Track</dt><dd>${trackLink(f.codeshare&&f.operatorFlight?f.operatorFlight.split(',')[0]:(f.number||f.id))}</dd>${f.connection?itineraryHtml(f)+`<dt>Connection</dt><dd>${f.connection.direction==='out'?`from ${escape(flightNumber({number:f.connection.number}))}, arrives ${dot(f.connection.time)}`:`to ${escape(flightNumber({number:f.connection.number}))}, departs ${dot(f.connection.time)}`}<br><small>${escape(waitText(f.connection))} at ${escape(f.connection.via)}</small></dd>`:f.via?`<dt>Connection</dt><dd>via ${escape(f.via)}</dd>`:''}</dl>`;
 }
 
 async function refresh(){
@@ -416,8 +429,10 @@ async function refresh(){
  busy=true;
  $('refresh').disabled=true;
  try{
-  const response=await fetch('/api/schedule',{signal:AbortSignal.timeout(20000)});
-  if(!response.ok)throw Error('Feed unavailable. Last successful schedule is still displayed.');
+  // The Node server answers api/schedule; a static host serves the baked schedule.json instead.
+  let response=await fetch('api/schedule',{signal:AbortSignal.timeout(20000)}).catch(()=>null);
+  if(!response||!response.ok)response=await fetch('schedule.json',{signal:AbortSignal.timeout(20000)});
+  if(!response.ok)throw Error('Schedule unavailable. Last successful schedule is still displayed.');
   const next=await response.json();
   if(imported)return;
   setData(next);
@@ -481,24 +496,25 @@ const viewport=$('viewport'),pointers=new Map();
 let dragged=false;
 
 viewport.addEventListener('dblclick',e=>{e.preventDefault();if(e.target.closest('.flight,.airport,.hub-port'))return;glide(()=>zoomAt(scale*1.6,e.clientX,e.clientY));});
+// Wheel and two-finger scroll zoom around the pointer in every browser; Shift+wheel pans. Pinch
+// (reported as ctrlKey) zooms faster. Line- and page-mode deltas are normalised to pixels first.
 viewport.addEventListener('wheel',e=>{
  e.preventDefault();
- const isPinch=e.ctrlKey;
- const isDiscreteWheel=e.deltaMode!==0||(e.wheelDelta&&Math.abs(e.wheelDelta)%120===0&&e.deltaX===0);
- if(isPinch||e.metaKey||isDiscreteWheel){
-  const factor=isPinch?Math.exp(-e.deltaY*0.01):Math.exp(-e.deltaY*0.002);
-  zoomAt(scale*factor,e.clientX,e.clientY);
- }else if(e.shiftKey){
-  panX-=(e.deltaY||e.deltaX);
-  scheduleApplyView();
- }else{
-  panX-=e.deltaX;
-  panY-=e.deltaY;
-  scheduleApplyView();
- }
+ const unit=e.deltaMode===1?16:e.deltaMode===2?innerHeight:1;
+ const dx=e.deltaX*unit,dy=e.deltaY*unit;
+ if(e.shiftKey&&!e.ctrlKey){panX-=(dy||dx);panY-=0;scheduleApplyView();return;}
+ const rate=e.ctrlKey?0.01:0.0022;
+ zoomAt(scale*Math.exp(-Math.max(-120,Math.min(120,dy))*rate),e.clientX,e.clientY);
 },{passive:false});
 
-viewport.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragged=false;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});});
+// Focusing a route or box must never scroll the map container: take focus without scrolling.
+viewport.addEventListener('pointerdown',e=>{
+ if(e.button!==0)return;
+ const target=e.target.closest?.('.flight,.airport,.hub-port');
+ if(target){e.preventDefault();target.focus({preventScroll:true});}
+ dragged=false;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+});
+viewport.addEventListener('scroll',()=>{viewport.scrollLeft=0;viewport.scrollTop=0;});
 viewport.addEventListener('pointermove',e=>{
  const old=pointers.get(e.pointerId);
  if(!old)return;
@@ -547,7 +563,7 @@ $('export').onclick=async()=>{
   const clone=svg.cloneNode(true),style=el('style');
   for(const plate of clone.querySelectorAll('.crowded-label'))plate.classList.remove('crowded-label');
   for(const node of clone.querySelectorAll('.hover'))node.classList.remove('hover');
-  const response=await fetch('/fonts.css');
+  const response=await fetch('fonts.css');
   if(!response.ok)throw Error('Font stylesheet could not be loaded.');
   let fontCss=await response.text();
   for(const match of [...fontCss.matchAll(/url\('([^']+)'\)/g)]){
@@ -558,7 +574,7 @@ $('export').onclick=async()=>{
    for(const byte of bytes)binary+=String.fromCharCode(byte);
    fontCss=fontCss.replace(match[0],`url('data:font/woff2;base64,${btoa(binary)}')`);
   }
-  const stylesheet=await fetch('/style.css');
+  const stylesheet=await fetch('style.css');
   if(!stylesheet.ok)throw Error('Timetable styles could not be loaded.');
   style.textContent=fontCss+await stylesheet.text();
   clone.prepend(style);
@@ -580,7 +596,7 @@ $('export').onclick=async()=>{
  }
 };
 
-if(innerWidth<=700)document.querySelector('.controls').open=false;
+if(innerWidth>1100&&!matchMedia('(pointer: coarse)').matches)document.querySelector('.controls').open=false;
 Promise.all([
  document.fonts.load('600 26px Oswald'),
  document.fonts.load('400 12px "Roboto Condensed"'),

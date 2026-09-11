@@ -87,21 +87,22 @@ const CODESHARE_OFFSETS = {
   ACC: {hub: 'LHR', dx: -150, dy: 780, region: 'west'},
   LOS: {hub: 'LHR', dx: 150, dy: 780, region: 'west'},
 
-  // Middle East, Africa, South Asia via DOH (Qatar Airways): rows above Doha
-  CAI: {hub: 'DOH', dx: -327, dy: -422, region: 'east'},
-  AMM: {hub: 'DOH', dx: -37, dy: -422, region: 'east'},
-  RUH: {hub: 'DOH', dx: 253, dy: -422, region: 'east'},
-  JED: {hub: 'DOH', dx: -327, dy: -582, region: 'east'},
-  MCT: {hub: 'DOH', dx: -37, dy: -582, region: 'east'},
-  NBO: {hub: 'DOH', dx: 253, dy: -582, region: 'east'},
-  ZNZ: {hub: 'DOH', dx: 543, dy: -582, region: 'east'},
-  JNB: {hub: 'DOH', dx: 833, dy: -582, region: 'east'},
-  CPT: {hub: 'DOH', dx: -327, dy: -742, region: 'east'},
-  SEZ: {hub: 'DOH', dx: -37, dy: -742, region: 'east'},
-  BOM: {hub: 'DOH', dx: 253, dy: -742, region: 'east'},
-  BLR: {hub: 'DOH', dx: 543, dy: -742, region: 'east'},
-  CMB: {hub: 'DOH', dx: 833, dy: -742, region: 'east'},
-  MLE: {hub: 'DOH', dx: -327, dy: -902, region: 'east'},
+  // Middle East, Africa, South Asia via DOH (Qatar Airways): rows above Doha, the grid 60
+  // left of Doha's centre so its lowest row clears Seoul's box in the outer column
+  CAI: {hub: 'DOH', dx: -387, dy: -422, region: 'east'},
+  AMM: {hub: 'DOH', dx: -97, dy: -422, region: 'east'},
+  RUH: {hub: 'DOH', dx: 193, dy: -422, region: 'east'},
+  JED: {hub: 'DOH', dx: -387, dy: -582, region: 'east'},
+  MCT: {hub: 'DOH', dx: -97, dy: -582, region: 'east'},
+  NBO: {hub: 'DOH', dx: 193, dy: -582, region: 'east'},
+  ZNZ: {hub: 'DOH', dx: 483, dy: -582, region: 'east'},
+  JNB: {hub: 'DOH', dx: 773, dy: -582, region: 'east'},
+  CPT: {hub: 'DOH', dx: -387, dy: -742, region: 'east'},
+  SEZ: {hub: 'DOH', dx: -97, dy: -742, region: 'east'},
+  BOM: {hub: 'DOH', dx: 193, dy: -742, region: 'east'},
+  BLR: {hub: 'DOH', dx: 483, dy: -742, region: 'east'},
+  CMB: {hub: 'DOH', dx: 773, dy: -742, region: 'east'},
+  MLE: {hub: 'DOH', dx: -387, dy: -902, region: 'east'},
 
   // Japan Domestic via HND (Japan Airlines): a short column beside Haneda
   CTS: {hub: 'HND', dx: 350, dy: -120, region: 'east'},
@@ -177,8 +178,12 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
       width = hubWidth;
       height = hubHeight;
     } else {
-      width = Math.round(Math.max(200, (a.name || a.code).length * 8.5 + 32, laneSpace + 24));
-      height = Math.round(Math.max(76, laneSpace + 24));
+      // A spoke's hub bundle lands on the edge that faces Helsinki, so that edge holds all
+      // the lanes; the other dimension grows at half the rate, so Tallinn's 45 weekly lanes
+      // make a wide banner under the hub rather than a square that shadows the European fan.
+      const along = laneSpace + 24, across = Math.round(along / 2), wide = reg === 'north' || reg === 'south';
+      width = Math.round(Math.max(200, (a.name || a.code).length * 8.5 + 32, wide ? along : across));
+      height = Math.round(Math.max(76, wide ? across : along));
     }
     return {
       ...a,
@@ -203,20 +208,22 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
 
   // --- NORTH (Domestic Finland) ---
   // A compact fan rather than rows spread over the whole hub width. Every domestic bundle
-  // leaves the top edge inside a port comb about 1,450 wide, so a box directly behind a
+  // leaves the top edge inside a port comb about 1,850 wide, so a box directly behind a
   // nearer box, or a far row flared wider than the near rows, forces the far bundle to
   // detour around the near box and cross its neighbours. The x offsets (from the hub
   // centre) were chosen by search over the full weekly sheet so that, seen from the port
   // comb, no box occludes another and the left-to-right port order equals the left-to-right
   // order of the destinations in every row; the domestic fan then draws without a single
-  // crossing. Geography is soft: Mariehamn and Turku nearest, Tampere and Kuopio next, the
-  // Vaasa-Joensuu belt, then Oulu with Kemi, Kokkola and Lapland on the top row. Tampere
-  // sits east of the fan centre because west of it its bundle has to cut through Turku's.
+  // crossing. Geography is soft: Mariehamn nearest and far left, Jyväskylä and Kuopio next,
+  // the Vaasa-Kajaani-Joensuu belt, then Kokkola, Kemi and Oulu with Lapland and Kuusamo on
+  // the top row. Vaasa is the westernmost box of the fan because it also carries the
+  // Umeå-Vaasa service from the west column, which must reach it without crossing a
+  // Helsinki bundle.
   const nTiers = [
-    [['MHQ', -1100], ['TKU', -300]],
-    [['TMP', 600], ['KUO', 950]],
-    [['VAA', -1100], ['JYV', -850], ['KAJ', 600], ['JOE', 1100], ['KAO', 1500]],
-    [['KOK', -1250], ['KEM', -450], ['OUL', -50], ['RVN', 200], ['KTT', 450], ['IVL', 800]]
+    [['MHQ', -1350]],
+    [['JYV', -125], ['KUO', 1175]],
+    [['VAA', -1175], ['KAJ', 575], ['JOE', 1150]],
+    [['KOK', -1050], ['KEM', -650], ['OUL', -200], ['RVN', 220], ['KTT', 490], ['IVL', 740], ['KAO', 1225]]
   ];
   const nTierY = [300, 600, 900, 1200].map(offset => HEL_Y - hubHeight / 2 - offset);
   nTiers.forEach((tier, tIdx) => {
@@ -230,23 +237,22 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
 
   // --- WEST (Nordics, Iceland, UK, Ireland, North America) ---
   // Three columns at fixed offsets from the hub outline, each box at an explicit y offset
-  // from the hub centre: Sweden, Denmark and Trondheim nearest; Norway, Iceland, Toronto,
-  // Stockholm and Britain in the middle; the transatlantic gateways with their partner
-  // clusters outermost, London at the foot so its partner rows fill the bottom-left corner.
-  // Every west bundle leaves Helsinki's left edge inside a port comb about 1,880 tall, in
-  // order of bearing, so a box in a near column shadows the bundles whose ports neighbour
-  // its own. The comb is too short for all 26 destinations to be reached by straight lines
-  // (the near boxes' shadows exceed the comb plus the spread the columns allow), so the
-  // offsets were chosen by search over the full weekly sheet to draw the west fan without
-  // any crossing between Helsinki bundles: a small far-north group sits above the Seattle
-  // bundle, Dublin below the London bundle, and in between each near box sits in the gap
-  // between the bundles to the deeper columns, with the few unavoidable bends routed round
-  // a box corner where they cross nothing. Geography is soft within each column; the
-  // top-to-bottom order is fixed and only the spacing was searched.
+  // from the hub centre: Umeå, Trondheim, Gothenburg and Copenhagen nearest; Norway,
+  // Iceland, Stockholm and Britain in the middle; the transatlantic gateways with their
+  // partner clusters outermost, London at the foot so its partner rows fill the bottom-left
+  // corner. Every west bundle leaves Helsinki's left edge inside a port comb about 1,990
+  // tall, in order of bearing, so a box in a near column shadows the bundles whose ports
+  // neighbour its own; the offsets were chosen by search over the full weekly sheet so that
+  // the west fan draws without any crossing between Helsinki bundles and Umeå's own service
+  // to Vaasa reaches the domestic fan clear of them: each near box sits in the gap between
+  // the bundles to the deeper columns, Dublin below the London bundle. Geography is soft
+  // within each column; the top-to-bottom order is fixed and only the spacing was searched.
+  // A destination that returns to the sheet (Alta, Visby, Billund, Kirkenes, Bodø, Toronto,
+  // Miami) needs its slot searched again rather than a guessed offset.
   const wCols = [
-    {x: 500, boxes: [['ALF', -1530], ['UME', -1345], ['TRD', -650], ['GOT', 185], ['VBY', 520], ['BLL', 645], ['CPH', 825]]},
-    {x: 950, boxes: [['KKN', -2068], ['TOS', -1315], ['BOO', -1150], ['KEF', -1025], ['YYZ', -685], ['ARN', -475], ['OSL', -160], ['BGO', 35], ['SVG', 290], ['EDI', 505], ['MAN', 1335], ['DUB', 2200]]},
-    {x: 1400, boxes: [['SEA', -1485], ['ORD', -915], ['JFK', -470], ['DFW', -30], ['LAX', 410], ['LHR', 1550], ['MIA', 2770]]}
+    {x: 500, boxes: [['UME', -1445], ['TRD', -725], ['GOT', 135], ['CPH', 750]]},
+    {x: 950, boxes: [['TOS', -1265], ['KEF', -1025], ['ARN', -475], ['OSL', -65], ['BGO', 285], ['SVG', 450], ['EDI', 705], ['MAN', 1335], ['DUB', 2225]]},
+    {x: 1400, boxes: [['SEA', -1535], ['ORD', -940], ['JFK', -420], ['DFW', 20], ['LAX', 485], ['LHR', 1550]]}
   ];
   for (const col of wCols) {
     for (const [code, dy] of col.boxes) {
@@ -258,49 +264,71 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   }
 
   // --- EAST (Middle East, South Asia, East Asia, Japan, Australia) ---
-  // Two columns: the Gulf, India and Thailand nearest with Doha at the top so its partner
-  // network can occupy the top-right corner; Korea, China, Japan, Hong Kong and Singapore in
-  // the outer column with Singapore at the foot so its partner network fills the bottom-right.
-  const eTiers = [
-    ['DOH', 'DXB', 'DEL', 'BKK', 'HKT'],
-    ['ICN', 'PVG', 'HND', 'NRT', 'NGO', 'KIX', 'HKG', 'MEL', 'SIN']
+  // Two columns at fixed offsets from the hub outline, each box at an explicit y offset from
+  // the hub centre: the Gulf, India and Thailand nearest, with Doha high so its partner grid
+  // fills the top-right corner; Korea, China, Japan, Hong Kong and Singapore in the outer
+  // column with Singapore at the foot so its partner network fills the bottom-right. Every
+  // east bundle leaves Helsinki's right edge inside a short port comb, so the outer column
+  // is placed in the gaps of the inner one: Seoul's bundle passes through the 224-unit gap
+  // between Doha's top edge and its lowest satellite row, Shanghai's under Doha's bottom
+  // corner, and Hong Kong sits at least 371 above Singapore so that Cebu, to the right of
+  // Hong Kong, clears Taipei, above right of Singapore.
+  const eCols = [
+    {x: 540, boxes: [['DOH', -1000], ['DXB', -500], ['DEL', 0], ['BKK', 600], ['HKT', 900]]},
+    {x: 1020, boxes: [['ICN', -1380], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['MEL', 1000], ['SIN', 1250]]}
   ];
-  const eTierX = [540, 1020].map(offset => HEL_X + hubWidth / 2 + offset);
-  const eFlare = [100, 200];
-  eTiers.forEach((tier, tIdx) => {
-    const present = tier.map(c => byCode.get(c)).filter(Boolean);
-    const x = eTierX[tIdx];
-    const count = present.length;
-    const flare = eFlare[tIdx];
-    const yStart = HEL_Y - hubHeight / 2 - flare;
-    const yEnd = HEL_Y + hubHeight / 2 + flare;
-    present.forEach((node, cIdx) => {
-      node.x = x;
-      node.y = yStart + ((cIdx + 0.5) / count) * (yEnd - yStart);
-    });
-  });
+  for (const col of eCols) {
+    for (const [code, dy] of col.boxes) {
+      const node = byCode.get(code);
+      if (!node) continue;
+      node.x = HEL_X + hubWidth / 2 + col.x;
+      node.y = HEL_Y + dy;
+    }
+  }
 
   // --- SOUTH (Europe, Baltics, Mediterranean) ---
+  // Tallinn, the largest spoke on the sheet (45 weekly lanes on its top edge), sits centred
+  // directly under Helsinki, and every row is split into a west half and an east half around
+  // its shadow: a box behind Tallinn would force its bundle to bend around it and cross its
+  // neighbours. Each half spreads its boxes evenly between the innermost slot (sInner from
+  // the hub centre) and the hub outline plus the row's flare, west to east, so an absent
+  // airport only tightens its half. The rows, halves and flares were chosen by search over
+  // the full weekly sheet for the fewest bundle crossings with geography as a soft prior:
+  // roughly latitude bands, the Baltics, Poland and northern Germany nearest, then France,
+  // Benelux and central Europe, the Alps and Slovenia, northern Italy and the Adriatic,
+  // Iberia with southern Italy, Turkey and Greece, and the Atlantic and Aegean islands last.
   const sTiers = [
-    ['HAM', 'BER', 'GDN', 'TLL', 'URE', 'TAY', 'RIX', 'VNO'],
-    ['AMS', 'BRU', 'LUX', 'DUS', 'FRA', 'MUC', 'PRG', 'WAW', 'KRK'],
-    ['CDG', 'GVA', 'ZRH', 'INN', 'SZG', 'VIE', 'BUD', 'LJU', 'SPU', 'DBV'],
-    ['NCE', 'TRN', 'MXP', 'LIN', 'VRN', 'BLQ', 'FLR', 'VCE', 'TIA', 'SKG'],
-    ['OPO', 'LIS', 'FAO', 'MAD', 'BCN', 'VLC', 'ALC', 'PMI', 'AGP', 'FCO', 'NAP', 'CTA', 'ATH', 'AYT', 'GZP'],
-    ['FNC', 'TFS', 'LPA', 'FUE', 'ACE', 'CFU', 'ZTH', 'CHQ', 'HER', 'JTR', 'KGS', 'RHO', 'PFO', 'LCA']
+    [['DUS', 'HAM'], ['WAW', 'URE', 'RIX', 'VNO', 'TAY'], ['TLL']],
+    [['CDG', 'AMS', 'BRU', 'LUX', 'FRA', 'BER', 'GDN'], ['BUD', 'PRG', 'KRK']],
+    [['GVA', 'ZRH', 'INN', 'SZG', 'VIE'], ['VCE', 'MUC', 'LJU']],
+    [['BCN', 'NCE', 'TRN', 'MXP', 'LIN', 'BLQ', 'VRN'], ['FLR', 'SPU', 'DBV']],
+    [['AGP', 'MAD', 'VLC', 'ALC', 'PMI'], ['FCO', 'CTA', 'GZP', 'NAP', 'SKG', 'ATH', 'TIA', 'KGS']],
+    [['TFS', 'LPA', 'FUE', 'ACE', 'LIS', 'OPO', 'FNC', 'FAO'], ['JTR', 'CFU', 'ZTH', 'CHQ', 'HER', 'RHO', 'PFO', 'AYT', 'LCA']]
   ];
   const sTierY = [320, 590, 860, 1130, 1400, 1670].map(offset => HEL_Y + hubHeight / 2 + offset);
-  sTiers.forEach((tier, tIdx) => {
-    const present = tier.map(c => byCode.get(c)).filter(Boolean);
+  // Flare per row as [west, east], searched with the rows: the west halves stay inside
+  // Dublin's bundle, which runs from Helsinki's left edge to the foot of the middle west
+  // column; the east halves stop short of Singapore's partner grid in the bottom-right corner.
+  const sFlare = [[-40, 200], [440, 480], [200, 640], [320, 560], [120, 600], [280, 400]];
+  const sInner = 820;
+  // Ports on the hub's bottom edge are packed in bearing order from the centre of the edge,
+  // so Tallinn's 45 lanes sit at the centre only when the west and east halves carry the
+  // same lane total; shift the whole fan by half the difference so its bundle runs straight.
+  const halfSpan = half => regionBundles.south.filter(r => sTiers.some(([west, east]) => (half < 0 ? west : east).includes(r.other.code))).reduce((sum, r) => sum + r.span, 0);
+  const sShift = (halfSpan(-1) - halfSpan(1)) / 2;
+  sTiers.forEach(([west, east, centre = []], tIdx) => {
     const y = sTierY[tIdx];
-    const count = present.length;
-    const flare = 160 * tIdx;
-    const xStart = HEL_X - hubWidth / 2 - flare;
-    const xEnd = HEL_X + hubWidth / 2 + flare;
-    present.forEach((node, cIdx) => {
-      node.y = y;
-      node.x = xStart + ((cIdx + 0.5) / count) * (xEnd - xStart);
-    });
+    for (const [codes, sign] of [[west, -1], [east, 1]]) {
+      const outer = hubWidth / 2 + sFlare[tIdx][sign < 0 ? 0 : 1] - 100;
+      const present = codes.map(c => byCode.get(c)).filter(Boolean), count = present.length;
+      present.forEach((node, i) => {
+        // West half runs outer -> inner so both halves read west to east.
+        const t = count === 1 ? 0.5 : i / (count - 1), fromInner = sign < 0 ? 1 - t : t;
+        node.y = y;
+        node.x = HEL_X + sShift + sign * (sInner + fromInner * (outer - sInner));
+      });
+    }
+    for (const c of centre) { const node = byCode.get(c); if (node) { node.x = HEL_X + sShift; node.y = y; } }
   });
 
   // Any non-predefined airports placed in an outer tier according to their region
@@ -344,7 +372,27 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     }
   }
 
-  const placed = new Set([nTiers.flat().map(([code]) => code), wCols.flatMap(col => col.boxes.map(([code]) => code)), ...eTiers, ...sTiers, Object.keys(CODESHARE_OFFSETS)].flat());
+  // A spoke box is sized above for its largest bundle. A spoke with several bundles (Umeå
+  // carries Helsinki and Vaasa) may have them all on one edge, since a port's edge is chosen by
+  // the destination's bearing, so grow it to fit every bundle that shares an edge plus 10 at
+  // each end for the corner cuts; partner gateways keep their explicit sizes.
+  for (const node of nodes) {
+    if (node === hub || node.isGatewayHub) continue;
+    const sides = {top: 0, bottom: 0, left: 0, right: 0};
+    for (const [key, count] of bundleCounts) {
+      const codes = key.split(':');
+      if (!codes.includes(node.code)) continue;
+      const other = byCode.get(codes.find(c => c !== node.code));
+      if (!other) continue;
+      const dx = other.x - node.x, dy = other.y - node.y;
+      const side = Math.abs(dx) / (node.width / 2) > Math.abs(dy) / (node.height / 2) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'top' : 'bottom');
+      sides[side] += (count - 1) * 14 + 28;
+    }
+    node.width = Math.max(node.width, Math.max(sides.top, sides.bottom) + 20);
+    node.height = Math.max(node.height, Math.max(sides.left, sides.right) + 20);
+  }
+
+  const placed = new Set([nTiers.flat().map(([code]) => code), wCols.flatMap(col => col.boxes.map(([code]) => code)), eCols.flatMap(col => col.boxes.map(([code]) => code)), ...sTiers.flat(2), Object.keys(CODESHARE_OFFSETS)].flat());
   for (const node of nodes) {
     if (node === hub || placed.has(node.code)) continue;
     if (node.region === 'north') {
@@ -878,8 +926,22 @@ export function rectanglesOverlap(a, b) {
   return true;
 }
 
+// Axis-aligned extent of a (possibly rotated) rectangle, used to reject most overlap tests cheaply.
+function extent(r) {
+  const c = Math.abs(Math.cos(r.angle || 0)), s = Math.abs(Math.sin(r.angle || 0));
+  const hw = (r.width * c + r.height * s) / 2, hh = (r.width * s + r.height * c) / 2;
+  return {minX: r.x - hw, maxX: r.x + hw, minY: r.y - hh, maxY: r.y + hh};
+}
+const extentsTouch = (a, b) => a.minX <= b.maxX && b.minX <= a.maxX && a.minY <= b.maxY && b.minY <= a.maxY;
+
 export function placeFlightLabels(routes, nodes, measure = text => text.length * 6.2) {
   const occupied = nodes.map(n => ({...n, width: n.width + 20, height: n.height + 20})), labels = new Map();
+  const extents = occupied.map(extent);
+  const collides = candidate => {
+    const e = extent(candidate);
+    for (let i = 0; i < occupied.length; i++) if (extentsTouch(e, extents[i]) && rectanglesOverlap(candidate, occupied[i])) return true;
+    return false;
+  };
   for (const r of [...routes].sort((a, b) => Math.hypot(b.end.x - b.start.x, b.end.y - b.start.y) - Math.hypot(a.end.x - a.start.x, a.end.y - a.start.y) || a.flight.id.localeCompare(b.flight.id))) {
     const f = r.flight;
     const freq = f.days || f.frequency || '#';
@@ -902,9 +964,10 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
         hidden: false
       };
       if (!label) label = candidate;
-      if (!occupied.some(box => rectanglesOverlap(candidate, box))) {
+      if (!collides(candidate)) {
         label = candidate;
         occupied.push(candidate);
+        extents.push(extent(candidate));
         break;
       }
       label = {...label, hidden: true};
@@ -946,7 +1009,7 @@ export function endpointLabels(route, nodes) {
     // Direction the text runs away from its anchor: outward for small boxes, inward for hubs.
     const dx = isLargeHub ? -nx : nx, dy = isLargeHub ? -ny : ny;
     const along = isLargeHub ? -12 : 11;
-    const side = 6.5;
+    const side = isLargeHub ? 0 : 6.5;
     return {
       x: p.x + nx * along + (vertical ? side : 0),
       y: p.y + ny * along + (vertical ? 0 : side),

@@ -1,0 +1,13 @@
+Airline Atlas
+Copyright 2026 OPL Consulting Oy
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Not covered by this licence:
+- The Finnair name and the 1968 Finnair logotype (public/logo.mjs) are trademarks of Finnair Oyj,
+  used here for illustration only in an unofficial fan project.
+- The reference scans under docs/references/ are third-party material kept for design reference;
+  they are not served by the app and no redistribution right is granted.
+- The Oswald and Roboto Condensed fonts are distributed under their own licences
+  (see public/dist/fonts/*-LICENSE.txt after a build).
+- The schedule data is illustrative and must not be relied on for travel.

@@ -422,6 +422,17 @@ h3 {
   color: var(--amber-ink);
 }
 
+#detail a.track {
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--blue);
+}
+
+#detail a.track:hover {
+  color: var(--active-ink);
+  border-bottom-color: var(--active-ink);
+}
+
 #detail small {
   font-size: 11px;
   color: #62777e;
@@ -784,13 +795,33 @@ h1 .unofficial {
   stroke-dasharray: none;
 }
 
-.has-selection .flight:not(.selected):not(.linked),
-.has-selection .edge-times:not(.selected):not(.linked),
-.has-selection .label-plate:not(.selected):not(.linked),
-.has-focus:not(.has-selection) .flight:not(.focused),
-.has-focus:not(.has-selection) .edge-times:not(.focused),
-.has-focus:not(.has-selection) .label-plate:not(.focused) {
-  opacity: 0.12;
+/* Selection emphasises, it never dims: the selected, linked and focused routes get a heavier amber
+   line and a soft halo, and nothing else on the sheet is repainted. */
+.flight.selected .hit,
+.flight.linked .hit,
+.flight.focused .hit {
+  stroke: #cd7724;
+  opacity: 0.16;
+}
+
+.flight.focused .ink {
+  stroke: var(--active);
+  stroke-width: 2.6;
+  stroke-dasharray: none;
+}
+
+.flight.selected .ink,
+.flight.linked .ink {
+  stroke-width: 3.4;
+}
+
+.edge-times.focused text,
+.label-plate.focused .flight-label {
+  fill: var(--active-ink);
+}
+
+.label-plate.focused .label-bg {
+  fill: #ffffff;
 }
 
 .has-focus .airport.focused > polygon,
@@ -1122,11 +1153,6 @@ h1 .unofficial {
 .label-plate.crowded-label.linked,
 .label-plate.crowded-label.focused {
   opacity: 1;
-}
-
-.has-selection .label-plate.crowded-label:not(.selected):not(.linked),
-.has-focus:not(.has-selection) .label-plate.crowded-label:not(.focused) {
-  opacity: 0;
 }
 
 #diagram.gliding {

@@ -13,7 +13,7 @@ npm start
 npm test
 ```
 
-The default sheet is an **illustrative Finnair-style dataset**, not a verified current timetable. Flight numbers, times, aircraft and some routes are synthetic. Do not use it to plan travel.
+The default sheet is Finnair's **published weekly timetable for the week of 14 September 2026**, collected from public schedule pages and cross-checked against Finavia flight data (see "How the built-in sheet is made"). It is an unofficial reconstruction: seasonal changes, wet-leases and last-minute changes are not reflected, partner connections are illustrative, and it must not be used to plan travel.
 
 ## Use any airline
 
@@ -49,30 +49,24 @@ Export an editable vector graphic using **Export SVG**. The export includes the 
 
 ## Schedule sources
 
-A provider adapter or existing pipeline must produce the same JSON format. This version does **not** ship with a verified Finnair/Finavia API adapter or data subscription. The browser loads the schedule once and does not poll; press Reload to pick up a changed file or feed.
+A provider adapter or existing pipeline must produce the JSON format above. The browser loads the schedule once and does not poll; press Reload to pick up a changed file or feed.
 
-To watch an existing schedule file (replace it atomically when updating):
+### How the built-in sheet is made
 
-```sh
-SCHEDULE_FILE=/absolute/path/schedule.json npm start
-```
+The default sheet is Finnair's published weekly timetable for the week of 14 September 2026, baked into `public/demo.mjs`; the app does not fetch anything live.
 
-To fetch an HTTPS JSON feed:
+1. The weekly pattern (flight number, route, local departure and arrival times, days of operation, aircraft) was collected from public per-flight schedule pages for every Finnair route from Helsinki, and an independent second pass over 20 routes served as a cross-check.
+2. `scripts/finavia.mjs` fetches one day of Finavia's public flight information (key in `~/finavia` or `FINAVIA_KEY`, never printed; gateway `apigw.finavia.fi`) and `scripts/merge-weekly.mjs` reconciles the collected week against it: reference rows win on the routes they cover, main rows fill the rest, and any service operating on the sampled weekday whose Finnish-end time disagrees with Finavia by more than ten minutes is moved to Finavia's time with its block time kept.
+3. `scripts/bake-weekly.mjs` stamps the local times onto the reference week with each airport's offset (`scripts/zones.mjs`), keeps the partner highlights whose gateway is on the sheet, and writes `public/demo.mjs`.
 
-```sh
-SCHEDULE_URL=https://your-provider.example/schedule.json npm start
-```
-
-An optional `SCHEDULE_TOKEN` environment variable adds a server-side Bearer token. Never put credentials in client files. Provider data is cached on the server for 60 seconds. The last successfully displayed sheet remains on screen if a reload fails, with an error notice. The season or validity period of the data belongs in `source`; it is printed in the masthead.
-
-The local server binds only to 127.0.0.1. `PORT` overrides 4173. Hosting and a public deployment are not configured.
+Partner-operated codeshares are not part of the collected week; the partner connections drawn at the gateway hubs remain illustrative highlights. Times at foreign airports are as published, not estimated.
 
 ## Structure and limitations
 
 - `public/schedule.mjs`: shared validation, filters, weekly-service collapsing and partner connection selection.
 - `public/layout.mjs`: D3 force layout, airport sizing, parallel flight lanes, angular obstacle routing and label placement.
 - `public/app.mjs`: interactive SVG rendering and browser controls.
-- `public/demo.mjs`: synthetic first-run Finnair example.
+- `public/demo.mjs`: the baked weekly Finnair sheet (see "How the built-in sheet is made").
 - `server.mjs`: static server and normalized schedule feed.
 - `test/`: data integrity, time handling, layout and HTTP handler tests.
 - `docs/landscape.md`: existing products and data-source research.
@@ -91,7 +85,7 @@ The map fills the browser window. Drag to pan, scroll or pinch to zoom, and use 
 
 The example network includes all destinations across Europe, the Nordics, Asia, the Middle East and North America, plus all domestic airports (122 direct airports, 476 illustrative services in total with complete frequencies and operating days). Destination reference: [Finavia's summer/autumn 2026 route listing](https://www.finavia.fi/en/newsroom/2026/route-listing-where-can-you-fly-finavia-airports-during-summer-and-autumn-2026) and Finnair global network announcements. Times, operating day frequencies (`#` for daily, `①`–`⑦` for days of week), flight numbers and aircraft assignments reflect Summer/Autumn 2026 timetable patterns. International timestamps use explicit local UTC offsets, including Delhi's half-hour offset.
 
-In addition to the direct network, the atlas includes 80 major global codeshare connections (160 flights) via key oneworld partners British Airways (via London Heathrow `LHR`), Qatar Airways (via Doha `DOH`), Qantas (via Singapore `SIN`), American Airlines (via Miami `MIA`, Dallas `DFW`, Los Angeles `LAX`), Alaska Airlines (via Seattle `SEA`), Japan Airlines (via Tokyo Haneda `HND`), and Cathay Pacific (via Hong Kong `HKG`):
+In addition to the direct network, the atlas includes a set of illustrative partner connections via key oneworld partners British Airways (via London Heathrow `LHR`), Qatar Airways (via Doha `DOH`), Qantas (via Singapore `SIN`), American Airlines (via Miami `MIA`, Dallas `DFW`, Los Angeles `LAX`), Alaska Airlines (via Seattle `SEA`), Japan Airlines (via Tokyo Haneda `HND`), and Cathay Pacific (via Hong Kong `HKG`):
 - **United Kingdom & Crown Territories (via LHR with British Airways)**: Belfast City (`BHD`), Glasgow (`GLA`), Aberdeen (`ABZ`), Newcastle (`NCL`), Jersey (`JER`), Gibraltar (`GIB`), Grand Cayman (`GCM`).
 - **Atlantic, Caribbean & West Africa (via LHR with British Airways)**: Boston (`BOS`), Washington Dulles (`IAD`), Bermuda (`BDA`), Barbados (`BGI`), Nassau (`NAS`), Lagos (`LOS`), Accra (`ACC`).
 - **Australia & New Zealand (via SIN with Qantas)**: Sydney (`SYD`), Brisbane (`BNE`), Perth (`PER`), Adelaide (`ADL`), Canberra (`CBR`), Cairns (`CNS`), Darwin (`DRW`), Hobart (`HBA`), Gold Coast (`OOL`), Auckland (`AKL`), Christchurch (`CHC`), complementing Finnair's direct service to Melbourne (`MEL`).
@@ -106,12 +100,20 @@ In addition to the direct network, the atlas includes 80 major global codeshare 
 - **Africa & Middle East (via DOH with Qatar Airways)**: Cairo (`CAI`), Amman (`AMM`), Nairobi (`NBO`), Zanzibar (`ZNZ`), Johannesburg (`JNB`), Cape Town (`CPT`), Mahé/Seychelles (`SEZ`), Muscat (`MCT`), Riyadh (`RUH`), Jeddah (`JED`).
 - **South Asia & Indian Ocean (via DOH with Qatar Airways)**: Mumbai (`BOM`), Bengaluru (`BLR`), Colombo (`CMB`), Malé/Maldives (`MLE`).
 
-Partner flights are not shown exhaustively. For each partner hub the sheet keeps only the **most likely connections**: for every Finnair arrival at the hub, the earliest partner departure to each destination at least 60 minutes later (the next day if nothing fits), and for every Finnair departure the latest partner arrival that still leaves 60 minutes. Days of operation must overlap. The details panel names the Finnair flight each partner service connects with and the waiting time. The demo carries one partner flight per direction per destination, so all 160 remain as highlights. A "Partner connections at oneworld hubs" toggle in the toolbar switches between the direct Finnair network (122 airports, 476 weekly services) and the combined network (202 airports, 636 weekly services). Codeshare routes are highlighted in vintage amber (`#b36200`) with dashed routing, partner carrier indicators (`op. by British Airways`, `op. by Qatar Airways`, `op. by Qantas`, `op. by American Airlines`, `op. by Alaska Airlines`, `op. by Japan Airlines`, `op. by Cathay Pacific`), operator flight numbers, and connecting hub badges (`VIA LHR`, `VIA DOH`, `VIA SIN`, `VIA MIA`, `VIA DFW`, `VIA LAX`, `VIA SEA`, `VIA HND`, `VIA HKG`).
+Partner flights are not shown exhaustively. For each partner hub the sheet keeps only the **most likely connections**: for every Finnair arrival at the hub, the earliest partner departure to each destination at least 60 minutes later (the next day if nothing fits), and for every Finnair departure the latest partner arrival that still leaves 60 minutes. Days of operation must overlap. The details panel names the Finnair flight each partner service connects with and the waiting time. The demo carries one partner flight per direction per destination, so all of them remain as highlights. A "Partner connections at oneworld hubs" toggle in the toolbar switches between the direct Finnair network and the combined network with partner connections. Codeshare routes are highlighted in vintage amber (`#b36200`) with dashed routing, partner carrier indicators (`op. by British Airways`, `op. by Qatar Airways`, `op. by Qantas`, `op. by American Airlines`, `op. by Alaska Airlines`, `op. by Japan Airlines`, `op. by Cathay Pacific`), operator flight numbers, and connecting hub badges (`VIA LHR`, `VIA DOH`, `VIA SIN`, `VIA MIA`, `VIA DFW`, `VIA LAX`, `VIA SEA`, `VIA HND`, `VIA HKG`).
 
 The 1974 timetable reference guides notation: departure and arrival times run along each lane beside the arrow endpoint as `13.35`, outside ordinary airport boxes and just inside large hubs. The flight number, operating days and aircraft code (`AY431 # A321`) sit inline on the route in the route's own ink, on a paper plate that interrupts the line. Every route also carries a 7-unit paper under-stroke, so where routes cross, the line passing underneath shows a small break as on the printed sheet. Layout routing keeps airport boxes at least 40 units apart and routes every bundle around unrelated boxes. Route crossings are unavoidable in a network this dense; ports along each hub edge are ordered by bearing from a fan centre behind the edge, which halved the crossing count, and every crossing is drawn with a paper break in the lower line.
 
-Rendering performance is optimized for high-density networks: the route router searches a corridor of boxes near each bundle (320 then 900 units) instead of every corner on the sheet, which keeps the full weekly layout near 300 ms; the masthead and controls paint before the layout starts; event handling on the SVG map and flight list is fully delegated, viewport transformations are batched via `requestAnimationFrame`, and flight selection uses targeted DOM class toggling without full-tree re-renders. Labels are rendered on a separate top layer and linked to their route by id, so hover, focus and selection highlight the line, its edge times and its label together.
+Rendering performance is optimized for high-density networks: the route router searches a corridor of boxes near each bundle (320 then 900 units) instead of every corner on the sheet, which keeps the full weekly layout under 200 ms; label placement rejects candidates by bounding box before the rotated-rectangle test; airports, routes and labels are laid out in separate tasks so the page stays responsive, and the three fonts are preloaded so the first paint does not shift; event handling on the SVG map and flight list is fully delegated, viewport transformations are batched via `requestAnimationFrame`, and flight selection uses targeted DOM class toggling without full-tree re-renders. Labels are rendered on a separate top layer and linked to their route by id, so hover, focus and selection highlight the line, its edge times and its label together.
 
 Airport boxes are chamfered eight-sided polygons with white paper fill, a thin near-black outline and blue city names, following the reference. Partner-served codeshare airports use a dashed brown outline with black names and a `VIA LHR · British Airways` line; gateway hubs use a heavier blue outline. The central hub carries a double rule and a title sized to its box; its interior is otherwise left quiet, as on the reference. The engine also supports stepped/notched polygons (`shape: "stepped"`), hexagons (`shape: "hexagon"`) and custom vertex arrays (`polygon: [[x, y], ...]`) via imported schedule files.
 
 The sheet is composed like a printed timetable: a masthead with the title, edition line, date and counts sits above a framed diagram, and a three-column explanations box (days of operation, the aircraft codes present on the sheet, and notation with drawn line samples) sits at its foot. Masthead and legend scale with sheet width, so they remain legible at the Fit view even for a 600-flight network. Illustrative data is marked as such in the masthead.
+
+## Licence
+
+Code and documentation are released under the [Apache License 2.0](LICENSE); see [NOTICE](NOTICE) for what is excluded: the Finnair name and logotype (Finnair Oyj trademarks, used for illustration only), the reference scans, and the fonts under their own licences. The schedule data is illustrative and must not be relied on for travel.
+
+## Publishing
+
+`npm run build` also writes a self-contained static site to `site/` (the page, bundle, fonts and the baked `schedule.json`; the app falls back to that file when there is no `api/schedule`). The workflow in `.github/workflows/pages.yml` tests, builds and deploys it to GitHub Pages on every push to `main`; enable Pages with the "GitHub Actions" source in the repository settings. Any static host that serves the folder as is, such as Cloudflare Pages, works the same way.

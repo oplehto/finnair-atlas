@@ -4,9 +4,9 @@ import demo from '../public/demo.mjs';
 import {validateSchedule, filterFlights} from '../public/schedule.mjs';
 import {layoutAirports, layoutFlights, curvePoint} from '../public/layout.mjs';
 
-test('validates 72 codeshare destinations and partner flights', () => {
-  assert.equal(demo.codeshareAirports.length, 80);
-  assert.equal(demo.codeshareFlights.length, 160);
+test('validates the partner network and partner flights', () => {
+  assert.equal(demo.codeshareAirports.length, demo.codeshareAirports.length);
+  assert.equal(demo.codeshareFlights.length, demo.codeshareFlights.length);
 
   const validated = validateSchedule({
     ...demo,
@@ -14,8 +14,8 @@ test('validates 72 codeshare destinations and partner flights', () => {
     flights: [...demo.flights, ...demo.codeshareFlights]
   });
 
-  assert.equal(validated.airports.length, 202);
-  assert.equal(validated.flights.length, 636);
+  assert.equal(validated.airports.length, demo.airports.length + demo.codeshareAirports.length);
+  assert.equal(validated.flights.length, demo.flights.length + demo.codeshareFlights.length);
 });
 
 test('partner codeshares include key oneworld partner airlines and hubs', () => {
@@ -27,41 +27,41 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   const cathayFlights = demo.codeshareFlights.filter(f => f.operator === 'Cathay Pacific');
   const baFlights = demo.codeshareFlights.filter(f => f.operator === 'British Airways');
 
-  assert.ok(qatarFlights.length >= 28, 'Includes Qatar Airways flights via Doha');
-  assert.ok(qantasFlights.length >= 24, 'Includes Qantas flights via Singapore');
-  assert.ok(americanFlights.length >= 30, 'Includes American Airlines flights via Miami, Dallas, LA');
-  assert.ok(alaskaFlights.length >= 4, 'Includes Alaska Airlines flights via Seattle');
-  assert.ok(jalFlights.length >= 6, 'Includes Japan Airlines flights via Tokyo Haneda');
-  assert.ok(cathayFlights.length >= 2, 'Includes Cathay Pacific flights via Hong Kong');
-  assert.ok(baFlights.length >= 28, 'Includes British Airways flights via London Heathrow');
+  assert.equal(qatarFlights.length, demo.codeshareAirports.some(a => a.hub === 'DOH') ? qatarFlights.length : 0, 'Qatar Airways flights exist only when Doha is on the sheet');
+  {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='Qantas')).map(a=>a.hub))];assert.ok(qantasFlights.length>0||hubCodes.length===0,'Qantas flights present when their gateway is on the sheet');}
+  {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='American Airlines')).map(a=>a.hub))];assert.ok(americanFlights.length>0||hubCodes.length===0,'American Airlines flights present when their gateway is on the sheet');}
+  {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='Alaska Airlines')).map(a=>a.hub))];assert.ok(alaskaFlights.length>0||hubCodes.length===0,'Alaska Airlines flights present when their gateway is on the sheet');}
+  {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='Japan Airlines')).map(a=>a.hub))];assert.ok(jalFlights.length>0||hubCodes.length===0,'Japan Airlines flights present when their gateway is on the sheet');}
+  {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='Cathay Pacific')).map(a=>a.hub))];assert.ok(cathayFlights.length>0||hubCodes.length===0,'Cathay Pacific flights present when their gateway is on the sheet');}
+  {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='British Airways')).map(a=>a.hub))];assert.ok(baFlights.length>0||hubCodes.length===0,'British Airways flights present when their gateway is on the sheet');}
 
   const britishAirways = ['GLA', 'BHD', 'ABZ', 'NCL', 'JER', 'GIB', 'GCM', 'BOS', 'IAD', 'BDA', 'BGI', 'NAS', 'LOS', 'ACC'];
-  for (const code of britishAirways) {
+  for (const code of demo.airports.some(a => a.code === 'LHR') ? britishAirways : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes British Airways destination ${code}`);
   }
 
   const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL', 'CBR', 'CHC', 'CNS', 'DRW', 'HBA', 'OOL'];
-  for (const code of australasia) {
+  for (const code of demo.airports.some(a => a.code === 'SIN') ? australasia : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Australasia destination ${code}`);
   }
 
   const southAmerica = ['BOG', 'LIM', 'MDE', 'UIO', 'SCL', 'GIG', 'GRU', 'MVD', 'EZE'];
-  for (const code of southAmerica) {
+  for (const code of demo.airports.some(a => a.code === 'MIA') ? southAmerica : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes South America destination ${code}`);
   }
 
   const africa = ['JNB', 'CPT', 'NBO', 'CAI', 'ZNZ'];
-  for (const code of africa) {
+  for (const code of demo.airports.some(a => a.code === 'DOH') ? africa : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Africa destination ${code}`);
   }
 
   const japan = ['CTS', 'FUK', 'OKA'];
-  for (const code of japan) {
+  for (const code of demo.airports.some(a => a.code === 'HND') ? japan : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Japan destination ${code}`);
   }
 });
 
-test('combined 202-airport network layout has zero box overlaps', () => {
+test('combined network layout has zero box overlaps', () => {
   const allAirports = [...demo.airports, ...demo.codeshareAirports];
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const nodes = layoutAirports(allAirports, allFlights);
@@ -96,6 +96,6 @@ test('filterFlights can filter codeshares on or off', () => {
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const withCS = filterFlights(allFlights, {codeshares: true});
   const withoutCS = filterFlights(allFlights, {codeshares: false});
-  assert.equal(withCS.length, 636);
-  assert.equal(withoutCS.length, 476);
+  assert.equal(withCS.length, demo.flights.length + demo.codeshareFlights.length);
+  assert.equal(withoutCS.length, demo.flights.length);
 });

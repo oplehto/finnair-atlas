@@ -72,7 +72,7 @@ Use the notation in the timing-detail reference:
 - Aircraft appear as timetable codes (A321, A359, E190, AT72, B738, B789); the legend lists the codes present on the sheet with their full names.
 - Blue or black lettering matched to the route's ink; partner codeshares use the amber ink.
 
-Times run along the lane, 6.5 units to one side of it, starting 11 units beyond the port outside ordinary airport boxes and 12 units inside the outline of large hubs, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
+Times run along the lane: outside ordinary airport boxes 6.5 units to one side of it starting 11 units beyond the port, inside large hubs centred on the lane axis starting 12 units inside the outline, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
 
 Use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
 
@@ -109,7 +109,7 @@ These are current SVG drawing units, not immutable visual rules. Adjust them tog
 | Airport-edge time text | 9 bold, 1.8 paper knockout |
 | Arrow endpoint gap outside airport | 8 |
 | Straight approach stub | 40 before lane offsetting |
-| Time label | 11 beyond the port outside small boxes, 12 inside hubs, 6.5 beside the lane |
+| Time label | 11 beyond the port outside small boxes, 6.5 beside the lane; 12 inside hubs, centred on the lane |
 | City name | Oswald 600, 18 |
 | Hub title | width ÷ 14, capped at 320 |
 | Masthead wordmark | 64 × masthead scale |
@@ -120,7 +120,7 @@ Zoom scales the whole diagram. Judge both the overall sheet and a close-up of th
 
 Support drag-to-pan, scroll/pinch zoom, double-click zoom, explicit zoom buttons, a 100% shortcut, and Fit. Keep keyboard panning, zoom shortcuts, focus indicators, and keyboard flight selection available.
 
-Selecting a flight highlights its line and edge times and opens its details. De-emphasize other flights without removing the network context. Crowded central labels may appear on hover, focus, or selection. Do not use colour as the only way to distinguish the selected state or route type.
+Selecting a flight emphasises its line, edge times and label with a heavier amber stroke and a soft halo, and opens its details. Other flights are left untouched: emphasis, not dimming, so only the selected elements repaint. Crowded central labels may appear on hover, focus, or selection. Do not use colour as the only way to distinguish the selected state or route type.
 
 The SVG export must retain the fonts, route styles, crossing breaks, labels, and paper background. Keep reference scans out of runtime assets and exported timetable content.
 

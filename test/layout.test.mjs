@@ -29,7 +29,7 @@ test('sizes hubs by service volume with Helsinki and Oulu visibly larger',()=>{
  const nodes=layoutAirports(demo.airports,demo.flights),get=c=>nodes.find(a=>a.code===c);
  assert.ok(get('HEL').width>get('OUL').width*1.3);
  assert.ok(get('OUL').width>get('VAA').width*1.15);
- assert.equal(get('HEL').services,476);assert.equal(get('OUL').services,14);
+ assert.equal(get('HEL').services,demo.flights.filter(f=>f.from==='HEL'||f.to==='HEL').length);assert.equal(get('OUL').services,demo.flights.filter(f=>f.from==='OUL'||f.to==='OUL').length);
 });
 test('variable airport rectangles have clear space around every box',()=>{
  const nodes=layoutAirports(demo.airports,demo.flights);
@@ -64,15 +64,18 @@ test('visible flight labels avoid airport boxes and one another',()=>{
   for(let j=i+1;j<labels.length;j++)assert.ok(!rectanglesOverlap(labels[i],labels[j]),'labels overlap');
  }
 });
+// The sheet is a weekly timetable; the single-day subsets below use the Monday of the published
+// week (14 September 2026), the fullest day, as a second, smaller airport set to lay out.
+const MONDAY='2026-09-14';
 test('flight paths avoid unrelated airport boxes on the displayed Finnair date',()=>{
  // Checked against the drawn octagon rather than the rectangle: a lane may hug a cut corner.
- const flights=demo.flights.filter(f=>f.departure.startsWith('2026-09-10'));
+ const flights=demo.flights.filter(f=>f.departure.startsWith(MONDAY));
  const nodes=layoutAirports(demo.airports,flights),routes=layoutFlights(nodes,flights);
  routeClearsBoxes(routes,nodes);
 });
 
 test('each route uses straight parallel lanes with constant spacing in both directions',()=>{
- const flights=demo.flights.filter(f=>f.departure.startsWith('2026-09-10'));
+ const flights=demo.flights.filter(f=>f.departure.startsWith(MONDAY));
  const nodes=layoutAirports(demo.airports,flights),routes=layoutFlights(nodes,flights),bundle=routes.filter(r=>[r.flight.from,r.flight.to].sort().join(':')==='HEL:OUL');
  const canonical=bundle.map(r=>r.flight.from==='HEL'?r.points:[...r.points].reverse());
  for(const r of bundle)assert.ok(!/[QC]/.test(r.path),'routes must not curve');
@@ -110,9 +113,10 @@ test('all flight ports fit on the physical edge of their expanded airport',()=>{
 });
 
 test('regional groups dock on their assigned Helsinki edges',()=>{
- for(const flights of [demo.flights,demo.flights.filter(f=>f.departure.startsWith('2026-09-10'))]){
+ for(const flights of [demo.flights,demo.flights.filter(f=>f.departure.startsWith(MONDAY))]){
   const nodes=layoutAirports(demo.airports,flights),hub=nodes.find(n=>n.code==='HEL'),byCode=new Map(nodes.map(n=>[n.code,n]));
   for(const r of layoutFlights(nodes,flights)){
+   if(r.flight.from!=='HEL'&&r.flight.to!=='HEL')continue; // Umeå-Vaasa does not touch the hub
    const outgoing=r.flight.from==='HEL',other=byCode.get(outgoing?r.flight.to:r.flight.from),port=outgoing?r.start:r.end;
    if(other.region==='west'){assert.ok(other.x+other.width/2<hub.x-hub.width/2);assert.ok(Math.abs(port.x-(hub.x-hub.width/2-8))<.001);}
    if(other.region==='east'){assert.ok(other.x-other.width/2>hub.x+hub.width/2);assert.ok(Math.abs(port.x-(hub.x+hub.width/2+8))<.001);}
@@ -122,9 +126,10 @@ test('regional groups dock on their assigned Helsinki edges',()=>{
  }
 });
 
-test('the displayed date with partner codeshares stays compact, clear and routable',()=>{
- // Built exactly as the app does: active airports are those used by the visible flights.
- const flights=[...demo.flights,...demo.codeshareFlights].filter(f=>f.departure.startsWith('2026-09-10'));
+test('the displayed weekly sheet with partner codeshares stays compact, clear and routable',()=>{
+ // Built exactly as the app does: every weekly service with partner codeshares, and the active
+ // airports are those used by the visible flights.
+ const flights=[...demo.flights,...demo.codeshareFlights];
  const codes=new Set(flights.flatMap(f=>[f.from,f.to]));
  const nodes=layoutAirports([...demo.airports,...demo.codeshareAirports].filter(a=>codes.has(a.code)),flights),routes=layoutFlights(nodes,flights),byCode=new Map(nodes.map(n=>[n.code,n]));
  for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++)assert.ok(!overlap(nodes[i],nodes[j],39.9),`${nodes[i].code} is closer than 40 to ${nodes[j].code}`);
@@ -135,9 +140,9 @@ test('the displayed date with partner codeshares stays compact, clear and routab
   }
  }
  routeClearsBoxes(routes,nodes);
- // Sheet compactness: the bounding box of all airport boxes. The hub alone is about 9 M square
+ // Sheet compactness: the bounding box of all airport boxes. The hub alone is about 10 M square
  // units; the tiers and partner satellites around it must not spread the sheet past 49 M
- // (about 8,900 x 5,000: the west fan needs its three columns 500, 950 and 1,400 outside the
+ // (about 9,300 x 5,100: the west fan needs its three columns 500, 950 and 1,400 outside the
  // hub and London's four satellite columns to draw without crossings).
  const left=Math.min(...nodes.map(n=>n.x-n.width/2)),right=Math.max(...nodes.map(n=>n.x+n.width/2)),top=Math.min(...nodes.map(n=>n.y-n.height/2)),bottom=Math.max(...nodes.map(n=>n.y+n.height/2));
  assert.ok((right-left)*(bottom-top)<49e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
@@ -148,7 +153,7 @@ test('the domestic fan of the full weekly sheet draws without route crossings',(
  const flights=[...demo.flights,...demo.codeshareFlights],codes=new Set(flights.flatMap(f=>[f.from,f.to]));
  const nodes=layoutAirports([...demo.airports,...demo.codeshareAirports].filter(a=>codes.has(a.code)),flights),routes=layoutFlights(nodes,flights),byCode=new Map(nodes.map(n=>[n.code,n])),hub=byCode.get('HEL');
  const north=new Set(nodes.filter(n=>n!==hub&&n.region==='north').map(n=>n.code));
- assert.equal(north.size,15);
+ assert.equal(north.size,13); // Helsinki's domestic destinations on the published sheet
  for(const c of north)assert.ok(byCode.get(c).y+byCode.get(c).height/2<hub.y-hub.height/2,`${c} is not above Helsinki`);
  const keyOf=r=>[r.flight.from,r.flight.to].sort().join(':'),touchesNorth=r=>north.has(r.flight.from)||north.has(r.flight.to);
  const cross=(o,a,b)=>(a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x);
