@@ -1004,9 +1004,22 @@ h1 .unofficial {
 }
 
 .hub-port text {
-  font: 700 10px 'Roboto Condensed', sans-serif;
+  font: 700 13px 'Roboto Condensed', sans-serif;
   fill: var(--blue);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.6px;
+}
+
+.hub-bracket {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1;
+}
+
+.hub-port:hover .hub-bracket,
+.hub-port:focus-visible .hub-bracket,
+.has-focus .hub-port.focused .hub-bracket {
+  stroke: var(--active);
+  stroke-width: 1.6;
 }
 
 .hub-port:hover .hub-port-bg,

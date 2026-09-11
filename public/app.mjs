@@ -270,14 +270,19 @@ function render(){
    if(!bundles.has(other))bundles.set(other,[]);
    bundles.get(other).push(p);
   }
+  // Each destination's group of lanes gets a bracket just inside the times and its code beyond it.
   for(const [code,pts] of bundles){
    const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length,cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
    const onTopOrBottom=Math.abs(Math.abs(cy-hub.y)-hub.height/2-8)<0.01;
    const nx=onTopOrBottom?0:Math.sign(cx-hub.x),ny=onTopOrBottom?Math.sign(cy-hub.y):0;
-   const x=cx-nx*100,y=cy-ny*100,w=measure(code,'700 10px "Roboto Condensed"')+7;
+   const lo=Math.min(...pts.map(p=>onTopOrBottom?p.x:p.y))-6,hi=Math.max(...pts.map(p=>onTopOrBottom?p.x:p.y))+6;
+   const depth=96,tick=6,d=onTopOrBottom
+    ?`M ${lo} ${cy-ny*(depth-tick)} L ${lo} ${cy-ny*depth} L ${hi} ${cy-ny*depth} L ${hi} ${cy-ny*(depth-tick)}`
+    :`M ${cx-nx*(depth-tick)} ${lo} L ${cx-nx*depth} ${lo} L ${cx-nx*depth} ${hi} L ${cx-nx*(depth-tick)} ${hi}`;
+   const x=cx-nx*(depth+18),y=cy-ny*(depth+18),w=measure(code,'700 13px "Roboto Condensed"')+8;
    const g=el('g',{class:'hub-port',role:'button',tabindex:0,'aria-label':`${byName(code)} (${code}), ${pts.length} services. Activate to show only this airport's flights.`});
    g.dataset.code=code;
-   g.append(el('rect',{x:x-w/2,y:y-7,width:w,height:14,class:'hub-port-bg'}),el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central'},code));
+   g.append(el('path',{d,class:'hub-bracket'}),el('rect',{x:x-w/2,y:y-9,width:w,height:18,class:'hub-port-bg'}),el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central'},code));
    portsG.append(g);
   }
   svg.append(portsG);

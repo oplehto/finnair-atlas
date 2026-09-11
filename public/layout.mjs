@@ -167,6 +167,13 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
 
   const HEL_X = 6000, HEL_Y = 5000;
 
+  // Longest edge-time string each airport must hold inside its box ("12.15 ①②③④⑤" at 7.5 px, in
+  // sheet units) so the box is sized from its text: times run inward from the port edge and must
+  // clear the name block (44) on the far side.
+  const timeTextLength = f => 5 * 4.1 + (f.days && f.days !== '#' ? 2.2 + [...f.days].length * 7.2 : 0);
+  const longestTime = new Map();
+  for (const f of flightList) for (const code of [f.from, f.to]) longestTime.set(code, Math.max(longestTime.get(code) || 0, timeTextLength(f)));
+
   const nodes = sortedAirports.map(a => {
     const isHub = a.code === center.code;
     const services = counts.get(a.code) || 0;
@@ -182,8 +189,13 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
       // the lanes; the other dimension grows at half the rate, so Tallinn's 45 weekly lanes
       // make a wide banner under the hub rather than a square that shadows the European fan.
       const along = laneSpace + 24, across = Math.round(along / 2), wide = reg === 'north' || reg === 'south';
-      width = Math.round(Math.max(200, (a.name || a.code).length * 8.5 + 32, wide ? along : across));
-      height = Math.round(Math.max(a.codeshare ? 76 : 104, wide ? across : along));
+      const nameWidth = (a.name || a.code).length * 10.5, text = longestTime.get(a.code) || 0;
+      // Room for the inward times: on a north/south spoke they rise from the port edge, so the height
+      // must hold 8 + text + 14 + name block 44 + 10; on a west/east spoke they run in horizontally
+      // beside the centred name, so the width must hold that on both sides of it.
+      const textHeight = wide ? 8 + text + 14 + 44 + 10 : 0, textWidth = wide ? 0 : 2 * (18 + text) + nameWidth;
+      width = Math.round(Math.max(200, nameWidth + 32, textWidth, wide ? along : across));
+      height = Math.round(Math.max(a.codeshare ? 76 : 120, textHeight, wide ? across : along));
     }
     return {
       ...a,
@@ -780,7 +792,14 @@ function routePorts(nodes, bundles, byCode) {
         : (item.other.x - node.x) / Math.max(1, Math.abs(item.other.y - node.y) + node.height);
       items.sort((a, b) => bearing(a) - bearing(b) || a.key.localeCompare(b.key));
       const total = items.reduce((sum, i) => sum + i.span, 0);
-      let cursor = -total / 2;
+      // On a spoke that also has ports on one horizontal edge, side-edge ports move into the other half
+      // so their inward times stay clear of the column of times rising from that edge.
+      let bias = 0;
+      if (vertical && !node.isRegionalHub && (sides.top.length > 0) !== (sides.bottom.length > 0)) {
+        const room = Math.max(0, node.height / 2 - 8 - total / 2);
+        bias = Math.min(room, node.height / 4) * (sides.top.length ? 1 : -1);
+      }
+      let cursor = -total / 2 + bias;
       for (const item of items) {
         const along = cursor + item.span / 2;
         cursor += item.span;
