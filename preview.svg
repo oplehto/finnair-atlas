@@ -38,10 +38,42 @@
   <text x="0" y="60" fill="#08618c" font-size="64" font-family="Oswald" font-weight="600" letter-spacing="3px">FINNAIR</text>
   <text x="250" y="40" fill="#08618c" font-size="22" font-family="Oswald" font-weight="600" letter-spacing="1px">ULKOMAAN JA KOTIMAAN LIIKENNE — UTRIKES- OCH INRIKESTRAFIKEN</text>
   <text x="250" y="64" fill="#454940" font-size="15" font-family="Roboto Condensed" font-weight="700">10.9.2026 · AIKATAULUT JA REITTIKARTTA / TIMETABLE &amp; ROUTE NETWORK</text>
-  <text x="250" y="84" fill="#62777e" font-size="13" font-family="Roboto Condensed">Finnairin ja oneworld-kumppaneiden reitistö (Qatar, Qantas, American, Alaska, JAL, Cathay) · 180 lentoasemaa / airports · 575 reittilentoa / flights · Kaikki ajat paikallisaikoja / All times local</text>
+  <text x="250" y="84" fill="#62777e" font-size="13" font-family="Roboto Condensed">Finnairin ja oneworld-kumppaneiden reitistö (Qatar, Qantas, American, Alaska, JAL, Cathay) · 194 lentoasemaa / airports · 603 reittilentoa / flights · Kaikki ajat paikallisaikoja / All times local</text>
   <line x1="0" y1="104" x2="2800" y2="104" stroke="#08618c" stroke-width="2" />
   <line x1="0" y1="108" x2="2800" y2="108" stroke="#08618c" stroke-width="0.75" />
 </g>
+<g class="flight codeshare">
+    <path d="M 1203 4309.4 L 1203 4273.282827488836 L 1071.2518874675163 4191.064080570068 L 930 3804.639274141077 L 930 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 4309.4 L 1203 4273.282827488836 L 1071.2518874675163 4191.064080570068 L 930 3804.639274141077 L 930 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(31.966643674084192 1140.749706532446 4234.434899986528)">
+      <rect class="label-bg" x="1077.349706532446" y="4225.934899986528" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1140.749706532446" y="4234.434899986528" dominant-baseline="central" text-anchor="middle">AY 5955  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 944 3763.3999999999996 L 944 3802.1607258589224 L 1082.7481125324837 4181.7359194299315 L 1217 4265.517172511163 L 1217 4309.4" class="crossing-gap" />
+    <path d="M 944 3763.3999999999996 L 944 3802.1607258589224 L 1082.7481125324837 4181.7359194299315 L 1217 4265.517172511163 L 1217 4309.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(69.92086041569115 1014.8441104121871 3995.969970772263)">
+      <rect class="label-bg" x="951.4441104121871" y="3987.469970772263" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1014.8441104121871" y="3995.969970772263" dominant-baseline="central" text-anchor="middle">AY 5954  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1653 5269.4 L 1653 5233.282827488836 L 1520.5105664396842 5150.601451657963 L 1336.8868266204931 3811.345697107122 L 1224 3810.3377790122963 L 1224 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 5269.4 L 1653 5233.282827488836 L 1520.5105664396842 5150.601451657963 L 1336.8868266204931 3811.345697107122 L 1224 3810.3377790122963 L 1224 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(82.19292325792566 1458.6779132103964 4699.626339518264)">
+      <rect class="label-bg" x="1361.2779132103963" y="4691.126339518264" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1458.6779132103964" y="4699.626339518264" dominant-baseline="central" text-anchor="middle">AY 5977  #  Boeing 777-200</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1238 3763.3999999999996 L 1238 3796.462220987703 L 1349.1131733795069 3797.4543028928774 L 1533.4894335603158 5142.198548342037 L 1667 5225.517172511163 L 1667 5269.4" class="crossing-gap" />
+    <path d="M 1238 3763.3999999999996 L 1238 3796.462220987703 L 1349.1131733795069 3797.4543028928774 L 1533.4894335603158 5142.198548342037 L 1667 5225.517172511163 L 1667 5269.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(82.19292325792561 1445.1780202774817 4498.101175377018)">
+      <rect class="label-bg" x="1347.7780202774816" y="4489.601175377018" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1445.1780202774817" y="4498.101175377018" dominant-baseline="central" text-anchor="middle">AY 5976  #  Boeing 777-200</text>
+    </g>
+  </g>
 <g class="flight">
     <path d="M 3533.9285714285716 5921 L 3533.9285714285716 5879.776176980593 L 3634.539177851358 5600.835814965002 L 3932.3398971113097 4573.488355509273 L 4234.396999216833 3946.836678711645 L 4296 3594.3928439279516 L 4296 3555" class="crossing-gap" />
     <path d="M 3533.9285714285716 5921 L 3533.9285714285716 5879.776176980593 L 3634.539177851358 5600.835814965002 L 3932.3398971113097 4573.488355509273 L 4234.396999216833 3946.836678711645 L 4296 3594.3928439279516 L 4296 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
@@ -213,33 +245,33 @@
 <g class="flight">
     <path d="M 2649.3333333333335 4176 L 2649.3333333333335 4134.558587034314 L 2882 3593.558587034314 L 2882 3555" class="crossing-gap" />
     <path d="M 2649.3333333333335 4176 L 2649.3333333333335 4134.558587034314 L 2882 3593.558587034314 L 2882 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-66.72901797885191 2852.307312624097 3662.6004661332972)">
-      <rect class="label-bg" x="2792.307312624097" y="3654.1004661332972" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2852.307312624097" y="3662.6004661332972" dominant-baseline="central" text-anchor="middle">AY1308  #  A321</text>
+    <g class="label-plate" transform="rotate(-66.72901797885014 2828.5227344916934 3717.904721590161)">
+      <rect class="label-bg" x="2768.5227344916934" y="3709.404721590161" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2828.5227344916934" y="3717.904721590161" dominant-baseline="central" text-anchor="middle">AY1308  #  A321</text>
     </g>
   </g>
 <g class="flight">
     <path d="M 2896 3555 L 2896 3596.441412965686 L 2663.3333333333335 4137.441412965686 L 2663.3333333333335 4176" class="crossing-gap" />
     <path d="M 2896 3555 L 2896 3596.441412965686 L 2663.3333333333335 4137.441412965686 L 2663.3333333333335 4176" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-66.7290179788519 2811.948911371254 3791.878256582384)">
-      <rect class="label-bg" x="2751.948911371254" y="3783.378256582384" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2811.948911371254" y="3791.878256582384" dominant-baseline="central" text-anchor="middle">AY1301  #  A321</text>
+    <g class="label-plate" transform="rotate(-66.7290179788519 2748.5233696848445 3939.3562711340205)">
+      <rect class="label-bg" x="2688.5233696848445" y="3930.8562711340205" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2748.5233696848445" y="3939.3562711340205" dominant-baseline="central" text-anchor="middle">AY1301  #  A321</text>
     </g>
   </g>
 <g class="flight">
     <path d="M 2910 3555 L 2910 3599.3242388970584 L 2677.3333333333335 4140.324238897058 L 2677.3333333333335 4176" class="crossing-gap" />
     <path d="M 2910 3555 L 2910 3599.3242388970584 L 2677.3333333333335 4140.324238897058 L 2677.3333333333335 4176" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-66.72901797885115 2763.6623174076094 3939.590798850425)">
-      <rect class="label-bg" x="2703.6623174076094" y="3931.090798850425" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2763.6623174076094" y="3939.590798850425" dominant-baseline="central" text-anchor="middle">AY1305  #  A320</text>
+    <g class="label-plate" transform="rotate(-66.72901797885115 2882.585208069627 3663.0695215661067)">
+      <rect class="label-bg" x="2822.585208069627" y="3654.5695215661067" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2882.585208069627" y="3663.0695215661067" dominant-baseline="central" text-anchor="middle">AY1305  #  A320</text>
     </g>
   </g>
 <g class="flight">
     <path d="M 2924 3555 L 2924 3602.2070648284307 L 2691.3333333333335 4143.207064828431 L 2691.3333333333335 4176" class="crossing-gap" />
     <path d="M 2924 3555 L 2924 3602.2070648284307 L 2691.3333333333335 4143.207064828431 L 2691.3333333333335 4176" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-66.7290179788519 2842.2268068167837 3792.347312015193)">
-      <rect class="label-bg" x="2782.2268068167837" y="3783.847312015193" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2842.2268068167837" y="3792.347312015193" dominant-baseline="central" text-anchor="middle">AY1307  #  A321</text>
+    <g class="label-plate" transform="rotate(-66.72901797885012 2810.514035973579 3866.0863192910115)">
+      <rect class="label-bg" x="2750.514035973579" y="3857.5863192910115" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2810.514035973579" y="3866.0863192910115" dominant-baseline="central" text-anchor="middle">AY1307  #  A321</text>
     </g>
   </g>
 <g class="flight codeshare">
@@ -470,6 +502,22 @@
       <text class="flight-label" x="3987.095741803865" y="4492.405253737219" dominant-baseline="central" text-anchor="middle">AY1655  #  A321</text>
     </g>
   </g>
+<g class="flight codeshare">
+    <path d="M 1653 4309.4 L 1653 4273.282827488836 L 1521.1587513292866 4191.0059580176385 L 1392 3804.5387567745393 L 1392 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 4309.4 L 1653 4273.282827488836 L 1521.1587513292866 4191.0059580176385 L 1392 3804.5387567745393 L 1392 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(31.966643674086484 1591.3185079748007 4234.789866300178)">
+      <rect class="label-bg" x="1493.9185079748006" y="4226.289866300178" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1591.3185079748007" y="4234.789866300178" dominant-baseline="central" text-anchor="middle">AY 5969  #  Boeing 777-200</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1406 3763.3999999999996 L 1406 3802.26124322546 L 1532.8412486707134 4181.794041982361 L 1667 4265.517172511163 L 1667 4309.4" class="crossing-gap" />
+    <path d="M 1406 3763.3999999999996 L 1406 3802.26124322546 L 1532.8412486707134 4181.794041982361 L 1667 4265.517172511163 L 1667 4309.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(71.52018370033387 1495.2792710565773 4069.4015620900623)">
+      <rect class="label-bg" x="1397.8792710565772" y="4060.9015620900623" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1495.2792710565773" y="4069.4015620900623" dominant-baseline="central" text-anchor="middle">AY 5968  #  Boeing 777-200</text>
+    </g>
+  </g>
 <g class="flight">
     <path d="M 3513.875 3796 L 3513.875 3776.3157583113402 L 3232 3615.3157583113402 L 3232 3555" class="crossing-gap" />
     <path d="M 3513.875 3796 L 3513.875 3776.3157583113402 L 3232 3615.3157583113402 L 3232 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
@@ -510,6 +558,22 @@
       <text class="flight-label" x="3460.5784431790407" y="3665.2603103425863" dominant-baseline="central" text-anchor="middle">AY1435  #  A321</text>
     </g>
   </g>
+<g class="flight codeshare">
+    <path d="M 1653 4549.4 L 1653 4513.282827488836 L 1520.968516980835 4430.887240341537 L 1350 3804.337910464713 L 1350 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 4549.4 L 1653 4513.282827488836 L 1520.968516980835 4430.887240341537 L 1350 3804.337910464713 L 1350 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(74.73709971617905 1511.068215221752 4394.605546247957)">
+      <rect class="label-bg" x="1420.4682152217522" y="4386.105546247957" width="181.2" height="17" rx="2" />
+      <text class="flight-label" x="1511.068215221752" y="4394.605546247957" dominant-baseline="central" text-anchor="middle">AY 5971  #  Boeing 787-9</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1364 3763.3999999999996 L 1364 3802.4620895352864 L 1533.031483019165 4421.912759658462 L 1667 4505.517172511163 L 1667 4549.4" class="crossing-gap" />
+    <path d="M 1364 3763.3999999999996 L 1364 3802.4620895352864 L 1533.031483019165 4421.912759658462 L 1667 4505.517172511163 L 1667 4549.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(74.73709971617865 1469.9357530117948 4190.6854667491)">
+      <rect class="label-bg" x="1379.3357530117948" y="4182.1854667491" width="181.2" height="17" rx="2" />
+      <text class="flight-label" x="1469.9357530117948" y="4190.6854667491" dominant-baseline="central" text-anchor="middle">AY 5970  #  Boeing 787-9</text>
+    </g>
+  </g>
 <g class="flight">
     <path d="M 1858 3264.25 L 1895.3328329324902 3264.25 L 2659.33283293249 3067 L 2702 3067" class="crossing-gap" />
     <path d="M 1858 3264.25 L 1895.3328329324902 3264.25 L 2659.33283293249 3067 L 2702 3067" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
@@ -540,6 +604,22 @@
     <g class="label-plate" transform="rotate(-14.476531270243933 2482.0350844798413 3156.152065825154)">
       <rect class="label-bg" x="2425.4350844798414" y="3147.652065825154" width="113.2" height="17" rx="2" />
       <text class="flight-label" x="2482.0350844798413" y="3156.152065825154" dominant-baseline="central" text-anchor="middle">AY923  #  E190</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1203 4069.3999999999996 L 1203 4033.2828274888357 L 1072.052867725226 3951.5639404301423 L 972 3805.5684293617005 L 972 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 4069.3999999999996 L 1203 4033.2828274888357 L 1072.052867725226 3951.5639404301423 L 972 3805.5684293617005 L 972 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(31.966643674085493 1174.5633033725755 4015.53661831533)">
+      <rect class="label-bg" x="1111.1633033725755" y="4007.03661831533" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1174.5633033725755" y="4015.53661831533" dominant-baseline="central" text-anchor="middle">AY 5953  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 986 3763.3999999999996 L 986 3801.2315706382988 L 1081.947132274774 3941.236059569857 L 1217 4025.5171725111636 L 1217 4069.3999999999996" class="crossing-gap" />
+    <path d="M 986 3763.3999999999996 L 986 3801.2315706382988 L 1081.947132274774 3941.236059569857 L 1217 4025.5171725111636 L 1217 4069.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(55.57658654496925 1024.968336890788 3858.0935316115915)">
+      <rect class="label-bg" x="961.5683368907879" y="3849.5935316115915" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1024.968336890788" y="3858.0935316115915" dominant-baseline="central" text-anchor="middle">AY 5952  #  A320</text>
     </g>
   </g>
 <g class="flight">
@@ -672,6 +752,18 @@
     <g class="label-plate" transform="rotate(0 2283.200905272364 2460.666666666667)">
       <rect class="label-bg" x="2219.8009052723637" y="2452.166666666667" width="126.8" height="17" rx="2" />
       <text class="flight-label" x="2283.200905272364" y="2460.666666666667" dominant-baseline="central" text-anchor="middle">AY949  ②④⑥  E190</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1653 3829.3999999999996 L 1653 3796.9755348210138 L 1476 3810.9755348210138 L 1476 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 3829.3999999999996 L 1653 3796.9755348210138 L 1476 3810.9755348210138 L 1476 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+  </g>
+<g class="flight codeshare">
+    <path d="M 1490 3763.3999999999996 L 1490 3795.8244651789855 L 1667 3781.8244651789855 L 1667 3829.3999999999996" class="crossing-gap" />
+    <path d="M 1490 3763.3999999999996 L 1490 3795.8244651789855 L 1667 3781.8244651789855 L 1667 3829.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(-4.5224541463988865 1586.0519484626952 3788.227135922049)">
+      <rect class="label-bg" x="1505.6519484626951" y="3779.727135922049" width="160.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1586.0519484626952" y="3788.227135922049" dominant-baseline="central" text-anchor="middle">AY 5964  #  A350-1000</text>
     </g>
   </g>
 <g class="flight">
@@ -829,9 +921,9 @@
 <g class="flight">
     <path d="M 3036 3555 L 3036 3611.89968853952 L 2838.6018390517415 3768.6531577298206 L 2511.619259776368 4127.724913743683 L 2356.7 4528.528761860032 L 2356.7 4562" class="crossing-gap" />
     <path d="M 3036 3555 L 3036 3611.89968853952 L 2838.6018390517415 3768.6531577298206 L 2511.619259776368 4127.724913743683 L 2356.7 4528.528761860032 L 2356.7 4562" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-47.677973551109275 2623.197143869792 4005.197081030014)">
-      <rect class="label-bg" x="2563.197143869792" y="3996.697081030014" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2623.197143869792" y="4005.197081030014" dominant-baseline="central" text-anchor="middle">AY1575  #  A321</text>
+    <g class="label-plate" transform="rotate(-47.67797355111075 2826.4439570249274 3782.0041810731805)">
+      <rect class="label-bg" x="2766.4439570249274" y="3773.5041810731805" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2826.4439570249274" y="3782.0041810731805" dominant-baseline="central" text-anchor="middle">AY1575  #  A321</text>
     </g>
   </g>
 <g class="flight">
@@ -1507,19 +1599,19 @@
     </g>
   </g>
 <g class="flight">
-    <path d="M 1284.2142857142858 5921 L 1284.2142857142858 5879.739847137966 L 1450.6422824106153 5432.47627220132 L 2183.3399077186373 4532.496541156215 L 2518.1001774191545 4146.350119885971 L 2852.2172786477395 3779.4436794319276 L 3190 3590.8907097457595 L 3190 3555" class="crossing-gap" />
-    <path d="M 1284.2142857142858 5921 L 1284.2142857142858 5879.739847137966 L 1450.6422824106153 5432.47627220132 L 2183.3399077186373 4532.496541156215 L 2518.1001774191545 4146.350119885971 L 2852.2172786477395 3779.4436794319276 L 3190 3590.8907097457595 L 3190 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-50.850040957186586 1869.1961934132373 4918.362368674394)">
-      <rect class="label-bg" x="1805.7961934132372" y="4909.862368674394" width="126.8" height="17" rx="2" />
-      <text class="flight-label" x="1869.1961934132373" y="4918.362368674394" dominant-baseline="central" text-anchor="middle">AY1740  ①④  A321</text>
+    <path d="M 1284.2142857142858 5921 L 1284.2142857142858 5877.3615600240655 L 1718.2697314791117 5572.627655000334 L 2143.4855542034384 5144.316812199826 L 3116.122727410297 3945.903579303833 L 3190 3594.272594473516 L 3190 3555" class="crossing-gap" />
+    <path d="M 1284.2142857142858 5921 L 1284.2142857142858 5877.3615600240655 L 1718.2697314791117 5572.627655000334 L 2143.4855542034384 5144.316812199826 L 3116.122727410297 3945.903579303833 L 3190 3594.272594473516 L 3190 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-48.79888204466052 2148.466997366362 5138.179037940506)">
+      <rect class="label-bg" x="2085.066997366362" y="5129.679037940506" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="2148.466997366362" y="5138.179037940506" dominant-baseline="central" text-anchor="middle">AY1740  ①④  A321</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 3204 3555 L 3204 3599.1092902542405 L 2861.0327213522605 3790.5563205680724 L 2528.5664892475124 4155.649880114029 L 2194.0600922813624 4541.503458843785 L 1462.957717589385 5439.52372779868 L 1298.2142857142858 5882.260152862034 L 1298.2142857142858 5921" class="crossing-gap" />
-    <path d="M 3204 3555 L 3204 3599.1092902542405 L 2861.0327213522605 3790.5563205680724 L 2528.5664892475124 4155.649880114029 L 2194.0600922813624 4541.503458843785 L 1462.957717589385 5439.52372779868 L 1298.2142857142858 5882.260152862034 L 1298.2142857142858 5921" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-50.8500409571865 2122.1542934086942 4629.8260619132325)">
-      <rect class="label-bg" x="2058.754293408694" y="4621.3260619132325" width="126.8" height="17" rx="2" />
-      <text class="flight-label" x="2122.1542934086942" y="4629.8260619132325" dominant-baseline="central" text-anchor="middle">AY1739  ①④  A321</text>
+    <path d="M 3204 3555 L 3204 3595.727405526484 L 3129.127272589703 3952.096420696167 L 2153.9144457965613 5153.683187800174 L 1727.3302685208887 5583.372344999666 L 1298.2142857142858 5884.6384399759345 L 1298.2142857142858 5921" class="crossing-gap" />
+    <path d="M 3204 3555 L 3204 3595.727405526484 L 3129.127272589703 3952.096420696167 L 2153.9144457965613 5153.683187800174 L 1727.3302685208887 5583.372344999666 L 1298.2142857142858 5884.6384399759345 L 1298.2142857142858 5921" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-50.93707192380837 2401.652805228549 4848.43788521693)">
+      <rect class="label-bg" x="2338.252805228549" y="4839.93788521693" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="2401.652805228549" y="4848.43788521693" dominant-baseline="central" text-anchor="middle">AY1739  ①④  A321</text>
     </g>
   </g>
 <g class="flight">
@@ -1598,6 +1690,22 @@
       <text class="flight-label" x="9423.228318691248" y="1431.1701247337169" dominant-baseline="central" text-anchor="middle">AY 4142  #  A350-900</text>
     </g>
   </g>
+<g class="flight codeshare">
+    <path d="M 1203 5269.4 L 1203 5233.282827488836 L 1070.1599852606398 5150.382667914649 L 1014 3803.545878538948 L 1014 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 5269.4 L 1203 5233.282827488836 L 1070.1599852606398 5150.382667914649 L 1014 3803.545878538948 L 1014 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(87.61228144720354 1053.1611512441755 4742.714202126943)">
+      <rect class="label-bg" x="955.7611512441755" y="4734.214202126943" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1053.1611512441755" y="4742.714202126943" dominant-baseline="central" text-anchor="middle">AY 5963  #  Boeing 777-200</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1028 3763.3999999999996 L 1028 3803.2541214610515 L 1083.8400147393602 5142.417332085351 L 1217 5225.517172511163 L 1217 5269.4" class="crossing-gap" />
+    <path d="M 1028 3763.3999999999996 L 1028 3803.2541214610515 L 1083.8400147393602 5142.417332085351 L 1217 5225.517172511163 L 1217 5269.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(87.61228144720363 1059.2735699928423 4553.261344682254)">
+      <rect class="label-bg" x="961.8735699928424" y="4544.761344682254" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1059.2735699928423" y="4553.261344682254" dominant-baseline="central" text-anchor="middle">AY 5962  #  Boeing 777-200</text>
+    </g>
+  </g>
 <g class="flight">
     <path d="M 4087.125 3810 L 4087.125 3772.5493665298022 L 4044 3597.5493665298022 L 4044 3555" class="crossing-gap" />
     <path d="M 4087.125 3810 L 4087.125 3772.5493665298022 L 4044 3597.5493665298022 L 4044 3555" class="ink" stroke="#454940" stroke-dasharray="7 3" marker-end="url(#prop)" />
@@ -1623,6 +1731,22 @@
     <path d="M 4086 3555 L 4086 3592.4506334701978 L 4129.125 3767.4506334701978 L 4129.125 3810" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
   </g>
 <g class="flight codeshare">
+    <path d="M 1203 5029.4 L 1203 4993.282827488836 L 1070.0491085433518 4910.313474173785 L 1056 3803.4444225082866 L 1056 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 5029.4 L 1203 4993.282827488836 L 1070.0491085433518 4910.313474173785 L 1056 3803.4444225082866 L 1056 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(89.27280340758232 1061.9535582412695 4272.499761088307)">
+      <rect class="label-bg" x="998.5535582412696" y="4263.999761088307" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1061.9535582412695" y="4272.499761088307" dominant-baseline="central" text-anchor="middle">AY 5961  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1070 3763.3999999999996 L 1070 3803.3555774917127 L 1083.9508914566482 4902.486525826214 L 1217 4985.517172511163 L 1217 5029.4" class="crossing-gap" />
+    <path d="M 1070 3763.3999999999996 L 1070 3803.3555774917127 L 1083.9508914566482 4902.486525826214 L 1217 4985.517172511163 L 1217 5029.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(89.27280340758239 1077.995592036462 4433.294007221544)">
+      <rect class="label-bg" x="1014.5955920364621" y="4424.794007221544" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1077.995592036462" y="4433.294007221544" dominant-baseline="central" text-anchor="middle">AY 5960  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
     <path d="M 643 4101.285714285714 L 643 4056.7101008970276 L 748 4010.7101008970276 L 748 3975.2857142857138" class="crossing-gap" />
     <path d="M 643 4101.285714285714 L 643 4056.7101008970276 L 748 4010.7101008970276 L 748 3975.2857142857138" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
   </g>
@@ -1632,6 +1756,18 @@
     <g class="label-plate" transform="rotate(-23.657996998760495 713.6910651649529 4041.025241983087)">
       <rect class="label-bg" x="623.0910651649529" y="4032.525241983087" width="181.2" height="17" rx="2" />
       <text class="flight-label" x="713.6910651649529" y="4041.025241983087" dominant-baseline="central" text-anchor="middle">AY 4132  #  Boeing 787-8</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1203 3829.3999999999996 L 1203 3797.3952814435297 L 1098 3811.3952814435297 L 1098 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 3829.3999999999996 L 1203 3797.3952814435297 L 1098 3811.3952814435297 L 1098 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+  </g>
+<g class="flight codeshare">
+    <path d="M 1112 3763.3999999999996 L 1112 3795.4047185564696 L 1217 3781.4047185564696 L 1217 3829.3999999999996" class="crossing-gap" />
+    <path d="M 1112 3763.3999999999996 L 1112 3795.4047185564696 L 1217 3781.4047185564696 L 1217 3829.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(-7.594643368590057 1172.4251460406372 3787.348032417718)">
+      <rect class="label-bg" x="1109.025146040637" y="3778.848032417718" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1172.4251460406372" y="3787.348032417718" dominant-baseline="central" text-anchor="middle">AY 5950  #  A320</text>
     </g>
   </g>
 <g class="flight">
@@ -1745,6 +1881,10 @@
 <g class="flight">
     <path d="M 2982.625 3810 L 2982.625 3773.0098326611565 L 2798 3598.0098326611565 L 2798 3555" class="crossing-gap" />
     <path d="M 2982.625 3810 L 2982.625 3773.0098326611565 L 2798 3598.0098326611565 L 2798 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(43.46690230317618 2808.041420239267 3607.527766537239)">
+      <rect class="label-bg" x="2748.041420239267" y="3599.027766537239" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2808.041420239267" y="3607.527766537239" dominant-baseline="central" text-anchor="middle">AY1426  #  A320</text>
+    </g>
   </g>
 <g class="flight">
     <path d="M 2812 3555 L 2812 3591.9901673388435 L 2996.625 3766.9901673388435 L 2996.625 3810" class="crossing-gap" />
@@ -2403,67 +2543,67 @@
     </g>
   </g>
 <g class="flight">
-    <path d="M 2702 3235 L 2663.841018867292 3235 L 2117.6417290676795 3276.1014162812166 L 1948.7309362189778 3455.527733978833 L 1595.4056810334093 3502.4695178820584 L 1375.6510769722165 3684.3999999999996 L 1318 3684.3999999999996" class="crossing-gap" />
-    <path d="M 2702 3235 L 2663.841018867292 3235 L 2117.6417290676795 3276.1014162812166 L 1948.7309362189778 3455.527733978833 L 1595.4056810334093 3502.4695178820584 L 1375.6510769722165 3684.3999999999996 L 1318 3684.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-46.72910739791983 1994.2977019930433 3407.124213668833)">
-      <rect class="label-bg" x="1934.2977019930433" y="3398.624213668833" width="120" height="17" rx="2" />
-      <text class="flight-label" x="1994.2977019930433" y="3407.124213668833" dominant-baseline="central" text-anchor="middle">AY1331  #  A321</text>
+    <path d="M 2702 3235 L 2663.841018867292 3235 L 2117.6417290676795 3276.1014162812166 L 1948.7309362189778 3455.527733978833 L 1597.3687624165768 3502.208708498295 L 1407.723499344944 3684.3999999999996 L 1348 3684.3999999999996" class="crossing-gap" />
+    <path d="M 2702 3235 L 2663.841018867292 3235 L 2117.6417290676795 3276.1014162812166 L 1948.7309362189778 3455.527733978833 L 1597.3687624165768 3502.208708498295 L 1407.723499344944 3684.3999999999996 L 1348 3684.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-46.72910739792019 2001.9122263603663 3399.0356478335443)">
+      <rect class="label-bg" x="1941.9122263603663" y="3390.5356478335443" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2001.9122263603663" y="3399.0356478335443" dominant-baseline="central" text-anchor="middle">AY1331  #  A321</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 2702 3221 L 2663.3150134766374 3221 L 2111.172663619771 3262.5486306770595 L 1941.9506687278413 3442.305524270595 L 1589.5754864524351 3489.1210842014702 L 1370.6079121230118 3670.3999999999996 L 1318 3670.3999999999996" class="crossing-gap" />
-    <path d="M 2702 3221 L 2663.3150134766374 3221 L 2111.172663619771 3262.5486306770595 L 1941.9506687278413 3442.305524270595 L 1589.5754864524351 3489.1210842014702 L 1370.6079121230118 3670.3999999999996 L 1318 3670.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-10.785742240291794 2121.518300715173 3261.7701230061534)">
-      <rect class="label-bg" x="2061.518300715173" y="3253.2701230061534" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2121.518300715173" y="3261.7701230061534" dominant-baseline="central" text-anchor="middle">AY1333  #  A350</text>
+    <path d="M 2702 3221 L 2663.3150134766374 3221 L 2111.172663619771 3262.5486306770595 L 1941.9506687278413 3442.305524270595 L 1590.977687440412 3488.934791784496 L 1402.0882138178172 3670.3999999999996 L 1348 3670.3999999999996" class="crossing-gap" />
+    <path d="M 2702 3221 L 2663.3150134766374 3221 L 2111.172663619771 3262.5486306770595 L 1941.9506687278413 3442.305524270595 L 1590.977687440412 3488.934791784496 L 1402.0882138178172 3670.3999999999996 L 1348 3670.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-4.303388512843527 2129.9571419233102 3261.1351014455176)">
+      <rect class="label-bg" x="2069.9571419233102" y="3252.6351014455176" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2129.9571419233102" y="3261.1351014455176" dominant-baseline="central" text-anchor="middle">AY1333  #  A350</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 2702 3207 L 2662.7890080859825 3207 L 2104.7035981718627 3248.995845072902 L 1935.1704012367047 3429.083314562357 L 1583.7452918714612 3475.772650520882 L 1365.5647472738071 3656.3999999999996 L 1318 3656.3999999999996" class="crossing-gap" />
-    <path d="M 2702 3207 L 2662.7890080859825 3207 L 2104.7035981718627 3248.995845072902 L 1935.1704012367047 3429.083314562357 L 1583.7452918714612 3475.772650520882 L 1365.5647472738071 3656.3999999999996 L 1318 3656.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-46.72910739792001 1990.308227037409 3370.512888822099)">
-      <rect class="label-bg" x="1930.308227037409" y="3362.012888822099" width="120" height="17" rx="2" />
-      <text class="flight-label" x="1990.308227037409" y="3370.512888822099" dominant-baseline="central" text-anchor="middle">AY1337  #  A350</text>
+    <path d="M 2702 3207 L 2662.7890080859825 3207 L 2104.7035981718627 3248.995845072902 L 1935.1704012367047 3429.083314562357 L 1584.5866124642473 3475.660875070698 L 1396.4529282906904 3656.3999999999996 L 1348 3656.3999999999996" class="crossing-gap" />
+    <path d="M 2702 3207 L 2662.7890080859825 3207 L 2104.7035981718627 3248.995845072902 L 1935.1704012367047 3429.083314562357 L 1584.5866124642473 3475.660875070698 L 1396.4529282906904 3656.3999999999996 L 1348 3656.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-46.72910739792057 1997.9588222839718 3362.3860065185195)">
+      <rect class="label-bg" x="1937.9588222839718" y="3353.8860065185195" width="120" height="17" rx="2" />
+      <text class="flight-label" x="1997.9588222839718" y="3362.3860065185195" dominant-baseline="central" text-anchor="middle">AY1337  #  A350</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 2702 3193 L 2662.2630026953275 3193 L 2098.234532723954 3235.4430594687447 L 1928.3901337455682 3415.861104854119 L 1577.915097290487 3462.424216840294 L 1360.5215824246025 3642.3999999999996 L 1318 3642.3999999999996" class="crossing-gap" />
-    <path d="M 2702 3193 L 2662.2630026953275 3193 L 2098.234532723954 3235.4430594687447 L 1928.3901337455682 3415.861104854119 L 1577.915097290487 3462.424216840294 L 1360.5215824246025 3642.3999999999996 L 1318 3642.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-4.303388512843119 2121.578575315566 3233.6864236946553)">
-      <rect class="label-bg" x="2061.578575315566" y="3225.1864236946553" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2121.578575315566" y="3233.6864236946553" dominant-baseline="central" text-anchor="middle">AY1339  #  A321</text>
+    <path d="M 2702 3193 L 2662.2630026953275 3193 L 2098.234532723954 3235.4430594687447 L 1928.3901337455682 3415.861104854119 L 1578.1955374880824 3462.3869583568994 L 1390.8176427635635 3642.3999999999996 L 1348 3642.3999999999996" class="crossing-gap" />
+    <path d="M 2702 3193 L 2662.2630026953275 3193 L 2098.234532723954 3235.4430594687447 L 1928.3901337455682 3415.861104854119 L 1578.1955374880824 3462.3869583568994 L 1390.8176427635635 3642.3999999999996 L 1348 3642.3999999999996" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-4.303388512842941 2130.057297825631 3233.0484010719106)">
+      <rect class="label-bg" x="2070.057297825631" y="3224.5484010719106" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2130.057297825631" y="3233.0484010719106" dominant-baseline="central" text-anchor="middle">AY1339  #  A321</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 1318 3628.3999999999996 L 1355.4784175753975 3628.3999999999996 L 1572.084902709513 3449.075783159706 L 1921.6098662544318 3402.638895145881 L 2091.765467276046 3221.8902738645875 L 2661.7369973046725 3179 L 2702 3179" class="crossing-gap" />
-    <path d="M 1318 3628.3999999999996 L 1355.4784175753975 3628.3999999999996 L 1572.084902709513 3449.075783159706 L 1921.6098662544318 3402.638895145881 L 2091.765467276046 3221.8902738645875 L 2661.7369973046725 3179 L 2702 3179" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-46.72910739791995 1986.318752081775 3333.9015639753648)">
-      <rect class="label-bg" x="1926.318752081775" y="3325.4015639753648" width="120" height="17" rx="2" />
-      <text class="flight-label" x="1986.318752081775" y="3333.9015639753648" dominant-baseline="central" text-anchor="middle">AY1332  #  A321</text>
+    <path d="M 1348 3628.3999999999996 L 1385.1823572364365 3628.3999999999996 L 1571.8044625119176 3449.1130416431006 L 1921.6098662544318 3402.638895145881 L 2091.765467276046 3221.8902738645875 L 2661.7369973046725 3179 L 2702 3179" class="crossing-gap" />
+    <path d="M 1348 3628.3999999999996 L 1385.1823572364365 3628.3999999999996 L 1571.8044625119176 3449.1130416431006 L 1921.6098662544318 3402.638895145881 L 2091.765467276046 3221.8902738645875 L 2661.7369973046725 3179 L 2702 3179" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-46.72910739792008 1994.0054182075773 3325.7363652034956)">
+      <rect class="label-bg" x="1934.0054182075773" y="3317.2363652034956" width="120" height="17" rx="2" />
+      <text class="flight-label" x="1994.0054182075773" y="3325.7363652034956" dominant-baseline="central" text-anchor="middle">AY1332  #  A321</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 1318 3614.3999999999996 L 1350.4352527261929 3614.3999999999996 L 1566.2547081285388 3435.727349479118 L 1914.8295987632953 3389.416685437643 L 2085.2964018281373 3208.3374882604303 L 2661.2109919140175 3165 L 2702 3165" class="crossing-gap" />
-    <path d="M 1318 3614.3999999999996 L 1350.4352527261929 3614.3999999999996 L 1566.2547081285388 3435.727349479118 L 1914.8295987632953 3389.416685437643 L 2085.2964018281373 3208.3374882604303 L 2661.2109919140175 3165 L 2702 3165" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-7.5678345648621335 1833.1786872917014 3400.2645922474408)">
-      <rect class="label-bg" x="1773.1786872917014" y="3391.7645922474408" width="120" height="17" rx="2" />
-      <text class="flight-label" x="1833.1786872917014" y="3400.2645922474408" dominant-baseline="central" text-anchor="middle">AY1334  #  A350</text>
+    <path d="M 1348 3614.3999999999996 L 1379.5470717093096 3614.3999999999996 L 1565.4133875357527 3435.839124929302 L 1914.8295987632953 3389.416685437643 L 2085.2964018281373 3208.3374882604303 L 2661.2109919140175 3165 L 2702 3165" class="crossing-gap" />
+    <path d="M 1348 3614.3999999999996 L 1379.5470717093096 3614.3999999999996 L 1565.4133875357527 3435.839124929302 L 1914.8295987632953 3389.416685437643 L 2085.2964018281373 3208.3374882604303 L 2661.2109919140175 3165 L 2702 3165" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-7.5678345648614105 1846.9953518451866 3398.428949671049)">
+      <rect class="label-bg" x="1786.9953518451866" y="3389.928949671049" width="120" height="17" rx="2" />
+      <text class="flight-label" x="1846.9953518451866" y="3398.428949671049" dominant-baseline="central" text-anchor="middle">AY1334  #  A350</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 1318 3600.3999999999996 L 1345.3920878769882 3600.3999999999996 L 1560.4245135475649 3422.3789157985298 L 1908.0493312721587 3376.194475729405 L 2078.827336380229 3194.7847026562727 L 2660.6849865233626 3151 L 2702 3151" class="crossing-gap" />
-    <path d="M 1318 3600.3999999999996 L 1345.3920878769882 3600.3999999999996 L 1560.4245135475649 3422.3789157985298 L 1908.0493312721587 3376.194475729405 L 2078.827336380229 3194.7847026562727 L 2660.6849865233626 3151 L 2702 3151" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-46.72910739791986 1982.3292771261408 3297.2902391286307)">
-      <rect class="label-bg" x="1922.3292771261408" y="3288.7902391286307" width="120" height="17" rx="2" />
-      <text class="flight-label" x="1982.3292771261408" y="3297.2902391286307" dominant-baseline="central" text-anchor="middle">AY1338  #  A350</text>
+    <path d="M 1348 3600.3999999999996 L 1373.9117861821828 3600.3999999999996 L 1559.022312559588 3422.565208215504 L 1908.0493312721587 3376.194475729405 L 2078.827336380229 3194.7847026562727 L 2660.6849865233626 3151 L 2702 3151" class="crossing-gap" />
+    <path d="M 1348 3600.3999999999996 L 1373.9117861821828 3600.3999999999996 L 1559.022312559588 3422.565208215504 L 1908.0493312721587 3376.194475729405 L 2078.827336380229 3194.7847026562727 L 2660.6849865233626 3151 L 2702 3151" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-46.72910739792015 1990.052014131183 3289.0867238884707)">
+      <rect class="label-bg" x="1930.052014131183" y="3280.5867238884707" width="120" height="17" rx="2" />
+      <text class="flight-label" x="1990.052014131183" y="3289.0867238884707" dominant-baseline="central" text-anchor="middle">AY1338  #  A350</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 1318 3586.3999999999996 L 1340.3489230277835 3586.3999999999996 L 1554.5943189665907 3409.0304821179416 L 1901.2690637810222 3362.972266021167 L 2072.3582709323205 3181.2319170521155 L 2660.158981132708 3137 L 2702 3137" class="crossing-gap" />
-    <path d="M 1318 3586.3999999999996 L 1340.3489230277835 3586.3999999999996 L 1554.5943189665907 3409.0304821179416 L 1901.2690637810222 3362.972266021167 L 2072.3582709323205 3181.2319170521155 L 2660.158981132708 3137 L 2702 3137" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-7.567834564860764 1833.4795875751388 3371.978582145663)">
-      <rect class="label-bg" x="1773.4795875751388" y="3363.478582145663" width="120" height="17" rx="2" />
-      <text class="flight-label" x="1833.4795875751388" y="3371.978582145663" dominant-baseline="central" text-anchor="middle">AY1340  #  A321</text>
+    <path d="M 1348 3586.3999999999996 L 1368.276500655056 3586.3999999999996 L 1552.6312375834232 3409.291291501705 L 1901.2690637810222 3362.972266021167 L 2072.3582709323205 3181.2319170521155 L 2660.158981132708 3137 L 2702 3137" class="crossing-gap" />
+    <path d="M 1348 3586.3999999999996 L 1368.276500655056 3586.3999999999996 L 1552.6312375834232 3409.291291501705 L 1901.2690637810222 3362.972266021167 L 2072.3582709323205 3181.2319170521155 L 2660.158981132708 3137 L 2702 3137" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-7.567834564861892 1847.360937208815 3370.1343456943314)">
+      <rect class="label-bg" x="1787.360937208815" y="3361.6343456943314" width="120" height="17" rx="2" />
+      <text class="flight-label" x="1847.360937208815" y="3370.1343456943314" dominant-baseline="central" text-anchor="middle">AY1340  #  A321</text>
     </g>
   </g>
 <g class="flight">
@@ -2683,19 +2823,19 @@
     </g>
   </g>
 <g class="flight">
-    <path d="M 2702 3277 L 2664.577636722654 3277 L 2406.4933991457165 3496.8864417965665 L 1884.76419978689 3668.5386928035655 L 818.6692943832973 3874.2857142857138 L 778 3874.2857142857138" class="crossing-gap" />
-    <path d="M 2702 3277 L 2664.577636722654 3277 L 2406.4933991457165 3496.8864417965665 L 1884.76419978689 3668.5386928035655 L 818.6692943832973 3874.2857142857138 L 778 3874.2857142857138" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-10.923292192788274 1786.2230355644047 3687.5562783200107)">
-      <rect class="label-bg" x="1729.6230355644047" y="3679.0562783200107" width="113.2" height="17" rx="2" />
-      <text class="flight-label" x="1786.2230355644047" y="3687.5562783200107" dominant-baseline="central" text-anchor="middle">AY7  ②④⑥  A350</text>
+    <path d="M 2702 3277 L 2664.577636722654 3277 L 2406.4933991457165 3496.8864417965665 L 1884.9400735072707 3668.4808292221646 L 1374.0417742970062 3795.35390685938 L 1078.0233823030908 3811.354901021213 L 818.8376384399837 3874.2857142857138 L 778 3874.2857142857138" class="crossing-gap" />
+    <path d="M 2702 3277 L 2664.577636722654 3277 L 2406.4933991457165 3496.8864417965665 L 1884.9400735072707 3668.4808292221646 L 1374.0417742970062 3795.35390685938 L 1078.0233823030908 3811.354901021213 L 818.8376384399837 3874.2857142857138 L 778 3874.2857142857138" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-13.946332549947188 1785.5158354850148 3693.1711816643583)">
+      <rect class="label-bg" x="1728.915835485015" y="3684.6711816643583" width="113.2" height="17" rx="2" />
+      <text class="flight-label" x="1785.5158354850148" y="3693.1711816643583" dominant-baseline="central" text-anchor="middle">AY7  ②④⑥  A350</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 778 3860.2857142857138 L 817.3307056167027 3860.2857142857138 L 1881.23580021311 3654.9613071964345 L 2399.5066008542835 3484.4468915367656 L 2659.422363277346 3263 L 2702 3263" class="crossing-gap" />
-    <path d="M 778 3860.2857142857138 L 817.3307056167027 3860.2857142857138 L 1881.23580021311 3654.9613071964345 L 2399.5066008542835 3484.4468915367656 L 2659.422363277346 3263 L 2702 3263" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-10.923292192788393 1544.5333740048986 3719.941939752714)">
-      <rect class="label-bg" x="1487.9333740048987" y="3711.441939752714" width="113.2" height="17" rx="2" />
-      <text class="flight-label" x="1544.5333740048986" y="3719.941939752714" dominant-baseline="central" text-anchor="middle">AY8  ②④⑥  A350</text>
+    <path d="M 778 3860.2857142857138 L 817.1623615600163 3860.2857142857138 L 1075.9766176969092 3797.445098978786 L 1371.9582257029938 3781.4460931406193 L 1881.0599264927293 3655.0191707778354 L 2399.5066008542835 3484.4468915367656 L 2659.422363277346 3263 L 2702 3263" class="crossing-gap" />
+    <path d="M 778 3860.2857142857138 L 817.1623615600163 3860.2857142857138 L 1075.9766176969092 3797.445098978786 L 1371.9582257029938 3781.4460931406193 L 1881.0599264927293 3655.0191707778354 L 2399.5066008542835 3484.4468915367656 L 2659.422363277346 3263 L 2702 3263" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-13.946332549946723 1546.1506658931435 3738.1883038267324)">
+      <rect class="label-bg" x="1489.5506658931436" y="3729.6883038267324" width="113.2" height="17" rx="2" />
+      <text class="flight-label" x="1546.1506658931435" y="3738.1883038267324" dominant-baseline="central" text-anchor="middle">AY8  ②④⑥  A350</text>
     </g>
   </g>
 <g class="flight">
@@ -2797,17 +2937,17 @@
 <g class="flight">
     <path d="M 3120 3555 L 3120 3606.055800167718 L 2856.514778939666 3786.936927058479 L 2525.0328010758703 4150.949640342087 L 2193.1594461186905 4533.766001573698 L 2036.6999999999998 4973.6236897186955 L 2036.6999999999998 5010" class="crossing-gap" />
     <path d="M 3120 3555 L 3120 3606.055800167718 L 2856.514778939666 3786.936927058479 L 2525.0328010758703 4150.949640342087 L 2193.1594461186905 4533.766001573698 L 2036.6999999999998 4973.6236897186955 L 2036.6999999999998 5010" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-47.677973551109986 2626.8988986151885 4039.0866823741694)">
-      <rect class="label-bg" x="2566.8988986151885" y="4030.5866823741694" width="120" height="17" rx="2" />
-      <text class="flight-label" x="2626.8988986151885" y="4039.0866823741694" dominant-baseline="central" text-anchor="middle">AY1591  #  A320</text>
+    <g class="label-plate" transform="rotate(-49.07714126803977 2476.9210990740175 4206.446553299698)">
+      <rect class="label-bg" x="2416.9210990740175" y="4197.946553299698" width="120" height="17" rx="2" />
+      <text class="flight-label" x="2476.9210990740175" y="4206.446553299698" dominant-baseline="central" text-anchor="middle">AY1591  #  A320</text>
     </g>
   </g>
 <g class="flight">
     <path d="M 3106 3555 L 3106 3598.6852667225726 L 2847.254926313222 3776.312309019493 L 2514.5664892475124 4141.649880114029 L 2180.85314870623 4526.588667191233 L 2022.6999999999998 4971.207896572899 L 2022.6999999999998 5010" class="crossing-gap" />
     <path d="M 3106 3555 L 3106 3598.6852667225726 L 2847.254926313222 3776.312309019493 L 2514.5664892475124 4141.649880114029 L 2180.85314870623 4526.588667191233 L 2022.6999999999998 4971.207896572899 L 2022.6999999999998 5010" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-49.07714126803984 2312.244610834524 4375.028438936861)">
-      <rect class="label-bg" x="2242.044610834524" y="4366.528438936861" width="140.39999999999998" height="17" rx="2" />
-      <text class="flight-label" x="2312.244610834524" y="4375.028438936861" dominant-baseline="central" text-anchor="middle">AY1593  ①③⑤⑦  A321</text>
+    <g class="label-plate" transform="rotate(-47.677973551110036 2609.073868471378 4037.867804966831)">
+      <rect class="label-bg" x="2538.873868471378" y="4029.367804966831" width="140.39999999999998" height="17" rx="2" />
+      <text class="flight-label" x="2609.073868471378" y="4037.867804966831" dominant-baseline="central" text-anchor="middle">AY1593  ①③⑤⑦  A321</text>
     </g>
   </g>
 <g class="flight">
@@ -2843,19 +2983,19 @@
     </g>
   </g>
 <g class="flight">
-    <path d="M 3162 3555 L 3162 3598.841263475394 L 2861.1721785379177 3790.4031774353293 L 2528.5664892475124 4155.649880114029 L 2194.2530656563586 4541.280863796224 L 1888.4955322432606 4988.925880035008 L 1596.8000000000002 5423.132954319958 L 1596.8000000000002 5461" class="crossing-gap" />
-    <path d="M 3162 3555 L 3162 3598.841263475394 L 2861.1721785379177 3790.4031774353293 L 2528.5664892475124 4155.649880114029 L 2194.2530656563586 4541.280863796224 L 1888.4955322432606 4988.925880035008 L 1596.8000000000002 5423.132954319958 L 1596.8000000000002 5461" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-49.077141268040144 2293.095885899146 4427.265537726747)">
-      <rect class="label-bg" x="2226.295885899146" y="4418.765537726747" width="133.6" height="17" rx="2" />
-      <text class="flight-label" x="2293.095885899146" y="4427.265537726747" dominant-baseline="central" text-anchor="middle">AY1735  ①③⑤  A320</text>
+    <path d="M 3162 3555 L 3162 3598.841263475394 L 2861.1721785379177 3790.4031774353293 L 2528.5664892475124 4155.649880114029 L 2194.2530656563586 4541.280863796224 L 1889.2383827329875 4987.838308076192 L 1798.8068192357734 5392.511993558709 L 1596.8000000000002 5426.908823999447 L 1596.8000000000002 5461" class="crossing-gap" />
+    <path d="M 3162 3555 L 3162 3598.841263475394 L 2861.1721785379177 3790.4031774353293 L 2528.5664892475124 4155.649880114029 L 2194.2530656563586 4541.280863796224 L 1889.2383827329875 4987.838308076192 L 1798.8068192357734 5392.511993558709 L 1596.8000000000002 5426.908823999447 L 1596.8000000000002 5461" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-49.077141268039355 2263.164598631794 4461.791317839899)">
+      <rect class="label-bg" x="2196.364598631794" y="4453.291317839899" width="133.6" height="17" rx="2" />
+      <text class="flight-label" x="2263.164598631794" y="4461.791317839899" dominant-baseline="central" text-anchor="middle">AY1735  ①③⑤  A320</text>
     </g>
   </g>
 <g class="flight">
-    <path d="M 1582.8000000000002 5461 L 1582.8000000000002 5418.867045680042 L 1876.904467756739 4981.074119964992 L 2183.146934343641 4532.719136203776 L 2518.1001774191545 4146.350119885971 L 2852.0778214620823 3779.5968225646707 L 3148 3591.158736524606 L 3148 3555" class="crossing-gap" />
-    <path d="M 1582.8000000000002 5461 L 1582.8000000000002 5418.867045680042 L 1876.904467756739 4981.074119964992 L 2183.146934343641 4532.719136203776 L 2518.1001774191545 4146.350119885971 L 2852.0778214620823 3779.5968225646707 L 3148 3591.158736524606 L 3148 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
-    <g class="label-plate" transform="rotate(-49.07714126803998 2472.5148894430586 4198.932810867463)">
-      <rect class="label-bg" x="2405.7148894430584" y="4190.432810867463" width="133.6" height="17" rx="2" />
-      <text class="flight-label" x="2472.5148894430586" y="4198.932810867463" dominant-baseline="central" text-anchor="middle">AY1736  ①③⑤  A320</text>
+    <path d="M 1582.8000000000002 5461 L 1582.8000000000002 5415.091176000553 L 1787.1931807642266 5380.28800644129 L 1876.1616172670122 4982.161691923808 L 2183.146934343641 4532.719136203776 L 2518.1001774191545 4146.350119885971 L 2852.0778214620823 3779.5968225646707 L 3148 3591.158736524606 L 3148 3555" class="crossing-gap" />
+    <path d="M 1582.8000000000002 5461 L 1582.8000000000002 5415.091176000553 L 1787.1931807642266 5380.28800644129 L 1876.1616172670122 4982.161691923808 L 2183.146934343641 4532.719136203776 L 2518.1001774191545 4146.350119885971 L 2852.0778214620823 3779.5968225646707 L 3148 3591.158736524606 L 3148 3555" class="ink" stroke="#09618c" stroke-dasharray="none" marker-end="url(#jet)" />
+    <g class="label-plate" transform="rotate(-55.665528588621875 2060.453989314799 4712.348023043387)">
+      <rect class="label-bg" x="1993.653989314799" y="4703.848023043387" width="133.6" height="17" rx="2" />
+      <text class="flight-label" x="2060.453989314799" y="4712.348023043387" dominant-baseline="central" text-anchor="middle">AY1736  ①③⑤  A320</text>
     </g>
   </g>
 <g class="flight">
@@ -4099,6 +4239,34 @@
     <path d="M 522 3497.857142857143 L 483.91276882012744 3497.857142857143 L 334.9855877484841 3585.8141357048253 L 207 3588.7010286615578 L 207 3621.857142857143" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
   </g>
 <g class="flight codeshare">
+    <path d="M 1653 4069.3999999999996 L 1653 4033.2828274888357 L 1521.8677279636813 3951.448402082712 L 1434 3805.3427613989165 L 1434 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 4069.3999999999996 L 1653 4033.2828274888357 L 1521.8677279636813 3951.448402082712 L 1434 3805.3427613989165 L 1434 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+  </g>
+<g class="flight codeshare">
+    <path d="M 1448 3763.3999999999996 L 1448 3801.4572386010827 L 1532.1322720363187 3941.351597917287 L 1667 4025.5171725111636 L 1667 4069.3999999999996" class="crossing-gap" />
+    <path d="M 1448 3763.3999999999996 L 1448 3801.4572386010827 L 1532.1322720363187 3941.351597917287 L 1667 4025.5171725111636 L 1667 4069.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(42.823716099884464 1532.7925854472012 3941.7636732037777)">
+      <rect class="label-bg" x="1435.392585447201" y="3933.2636732037777" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1532.7925854472012" y="3941.7636732037777" dominant-baseline="central" text-anchor="middle">AY 5966  #  Boeing 777-200</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1203 4789.4 L 1203 4753.282827488836 L 1070 4670.282827488836 L 1070 3797.499285750725 L 1140 3796.499285750725 L 1140 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 4789.4 L 1203 4753.282827488836 L 1070 4670.282827488836 L 1070 3797.499285750725 L 1140 3796.499285750725 L 1140 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(-90 1070 4138.529586123893)">
+      <rect class="label-bg" x="1006.6" y="4130.029586123893" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1070" y="4138.529586123893" dominant-baseline="central" text-anchor="middle">AY 5959  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1154 3763.3999999999996 L 1154 3810.3007142492743 L 1084 3811.3007142492743 L 1084 4662.517172511163 L 1217 4745.517172511163 L 1217 4789.4" class="crossing-gap" />
+    <path d="M 1154 3763.3999999999996 L 1154 3810.3007142492743 L 1084 3811.3007142492743 L 1084 4662.517172511163 L 1217 4745.517172511163 L 1217 4789.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(90 1084 4278.783289897569)">
+      <rect class="label-bg" x="1020.6" y="4270.283289897569" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1084" y="4278.783289897569" dominant-baseline="central" text-anchor="middle">AY 5958  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
     <path d="M 8142 3498.666666666666 L 8183.5073513516945 3498.666666666666 L 8307.507351351695 3554.666666666666 L 8346 3554.666666666666" class="crossing-gap" />
     <path d="M 8142 3498.666666666666 L 8183.5073513516945 3498.666666666666 L 8307.507351351695 3554.666666666666 L 8346 3554.666666666666" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
   </g>
@@ -4157,6 +4325,50 @@
       <rect class="label-bg" x="398.82252514227497" y="3336.5467975977404" width="126.8" height="17" rx="2" />
       <text class="flight-label" x="462.22252514227495" y="3345.0467975977404" dominant-baseline="central" text-anchor="middle">AY 4051  #  A321</text>
     </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1280 3763.3999999999996 L 1280 3796.499285750725 L 1348.9421751112636 3797.4841739666 L 1533.3844530423328 4902.133034184199 L 1667 4985.517172511163 L 1667 5029.4" class="crossing-gap" />
+    <path d="M 1280 3763.3999999999996 L 1280 3796.499285750725 L 1348.9421751112636 3797.4841739666 L 1533.3844530423328 4902.133034184199 L 1667 4985.517172511163 L 1667 5029.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(80.52081617400509 1449.3429054399223 4398.7972436523705)">
+      <rect class="label-bg" x="1358.7429054399224" y="4390.2972436523705" width="181.2" height="17" rx="2" />
+      <text class="flight-label" x="1449.3429054399223" y="4398.7972436523705" dominant-baseline="central" text-anchor="middle">AY 5974  #  Boeing 787-9</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1653 5029.4 L 1653 4993.282827488836 L 1520.6155469576672 4910.666965815801 L 1337.0578248887364 3811.3158260333994 L 1266 3810.3007142492743 L 1266 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 5029.4 L 1653 4993.282827488836 L 1520.6155469576672 4910.666965815801 L 1337.0578248887364 3811.3158260333994 L 1266 3810.3007142492743 L 1266 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(80.52081617400515 1491.258535833967 4734.843997020596)">
+      <rect class="label-bg" x="1400.658535833967" y="4726.343997020596" width="181.2" height="17" rx="2" />
+      <text class="flight-label" x="1491.258535833967" y="4734.843997020596" dominant-baseline="central" text-anchor="middle">AY 5975  #  Boeing 787-9</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1322 3763.3999999999996 L 1322 3796.645537136939 L 1348.7060450937277 3797.599324461715 L 1533.2257413738162 4662.033988556477 L 1667 4745.517172511163 L 1667 4789.4" class="crossing-gap" />
+    <path d="M 1322 3763.3999999999996 L 1322 3796.645537136939 L 1348.7060450937277 3797.599324461715 L 1533.2257413738162 4662.033988556477 L 1667 4745.517172511163 L 1667 4789.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(77.95064368964513 1455.7457544095814 4299.057093104464)">
+      <rect class="label-bg" x="1358.3457544095813" y="4290.557093104464" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1455.7457544095814" y="4299.057093104464" dominant-baseline="central" text-anchor="middle">AY 5972  #  Boeing 777-200</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1653 4789.4 L 1653 4753.282827488836 L 1520.7742586261838 4670.766011443522 L 1337.2939549062723 3811.2006755382845 L 1308 3810.1544628630604 L 1308 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1653 4789.4 L 1653 4753.282827488836 L 1520.7742586261838 4670.766011443522 L 1337.2939549062723 3811.2006755382845 L 1308 3810.1544628630604 L 1308 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(77.95064368964461 1498.5971923490295 4566.871277036418)">
+      <rect class="label-bg" x="1401.1971923490294" y="4558.371277036418" width="194.79999999999998" height="17" rx="2" />
+      <text class="flight-label" x="1498.5971923490295" y="4566.871277036418" dominant-baseline="central" text-anchor="middle">AY 5973  #  Boeing 777-200</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1196 3763.3999999999996 L 1196 3810.3377790122963 L 1084 3811.3377790122963 L 1084 4422.517172511163 L 1217 4505.517172511163 L 1217 4549.4" class="crossing-gap" />
+    <path d="M 1196 3763.3999999999996 L 1196 3810.3377790122963 L 1084 3811.3377790122963 L 1084 4422.517172511163 L 1217 4505.517172511163 L 1217 4549.4" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
+    <g class="label-plate" transform="rotate(90 1084 3904.797864289259)">
+      <rect class="label-bg" x="1020.6" y="3896.297864289259" width="126.8" height="17" rx="2" />
+      <text class="flight-label" x="1084" y="3904.797864289259" dominant-baseline="central" text-anchor="middle">AY 5956  #  A320</text>
+    </g>
+  </g>
+<g class="flight codeshare">
+    <path d="M 1203 4549.4 L 1203 4513.282827488836 L 1070 4430.282827488836 L 1070 3797.462220987703 L 1182 3796.462220987703 L 1182 3763.3999999999996" class="crossing-gap" />
+    <path d="M 1203 4549.4 L 1203 4513.282827488836 L 1070 4430.282827488836 L 1070 3797.462220987703 L 1182 3796.462220987703 L 1182 3763.3999999999996" class="ink" stroke="#b36200" stroke-dasharray="8 3" marker-end="url(#codeshare)" />
   </g>
 <g class="flight codeshare">
     <path d="M 193 4801.285714285714 L 193 4756.192114494043 L 327.298329104419 4712.772353956525 L 511.0783110809667 4071.540025538353 L 622 4011.127319966379 L 622 3975.2857142857138" class="crossing-gap" />
@@ -4362,6 +4574,18 @@
       <text class="flight-label" x="8364.464859675218" y="3711.7262075574545" dominant-baseline="central" text-anchor="middle">AY 5915  #  A330-300</text>
     </g>
   </g>
+  <g class="airport codeshare-airport" transform="translate(1210 4355.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">ABERDEEN</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">DYCE</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1660 5315.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">ACCRA</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">KOTOKA</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
   <g class="airport" transform="translate(3540.9285714285716 5967)">
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">LANZAROTE</text>
@@ -4437,15 +4661,33 @@
     <text x="0" y="-8" text-anchor="middle" class="city-name">BARCELONA</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">EL PRAT</text>
   </g>
+  <g class="airport codeshare-airport" transform="translate(1660 4355.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">BERMUDA</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">L.F. WADE</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
   <g class="airport" transform="translate(3548.875 3867)">
     <polygon points="-90.0,-63.0 90.0,-63.0 100.0,-53.0 100.0,53.0 90.0,63.0 -90.0,63.0 -100.0,53.0 -100.0,-53.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">BERLIN</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">BRANDENBURG</text>
   </g>
+  <g class="airport codeshare-airport" transform="translate(1660 4595.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">BARBADOS</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">GRANTLEY ADAMS</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
   <g class="airport" transform="translate(1750 3285.25)">
     <polygon points="-90.0,-49.0 90.0,-49.0 100.0,-39.0 100.0,39.0 90.0,49.0 -90.0,49.0 -100.0,39.0 -100.0,-39.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">BERGEN</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">FLESLAND</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1210 4115.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">BELFAST</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">GEORGE BEST</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport" transform="translate(8484 2740.333333333334)">
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
@@ -4490,6 +4732,12 @@
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">BODØ</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">NORDLAND</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1660 3875.3999999999996)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">BOSTON</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">LOGAN</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport" transform="translate(3229 4247)">
     <polygon points="-90.0,-63.0 90.0,-63.0 100.0,-53.0 100.0,53.0 90.0,63.0 -90.0,63.0 -100.0,53.0 -100.0,-53.0" />
@@ -4686,16 +4934,34 @@
     <text x="0" y="4" text-anchor="middle" class="city-alt">KYUSHU</text>
     <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA HND · JAPAN AIRLINES</text>
   </g>
+  <g class="airport codeshare-airport" transform="translate(1210 5315.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">GRAND CAYMAN</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">OWEN ROBERTS</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
   <g class="airport" transform="translate(4108.125 3867)">
     <polygon points="-90.0,-49.0 90.0,-49.0 100.0,-39.0 100.0,39.0 90.0,49.0 -90.0,49.0 -100.0,39.0 -100.0,-39.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">GDAŃSK</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">TRÓJMIASTO</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1210 5075.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">GIBRALTAR</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">NORTH FRONT</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport codeshare-airport" transform="translate(650 4147.285714285714)">
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
     <text x="0" y="-16" text-anchor="middle" class="city-name">RIO DE JANEIRO</text>
     <text x="0" y="4" text-anchor="middle" class="city-alt">GALEÃO</text>
     <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA MIA · AMERICAN AIRLINES</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1210 3875.3999999999996)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">GLASGOW</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">ABBOTSINCH</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport" transform="translate(2270 2715.333333333334)">
     <polygon points="-90.0,-63.0 90.0,-63.0 100.0,-53.0 100.0,53.0 90.0,63.0 -90.0,63.0 -100.0,53.0 -100.0,-53.0" />
@@ -4768,6 +5034,12 @@
     <text x="0" y="4" text-anchor="middle" class="city-alt">HAWAII</text>
     <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LAX · AMERICAN AIRLINES</text>
   </g>
+  <g class="airport codeshare-airport" transform="translate(1660 4115.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">WASHINGTON</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">DULLES</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
   <g class="airport" transform="translate(8484 1592.3333333333335)">
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">SEOUL</text>
@@ -4788,6 +5060,12 @@
     <text x="0" y="-16" text-anchor="middle" class="city-name">JEDDAH</text>
     <text x="0" y="4" text-anchor="middle" class="city-alt">SAUDI ARABIA</text>
     <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA DOH · QATAR AIRWAYS</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1210 4835.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">JERSEY</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">SAINT PETER</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport" transform="translate(650 2549)">
     <polygon points="-90.0,-49.0 90.0,-49.0 100.0,-39.0 100.0,39.0 90.0,49.0 -90.0,49.0 -100.0,39.0 -100.0,-39.0" />
@@ -4893,7 +5171,7 @@
     <text x="0" y="14" text-anchor="middle" class="city-alt">CYPRUS</text>
   </g>
   <g class="airport" transform="translate(1210 3635.3999999999996)">
-    <polygon points="-90.0,-77.0 90.0,-77.0 100.0,-67.0 100.0,67.0 90.0,77.0 -90.0,77.0 -100.0,67.0 -100.0,-67.0" />
+    <polygon points="-120.0,-120.0 120.0,-120.0 130.0,-110.0 130.0,110.0 120.0,120.0 -120.0,120.0 -130.0,110.0 -130.0,-110.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">LONDON</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">HEATHROW</text>
   </g>
@@ -4917,6 +5195,12 @@
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">LJUBLJANA</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">BRNIK</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1660 5075.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">LAGOS</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">MURTALA MUHAMMED</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport" transform="translate(2416.0714285714284 5967)">
     <polygon points="-90.0,-49.0 90.0,-49.0 100.0,-39.0 100.0,39.0 90.0,49.0 -90.0,49.0 -100.0,39.0 -100.0,-39.0" />
@@ -5004,6 +5288,12 @@
     <text x="0" y="-8" text-anchor="middle" class="city-name">NAPOLI</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">CAPODICHINO</text>
   </g>
+  <g class="airport codeshare-airport" transform="translate(1660 4835.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">NASSAU</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">LYNDEN PINDLING</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
+  </g>
   <g class="airport codeshare-airport" transform="translate(7424 1203.666666666667)">
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
     <text x="0" y="-16" text-anchor="middle" class="city-name">NAIROBI</text>
@@ -5014,6 +5304,12 @@
     <polygon points="-90.0,-49.0 90.0,-49.0 100.0,-39.0 100.0,39.0 90.0,49.0 -90.0,49.0 -100.0,39.0 -100.0,-39.0" />
     <text x="0" y="-8" text-anchor="middle" class="city-name">NICE</text>
     <text x="0" y="14" text-anchor="middle" class="city-alt">CÔTE D'AZUR</text>
+  </g>
+  <g class="airport codeshare-airport" transform="translate(1210 4595.4)">
+    <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
+    <text x="0" y="-16" text-anchor="middle" class="city-name">NEWCASTLE</text>
+    <text x="0" y="4" text-anchor="middle" class="city-alt">WOOLSINGTON</text>
+    <text x="0" y="22" text-anchor="middle" class="city-cs-badge">VIA LHR · BRITISH AIRWAYS</text>
   </g>
   <g class="airport" transform="translate(9204 2549)">
     <polygon points="-90.0,-38.0 90.0,-38.0 100.0,-28.0 100.0,28.0 90.0,38.0 -90.0,38.0 -100.0,28.0 -100.0,-28.0" />
@@ -5323,6 +5619,22 @@
     <text x="0" y="14" text-anchor="middle" class="city-alt">ZANTE</text>
   </g>
   <g class="edge-times">
+    <text x="1203" y="4344.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 4344.4)">11.35</text>
+    <text x="930" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 930 3728.3999999999996)">13.10</text>
+  </g>
+  <g class="edge-times">
+    <text x="944" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 944 3728.3999999999996)">09.10</text>
+    <text x="1217" y="4344.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 4344.4)">10.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1653" y="5304.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 5304.4)">22.15</text>
+    <text x="1224" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1224 3728.3999999999996)">06.05</text>
+  </g>
+  <g class="edge-times">
+    <text x="1238" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1238 3728.3999999999996)">13.40</text>
+    <text x="1667" y="5304.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 5304.4)">19.25</text>
+  </g>
+  <g class="edge-times">
     <text x="3533.9285714285716" y="5956" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 3533.9285714285716 5956)">12.55</text>
     <text x="4296" y="3520" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 4296 3520)">20.45</text>
   </g>
@@ -5559,6 +5871,14 @@
     <text x="3543.2" y="5471" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 3543.2 5471)">20.15</text>
   </g>
   <g class="edge-times">
+    <text x="1653" y="4344.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 4344.4)">20.15</text>
+    <text x="1392" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1392 3728.3999999999996)">06.30</text>
+  </g>
+  <g class="edge-times">
+    <text x="1406" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1406 3728.3999999999996)">14.40</text>
+    <text x="1667" y="4344.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 4344.4)">18.30</text>
+  </g>
+  <g class="edge-times">
     <text x="3513.875" y="3831" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 3513.875 3831)">09.20</text>
     <text x="3232" y="3520" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 3232 3520)">12.25</text>
   </g>
@@ -5583,6 +5903,14 @@
     <text x="3583.875" y="3831" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 3583.875 3831)">18.30</text>
   </g>
   <g class="edge-times">
+    <text x="1653" y="4584.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 4584.4)">17.40</text>
+    <text x="1350" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1350 3728.3999999999996)">06.35</text>
+  </g>
+  <g class="edge-times">
+    <text x="1364" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1364 3728.3999999999996)">11.20</text>
+    <text x="1667" y="4584.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 4584.4)">15.35</text>
+  </g>
+  <g class="edge-times">
     <text x="1823" y="3264.25" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1823 3264.25)">10.05</text>
     <text x="2737" y="3067" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3067)">13.05</text>
   </g>
@@ -5597,6 +5925,14 @@
   <g class="edge-times">
     <text x="2737" y="3109" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3109)">17.30</text>
     <text x="1823" y="3306.25" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1823 3306.25)">18.30</text>
+  </g>
+  <g class="edge-times">
+    <text x="1203" y="4104.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 4104.4)">10.50</text>
+    <text x="972" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 972 3728.3999999999996)">12.10</text>
+  </g>
+  <g class="edge-times">
+    <text x="986" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 986 3728.3999999999996)">08.45</text>
+    <text x="1217" y="4104.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 4104.4)">10.05</text>
   </g>
   <g class="edge-times">
     <text x="7157" y="2626" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 7157 2626)">16.45</text>
@@ -5669,6 +6005,14 @@
   <g class="edge-times">
     <text x="2737" y="2381" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 2381)">12.15</text>
     <text x="1823" y="2408.75" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1823 2408.75)">13.15</text>
+  </g>
+  <g class="edge-times">
+    <text x="1653" y="3864.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 3864.3999999999996)">18.25</text>
+    <text x="1476" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1476 3728.3999999999996)">06.10</text>
+  </g>
+  <g class="edge-times">
+    <text x="1490" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1490 3728.3999999999996)">11.15</text>
+    <text x="1667" y="3864.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 3864.3999999999996)">13.45</text>
   </g>
   <g class="edge-times">
     <text x="3194" y="4211" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 3194 4211)">09.50</text>
@@ -6171,6 +6515,14 @@
     <text x="9551" y="1383.6" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(0 9551 1383.6)">13.10</text>
   </g>
   <g class="edge-times">
+    <text x="1203" y="5304.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 5304.4)">19.10</text>
+    <text x="1014" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1014 3728.3999999999996)">11.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1028" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1028 3728.3999999999996)">10.10</text>
+    <text x="1217" y="5304.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 5304.4)">17.35</text>
+  </g>
+  <g class="edge-times">
     <text x="4087.125" y="3845" text-anchor="middle" dominant-baseline="central" fill="#454940" transform="rotate(-90 4087.125 3845)">11.20</text>
     <text x="4044" y="3520" text-anchor="middle" dominant-baseline="central" fill="#454940" transform="rotate(-90 4044 3520)">13.50</text>
   </g>
@@ -6187,12 +6539,28 @@
     <text x="4129.125" y="3845" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(-90 4129.125 3845)">19.00</text>
   </g>
   <g class="edge-times">
+    <text x="1203" y="5064.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 5064.4)">12.00</text>
+    <text x="1056" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1056 3728.3999999999996)">13.55</text>
+  </g>
+  <g class="edge-times">
+    <text x="1070" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1070 3728.3999999999996)">07.10</text>
+    <text x="1217" y="5064.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 5064.4)">11.05</text>
+  </g>
+  <g class="edge-times">
     <text x="643" y="4136.285714285714" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 643 4136.285714285714)">23.15</text>
     <text x="748" y="3940.2857142857138" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 748 3940.2857142857138)">07.40</text>
   </g>
   <g class="edge-times">
     <text x="762" y="3940.2857142857138" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 762 3940.2857142857138)">21.30</text>
     <text x="657" y="4136.285714285714" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 657 4136.285714285714)">07.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1203" y="3864.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 3864.3999999999996)">09.20</text>
+    <text x="1098" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1098 3728.3999999999996)">10.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1112" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1112 3728.3999999999996)">07.15</text>
+    <text x="1217" y="3864.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 3864.3999999999996)">08.35</text>
   </g>
   <g class="edge-times">
     <text x="2343" y="2680.333333333334" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2343 2680.333333333334)">08.55</text>
@@ -6592,34 +6960,34 @@
   </g>
   <g class="edge-times">
     <text x="2737" y="3235" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3235)">07.50</text>
-    <text x="1283" y="3684.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3684.3999999999996)">09.00</text>
+    <text x="1313" y="3684.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3684.3999999999996)">09.00</text>
   </g>
   <g class="edge-times">
     <text x="2737" y="3221" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3221)">11.25</text>
-    <text x="1283" y="3670.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3670.3999999999996)">12.35</text>
+    <text x="1313" y="3670.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3670.3999999999996)">12.35</text>
   </g>
   <g class="edge-times">
     <text x="2737" y="3207" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3207)">16.00</text>
-    <text x="1283" y="3656.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3656.3999999999996)">17.10</text>
+    <text x="1313" y="3656.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3656.3999999999996)">17.10</text>
   </g>
   <g class="edge-times">
     <text x="2737" y="3193" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3193)">19.30</text>
-    <text x="1283" y="3642.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3642.3999999999996)">20.40</text>
+    <text x="1313" y="3642.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3642.3999999999996)">20.40</text>
   </g>
   <g class="edge-times">
-    <text x="1283" y="3628.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3628.3999999999996)">09.45</text>
+    <text x="1313" y="3628.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3628.3999999999996)">09.45</text>
     <text x="2737" y="3179" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3179)">14.55</text>
   </g>
   <g class="edge-times">
-    <text x="1283" y="3614.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3614.3999999999996)">13.20</text>
+    <text x="1313" y="3614.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3614.3999999999996)">13.20</text>
     <text x="2737" y="3165" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3165)">18.30</text>
   </g>
   <g class="edge-times">
-    <text x="1283" y="3600.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3600.3999999999996)">17.55</text>
+    <text x="1313" y="3600.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3600.3999999999996)">17.55</text>
     <text x="2737" y="3151" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3151)">23.05</text>
   </g>
   <g class="edge-times">
-    <text x="1283" y="3586.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1283 3586.3999999999996)">21.25</text>
+    <text x="1313" y="3586.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 1313 3586.3999999999996)">21.25</text>
     <text x="2737" y="3137" text-anchor="middle" dominant-baseline="central" fill="#09618c" transform="rotate(0 2737 3137)">02.35</text>
   </g>
   <g class="edge-times">
@@ -7471,6 +7839,22 @@
     <text x="207" y="3656.857142857143" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 207 3656.857142857143)">20.15</text>
   </g>
   <g class="edge-times">
+    <text x="1653" y="4104.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 4104.4)">18.30</text>
+    <text x="1434" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1434 3728.3999999999996)">06.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1448" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1448 3728.3999999999996)">11.15</text>
+    <text x="1667" y="4104.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 4104.4)">14.25</text>
+  </g>
+  <g class="edge-times">
+    <text x="1203" y="4824.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 4824.4)">12.50</text>
+    <text x="1140" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1140 3728.3999999999996)">13.55</text>
+  </g>
+  <g class="edge-times">
+    <text x="1154" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1154 3728.3999999999996)">11.00</text>
+    <text x="1217" y="4824.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 4824.4)">12.05</text>
+  </g>
+  <g class="edge-times">
     <text x="8107" y="3498.666666666666" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(0 8107 3498.666666666666)">13.00</text>
     <text x="8381" y="3554.666666666666" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(0 8381 3554.666666666666)">14.05</text>
   </g>
@@ -7509,6 +7893,30 @@
   <g class="edge-times">
     <text x="207" y="3198.857142857143" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 207 3198.857142857143)">14.20</text>
     <text x="557" y="3357.857142857143" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(0 557 3357.857142857143)">15.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1280" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1280 3728.3999999999996)">11.55</text>
+    <text x="1667" y="5064.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 5064.4)">18.40</text>
+  </g>
+  <g class="edge-times">
+    <text x="1653" y="5064.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 5064.4)">22.55</text>
+    <text x="1266" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1266 3728.3999999999996)">05.35</text>
+  </g>
+  <g class="edge-times">
+    <text x="1322" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1322 3728.3999999999996)">10.10</text>
+    <text x="1667" y="4824.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1667 4824.4)">14.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1653" y="4824.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1653 4824.4)">21.55</text>
+    <text x="1308" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1308 3728.3999999999996)">11.45</text>
+  </g>
+  <g class="edge-times">
+    <text x="1196" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1196 3728.3999999999996)">10.20</text>
+    <text x="1217" y="4584.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1217 4584.4)">11.35</text>
+  </g>
+  <g class="edge-times">
+    <text x="1203" y="4584.4" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1203 4584.4)">12.20</text>
+    <text x="1182" y="3728.3999999999996" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 1182 3728.3999999999996)">13.35</text>
   </g>
   <g class="edge-times">
     <text x="193" y="4836.285714285714" text-anchor="middle" dominant-baseline="central" fill="#b36200" transform="rotate(-90 193 4836.285714285714)">23.30</text>

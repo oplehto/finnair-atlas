@@ -4,9 +4,9 @@ import demo from '../public/demo.mjs';
 import {validateSchedule, filterFlights} from '../public/schedule.mjs';
 import {layoutAirports, layoutFlights, curvePoint} from '../public/layout.mjs';
 
-test('validates 58 codeshare destinations and partner flights', () => {
-  assert.equal(demo.codeshareAirports.length, 58);
-  assert.equal(demo.codeshareFlights.length, 116);
+test('validates 72 codeshare destinations and partner flights', () => {
+  assert.equal(demo.codeshareAirports.length, 72);
+  assert.equal(demo.codeshareFlights.length, 144);
 
   const validated = validateSchedule({
     ...demo,
@@ -14,8 +14,8 @@ test('validates 58 codeshare destinations and partner flights', () => {
     flights: [...demo.flights, ...demo.codeshareFlights]
   });
 
-  assert.equal(validated.airports.length, 180);
-  assert.equal(validated.flights.length, 592);
+  assert.equal(validated.airports.length, 194);
+  assert.equal(validated.flights.length, 620);
 });
 
 test('partner codeshares include key oneworld partner airlines and hubs', () => {
@@ -25,6 +25,7 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   const alaskaFlights = demo.codeshareFlights.filter(f => f.operator === 'Alaska Airlines');
   const jalFlights = demo.codeshareFlights.filter(f => f.operator === 'Japan Airlines');
   const cathayFlights = demo.codeshareFlights.filter(f => f.operator === 'Cathay Pacific');
+  const baFlights = demo.codeshareFlights.filter(f => f.operator === 'British Airways');
 
   assert.ok(qatarFlights.length >= 28, 'Includes Qatar Airways flights via Doha');
   assert.ok(qantasFlights.length >= 24, 'Includes Qantas flights via Singapore');
@@ -32,6 +33,12 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   assert.ok(alaskaFlights.length >= 4, 'Includes Alaska Airlines flights via Seattle');
   assert.ok(jalFlights.length >= 6, 'Includes Japan Airlines flights via Tokyo Haneda');
   assert.ok(cathayFlights.length >= 2, 'Includes Cathay Pacific flights via Hong Kong');
+  assert.ok(baFlights.length >= 28, 'Includes British Airways flights via London Heathrow');
+
+  const britishAirways = ['GLA', 'BHD', 'ABZ', 'NCL', 'JER', 'GIB', 'GCM', 'BOS', 'IAD', 'BDA', 'BGI', 'NAS', 'LOS', 'ACC'];
+  for (const code of britishAirways) {
+    assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes British Airways destination ${code}`);
+  }
 
   const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL', 'CBR', 'CHC', 'CNS', 'DRW', 'HBA', 'OOL'];
   for (const code of australasia) {
@@ -54,7 +61,7 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   }
 });
 
-test('combined 180-airport network layout has zero box overlaps', () => {
+test('combined 194-airport network layout has zero box overlaps', () => {
   const allAirports = [...demo.airports, ...demo.codeshareAirports];
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const nodes = layoutAirports(allAirports, allFlights);
@@ -89,6 +96,6 @@ test('filterFlights can filter codeshares on or off', () => {
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const withCS = filterFlights(allFlights, {codeshares: true});
   const withoutCS = filterFlights(allFlights, {codeshares: false});
-  assert.equal(withCS.length, 592);
+  assert.equal(withCS.length, 620);
   assert.equal(withoutCS.length, 476);
 });

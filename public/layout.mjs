@@ -86,7 +86,26 @@ const CODESHARE_OFFSETS = {
   OOL: {hub: 'SIN', dx: 1680, dy: 760, region: 'east'},
   BNE: {hub: 'SIN', dx: 1680, dy: 980, region: 'east'},
   AKL: {hub: 'SIN', dx: 1680, dy: 1200, region: 'east'},
-  CHC: {hub: 'SIN', dx: 1680, dy: 1420, region: 'east'}
+  CHC: {hub: 'SIN', dx: 1680, dy: 1420, region: 'east'},
+
+  // British Airways via London Heathrow (LHR)
+  // Column 1 (UK Domestic & Crown Territories): dx: 0 directly under LHR
+  GLA: {hub: 'LHR', dx: 0, dy: 240, region: 'west'},
+  BHD: {hub: 'LHR', dx: 0, dy: 480, region: 'west'},
+  ABZ: {hub: 'LHR', dx: 0, dy: 720, region: 'west'},
+  NCL: {hub: 'LHR', dx: 0, dy: 960, region: 'west'},
+  JER: {hub: 'LHR', dx: 0, dy: 1200, region: 'west'},
+  GIB: {hub: 'LHR', dx: 0, dy: 1440, region: 'west'},
+  GCM: {hub: 'LHR', dx: 0, dy: 1680, region: 'west'},
+
+  // Column 2 (Atlantic, Caribbean & Africa): dx: 450 to the east of LHR
+  BOS: {hub: 'LHR', dx: 450, dy: 240, region: 'west'},
+  IAD: {hub: 'LHR', dx: 450, dy: 480, region: 'west'},
+  BDA: {hub: 'LHR', dx: 450, dy: 720, region: 'west'},
+  BGI: {hub: 'LHR', dx: 450, dy: 960, region: 'west'},
+  NAS: {hub: 'LHR', dx: 450, dy: 1200, region: 'west'},
+  LOS: {hub: 'LHR', dx: 450, dy: 1440, region: 'west'},
+  ACC: {hub: 'LHR', dx: 450, dy: 1680, region: 'west'}
 };
 
 
@@ -274,6 +293,8 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   if (hnd && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hnd.height = 140; hnd.width = 240; }
   const hkg = byCode.get('HKG');
   if (hkg && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hkg.height = 120; hkg.width = 240; }
+  const lhr = byCode.get('LHR');
+  if (lhr && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lhr.height = 240; lhr.width = 260; }
 
   // Assign codeshare positions relative to partner hubs
   for (const node of nodes) {
@@ -588,9 +609,11 @@ function routePorts(nodes, bundles, byCode) {
       const isSINSouth = node.code === 'SIN' && dy > 0;
       const isDOHNorth = node.code === 'DOH' && dy < 0;
       const isMIASouth = node.code === 'MIA' && dy > 0;
+      const isLHRSouth = node.code === 'LHR' && dy > 0;
       const side = isSINSouth ? 'bottom'
         : isDOHNorth ? 'top'
         : isMIASouth ? 'bottom'
+        : isLHRSouth ? 'bottom'
         : node.isRegionalHub
           ? ({north: 'top', south: 'bottom', west: 'left', east: 'right'}[other.region])
           : Math.abs(dx) / (node.width / 2) > Math.abs(dy) / (node.height / 2)
