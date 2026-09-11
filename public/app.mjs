@@ -44,7 +44,7 @@ function setData(next){
  document.querySelector('.edition').textContent=next.subtitle||'Flight services';
  $('source').textContent=(next.demo?'Example · ':'')+(next.source||'Imported schedule');
  $('updated').textContent=imported?'Local file · weekly services':'Weekly services · Reload picks up a changed schedule';
- $('notice').textContent=[next.copyright?`© ${new Date().getFullYear()} ${next.copyright}`:'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean).join(' · ');
+ $('notice').textContent=[next.copyright?`Courtesy of ${next.copyright}`:'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean).join(' · ');
  const allFlights=[...data.flights,...(data.codeshareFlights||[])];
  const aircraft=$('aircraft').value;
  $('aircraft').replaceChildren(new Option('All aircraft',''),...[...new Set(allFlights.map(f=>f.aircraft).filter(Boolean))].sort().map(a=>new Option(a,a)));
@@ -104,12 +104,11 @@ function sheetLegend(x,y,k,width){
  item(marks,0,106,'AY 431 # A321 = lennon numero · päivät · kalusto / flight number · days · aircraft');
  item(marks,0,126,'Nuolenkärki = saapuminen / arrival · Katkos viivassa = ylittävä reitti / gap = route passing over');
  item(marks,0,146,'Reunan pituus = vuorojen määrä / edge length = number of services');
- const year=new Date().getFullYear();
  g.append(
   el('line',{x1:0,y1:H-50,x2:W,y2:H-50,class:'legend-rule'}),
   el('text',{x:20,y:H-32,class:'legend-item'},'Aikataulut ja konetyypit voidaan muuttaa ilmoittamatta · Tidtabeller och flygplanstyper kan ändras utan föregående meddelande · Schedules and aircraft types may change without notice'),
   el('text',{x:W-20,y:H-32,'text-anchor':'end',class:'legend-item'},data.demo?'Havainnollistava aineisto, ei matkasuunnitteluun / Illustrative data, not for travel planning':(data.source||'')),
-  el('text',{x:20,y:H-12,class:'legend-item legend-fine'},[data.copyright?`© ${year} ${data.copyright}`:'',`Tätä karttaa ei tule käyttää matkasuunnitteluun eikä siihen tule luottaa / This sheet must not be relied on for travel or any other purpose`,data.logo==='finnair-1968'?'Finnair-nimi ja -tunnus ovat Finnair Oyj:n omaisuutta, tässä vain havainnollistamassa / The Finnair name and logo are the property of Finnair Oyj, shown for illustration only':''].filter(Boolean).join('  ·  '))
+  el('text',{x:20,y:H-12,class:'legend-item legend-fine'},[data.copyright?`Kartan tarjoaa ${data.copyright} / Courtesy of ${data.copyright}`:'',`Tätä karttaa ei tule käyttää matkasuunnitteluun eikä siihen tule luottaa / This sheet must not be relied on for travel or any other purpose`,data.logo==='finnair-1968'?'Finnair-nimi ja -tunnus ovat Finnair Oyj:n omaisuutta, tässä vain havainnollistamassa / The Finnair name and logo are the property of Finnair Oyj, shown for illustration only':''].filter(Boolean).join('  ·  '))
  );
  return g;
 }
