@@ -883,8 +883,8 @@ h1 .unofficial {
 }
 
 .flight-label {
-  font: 700 11px 'Roboto Condensed', sans-serif;
-  letter-spacing: 0.3px;
+  font: 700 9.5px 'Roboto Condensed', sans-serif;
+  letter-spacing: 0.2px;
 }
 
 .label-plate.jet .flight-label { fill: var(--blue-ink); }

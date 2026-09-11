@@ -328,7 +328,9 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
         node.x = HEL_X + sShift + sign * (sInner + fromInner * (outer - sInner));
       });
     }
-    for (const c of centre) { const node = byCode.get(c); if (node) { node.x = HEL_X + sShift; node.y = y; } }
+    // The centre slot holds the tallest box on the sheet; hang it from a fixed top edge 342 below the
+    // hub outline so its bundle keeps a run long enough for a label and both time stacks.
+    for (const c of centre) { const node = byCode.get(c); if (node) { node.x = HEL_X + sShift; node.y = y + 22 + node.height / 2; } }
   });
 
   // Any non-predefined airports placed in an outer tier according to their region
@@ -958,7 +960,7 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
         x: p.x,
         y: p.y,
         width,
-        height: 16,
+        height: 13,
         angle,
         text,
         hidden: false

@@ -13,7 +13,7 @@ const nextTask=()=>new Promise(resolve=>setTimeout(resolve,0));
 let data,visible=[],selected=null,focusAirport=null,hovered=null,scale=0.8,imported=false,busy=false,layoutKey='',geometry,needsFit=false;
 const waitText=c=>`${Math.floor(c.wait/60)} h ${String(c.wait%60).padStart(2,'0')} min${c.overnight?' · seuraavana päivänä / next day':''}`;
 const measureContext=document.createElement('canvas').getContext('2d');
-const LABEL_FONT='700 11px "Roboto Condensed"';
+const LABEL_FONT='700 9.5px "Roboto Condensed"';
 function measure(text,font=LABEL_FONT){measureContext.font=font;return measureContext.measureText(text).width;}
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const upper=s=>String(s??'').toUpperCase();
@@ -283,7 +283,7 @@ function render(){
   const g=el('g',{class:`label-plate ${inkOf(f)}${label.hidden?' crowded-label':''}${selected===f.id?' selected':''}`,transform:`rotate(${label.angle*180/Math.PI} ${label.x} ${label.y})`});
   g.dataset.id=f.id;
   g.append(
-   el('rect',{x:label.x-label.width/2,y:label.y-8,width:label.width,height:16,class:'label-bg'}),
+   el('rect',{x:label.x-label.width/2,y:label.y-6.5,width:label.width,height:13,class:'label-bg'}),
    el('text',{x:label.x,y:label.y,'dominant-baseline':'central','text-anchor':'middle',class:'flight-label'},label.text)
   );
   labelsG.append(g);

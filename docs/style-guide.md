@@ -105,7 +105,7 @@ These are current SVG drawing units, not immutable visual rules. Adjust them tog
 | Finnair jet route stroke | 1.8 |
 | Turboprop and codeshare route stroke | 1.4, dashed |
 | Paper crossing under-stroke | 7 |
-| Flight label text | 11 bold, in route ink |
+| Flight label text | 9.5 bold on a 13-unit plate, in route ink, so neighbouring lanes' labels sit side by side |
 | Airport-edge time text | 9 bold, 1.8 paper knockout |
 | Arrow endpoint gap outside airport | 8 |
 | Straight approach stub | 40 before lane offsetting |
