@@ -124,4 +124,6 @@ The live sheet is deployed to Cloudflare from `wrangler.jsonc`, which serves `si
 npm run deploy
 ```
 
-That builds first, then uploads. The workflow in `.github/workflows/pages.yml` deploys the same folder to GitHub Pages instead, and is unused while Cloudflare is the host.
+That builds first, then uploads.
+
+Production deploys are automatic. Cloudflare builds the repository on every push to `main`, running `npm ci && npm test && npm run build` and then `npx wrangler deploy`, so a failing test blocks the deploy. No API token is stored in GitHub. The workflow in `.github/workflows/ci.yml` runs the same tests on pull requests.
