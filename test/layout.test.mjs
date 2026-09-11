@@ -102,6 +102,28 @@ test('regional groups dock on their assigned Helsinki edges',()=>{
  }
 });
 
+test('the displayed date with partner codeshares stays compact, clear and routable',()=>{
+ // Built exactly as the app does: active airports are those used by the visible flights.
+ const flights=[...demo.flights,...demo.codeshareFlights].filter(f=>f.departure.startsWith('2026-09-10'));
+ const codes=new Set(flights.flatMap(f=>[f.from,f.to]));
+ const nodes=layoutAirports([...demo.airports,...demo.codeshareAirports].filter(a=>codes.has(a.code)),flights),routes=layoutFlights(nodes,flights),byCode=new Map(nodes.map(n=>[n.code,n]));
+ for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++)assert.ok(!overlap(nodes[i],nodes[j],39.9),`${nodes[i].code} is closer than 40 to ${nodes[j].code}`);
+ for(const r of routes){
+  for(const [point,code]of [[r.start,r.flight.from],[r.end,r.flight.to]]){
+   const n=byCode.get(code),dx=Math.abs(point.x-n.x),dy=Math.abs(point.y-n.y);
+   assert.ok((Math.abs(dx-n.width/2-8)<.001&&dy<=n.height/2)||(Math.abs(dy-n.height/2-8)<.001&&dx<=n.width/2),`${code} has a port beyond its edge`);
+  }
+  for(let i=1;i<100;i++){
+   const p=curvePoint(r,i/100);
+   for(const n of nodes)if(n.code!==r.flight.from&&n.code!==r.flight.to)assert.ok(Math.abs(p.x-n.x)>=n.width/2||Math.abs(p.y-n.y)>=n.height/2,`${r.flight.id} crosses ${n.code}`);
+  }
+ }
+ // Sheet compactness: the bounding box of all airport boxes. The hub alone is about 9 M square
+ // units; the tiers and partner satellites around it must not spread the sheet past 42 M.
+ const left=Math.min(...nodes.map(n=>n.x-n.width/2)),right=Math.max(...nodes.map(n=>n.x+n.width/2)),top=Math.min(...nodes.map(n=>n.y-n.height/2)),bottom=Math.max(...nodes.map(n=>n.y+n.height/2));
+ assert.ok((right-left)*(bottom-top)<42e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
+});
+
 test('airport polygons are non-rectangular with chamfered, faceted, or stepped geometry', () => {
  const nodes = layoutAirports(demo.airports, demo.flights);
  const hel = nodes.find(n => n.code === 'HEL');

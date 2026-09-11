@@ -1,6 +1,6 @@
 # Airline Atlas
 
-A scrollable, interactive flight timetable inspired by vintage Finnair network diagrams. Each flight is an arrow with its departure time, flight number and arrival time. Airport locations are schematic.
+A scrollable, interactive weekly flight timetable inspired by vintage Finnair network diagrams. Each weekly service is one arrow with its departure time, flight number, days of operation, aircraft code and arrival time. Airport locations are schematic. The sheet is a printed-timetable view of a season, not a live departures board.
 
 ## Run
 
@@ -17,7 +17,9 @@ The default sheet is an **illustrative Finnair-style dataset**, not a verified c
 
 ## Use any airline
 
-Click **Import schedule** with a JSON file in the format below. The title, airports and airlines come from that file. The import stays in the browser's memory and pauses feed refresh; reloading or pressing Refresh schedule returns to the server feed. Search matches airport codes, airline names and flight numbers. Departure dates use the local date written in each timestamp.
+Click **Import schedule** with a JSON file in the format below. The title, airports and airlines come from that file. The import stays in the browser's memory; pressing Reload returns to the server schedule. Search matches airport codes, airline names and flight numbers, ignoring spaces, so `AY5955` finds `AY 5955` and `HEL OUL` finds the route. Clicking an airport box filters the sheet to that airport's services.
+
+Flights are collapsed into **weekly services**: one arrow per flight number, route and departure clock time. A `days` field with the day marks (`#` for daily, `①`–`⑦` for Monday to Sunday) is used when present; otherwise the days are derived from the dates in the file, so a file covering a full week produces correct marks on its own.
 
 ```json
 {
@@ -45,9 +47,9 @@ Airport codes must be unique 3–4 character uppercase alphanumeric codes. Fligh
 
 Export an editable vector graphic using **Export SVG**. The export includes the filtered sheet and styling; it does not require this server to open.
 
-## Automatically refreshed schedules
+## Schedule sources
 
-A provider adapter or existing pipeline must produce the same JSON format. This version does **not** ship with a verified Finnair/Finavia API adapter or data subscription.
+A provider adapter or existing pipeline must produce the same JSON format. This version does **not** ship with a verified Finnair/Finavia API adapter or data subscription. The browser loads the schedule once and does not poll; press Reload to pick up a changed file or feed.
 
 To watch an existing schedule file (replace it atomically when updating):
 
@@ -61,13 +63,13 @@ To fetch an HTTPS JSON feed:
 SCHEDULE_URL=https://your-provider.example/schedule.json npm start
 ```
 
-An optional `SCHEDULE_TOKEN` environment variable adds a server-side Bearer token. Never put credentials in client files. Provider data is cached for 60 seconds, and visible browser tabs poll every minute. The last successfully displayed sheet remains on screen if fetching fails, with an error notice. Metadata says when the browser loaded the data; provider freshness should be included in `source`.
+An optional `SCHEDULE_TOKEN` environment variable adds a server-side Bearer token. Never put credentials in client files. Provider data is cached on the server for 60 seconds. The last successfully displayed sheet remains on screen if a reload fails, with an error notice. The season or validity period of the data belongs in `source`; it is printed in the masthead.
 
 The local server binds only to 127.0.0.1. `PORT` overrides 4173. Hosting and a public deployment are not configured.
 
 ## Structure and limitations
 
-- `public/schedule.mjs`: shared validation and filters.
+- `public/schedule.mjs`: shared validation, filters, weekly-service collapsing and partner connection selection.
 - `public/layout.mjs`: D3 force layout, airport sizing, parallel flight lanes, angular obstacle routing and label placement.
 - `public/app.mjs`: interactive SVG rendering and browser controls.
 - `public/demo.mjs`: synthetic first-run Finnair example.
@@ -75,7 +77,7 @@ The local server binds only to 127.0.0.1. `PORT` overrides 4173. Hosting and a p
 - `test/`: data integrity, time handling, layout and HTTP handler tests.
 - `docs/landscape.md`: existing products and data-source research.
 
-Layout uses D3 repulsion and geographic anchors, followed by rectangular collision resolution. Airport boxes and type scale with service volume relative to the sheet’s median, using a capped logarithmic scale. Flights share an evenly spaced parallel route bundle, clipped against the edges of the city boxes. A visibility-graph router adds sharp bends around intervening airports while keeping lane spacing consistent. Busy city boxes grow to fit their largest route bundle. Labels use measured, locally hosted condensed fonts and try several positions and suppress unavoidable overlaps until hover, focus or selection. Layout is deterministic and cached across zoom and unchanged refreshes. Busy networks can still have crossing flight lines; filter and zoom for legibility. It is a first version for regional sheets, not a full global route-layout optimizer. It does not yet import arbitrary airline webpages, PDF schedules, SSIM or raw vendor responses. Codeshares should be deduplicated by your input pipeline when you want one arrow per physical flight.
+The Finnair sheet uses a tiered layout: domestic Finland above the hub, Scandinavia, Britain and North America to the left in three columns, Asia to the right in two, and Europe below in six rows, with partner satellites placed on the side of their gateway that faces away from Helsinki. Imported schedules without a Helsinki hub fall back to D3 repulsion with geographic anchors, followed by rectangular collision resolution. Airport boxes and type scale with service volume relative to the sheet’s median, using a capped logarithmic scale. Flights share an evenly spaced parallel route bundle, clipped against the edges of the city boxes. A visibility-graph router adds sharp bends around intervening airports while keeping lane spacing consistent. Busy city boxes grow to fit their largest route bundle. Labels use measured, locally hosted condensed fonts and try several positions and suppress unavoidable overlaps until hover, focus or selection. Layout is deterministic and cached across zoom and unchanged refreshes. Busy networks can still have crossing flight lines; filter and zoom for legibility. It is a first version for regional sheets, not a full global route-layout optimizer. It does not yet import arbitrary airline webpages, PDF schedules, SSIM or raw vendor responses. Codeshares should be deduplicated by your input pipeline when you want one arrow per physical flight.
 
 ## Vintage design
 
@@ -100,10 +102,12 @@ In addition to the direct network, the atlas includes 72 major global codeshare 
 - **Africa & Middle East (via DOH with Qatar Airways)**: Cairo (`CAI`), Amman (`AMM`), Nairobi (`NBO`), Zanzibar (`ZNZ`), Johannesburg (`JNB`), Cape Town (`CPT`), Mahé/Seychelles (`SEZ`), Muscat (`MCT`), Riyadh (`RUH`), Jeddah (`JED`).
 - **South Asia & Indian Ocean (via DOH with Qatar Airways)**: Mumbai (`BOM`), Bengaluru (`BLR`), Colombo (`CMB`), Malé/Maldives (`MLE`).
 
-A dedicated "Include Partner Codeshares" toggle in the toolbar allows switching between the pure direct Finnair network (122 airports, 476 flights) and the combined global network (194 airports, 620 flights). Codeshare routes are highlighted in vintage amber (`#b36200`) with dashed routing, partner carrier indicators (`op. by British Airways`, `op. by Qatar Airways`, `op. by Qantas`, `op. by American Airlines`, `op. by Alaska Airlines`, `op. by Japan Airlines`, `op. by Cathay Pacific`), operator flight numbers, and connecting hub badges (`VIA LHR`, `VIA DOH`, `VIA SIN`, `VIA MIA`, `VIA DFW`, `VIA LAX`, `VIA SEA`, `VIA HND`, `VIA HKG`).
+Partner flights are not shown exhaustively. For each partner hub the sheet keeps only the **most likely connections**: for every Finnair arrival at the hub, the earliest partner departure to each destination at least 60 minutes later (the next day if nothing fits), and for every Finnair departure the latest partner arrival that still leaves 60 minutes. Days of operation must overlap. The details panel names the Finnair flight each partner service connects with and the waiting time. The demo carries one partner flight per direction per destination, so all 144 remain as highlights. A "Partner connections at oneworld hubs" toggle in the toolbar switches between the direct Finnair network (122 airports, 476 weekly services) and the combined network (194 airports, 620 weekly services). Codeshare routes are highlighted in vintage amber (`#b36200`) with dashed routing, partner carrier indicators (`op. by British Airways`, `op. by Qatar Airways`, `op. by Qantas`, `op. by American Airlines`, `op. by Alaska Airlines`, `op. by Japan Airlines`, `op. by Cathay Pacific`), operator flight numbers, and connecting hub badges (`VIA LHR`, `VIA DOH`, `VIA SIN`, `VIA MIA`, `VIA DFW`, `VIA LAX`, `VIA SEA`, `VIA HND`, `VIA HKG`).
 
-The 1974 timetable reference guides notation: departure and arrival times appear at the corresponding airport edges as `13.35`; flight numbers and aircraft types sit directly on top of the arrow centerline with a warm paper knockout background plate (`#f8f7ef`). Excessive white space has been eliminated with dense tier positioning and compact ~76px box heights. Layout routing ensures zero box overlaps (clearance >= 28px) and zero route crossings across all 620 flights.
+The 1974 timetable reference guides notation: departure and arrival times run along each lane beside the arrow endpoint as `13.35`, outside ordinary airport boxes and just inside large hubs. The flight number, operating days and aircraft code (`AY431 # A321`) sit inline on the route in the route's own ink, on a paper plate that interrupts the line. Every route also carries a 7-unit paper under-stroke, so where routes cross, the line passing underneath shows a small break as on the printed sheet. Layout routing keeps airport boxes at least 40 units apart and routes every bundle around unrelated boxes. Route crossings are unavoidable in a network this dense; ports along each hub edge are ordered by bearing from a fan centre behind the edge, which halved the crossing count, and every crossing is drawn with a paper break in the lower line.
 
-Rendering performance is optimized for high-density networks: event handling on the SVG map and flight list is fully delegated, viewport transformations are batched via `requestAnimationFrame`, and flight selection uses targeted DOM class toggling without full-tree re-renders.
+Rendering performance is optimized for high-density networks: event handling on the SVG map and flight list is fully delegated, viewport transformations are batched via `requestAnimationFrame`, and flight selection uses targeted DOM class toggling without full-tree re-renders. Labels are rendered on a separate top layer and linked to their route by id, so hover, focus and selection highlight the line, its edge times and its label together.
 
-Airport nodes are rendered as authentic non-rectangular polygons rather than plain rectangles. Cities feature 8-sided faceted octagonal polygons with 45° beveled chamfers, providing extra clearance at diagonal crossings and reflecting vintage technical cartography. The central Helsinki hub features a prominent double-concentric faceted polygon (`hub-outer` and `hub-inner`). The engine also supports architectural stepped/notched polygons (`shape: "stepped"`), hexagons (`shape: "hexagon"`), and custom arbitrary polygon vertex arrays (`polygon: [[x, y], ...]`) via imported schedule files.
+Airport boxes are chamfered eight-sided polygons with white paper fill, a thin near-black outline and blue city names, following the reference. Partner-served codeshare airports use a dashed brown outline with black names and a `VIA LHR · British Airways` line; gateway hubs use a heavier blue outline. The central hub carries a double rule and a title sized to its box; its interior is otherwise left quiet, as on the reference. The engine also supports stepped/notched polygons (`shape: "stepped"`), hexagons (`shape: "hexagon"`) and custom vertex arrays (`polygon: [[x, y], ...]`) via imported schedule files.
+
+The sheet is composed like a printed timetable: a masthead with the title, edition line, date and counts sits above a framed diagram, and a three-column explanations box (days of operation, the aircraft codes present on the sheet, and notation with drawn line samples) sits at its foot. Masthead and legend scale with sheet width, so they remain legible at the Fit view even for a 600-flight network. Illustrative data is marked as such in the masthead.

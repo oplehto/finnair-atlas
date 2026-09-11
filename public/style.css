@@ -9,8 +9,10 @@
   --amber-ink: #b36200;
   --ink-dim: #303a34;
   --paper: #f8f7ef;
+  --box-paper: #fdfcf6;
   --rule: #aaa99b;
   --active: #cd7724;
+  --active-ink: #975114;
 }
 
 * {
@@ -55,7 +57,6 @@ button:hover {
   touch-action: none;
   cursor: grab;
   background: var(--paper);
-  background-image: linear-gradient(90deg, transparent 49.8%, #b1a68b16 50%, transparent 50.3%);
 }
 
 .sheet-wrap.dragging {
@@ -137,6 +138,29 @@ details[open] > summary::after {
   overflow: auto;
 }
 
+/* Details stay put; only the service list scrolls. */
+.services .widget-body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#detail {
+  flex: 0 0 auto;
+  max-height: 42vh;
+  overflow: auto;
+}
+
+.services h3 {
+  flex: 0 0 auto;
+}
+
+#flights {
+  flex: 1 1 auto;
+  min-height: 120px;
+  overflow: auto;
+}
+
 .edition {
   font-size: 11px;
   text-transform: uppercase;
@@ -215,24 +239,26 @@ input, select {
   left: 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   padding: 6px;
 }
 
 .zoom button {
   border: 0;
   font-size: 18px;
-  min-width: 35px;
+  min-width: 36px;
+  line-height: 1;
 }
 
-.zoom #plus, .zoom #actual, .zoom #fit {
-  font-size: 14px;
+.zoom #actual, .zoom #fit {
+  font-size: 13px;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .zoom output {
   font-size: 12px;
-  min-width: 38px;
+  min-width: 42px;
   text-align: center;
 }
 
@@ -291,8 +317,17 @@ h3 {
   margin-top: 16px;
 }
 
-#detail .route.codeshare-route {
+#detail .route.prop {
+  color: var(--black-ink);
+}
+
+#detail .route.codeshare {
   color: var(--amber-ink);
+}
+
+#detail small {
+  font-size: 11px;
+  color: #62777e;
 }
 
 .codeshare-badge {
@@ -334,6 +369,15 @@ dd {
   display: flex;
   justify-content: space-between;
   font-size: 15px;
+  color: var(--blue);
+}
+
+.service.prop strong {
+  color: var(--black-ink);
+}
+
+.service.codeshare strong {
+  color: #8c4c00;
 }
 
 .service span {
@@ -341,13 +385,12 @@ dd {
   color: #4f5a51;
 }
 
-.service.codeshare-service strong {
-  color: #8c4c00;
-}
-
 .service.selected {
   background: #e1e8df;
-  color: #07567d;
+}
+
+.service.selected strong {
+  color: var(--active-ink);
 }
 
 #clear {
@@ -372,14 +415,94 @@ dd {
   padding: 20px;
 }
 
-/* --- SVG Diagram Styling (1974 Vintage Print Timetable) --- */
-.airport,
+/* --- The printed sheet (SVG). Palette and grammar follow the 1974 Finnair network timetable. --- */
 .sheet-header,
 .sheet-legend,
-.label-plate {
+.label-plate,
+.edge-times {
   pointer-events: none;
 }
 
+.airport {
+  cursor: pointer;
+  outline: none;
+}
+
+.airport:hover > polygon,
+.airport:hover > rect,
+.airport:focus > polygon,
+.airport:focus > rect,
+.airport:hover > .hub-outer,
+.airport:focus > .hub-outer {
+  stroke: var(--active);
+}
+
+.airport text {
+  pointer-events: none;
+}
+
+.sheet-frame {
+  fill: none;
+  stroke: #454940;
+  stroke-width: 1.4;
+}
+
+.sheet-brand {
+  font: 600 64px Oswald, sans-serif;
+  fill: var(--blue);
+  letter-spacing: 3px;
+}
+
+.sheet-edition {
+  font: 600 26px Oswald, sans-serif;
+  fill: var(--blue);
+  letter-spacing: 4px;
+}
+
+.sheet-meta {
+  font: 700 14px 'Roboto Condensed', sans-serif;
+  fill: var(--black-ink);
+  letter-spacing: 0.4px;
+}
+
+.legend-box {
+  fill: #fbfaf5;
+  stroke: #454940;
+  stroke-width: 1;
+}
+
+.legend-title {
+  font: 600 16px Oswald, sans-serif;
+  fill: var(--blue);
+  letter-spacing: 2px;
+}
+
+.legend-head {
+  font: 700 12px 'Roboto Condensed', sans-serif;
+  fill: var(--blue);
+  letter-spacing: 0.6px;
+}
+
+.legend-item {
+  font: 400 12px 'Roboto Condensed', sans-serif;
+  fill: #303a34;
+}
+
+.legend-rule {
+  stroke: #454940;
+  stroke-width: 0.8;
+}
+
+.legend-sample {
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.legend-sample.jet { stroke: var(--blue-ink); }
+.legend-sample.prop { stroke: var(--black-ink); stroke-width: 1.4; }
+.legend-sample.codeshare { stroke: var(--amber-ink); stroke-width: 1.4; }
+
+/* Routes: a wide invisible hit area, a paper under-stroke that breaks lines passing beneath, then the ink. */
 .flight {
   cursor: pointer;
   outline: none;
@@ -393,154 +516,149 @@ dd {
   pointer-events: stroke;
 }
 
-.flight .crossing-gap {
-  display: none;
+.flight:focus .hit {
+  stroke: #de9437;
+  opacity: 0.3;
+}
+
+.flight .under {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 7;
+  stroke-linejoin: bevel;
 }
 
 .flight .ink {
-  stroke-width: 1.5;
-  opacity: 0.85;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linejoin: miter;
+}
+
+.flight.jet .ink {
+  stroke: var(--blue-ink);
+}
+
+.flight.prop .ink {
+  stroke: var(--black-ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 7 3;
 }
 
 .flight.codeshare .ink {
   stroke: var(--amber-ink);
-  stroke-width: 1.8;
+  stroke-width: 1.4;
   stroke-dasharray: 8 3;
 }
 
-.flight text {
-  font: 11px 'Roboto Condensed', sans-serif;
-  fill: #303a34;
-  paint-order: stroke;
-  stroke: var(--paper);
-  stroke-width: 4px;
-  stroke-linejoin: round;
-}
-
 .flight:hover .ink,
+.flight.hover .ink,
 .flight:focus .ink,
 .flight.selected .ink {
-  stroke: var(--active) !important;
-  stroke-width: 3;
-  opacity: 1;
-}
-
-.flight.selected text {
-  fill: #975114;
-  font-weight: 700;
-}
-
-.flight.dim,
-.has-selection .flight:not(.selected) {
-  opacity: 0.12;
-}
-
-.edge-times.dim,
-.has-selection .edge-times:not(.selected) {
-  opacity: 0.12;
-}
-
-.flight .crowded-label {
-  display: none;
-}
-
-.flight:hover .crowded-label,
-.flight:focus .crowded-label,
-.flight.selected .crowded-label {
-  display: block;
-}
-
-.label-plate {
-  pointer-events: none;
-}
-
-.label-plate rect.label-bg {
-  fill: #f8f7ef;
-  stroke: #d0cebd;
-  stroke-width: 0.6;
-}
-
-.flight:hover .label-plate rect.label-bg,
-.flight:focus .label-plate rect.label-bg,
-.flight.selected .label-plate rect.label-bg {
-  fill: #ffffff;
   stroke: var(--active);
-  stroke-width: 1.2;
+  stroke-width: 3;
+  stroke-dasharray: none;
 }
 
-.flight.codeshare:hover .label-plate rect.label-bg,
-.flight.codeshare:focus .label-plate rect.label-bg,
-.flight.codeshare.selected .label-plate rect.label-bg {
-  stroke: var(--amber-ink);
+.has-selection .flight:not(.selected),
+.has-selection .edge-times:not(.selected),
+.has-selection .label-plate:not(.selected) {
+  opacity: 0.12;
+}
+
+/* Flight labels sit on the route in the route's own ink, on a paper plate that interrupts the line. */
+.label-plate .label-bg {
+  fill: var(--paper);
 }
 
 .flight-label {
   font: 700 11px 'Roboto Condensed', sans-serif;
-  fill: #222b26;
   letter-spacing: 0.3px;
 }
 
-.flight:hover .flight-label,
-.flight:focus .flight-label,
-.flight.selected .flight-label {
-  fill: #975114;
+.label-plate.jet .flight-label { fill: var(--blue-ink); }
+.label-plate.prop .flight-label { fill: var(--black-ink); }
+.label-plate.codeshare .flight-label { fill: var(--amber-ink); }
+
+.label-plate.crowded-label {
+  display: none;
 }
 
+.label-plate.crowded-label.hover,
+.label-plate.crowded-label.selected {
+  display: block;
+}
+
+.label-plate.hover .flight-label,
+.label-plate.selected .flight-label {
+  fill: var(--active-ink);
+}
+
+.label-plate.hover .label-bg,
+.label-plate.selected .label-bg {
+  fill: #ffffff;
+}
+
+/* Times at the arrow endpoints, set along the lane like the reference. */
 .edge-times {
-  pointer-events: none;
-  font: 700 11px 'Roboto Condensed', sans-serif;
+  font: 700 10.5px 'Roboto Condensed', sans-serif;
 }
 
-.edge-times.codeshare text {
-  fill: var(--amber-ink);
+.edge-times text {
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
 }
 
-.edge-times.dim {
-  opacity: 0.12;
-}
+.edge-times.jet text { fill: var(--blue-ink); }
+.edge-times.prop text { fill: var(--black-ink); }
+.edge-times.codeshare text { fill: var(--amber-ink); }
 
+.edge-times.hover text,
 .edge-times.selected text {
-  fill: #975114;
+  fill: var(--active-ink);
 }
 
-/* Airport boxes */
+/* Airport boxes: white paper, a thin near-black outline and blue city names. */
 .airport rect,
 .airport polygon {
-  fill: #fbfaf5;
-  stroke: #555c52;
+  fill: var(--box-paper);
+  stroke: #2f3631;
   stroke-width: 1.5;
 }
 
-.airport.hub rect,
-.airport.hub polygon {
-  fill: #f4f4e9;
+.airport.gateway-hub rect,
+.airport.gateway-hub polygon {
   stroke: var(--blue);
-  stroke-width: 2;
+  stroke-width: 2.2;
 }
 
 .airport.codeshare-airport rect,
 .airport.codeshare-airport polygon {
-  fill: #faf6ea;
-  stroke: #a8793b;
-  stroke-width: 1.5;
-  stroke-dasharray: 6 2;
+  fill: #fcfaf2;
+  stroke: #8a6a3a;
+  stroke-width: 1.3;
+  stroke-dasharray: 6 2.5;
 }
 
 .airport .city-name {
   font-family: Oswald, sans-serif;
   font-weight: 600;
-  font-size: 17px;
-  fill: #222b26;
-  letter-spacing: 0.5px;
+  font-size: 18px;
+  fill: var(--blue);
+  letter-spacing: 0.6px;
+}
+
+.airport.codeshare-airport .city-name {
+  fill: #3d4640;
 }
 
 .airport .city-alt {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 400;
   font-size: 11px;
-  fill: #5a6865;
-  font-style: italic;
-  letter-spacing: 0.5px;
+  fill: #4f5d59;
+  letter-spacing: 0.6px;
 }
 
 .airport .city-cs-badge {
@@ -551,58 +669,82 @@ dd {
   letter-spacing: 0.5px;
 }
 
-.airport .city-info {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 10px;
-  fill: #687672;
-  letter-spacing: 0.5px;
+.airport.gateway-hub .city-cs-badge {
+  fill: #526e72;
 }
 
-/* Helsinki Hub */
-.helsinki-hub .hub-outer {
-  fill: #f5f4ea;
+/* Central hub: double rule, a title sized to the box, and a departures board inside. */
+.regional-hub .hub-outer {
+  fill: #fbfaf3;
   stroke: var(--blue);
   stroke-width: 3;
 }
 
-.helsinki-hub .hub-inner {
+.regional-hub .hub-inner {
   fill: none;
   stroke: var(--blue);
-  stroke-width: 1.2;
-  stroke-dasharray: 6 3;
+  stroke-width: 1;
 }
 
-.helsinki-hub .hub-title {
+.hub-title {
   font-family: Oswald, sans-serif;
   font-weight: 600;
-  font-size: 96px;
   fill: var(--blue);
-  letter-spacing: 4px;
+  letter-spacing: 0.04em;
 }
 
-.helsinki-hub .hub-subtitle {
+.hub-subtitle {
   font-family: Oswald, sans-serif;
   font-weight: 600;
-  font-size: 52px;
   fill: var(--black-ink);
-  letter-spacing: 3px;
+  letter-spacing: 0.06em;
 }
 
-.helsinki-hub .hub-tag {
+.hub-tag {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 700;
-  font-size: 24px;
   fill: #526e72;
+  letter-spacing: 0.12em;
+}
+
+.board-title {
+  font: 600 20px Oswald, sans-serif;
+  fill: var(--blue);
   letter-spacing: 2px;
 }
 
-.helsinki-hub .hub-services-count {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
+.board-note {
+  font: 400 14px 'Roboto Condensed', sans-serif;
+  fill: #526e72;
+}
+
+.board-rule {
+  stroke: #454940;
+  stroke-width: 0.8;
+}
+
+.board-name {
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
   fill: var(--blue);
-  letter-spacing: 1.5px;
+  letter-spacing: 0.3px;
+}
+
+.board-name.partner {
+  fill: #3d4640;
+}
+
+.board-times {
+  font-family: 'Roboto Condensed', sans-serif;
+  fill: #303a34;
+}
+
+.board-times.prop {
+  fill: var(--black-ink);
+}
+
+.board-times.partner {
+  fill: var(--amber-ink);
 }
 
 /* Responsive adjustments */

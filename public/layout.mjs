@@ -6,101 +6,108 @@ const DOMESTIC_CODES = new Set(["HEL","TKU","VAA","OUL","RVN","KTT","IVL","KAJ",
 const SCANDINAVIA_CODES = new Set(["ARN","OSL","CPH","KEF","GOT","BGO","TOS","TRD","BLL","SVG","BOO","ALF","KKN","UME","VBY","LHR","MAN","EDI","DUB","JFK","ORD","DFW","LAX","SEA","MIA","YYZ"]);
 const EAST_CODES = new Set(["DOH","DXB","DEL","BKK","HKT","SIN","HKG","PVG","ICN","HND","NRT","KIX","NGO","MEL"]);
 
+// Partner satellites are placed relative to their gateway hub (dx, dy from the hub centre).
+// Every satellite sits on the side of its gateway that faces away from Helsinki so that the
+// hub's own bundles never route around a partner box: in the two outer satellite columns of
+// the west sheet (dx -400 and -670, interleaved so the outer column's routes pass between the
+// inner column's boxes), in the gaps of the outer west column, in rows above Doha in the
+// top-right corner, or in rows below London and Singapore in the two bottom corners.
+// A satellite's port faces its gateway (side ports within the box's aspect cone, otherwise
+// top/bottom), so stacked slots keep at least 170 between centres and rows 280 apart, and a
+// side slot leaves at least 90 between the gateway outline and the satellite, so that the
+// 48-unit port stubs on both ends stay clear of the neighbouring boxes' routing margins.
 const CODESHARE_OFFSETS = {
-  // Pacific / US West via LAX (American Airlines)
-  SFO: {hub: 'LAX', dx: -320, dy: -80, region: 'west'},
-  HNL: {hub: 'LAX', dx: -560, dy: 60, region: 'west'},
-  SAN: {hub: 'LAX', dx: 0, dy: 220, region: 'west'},
-  LAS: {hub: 'LAX', dx: 300, dy: -60, region: 'west'},
-  DEN: {hub: 'LAX', dx: 300, dy: -220, region: 'west'},
-  PHX: {hub: 'LAX', dx: -320, dy: 160, region: 'west'},
-
   // Pacific Northwest & Alaska via SEA (Alaska Airlines)
-  ANC: {hub: 'SEA', dx: -280, dy: -140, region: 'west'},
-  PDX: {hub: 'SEA', dx: -280, dy: 140, region: 'west'},
+  ANC: {hub: 'SEA', dx: -400, dy: -85, region: 'west'},
+  PDX: {hub: 'SEA', dx: -400, dy: 85, region: 'west'},
 
   // Mexico & Texas via DFW (American Airlines)
-  AUS: {hub: 'DFW', dx: 0, dy: 230, region: 'west'},
-  MEX: {hub: 'DFW', dx: -260, dy: 230, region: 'west'},
-  CUN: {hub: 'DFW', dx: 300, dy: 0, region: 'west'},
+  AUS: {hub: 'DFW', dx: 0, dy: -250, region: 'west'},
+  CUN: {hub: 'DFW', dx: -400, dy: -170, region: 'west'},
+  MEX: {hub: 'DFW', dx: -400, dy: 0, region: 'west'},
+
+  // Pacific / US West via LAX (American Airlines)
+  SFO: {hub: 'LAX', dx: -120, dy: -225, region: 'west'},
+  HNL: {hub: 'LAX', dx: 120, dy: -225, region: 'west'},
+  PHX: {hub: 'LAX', dx: -400, dy: -170, region: 'west'},
+  LAS: {hub: 'LAX', dx: -400, dy: 0, region: 'west'},
+  DEN: {hub: 'LAX', dx: -670, dy: -85, region: 'west'},
+  SAN: {hub: 'LAX', dx: -670, dy: 85, region: 'west'},
 
   // South America & Caribbean via MIA (American Airlines)
-  MDE: {hub: 'MIA', dx: -320, dy: 280, region: 'west'},
-  BOG: {hub: 'MIA', dx: -320, dy: 480, region: 'west'},
-  UIO: {hub: 'MIA', dx: -320, dy: 680, region: 'west'},
-  LIM: {hub: 'MIA', dx: -320, dy: 880, region: 'west'},
-  SCL: {hub: 'MIA', dx: -320, dy: 1080, region: 'west'},
-  SJU: {hub: 'MIA', dx: 280, dy: 200, region: 'west'},
-  GIG: {hub: 'MIA', dx: 0, dy: 320, region: 'west'},
-  GRU: {hub: 'MIA', dx: 0, dy: 520, region: 'west'},
-  MVD: {hub: 'MIA', dx: 0, dy: 720, region: 'west'},
-  EZE: {hub: 'MIA', dx: 0, dy: 920, region: 'west'},
+  LIM: {hub: 'MIA', dx: -120, dy: -209, region: 'west'},
+  SCL: {hub: 'MIA', dx: 120, dy: -209, region: 'west'},
+  EZE: {hub: 'MIA', dx: -120, dy: 245, region: 'west'},
+  SJU: {hub: 'MIA', dx: 120, dy: 245, region: 'west'},
+  MDE: {hub: 'MIA', dx: -400, dy: -170, region: 'west'},
+  BOG: {hub: 'MIA', dx: -400, dy: 0, region: 'west'},
+  UIO: {hub: 'MIA', dx: -400, dy: 170, region: 'west'},
+  GIG: {hub: 'MIA', dx: -670, dy: -85, region: 'west'},
+  GRU: {hub: 'MIA', dx: -670, dy: 85, region: 'west'},
+  MVD: {hub: 'MIA', dx: -670, dy: 255, region: 'west'},
 
-  // Middle East, Africa, South Asia via DOH (Qatar Airways)
-  AMM: {hub: 'DOH', dx: -160, dy: -260, region: 'east'},
-  CAI: {hub: 'DOH', dx: -430, dy: -260, region: 'east'},
-  RUH: {hub: 'DOH', dx: -430, dy: -80, region: 'east'},
-  JED: {hub: 'DOH', dx: -430, dy: 100, region: 'east'},
-  MCT: {hub: 'DOH', dx: 430, dy: -80, region: 'east'},
-  NBO: {hub: 'DOH', dx: -430, dy: 280, region: 'east'},
-  ZNZ: {hub: 'DOH', dx: -430, dy: 440, region: 'east'},
-  JNB: {hub: 'DOH', dx: -430, dy: 600, region: 'east'},
-  CPT: {hub: 'DOH', dx: -430, dy: 760, region: 'east'},
-  SEZ: {hub: 'DOH', dx: -160, dy: 380, region: 'east'},
-  BOM: {hub: 'DOH', dx: 430, dy: 100, region: 'east'},
-  BLR: {hub: 'DOH', dx: 430, dy: 260, region: 'east'},
-  CMB: {hub: 'DOH', dx: 430, dy: 420, region: 'east'},
-  MLE: {hub: 'DOH', dx: 430, dy: 580, region: 'east'},
+  // British Airways via London Heathrow (LHR): beside London and in rows below it
+  NCL: {hub: 'LHR', dx: -440, dy: -170, region: 'west'},
+  GLA: {hub: 'LHR', dx: -440, dy: 0, region: 'west'},
+  ABZ: {hub: 'LHR', dx: -440, dy: 170, region: 'west'},
+  BHD: {hub: 'LHR', dx: -120, dy: 292, region: 'west'},
+  JER: {hub: 'LHR', dx: 160, dy: 292, region: 'west'},
+  GIB: {hub: 'LHR', dx: 440, dy: 292, region: 'west'},
+  BOS: {hub: 'LHR', dx: 720, dy: 292, region: 'west'},
+  IAD: {hub: 'LHR', dx: -120, dy: 572, region: 'west'},
+  BDA: {hub: 'LHR', dx: 160, dy: 572, region: 'west'},
+  NAS: {hub: 'LHR', dx: 440, dy: 572, region: 'west'},
+  BGI: {hub: 'LHR', dx: 720, dy: 572, region: 'west'},
+  GCM: {hub: 'LHR', dx: -120, dy: 852, region: 'west'},
+  ACC: {hub: 'LHR', dx: 160, dy: 852, region: 'west'},
+  LOS: {hub: 'LHR', dx: 440, dy: 852, region: 'west'},
 
-  // Japan Domestic via HND (Japan Airlines)
-  CTS: {hub: 'HND', dx: 0, dy: -180, region: 'east'},
-  FUK: {hub: 'HND', dx: -300, dy: 140, region: 'east'},
-  OKA: {hub: 'HND', dx: -300, dy: 320, region: 'east'},
+  // Middle East, Africa, South Asia via DOH (Qatar Airways): rows above Doha
+  CAI: {hub: 'DOH', dx: -327, dy: -422, region: 'east'},
+  AMM: {hub: 'DOH', dx: -37, dy: -422, region: 'east'},
+  RUH: {hub: 'DOH', dx: 253, dy: -422, region: 'east'},
+  JED: {hub: 'DOH', dx: -327, dy: -582, region: 'east'},
+  MCT: {hub: 'DOH', dx: -37, dy: -582, region: 'east'},
+  NBO: {hub: 'DOH', dx: 253, dy: -582, region: 'east'},
+  ZNZ: {hub: 'DOH', dx: 543, dy: -582, region: 'east'},
+  JNB: {hub: 'DOH', dx: 833, dy: -582, region: 'east'},
+  CPT: {hub: 'DOH', dx: -327, dy: -742, region: 'east'},
+  SEZ: {hub: 'DOH', dx: -37, dy: -742, region: 'east'},
+  BOM: {hub: 'DOH', dx: 253, dy: -742, region: 'east'},
+  BLR: {hub: 'DOH', dx: 543, dy: -742, region: 'east'},
+  CMB: {hub: 'DOH', dx: 833, dy: -742, region: 'east'},
+  MLE: {hub: 'DOH', dx: -327, dy: -902, region: 'east'},
+
+  // Japan Domestic via HND (Japan Airlines): a short column beside Haneda
+  CTS: {hub: 'HND', dx: 350, dy: -120, region: 'east'},
+  FUK: {hub: 'HND', dx: 350, dy: 0, region: 'east'},
+  OKA: {hub: 'HND', dx: 350, dy: 120, region: 'east'},
 
   // Philippines via HKG (Cathay Pacific)
-  CEB: {hub: 'HKG', dx: 300, dy: 140, region: 'east'},
+  CEB: {hub: 'HKG', dx: 350, dy: 0, region: 'east'},
 
-  // Southeast Asia & Australia via SIN (Qatar Airways / Qantas)
-  HAN: {hub: 'SIN', dx: -460, dy: -420, region: 'east'},
-  SGN: {hub: 'SIN', dx: -460, dy: -260, region: 'east'},
-  PEN: {hub: 'SIN', dx: -460, dy: -100, region: 'east'},
-  KUL: {hub: 'SIN', dx: -460, dy: 60, region: 'east'},
-
-  CGK: {hub: 'SIN', dx: -160, dy: 300, region: 'east'},
-  PER: {hub: 'SIN', dx: -160, dy: 480, region: 'east'},
-
-  DPS: {hub: 'SIN', dx: 140, dy: 300, region: 'east'},
-  DRW: {hub: 'SIN', dx: 140, dy: 480, region: 'east'},
-  ADL: {hub: 'SIN', dx: 140, dy: 660, region: 'east'},
-  CBR: {hub: 'SIN', dx: 140, dy: 1020, region: 'east'},
-
-  MNL: {hub: 'SIN', dx: 440, dy: 300, region: 'east'},
-  CNS: {hub: 'SIN', dx: 440, dy: 480, region: 'east'},
-  BNE: {hub: 'SIN', dx: 440, dy: 660, region: 'east'},
-  OOL: {hub: 'SIN', dx: 440, dy: 840, region: 'east'},
-  SYD: {hub: 'SIN', dx: 440, dy: 1020, region: 'east'},
-  HBA: {hub: 'SIN', dx: 440, dy: 1200, region: 'east'},
-
-  TPE: {hub: 'SIN', dx: 740, dy: 300, region: 'east'},
-  AKL: {hub: 'SIN', dx: 740, dy: 900, region: 'east'},
-  CHC: {hub: 'SIN', dx: 740, dy: 1080, region: 'east'},
-
-  // British Airways via London Heathrow (LHR)
-  NCL: {hub: 'LHR', dx: 0, dy: 340, region: 'west'},
-  BHD: {hub: 'LHR', dx: 0, dy: 560, region: 'west'},
-  GLA: {hub: 'LHR', dx: 0, dy: 780, region: 'west'},
-  ABZ: {hub: 'LHR', dx: 0, dy: 1000, region: 'west'},
-  JER: {hub: 'LHR', dx: 0, dy: 1220, region: 'west'},
-  GIB: {hub: 'LHR', dx: 0, dy: 1440, region: 'west'},
-  GCM: {hub: 'LHR', dx: 0, dy: 1660, region: 'west'},
-
-  BOS: {hub: 'LHR', dx: 450, dy: 340, region: 'west'},
-  IAD: {hub: 'LHR', dx: 450, dy: 560, region: 'west'},
-  BDA: {hub: 'LHR', dx: 450, dy: 780, region: 'west'},
-  NAS: {hub: 'LHR', dx: 450, dy: 1000, region: 'west'},
-  BGI: {hub: 'LHR', dx: 450, dy: 1220, region: 'west'},
-  ACC: {hub: 'LHR', dx: 450, dy: 1440, region: 'west'},
-  LOS: {hub: 'LHR', dx: 450, dy: 1660, region: 'west'}
+  // Southeast Asia, Australia & New Zealand via SIN (Qantas / partners): three sides of
+  // Singapore (left below the Helsinki approach, right, and rows starting below the left
+  // column) so that no edge carries more bundle intervals than its length.
+  SGN: {hub: 'SIN', dx: -470, dy: 85, region: 'east'},
+  PEN: {hub: 'SIN', dx: -470, dy: 255, region: 'east'},
+  KUL: {hub: 'SIN', dx: -470, dy: 425, region: 'east'},
+  TPE: {hub: 'SIN', dx: 460, dy: -255, region: 'east'},
+  MNL: {hub: 'SIN', dx: 460, dy: -85, region: 'east'},
+  HAN: {hub: 'SIN', dx: 460, dy: 85, region: 'east'},
+  CGK: {hub: 'SIN', dx: 460, dy: 255, region: 'east'},
+  DPS: {hub: 'SIN', dx: -330, dy: 575, region: 'east'},
+  DRW: {hub: 'SIN', dx: -50, dy: 575, region: 'east'},
+  PER: {hub: 'SIN', dx: 230, dy: 575, region: 'east'},
+  CNS: {hub: 'SIN', dx: -330, dy: 855, region: 'east'},
+  BNE: {hub: 'SIN', dx: -50, dy: 855, region: 'east'},
+  OOL: {hub: 'SIN', dx: 230, dy: 855, region: 'east'},
+  ADL: {hub: 'SIN', dx: -330, dy: 1135, region: 'east'},
+  SYD: {hub: 'SIN', dx: -50, dy: 1135, region: 'east'},
+  CBR: {hub: 'SIN', dx: 230, dy: 1135, region: 'east'},
+  HBA: {hub: 'SIN', dx: -330, dy: 1415, region: 'east'},
+  AKL: {hub: 'SIN', dx: -50, dy: 1415, region: 'east'},
+  CHC: {hub: 'SIN', dx: 230, dy: 1415, region: 'east'}
 };
 
 
@@ -163,24 +170,26 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   const byCode = new Map(nodes.map(n => [n.code, n]));
   const hub = byCode.get(center.code);
 
+  // Tiers are rows (north, south) or columns (west, east) of boxes spread evenly over the hub
+  // edge plus a per-tier flare. Offsets are measured from the hub outline. They are kept as
+  // tight as the 40-unit box clearance, the room a route bundle needs to pass between two
+  // boxes (twice its routing margin) and a readable label on the shortest hub routes allow.
+
   // --- NORTH (Domestic Finland) ---
+  // The rows stay within the hub width plus a small flare: a wide flare makes the routes of
+  // the near and far rows cross each other in front of the hub.
   const nTiers = [
     ['MHQ', 'TKU', 'TMP'],
     ['VAA', 'KOK', 'JYV', 'KUO', 'JOE'],
     ['KEM', 'OUL', 'KAJ', 'KAO'],
     ['KTT', 'RVN', 'IVL']
   ];
-  const nTierY = [
-    HEL_Y - hubHeight / 2 - 240,
-    HEL_Y - hubHeight / 2 - 580,
-    HEL_Y - hubHeight / 2 - 920,
-    HEL_Y - hubHeight / 2 - 1260
-  ];
+  const nTierY = [240, 490, 740, 990].map(offset => HEL_Y - hubHeight / 2 - offset);
   nTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const y = nTierY[tIdx];
     const count = present.length;
-    const flare = 260 * tIdx;
+    const flare = 100 * tIdx;
     const xStart = HEL_X - hubWidth / 2 - flare;
     const xEnd = HEL_X + hubWidth / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -189,24 +198,24 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     });
   });
 
-  // --- WEST (Nordics, UK, Ireland, Iceland, North America) ---
+  // --- WEST (Nordics, Iceland, UK, Ireland, North America) ---
+  // Three columns: Sweden/Denmark nearest, Norway with Iceland and northern Britain next,
+  // then the transatlantic gateways with Dublin and London at the foot of the outer column
+  // so that London's partner network can fill the bottom-left corner of the sheet. The outer
+  // column is spread far taller than the hub (the sheet is that tall anyway because of the
+  // domestic and European rows) so that partner satellites fit in its gaps.
   const wTiers = [
-    ['UME', 'ARN', 'VBY', 'GOT', 'BLL', 'CPH'],
-    ['KKN', 'ALF', 'TOS', 'BOO', 'TRD', 'OSL', 'BGO', 'SVG'],
-    ['KEF', 'EDI', 'MAN', 'DUB', 'LHR'],
-    ['SEA', 'YYZ', 'ORD', 'JFK', 'DFW', 'LAX', 'MIA']
+    ['ALF', 'UME', 'ARN', 'VBY', 'GOT', 'BLL', 'CPH'],
+    ['KEF', 'KKN', 'TOS', 'BOO', 'TRD', 'OSL', 'BGO', 'SVG', 'EDI', 'MAN'],
+    ['SEA', 'YYZ', 'ORD', 'JFK', 'DFW', 'LAX', 'MIA', 'DUB', 'LHR']
   ];
-  const wTierX = [
-    HEL_X - hubWidth / 2 - 440,
-    HEL_X - hubWidth / 2 - 960,
-    HEL_X - hubWidth / 2 - 1500,
-    HEL_X - hubWidth / 2 - 2060
-  ];
+  const wTierX = [380, 740, 1180].map(offset => HEL_X - hubWidth / 2 - offset);
+  const wFlare = [100, 250, 800];
   wTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const x = wTierX[tIdx];
     const count = present.length;
-    const flare = 180 * tIdx;
+    const flare = wFlare[tIdx];
     const yStart = HEL_Y - hubHeight / 2 - flare;
     const yEnd = HEL_Y + hubHeight / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -216,21 +225,20 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   });
 
   // --- EAST (Middle East, South Asia, East Asia, Japan, Australia) ---
+  // Two columns: the Gulf, India and Thailand nearest with Doha at the top so its partner
+  // network can occupy the top-right corner; Korea, China, Japan, Hong Kong and Singapore in
+  // the outer column with Singapore at the foot so its partner network fills the bottom-right.
   const eTiers = [
-    ['DOH', 'DXB', 'DEL'],
-    ['ICN', 'PVG', 'HKG', 'BKK', 'HKT', 'SIN'],
-    ['HND', 'NRT', 'NGO', 'KIX', 'MEL']
+    ['DOH', 'DXB', 'DEL', 'BKK', 'HKT'],
+    ['ICN', 'PVG', 'HND', 'NRT', 'NGO', 'KIX', 'HKG', 'MEL', 'SIN']
   ];
-  const eTierX = [
-    HEL_X + hubWidth / 2 + 580,
-    HEL_X + hubWidth / 2 + 1300,
-    HEL_X + hubWidth / 2 + 2020
-  ];
+  const eTierX = [540, 1020].map(offset => HEL_X + hubWidth / 2 + offset);
+  const eFlare = [100, 200];
   eTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const x = eTierX[tIdx];
     const count = present.length;
-    const flare = 150 * tIdx;
+    const flare = eFlare[tIdx];
     const yStart = HEL_Y - hubHeight / 2 - flare;
     const yEnd = HEL_Y + hubHeight / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -248,19 +256,12 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     ['OPO', 'LIS', 'FAO', 'MAD', 'BCN', 'VLC', 'ALC', 'PMI', 'AGP', 'FCO', 'NAP', 'CTA', 'ATH', 'AYT', 'GZP'],
     ['FNC', 'TFS', 'LPA', 'FUE', 'ACE', 'CFU', 'ZTH', 'CHQ', 'HER', 'JTR', 'KGS', 'RHO', 'PFO', 'LCA']
   ];
-  const sTierY = [
-    HEL_Y + hubHeight / 2 + 320,
-    HEL_Y + hubHeight / 2 + 700,
-    HEL_Y + hubHeight / 2 + 1100,
-    HEL_Y + hubHeight / 2 + 1520,
-    HEL_Y + hubHeight / 2 + 1960,
-    HEL_Y + hubHeight / 2 + 2420
-  ];
+  const sTierY = [320, 590, 860, 1130, 1400, 1670].map(offset => HEL_Y + hubHeight / 2 + offset);
   sTiers.forEach((tier, tIdx) => {
     const present = tier.map(c => byCode.get(c)).filter(Boolean);
     const y = sTierY[tIdx];
     const count = present.length;
-    const flare = 340 * tIdx;
+    const flare = 160 * tIdx;
     const xStart = HEL_X - hubWidth / 2 - flare;
     const xEnd = HEL_X + hubWidth / 2 + flare;
     present.forEach((node, cIdx) => {
@@ -275,7 +276,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   const sin = byCode.get('SIN');
   if (sin && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sin.height = 360; sin.width = 520; sin.isGatewayHub = true; }
   const doh = byCode.get('DOH');
-  if (doh && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { doh.height = 320; doh.width = 460; doh.isGatewayHub = true; }
+  if (doh && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { doh.height = 320; doh.width = 600; doh.isGatewayHub = true; }
   const lax = byCode.get('LAX');
   if (lax && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lax.height = 200; lax.width = 320; lax.isGatewayHub = true; }
   const sea = byCode.get('SEA');
@@ -543,7 +544,18 @@ function segmentBlocked(a, b, r) {
   return hi > 0 && lo < 1;
 }
 
-function bundlePath(a, b, obstacles, margin) {
+function bundlePath(a, b, obstacles, laneSpread) {
+  // The spine keeps the outer lanes 26 clear of every unrelated box. A tightly packed group
+  // (partner satellites) can leave no corner-to-corner path at that clearance; retry with a
+  // smaller one, never below the lane spread, before falling back to a straight line.
+  for (const clearance of [26, 14, 6]) {
+    const path = visibilityPath(a, b, obstacles, laneSpread + clearance);
+    if (path) return path;
+  }
+  return [a, b];
+}
+
+function visibilityPath(a, b, obstacles, margin) {
   const boxes = obstacles.map(n => ({...n, width: n.width + margin * 2, height: n.height + margin * 2}));
   if (!boxes.some(r => segmentBlocked(a, b, r))) return [a, b];
   const vertices = [
@@ -570,7 +582,7 @@ function bundlePath(a, b, obstacles, margin) {
       }
     }
   }
-  if (prev[1] < 0) return [a, b];
+  if (prev[1] < 0) return null;
   const path = [];
   for (let i = 1; i >= 0; i = prev[i]) path.unshift(vertices[i]);
   return path;
@@ -610,9 +622,12 @@ function routePorts(nodes, bundles, byCode) {
     }
     for (const [side, items] of Object.entries(sides)) {
       const vertical = side === 'left' || side === 'right', sign = side === 'left' || side === 'top' ? -1 : 1;
+      // Bearing from a virtual fan centre one box dimension behind the edge rather than from the
+      // box centre: on a wide hub edge, ports ordered by the true centre bearing make routes to
+      // near and far destinations cross each other right outside the outline.
       const bearing = item => vertical
-        ? (item.other.y - node.y) / Math.max(1, Math.abs(item.other.x - node.x))
-        : (item.other.x - node.x) / Math.max(1, Math.abs(item.other.y - node.y));
+        ? (item.other.y - node.y) / Math.max(1, Math.abs(item.other.x - node.x) + node.width)
+        : (item.other.x - node.x) / Math.max(1, Math.abs(item.other.y - node.y) + node.height);
       items.sort((a, b) => bearing(a) - bearing(b) || a.key.localeCompare(b.key));
       const total = items.reduce((sum, i) => sum + i.span, 0);
       let cursor = -total / 2;
@@ -647,7 +662,7 @@ export function layoutFlights(nodes, flights) {
     const [from, to] = key.split(':'), a = byCode.get(from), b = byCode.get(to);
     if (!a || !b) continue;
     const pa = ports.get(from + ':' + key), pb = ports.get(to + ':' + key);
-    const middle = bundlePath(pa.escape, pb.escape, nodes.filter(n => n !== a && n !== b), (services.length - 1) * 7 + 26);
+    const middle = bundlePath(pa.escape, pb.escape, nodes.filter(n => n !== a && n !== b), (services.length - 1) * 7);
     const spine = [pa.port, ...middle, pb.port];
     services.sort((a, b) => a.from.localeCompare(b.from) || a.departure.localeCompare(b.departure) || a.id.localeCompare(b.id));
     services.forEach((flight, i) => {
@@ -693,7 +708,7 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
   for (const r of [...routes].sort((a, b) => Math.hypot(b.end.x - b.start.x, b.end.y - b.start.y) - Math.hypot(a.end.x - a.start.x, a.end.y - a.start.y) || a.flight.id.localeCompare(b.flight.id))) {
     const f = r.flight;
     const freq = f.days || f.frequency || '#';
-    const num = f.number || f.id;
+    const num = String(f.number || f.id).trim().replace(/^([A-Z]{2}|[A-Z]\d|\d[A-Z])\s*(\d+)/i, (m, c, n) => `${c.toUpperCase()} ${n}`);
     const text = `${num}  ${freq}  ${aircraftNotation(f.aircraft)}`;
     const width = measure(text) + 12;
     let label;
@@ -724,20 +739,44 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
   return labels;
 }
 
+const AIRCRAFT_CODES = [
+  [/^Airbus A350-1000/i, 'A35K'], [/^Airbus A350-900/i, 'A359'], [/^Airbus A350$/i, 'A350'],
+  [/^Airbus A330-200/i, 'A332'], [/^Airbus A330-300/i, 'A333'], [/^Airbus A330$/i, 'A330'],
+  [/^Airbus A321neo/i, 'A21N'], [/^Airbus A320neo/i, 'A20N'], [/^Airbus A380/i, 'A380'],
+  [/^Airbus A(\d{3})/i, 'A$1'],
+  [/^Boeing 777-300ER/i, 'B77W'], [/^Boeing 777-200/i, 'B772'], [/^Boeing 787-8$/i, 'B788'], [/^Boeing 787-9/i, 'B789'],
+  [/^Boeing 787-10/i, 'B78X'], [/^Boeing 737-800/i, 'B738'], [/^Boeing 737-900/i, 'B739'], [/^Boeing 737 MAX 8/i, 'B38M'],
+  [/^Boeing (\d)(\d)(\d)-(\d)/i, 'B$1$3$4'], [/^Boeing (\d{3})/i, 'B$1'],
+  [/^Embraer (?:E)?190/i, 'E190'], [/^Embraer (?:E)?175/i, 'E175'], [/^Embraer (?:E)?195/i, 'E195'],
+  [/^ATR ?72/i, 'AT72'], [/^ATR ?42/i, 'AT42'], [/^(?:Bombardier |De Havilland )?(?:Dash ?8|DHC-8)[- ]?Q?400/i, 'DH8D']
+];
+
+// Compact timetable code for an aircraft name, in the spirit of the reference's DC9 / CVS notation.
 export function aircraftNotation(aircraft = '') {
-  return aircraft.replace('Airbus A', 'A').replace('Embraer ', 'E').replace('ATR ', 'AT');
+  const name = String(aircraft).trim();
+  for (const [pattern, code] of AIRCRAFT_CODES) {
+    if (pattern.test(name)) return name.replace(pattern, code).split(/[\s(]/)[0];
+  }
+  return name.replace('Airbus A', 'A').replace('Embraer ', 'E').replace('ATR ', 'AT');
 }
 
+// Departure and arrival times beside each arrow endpoint. As on the reference sheet the time runs along the
+// lane, just to one side of it: outside the box for ordinary airports, inside the outline for large hubs.
 export function endpointLabels(route, nodes) {
   return [[route.start, route.flight.from, route.flight.departure], [route.end, route.flight.to, route.flight.arrival]].map(([p, code, time]) => {
     const n = nodes.find(n => n.code === code);
-    const isLargeHub = n && (n.code === 'HEL' || (n.width >= 340 && n.height >= 240));
+    const isLargeHub = n && (n.isRegionalHub || (n.width >= 340 && n.height >= 240));
     const vertical = Math.abs(Math.abs(p.y - n.y) - n.height / 2 - 8) < 0.01;
     const nx = vertical ? 0 : Math.sign(p.x - n.x), ny = vertical ? Math.sign(p.y - n.y) : 0;
+    // Direction the text runs away from its anchor: outward for small boxes, inward for hubs.
+    const dx = isLargeHub ? -nx : nx, dy = isLargeHub ? -ny : ny;
+    const along = isLargeHub ? -4 : 11;
+    const side = 6.5;
     return {
-      x: isLargeHub ? p.x - nx * 24 : p.x + nx * 16,
-      y: isLargeHub ? p.y - ny * 24 : p.y + ny * 16,
+      x: p.x + nx * along + (vertical ? side : 0),
+      y: p.y + ny * along + (vertical ? 0 : side),
       angle: vertical ? -90 : 0,
+      anchor: vertical ? (dy > 0 ? 'end' : 'start') : (dx > 0 ? 'start' : 'end'),
       text: time.slice(11, 16).replace(':', '.')
     };
   });

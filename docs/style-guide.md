@@ -4,6 +4,8 @@ The design should feel like a carefully typeset airline timetable: compact, prec
 
 This guide records the design decisions agreed during development. The reference scans illustrate visual treatment; they are not a source of current schedules. When exact geography competes with readability, prefer a clean, compact diagram.
 
+The sheet is a **weekly timetable**, like the reference: one arrow per weekly service with its days of operation, not a live board of dated departures. Partner services are highlights, not an exhaustive list: only the most likely connection at each partner hub is drawn (see the README for the selection rule).
+
 ## Reference images
 
 | Image | What to learn from it |
@@ -21,6 +23,8 @@ See [reference provenance](references/README.md) for source information. The ear
 ## Composition and geography
 
 The map fills the browser window. Filters, schedule details, and zoom controls float above it in compact, collapsible widgets. The diagram remains the main surface. Keep the paper background quiet and the controls visually related to the timetable.
+
+The sheet itself is composed like the printed reference: a masthead (title as wordmark, letter-spaced edition line, date and counts) sits above a thin-ruled frame, the diagram fills the frame, and the explanations box sits inside the frame at the foot. Masthead and legend are scaled with sheet width (masthead by width ÷ 2300 up to 4.4×, legend by width ÷ 3000 up to 3.4×) so that they read at the Fit view even when the network is far denser than the 1974 sheet. Illustrative data is named as such in the masthead.
 
 For the Finnair international sheet, organize the network around Helsinki:
 
@@ -45,13 +49,15 @@ Airport size communicates service volume and provides room for route ports. Hels
 - Center the city name prominently; place the airport code and service count below it.
 - Preserve a quiet interior and a thin outline. Airport boxes should read as parts of the diagram, not dashboard cards.
 
-The implementation currently uses rectangular boxes. The reference also demonstrates clipped corners and irregular hub outlines; those may be explored when they improve docking, but they are not required for the present design.
+Boxes are chamfered octagons with white paper fill (`#fdfcf6`), a thin near-black outline (`#2f3631`, 1.5) and the city name in blue, as on the reference; the secondary name or code sits below in small condensed type. Partner-served codeshare airports use a dashed brown outline and a black name, with a `VIA LHR · British Airways` line. Gateway hubs use a heavier blue outline.
+
+The central hub carries a double rule and a city title sized to its box (about width ÷ 14, capped at 320), centred in an otherwise empty interior, as on the reference. A departures board inside the hub was tried and rejected: the sheet is a weekly timetable, and the edge times already carry the departures.
 
 ## Routes and crossings
 
 Each arrow represents one flight. Flights between the same two airports share a route spine, with straight parallel lanes and consistent perpendicular spacing. Bends are sharp and geometric. Keep corresponding segments parallel through bends; do not fan individual lanes toward a shared point.
 
-Crossings are allowed. Make them intentional and readable with a small paper-coloured break in the lower line as another route passes over it. Crossing breaks must not resemble a transfer, airport, or route endpoint. The current renderer uses a paper under-stroke beneath each route to create this effect.
+Crossings are allowed. Make them intentional and readable with a small paper-coloured break in the lower line as another route passes over it. Crossing breaks must not resemble a transfer, airport, or route endpoint. Each route draws a 7-unit paper under-stroke beneath its ink, so routes drawn later break the routes they cross. Flight labels live on a separate top layer, linked to their route by id, so a crossing never cuts through a label and hover, focus and selection light up line, times and label together.
 
 Keep hub approaches orderly even when routes cross elsewhere: separate bundle intervals, short perpendicular approaches, and distinct arrowheads. Route around unrelated airport boxes. Do not lengthen every connection merely to eliminate crossings.
 
@@ -62,10 +68,11 @@ Use the notation in the timing-detail reference:
 - Departure time beside the departure airport's edge.
 - Arrival time beside the arrival airport's edge.
 - Times written with a dot, for example **13.35**, and aligned with the corresponding lane.
-- Flight number and compact aircraft designation along the route, for example **AY1021 · A320**.
-- Blue or black lettering matched to the route's ink.
+- Flight number, operating days and compact aircraft code along the route, for example **AY 431 # A321** or **AY341 ①②③④⑤ AT72**, set in the route's own ink on a borderless paper plate that interrupts the line.
+- Aircraft appear as timetable codes (A321, A359, E190, AT72, B738, B789); the legend lists the codes present on the sheet with their full names.
+- Blue or black lettering matched to the route's ink; partner codeshares use the amber ink.
 
-Place edge times just inside the airport outline, with enough room to distinguish adjacent lanes. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
+Times run along the lane, 6.5 units to one side of it, starting 11 units beyond the port outside ordinary airport boxes and 4 units inside the outline of large hubs, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
 
 Use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
 
@@ -75,16 +82,18 @@ Use locally hosted **Oswald 600** for the brand, city names, and major headings.
 
 | Role | Current treatment |
 | --- | --- |
-| Paper | Warm off-white `#f8f7ef` |
+| Paper | Warm off-white `#f8f7ef`; airport boxes `#fdfcf6` |
+| Box outline | Near-black `#2f3631`, 1.5; hubs blue |
 | Main blue | `#08618c`; route blue `#09618c` |
 | Secondary route ink | Muted black `#454940` |
 | Main text | `#303a34` |
 | Rules and borders | Muted grey-green, typically `#aaa99b` |
-| Active flight | Warm amber/brown, kept distinct from normal route ink |
+| Partner codeshare ink | Amber `#b36200`, dashed |
+| Active flight | Warm amber/brown `#cd7724` line, `#975114` text, kept distinct from normal route ink |
 
 Use uppercase condensed city names, small timing labels, thin rules, and restrained contrast. Avoid glossy cards, rounded route curves, bright multicolour palettes, heavy shadows, or decorative map textures. Light paper texture is optional and must not compete with fine lines.
 
-In the current app, blue solid routes indicate jets and black dashed routes indicate turboprops. This is the app's convention, not a claim about the meaning of the historical scan's colours.
+In the current app, blue solid routes indicate Finnair jets, black dashed routes indicate turboprops and amber dashed routes indicate partner-operated codeshares. This is the app's convention, not a claim about the meaning of the historical scan's colours. It follows the reference's spirit of blue for the airline's own services and a second ink for everything else.
 
 ## Working dimensions
 
@@ -93,13 +102,17 @@ These are current SVG drawing units, not immutable visual rules. Adjust them tog
 | Element | Current value |
 | --- | --- |
 | Parallel lane spacing | 14 |
-| Normal route stroke | 1.5 |
+| Finnair jet route stroke | 1.8 |
+| Turboprop and codeshare route stroke | 1.4, dashed |
 | Paper crossing under-stroke | 7 |
-| Flight label text | 12 |
-| Airport-edge time text | 11 |
+| Flight label text | 11 bold, in route ink |
+| Airport-edge time text | 10.5 bold, 2.5 paper knockout |
 | Arrow endpoint gap outside airport | 8 |
 | Straight approach stub | 40 before lane offsetting |
-| Time-label centre | 35 inward from the route endpoint |
+| Time label | 11 beyond the port outside small boxes, 4 inside hubs, 6.5 beside the lane |
+| City name | Oswald 600, 18 |
+| Hub title | width ÷ 14, capped at 320 |
+| Masthead wordmark | 64 × masthead scale |
 
 Zoom scales the whole diagram. Judge both the overall sheet and a close-up of the busiest hub. At a full-network fit, the composition should remain clear; zoom provides access to the fine timetable text.
 
@@ -122,6 +135,7 @@ Before accepting a visual change, check:
 - Crossing gaps are clear, and hub approaches do not collapse into a knot.
 - Departure and arrival times remain attached to the correct endpoints.
 - Flight labels stay readable and do not obscure city names.
+- Masthead, frame and legend are legible at Fit, and the hub interior stays quiet apart from its title.
 - Zoom, selection, keyboard access, and narrow-window controls still work.
 - Illustrative data is clearly labelled; the reference is not presented as live service information.
 
