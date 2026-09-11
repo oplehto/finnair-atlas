@@ -6332,7 +6332,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-18T22:45:00+03:00",
     "arrival": "2026-09-19T00:05:00+03:00",
-    "aircraft": "A320",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑤"
