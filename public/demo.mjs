@@ -7472,7 +7472,15 @@ export const codeshareAirports = [
     "hub": "LHR",
     "partner": "British Airways",
     "codeshare": true
-  }
+  },
+  {"code":"MSP","name":"Minneapolis","alt":"Saint Paul","lat":44.882,"lon":-93.222,"region":"west","hub":"ORD","partner":"American Airlines","codeshare":true},
+  {"code":"DTW","name":"Detroit","alt":"Metro Wayne","lat":42.212,"lon":-83.353,"region":"west","hub":"ORD","partner":"American Airlines","codeshare":true},
+  {"code":"STL","name":"St. Louis","alt":"Lambert","lat":38.749,"lon":-90.37,"region":"west","hub":"ORD","partner":"American Airlines","codeshare":true},
+  {"code":"BNA","name":"Nashville","alt":"Tennessee","lat":36.124,"lon":-86.678,"region":"west","hub":"ORD","partner":"American Airlines","codeshare":true},
+  {"code":"CLT","name":"Charlotte","alt":"Douglas","lat":35.214,"lon":-80.943,"region":"west","hub":"JFK","partner":"American Airlines","codeshare":true},
+  {"code":"PHL","name":"Philadelphia","alt":"Pennsylvania","lat":39.872,"lon":-75.241,"region":"west","hub":"JFK","partner":"American Airlines","codeshare":true},
+  {"code":"RDU","name":"Raleigh-Durham","alt":"North Carolina","lat":35.878,"lon":-78.788,"region":"west","hub":"JFK","partner":"American Airlines","codeshare":true},
+  {"code":"MCO","name":"Orlando","alt":"Florida","lat":28.429,"lon":-81.309,"region":"west","hub":"JFK","partner":"American Airlines","codeshare":true}
 ];
 
 export const codeshareFlights = [
@@ -9779,13 +9787,31 @@ export const codeshareFlights = [
     "frequency": "Daily (#)",
     "codeshare": true,
     "via": "LHR"
-  }
+  },
+  {"id":"AY4200-2026-09-10","number":"AY 4200","from":"ORD","to":"MSP","departure":"2026-09-10T16:50:00-05:00","arrival":"2026-09-10T18:25:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1420","aircraft":"Boeing 737-800","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4201-2026-09-10","number":"AY 4201","from":"MSP","to":"ORD","departure":"2026-09-10T13:30:00-05:00","arrival":"2026-09-10T15:05:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1421","aircraft":"Boeing 737-800","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4202-2026-09-10","number":"AY 4202","from":"ORD","to":"DTW","departure":"2026-09-10T17:10:00-05:00","arrival":"2026-09-10T19:30:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 2312","aircraft":"Embraer E175","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4203-2026-09-10","number":"AY 4203","from":"DTW","to":"ORD","departure":"2026-09-10T14:15:00-04:00","arrival":"2026-09-10T14:45:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 2313","aircraft":"Embraer E175","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4204-2026-09-10","number":"AY 4204","from":"ORD","to":"STL","departure":"2026-09-10T17:00:00-05:00","arrival":"2026-09-10T18:15:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 3641","aircraft":"Embraer E175","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4205-2026-09-10","number":"AY 4205","from":"STL","to":"ORD","departure":"2026-09-10T14:00:00-05:00","arrival":"2026-09-10T15:20:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 3642","aircraft":"Embraer E175","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4206-2026-09-10","number":"AY 4206","from":"ORD","to":"BNA","departure":"2026-09-10T16:55:00-05:00","arrival":"2026-09-10T18:35:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1866","aircraft":"Airbus A321","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4207-2026-09-10","number":"AY 4207","from":"BNA","to":"ORD","departure":"2026-09-10T13:45:00-05:00","arrival":"2026-09-10T15:30:00-05:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1867","aircraft":"Airbus A321","days":"#","frequency":"Daily (#)","codeshare":true,"via":"ORD"},
+  {"id":"AY4300-2026-09-10","number":"AY 4300","from":"JFK","to":"CLT","departure":"2026-09-10T17:15:00-04:00","arrival":"2026-09-10T19:25:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1911","aircraft":"Airbus A321","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4301-2026-09-10","number":"AY 4301","from":"CLT","to":"JFK","departure":"2026-09-10T14:30:00-04:00","arrival":"2026-09-10T16:45:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1912","aircraft":"Airbus A321","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4302-2026-09-10","number":"AY 4302","from":"JFK","to":"PHL","departure":"2026-09-10T17:30:00-04:00","arrival":"2026-09-10T18:35:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 4532","aircraft":"Embraer E175","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4303-2026-09-10","number":"AY 4303","from":"PHL","to":"JFK","departure":"2026-09-10T15:20:00-04:00","arrival":"2026-09-10T16:30:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 4533","aircraft":"Embraer E175","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4304-2026-09-10","number":"AY 4304","from":"JFK","to":"RDU","departure":"2026-09-10T17:20:00-04:00","arrival":"2026-09-10T19:15:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 2160","aircraft":"Boeing 737-800","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4305-2026-09-10","number":"AY 4305","from":"RDU","to":"JFK","departure":"2026-09-10T14:40:00-04:00","arrival":"2026-09-10T16:40:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 2161","aircraft":"Boeing 737-800","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4306-2026-09-10","number":"AY 4306","from":"JFK","to":"MCO","departure":"2026-09-10T17:45:00-04:00","arrival":"2026-09-10T20:45:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1043","aircraft":"Airbus A321","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"},
+  {"id":"AY4307-2026-09-10","number":"AY 4307","from":"MCO","to":"JFK","departure":"2026-09-10T13:30:00-04:00","arrival":"2026-09-10T16:20:00-04:00","airline":"Finnair (op. by American Airlines)","operator":"American Airlines","operatorFlight":"AA 1044","aircraft":"Airbus A321","days":"#","frequency":"Daily (#)","codeshare":true,"via":"JFK"}
 ];
 
 export default {
   codeshareAirports,
   codeshareFlights,
   title: "Finnair, by air",
+  logo: "finnair-1968",
+  copyright: "OPL Consulting Oy",
   subtitle: "Ulkomaan ja kotimaan liikenne — Utrikes- och inrikestrafiken",
   source: "Finnair aikataulukartta · Summer / Autumn 2026",
   demo: true,

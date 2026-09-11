@@ -51,7 +51,7 @@ Airport size communicates service volume and provides room for route ports. Hels
 
 Boxes are chamfered octagons with white paper fill (`#fdfcf6`), a thin near-black outline (`#2f3631`, 1.5) and the city name in blue, as on the reference; the secondary name or code sits below in small condensed type. Partner-served codeshare airports use a dashed brown outline and a black name, with a `VIA LHR · British Airways` line. Gateway hubs use a heavier blue outline.
 
-The central hub carries a double rule and a city title sized to its box (about width ÷ 14, capped at 320), centred in an otherwise empty interior, as on the reference. A departures board inside the hub was tried and rejected: the sheet is a weekly timetable, and the edge times already carry the departures.
+The central hub carries a double rule and a city title sized to its box (about width ÷ 14, capped at 320), centred in an otherwise empty interior, as on the reference. Along its edges every route bundle carries its destination code, 42 units inside the outline just beyond the times, so the comb of lanes can be read without following each line; the code is clickable and highlights that airport's connections in place. Spoke airports do not repeat this: their one bundle leads back to the hub. A departures board inside the hub was tried and rejected: the sheet is a weekly timetable, and the edge times already carry the departures.
 
 ## Routes and crossings
 

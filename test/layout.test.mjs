@@ -119,9 +119,29 @@ test('the displayed date with partner codeshares stays compact, clear and routab
   }
  }
  // Sheet compactness: the bounding box of all airport boxes. The hub alone is about 9 M square
- // units; the tiers and partner satellites around it must not spread the sheet past 42 M.
+ // units; the tiers and partner satellites around it must not spread the sheet past 46 M
+ // (about 8,900 x 5,000: the west fan needs its three columns 500, 950 and 1,400 outside the
+ // hub and London's four satellite columns to draw without crossings).
  const left=Math.min(...nodes.map(n=>n.x-n.width/2)),right=Math.max(...nodes.map(n=>n.x+n.width/2)),top=Math.min(...nodes.map(n=>n.y-n.height/2)),bottom=Math.max(...nodes.map(n=>n.y+n.height/2));
- assert.ok((right-left)*(bottom-top)<42e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
+ assert.ok((right-left)*(bottom-top)<46e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
+});
+
+test('the domestic fan of the full weekly sheet draws without route crossings',()=>{
+ // Every weekly service with partner codeshares, as the app shows it with no date filter.
+ const flights=[...demo.flights,...demo.codeshareFlights],codes=new Set(flights.flatMap(f=>[f.from,f.to]));
+ const nodes=layoutAirports([...demo.airports,...demo.codeshareAirports].filter(a=>codes.has(a.code)),flights),routes=layoutFlights(nodes,flights),byCode=new Map(nodes.map(n=>[n.code,n])),hub=byCode.get('HEL');
+ const north=new Set(nodes.filter(n=>n!==hub&&n.region==='north').map(n=>n.code));
+ assert.equal(north.size,15);
+ for(const c of north)assert.ok(byCode.get(c).y+byCode.get(c).height/2<hub.y-hub.height/2,`${c} is not above Helsinki`);
+ const keyOf=r=>[r.flight.from,r.flight.to].sort().join(':'),touchesNorth=r=>north.has(r.flight.from)||north.has(r.flight.to);
+ const cross=(o,a,b)=>(a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x);
+ const segmentsCross=(p1,p2,p3,p4)=>{const e=1e-6,d1=cross(p3,p4,p1),d2=cross(p3,p4,p2),d3=cross(p1,p2,p3),d4=cross(p1,p2,p4);return((d1>e&&d2<-e)||(d1<-e&&d2>e))&&((d3>e&&d4<-e)||(d3<-e&&d4>e));};
+ const domestic=routes.filter(touchesNorth);
+ assert.ok(domestic.length>=80);
+ for(const a of domestic)for(const b of routes){
+  if(a===b||keyOf(a)===keyOf(b))continue;
+  for(let s=0;s<a.points.length-1;s++)for(let t=0;t<b.points.length-1;t++)assert.ok(!segmentsCross(a.points[s],a.points[s+1],b.points[t],b.points[t+1]),`${a.flight.id} crosses ${b.flight.id}`);
+ }
 });
 
 test('airport polygons are non-rectangular with chamfered, faceted, or stepped geometry', () => {

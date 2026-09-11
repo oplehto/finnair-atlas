@@ -1,10 +1,11 @@
 import {layoutFlights,placeFlightLabels,endpointLabels,aircraftNotation} from './layout.mjs';
+import {FINNAIR_1968} from './logo.mjs';
 import {validateSchedule,filterFlights,layoutAirports,clockTime,flightNumber,weeklyServices,connectionFlights} from './schedule.mjs';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const INK={jet:'#09618c',prop:'#454940',codeshare:'#b36200'},PAPER='#f8f7ef';
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 let panX=0,panY=0,hasFit=false,mapWidth=1200,mapHeight=900;
-let data,visible=[],selected=null,hovered=null,scale=0.8,imported=false,busy=false,layoutKey='',geometry,needsFit=false;
+let data,visible=[],selected=null,focusAirport=null,hovered=null,scale=0.8,imported=false,busy=false,layoutKey='',geometry,needsFit=false;
 const waitText=c=>`${Math.floor(c.wait/60)} h ${String(c.wait%60).padStart(2,'0')} min${c.overnight?' · seuraavana päivänä / next day':''}`;
 const measureContext=document.createElement('canvas').getContext('2d');
 const LABEL_FONT='700 11px "Roboto Condensed"';
@@ -13,40 +14,58 @@ const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 const upper=s=>String(s??'').toUpperCase();
 const dot=t=>t.replace(':','.');
 const inkOf=f=>f.codeshare?'codeshare':/ATR|Dash|DHC|Q400/i.test(f.aircraft||'')?'prop':'jet';
-function el(tag,attrs={},text){const node=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))node.setAttribute(k,v);if(text!==undefined)node.textContent=text;return node;}
+// Worn-print filter: a little ink mottle, a hair of edge wobble and a soft blur, for the logotype only.
+const WORN_FILTER='<feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" seed="7" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.32 1.1" result="mottle"/><feComposite in="SourceGraphic" in2="mottle" operator="in" result="inked"/><feDisplacementMap in="inked" in2="grain" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="wobbled"/><feGaussianBlur in="wobbled" stdDeviation="0.5"/>';
+function wornFilter(id){const f=el('filter',{id,x:'-5%',y:'-10%',width:'110%',height:'120%','color-interpolation-filters':'sRGB'});f.innerHTML=WORN_FILTER;return f;}
+// The 1968 Finnair logotype as an SVG group, scaled to the given height.
+function logotype(height){
+ const g=el('g',{class:'logotype',filter:'url(#worn)',transform:`scale(${height/FINNAIR_1968.height})`});
+ const inner=el('g',{transform:FINNAIR_1968.transform});
+ for(const d of FINNAIR_1968.paths)inner.append(el('path',{d}));
+ g.append(inner);
+ return g;
+}
+const logotypeHtml=height=>`<svg class="brand-logo" viewBox="0 0 ${FINNAIR_1968.width} ${FINNAIR_1968.height}" height="${height}" width="${Math.round(height*FINNAIR_1968.width/FINNAIR_1968.height)}" role="img" aria-label="Finnair"><defs><filter id="worn-ui" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">${WORN_FILTER}</filter></defs><g filter="url(#worn-ui)"><g transform="${FINNAIR_1968.transform}">${FINNAIR_1968.paths.map(d=>`<path d="${d}"/>`).join('')}</g></g></svg>`;
+function el(tag,attrs={},text){const node=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))if(v!==null&&v!==undefined)node.setAttribute(k,v);if(text!==undefined)node.textContent=text;return node;}
 function message(text){$('message').hidden=!text;$('message').textContent=text;}
 
 function setData(next){
  validateSchedule(next);
  data=next;
- $('title').textContent=next.title||'Airline timetable';
+ $('title').innerHTML=next.logo==='finnair-1968'?logotypeHtml(40)+`<span class="visually-hidden">${escape(next.title||'Finnair')}</span>`:escape(next.title||'Airline timetable');
  document.querySelector('.edition').textContent=next.subtitle||'Flight services';
  $('source').textContent=(next.demo?'Example · ':'')+(next.source||'Imported schedule');
  $('updated').textContent=imported?'Local file · weekly services':'Weekly services · Reload picks up a changed schedule';
+ $('notice').textContent=[next.copyright?`© ${new Date().getFullYear()} ${next.copyright}`:'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean).join(' · ');
  const allFlights=[...data.flights,...(data.codeshareFlights||[])];
  const aircraft=$('aircraft').value;
  $('aircraft').replaceChildren(new Option('All aircraft',''),...[...new Set(allFlights.map(f=>f.aircraft).filter(Boolean))].sort().map(a=>new Option(a,a)));
  if([...$('aircraft').options].some(o=>o.value===aircraft))$('aircraft').value=aircraft;
- render();
+ // Let the masthead and controls paint before the layout work starts.
+ $('layout-note').textContent='Laying out the sheet…';
+ requestAnimationFrame(()=>setTimeout(render,0));
 }
 
 // Masthead above the framed sheet: wordmark left, letter-spaced edition line and metadata to its right.
 function sheetHeader(x,y,k,points){
  const g=el('g',{class:'sheet-header',transform:`translate(${x} ${y}) scale(${k})`});
  const title=upper(data.title||'Airline timetable');
- const titleWidth=measure(title,'600 64px Oswald')+3*title.length;
+ const hasLogo=data.logo==='finnair-1968';
+ const logoHeight=74,logoWidth=logoHeight*FINNAIR_1968.width/FINNAIR_1968.height;
+ const titleWidth=hasLogo?logoWidth:measure(title,'600 64px Oswald')+3*title.length;
+ if(hasLogo){const l=logotype(logoHeight);l.setAttribute('transform',`translate(0 4) scale(${logoHeight/FINNAIR_1968.height})`);g.append(l);}
  const meta=[data.demo?'Havainnollistava esimerkki / Illustrative example':'','Viikkoaikataulu / Veckotidtabell / Weekly timetable',data.source||'',`${points.length} lentoasemaa / airports`,`${visible.length} viikoittaista vuoroa / weekly services`,'Kaikki ajat paikallisaikoja / All times local'].filter(Boolean).join('  ·  ');
- g.append(
-  el('text',{x:0,y:64,class:'sheet-brand'},title),
+ g.append(...[
+  hasLogo?null:el('text',{x:0,y:64,class:'sheet-brand'},title),
   el('text',{x:titleWidth+44,y:62,class:'sheet-edition'},upper(data.subtitle||'Flight services')),
   el('text',{x:titleWidth+44,y:90,class:'sheet-meta'},meta)
- );
+ ].filter(Boolean));
  return g;
 }
 
 // Explanations box at the foot of the sheet, three columns like the 1974 reference.
 function sheetLegend(x,y,k,width){
- const W=width/k,H=252;
+ const W=width/k,H=274;
  const g=el('g',{class:'sheet-legend',transform:`translate(${x} ${y}) scale(${k})`});
  g.append(
   el('rect',{x:0,y:0,width:W,height:H,class:'legend-box'}),
@@ -78,10 +97,12 @@ function sheetLegend(x,y,k,width){
  item(marks,0,106,'AY 431 # A321 = lennon numero · päivät · kalusto / flight number · days · aircraft');
  item(marks,0,126,'Nuolenkärki = saapuminen / arrival · Katkos viivassa = ylittävä reitti / gap = route passing over');
  item(marks,0,146,'Reunan pituus = vuorojen määrä / edge length = number of services');
+ const year=new Date().getFullYear();
  g.append(
-  el('line',{x1:0,y1:H-30,x2:W,y2:H-30,class:'legend-rule'}),
-  el('text',{x:20,y:H-11,class:'legend-item'},'Aikataulut ja konetyypit voidaan muuttaa ilmoittamatta · Tidtabeller och flygplanstyper kan ändras utan föregående meddelande · Schedules and aircraft types may change without notice'),
-  el('text',{x:W-20,y:H-11,'text-anchor':'end',class:'legend-item'},data.demo?'Havainnollistava aineisto, ei matkasuunnitteluun / Illustrative data, not for travel planning':(data.source||''))
+  el('line',{x1:0,y1:H-50,x2:W,y2:H-50,class:'legend-rule'}),
+  el('text',{x:20,y:H-32,class:'legend-item'},'Aikataulut ja konetyypit voidaan muuttaa ilmoittamatta · Tidtabeller och flygplanstyper kan ändras utan föregående meddelande · Schedules and aircraft types may change without notice'),
+  el('text',{x:W-20,y:H-32,'text-anchor':'end',class:'legend-item'},data.demo?'Havainnollistava aineisto, ei matkasuunnitteluun / Illustrative data, not for travel planning':(data.source||'')),
+  el('text',{x:20,y:H-12,class:'legend-item legend-fine'},[data.copyright?`© ${year} ${data.copyright}`:'',`Tätä karttaa ei tule käyttää matkasuunnitteluun eikä siihen tule luottaa / This sheet must not be relied on for travel or any other purpose`,data.logo==='finnair-1968'?'Finnair-nimi ja -tunnus ovat Finnair Oyj:n omaisuutta, tässä vain havainnollistamassa / The Finnair name and logo are the property of Finnair Oyj, shown for illustration only':''].filter(Boolean).join('  ·  '))
  );
  return g;
 }
@@ -121,6 +142,7 @@ function render(){
   layoutKey=key;
  }
  const {points,routes,labels}=geometry;
+ const byName=code=>points.find(p=>p.code===code)?.name||code;
  const partnerOf=new Map((data.codeshareAirports||[]).filter(a=>a.hub&&a.partner).map(a=>[a.hub,a.partner]));
 
  // Sheet geometry: content bounds, then a scale factor so masthead, frame and legend read at the fit view.
@@ -144,6 +166,7 @@ function render(){
   marker.append(el('path',{d:'M 0 1 L 10 5 L 0 9 z',fill:color}));
   defs.append(marker);
  }
+ defs.append(wornFilter('worn'));
  svg.append(defs);
  svg.append(el('rect',{x:frameX,y:frameY,width:frameW,height:frameH,class:'sheet-frame'}));
  svg.append(sheetHeader(frameX,frameY-headH,kh,points));
@@ -212,6 +235,31 @@ function render(){
  }
  svg.append(timesG);
 
+ // Destination codes along the main hub's edges: one per route bundle, just inside the times, clickable.
+ const hub=points.find(p=>p.isRegionalHub);
+ if(hub){
+  const portsG=el('g',{class:'hub-ports'});
+  const bundles=new Map();
+  for(const route of routes){
+   const f=route.flight;
+   if(f.from!==hub.code&&f.to!==hub.code)continue;
+   const other=f.from===hub.code?f.to:f.from,p=f.from===hub.code?route.start:route.end;
+   if(!bundles.has(other))bundles.set(other,[]);
+   bundles.get(other).push(p);
+  }
+  for(const [code,pts] of bundles){
+   const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length,cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
+   const onTopOrBottom=Math.abs(Math.abs(cy-hub.y)-hub.height/2-8)<0.01;
+   const nx=onTopOrBottom?0:Math.sign(cx-hub.x),ny=onTopOrBottom?Math.sign(cy-hub.y):0;
+   const x=cx-nx*42,y=cy-ny*42,w=measure(code,'700 10px "Roboto Condensed"')+7;
+   const g=el('g',{class:'hub-port',role:'button',tabindex:0,'aria-label':`${byName(code)} (${code}), ${pts.length} services. Activate to show only this airport's flights.`});
+   g.dataset.code=code;
+   g.append(el('rect',{x:x-w/2,y:y-7,width:w,height:14,class:'hub-port-bg'}),el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central'},code));
+   portsG.append(g);
+  }
+  svg.append(portsG);
+ }
+
  // Flight number · days · aircraft, set inline on the route in its own ink
  const labelsG=el('g',{class:'labels'});
  for(const route of routes){
@@ -229,8 +277,8 @@ function render(){
  svg.append(sheetLegend(frameX+gap,legendY,k,frameW-2*gap));
 
  const activate=target=>{if(target?.dataset.id)select(target.dataset.id);else if(target?.dataset.code)filterToAirport(target.dataset.code);};
- svg.addEventListener('click',e=>activate(e.target.closest('.flight,.airport')));
- svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const target=e.target.closest('.flight,.airport');if(target){e.preventDefault();activate(target);}}});
+ svg.addEventListener('click',e=>activate(e.target.closest('.flight,.airport,.hub-port')));
+ svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const target=e.target.closest('.flight,.airport,.hub-port');if(target){e.preventDefault();activate(target);}}});
  svg.addEventListener('pointerover',e=>{const target=e.target.closest('.flight');if(target)hover(target.dataset.id);});
  svg.addEventListener('pointerout',e=>{const target=e.target.closest('.flight');if(target&&!target.contains(e.relatedTarget))hover(null);});
  svg.addEventListener('focusin',e=>{const target=e.target.closest('.flight');if(target){hover(target.dataset.id);reveal(target.dataset.id,{onlyIfHidden:true});}});
@@ -243,23 +291,62 @@ function render(){
  $('diagram').replaceChildren(svg);
  $('diagram').classList.toggle('has-selection',!!selected);
  if(!hasFit){if(innerWidth<=700)focusHub();else fit();hasFit=true;}
- else if(needsFit){fit();}
+ else if(needsFit){glide(fit);}
  needsFit=false;
  applyView();
  $('diagram').hidden=false;
  $('empty').hidden=true;
- $('count').textContent=`${points.length} airports · ${visible.length} flights`;
+ $('count').textContent=`${points.length} airports · ${visible.length} weekly services on the sheet`;
  $('scale').textContent=`${Math.round(scale*100)}%`;
- $('flights').innerHTML=visible.map(f=>`<button class="service ${inkOf(f)}${selected===f.id?' selected':''}" data-id="${escape(f.id)}"><strong>${escape(f.from)} — ${escape(f.to)} <b>${dot(clockTime(f.departure))}</b></strong><span>${escape(flightNumber(f))} · ${escape(f.days||f.frequency||'#')} · ${escape(aircraftNotation(f.aircraft||''))||'—'} · ${escape(f.operator||f.airline||'Airline unspecified')}</span></button>`).join('');
+ renderList();
+ applyFocus();
  detail();
+ showPanel();
+}
+
+const touches=(f,code)=>f.from===code||f.to===code;
+const minutesOf=f=>Math.round((Date.parse(f.arrival)-Date.parse(f.departure))/60000);
+const hm=m=>`${Math.floor(m/60)} h ${String(m%60).padStart(2,'0')} min`;
+// The full journey a partner connection belongs to: Finnair leg to the hub, the wait, then the partner leg (or the reverse).
+function itineraryHtml(f){
+ const c=f.connection,own=c&&visible.find(x=>x.id===c.id);
+ if(!own)return '';
+ const legs=c.direction==='out'?[own,f]:[f,own];
+ const total=minutesOf(legs[0])+c.wait+minutesOf(legs[1]);
+ const leg=x=>`<div class="leg"><b>${escape(x.from)} ${dot(clockTime(x.departure))} → ${escape(x.to)} ${dot(clockTime(x.arrival))}</b><span>${escape(flightNumber(x))} · ${escape(x.days||'#')} · ${escape(aircraftNotation(x.aircraft||''))} · ${escape(x.operator||x.airline||'')} · ${hm(minutesOf(x))}</span></div>`;
+ return `<div class="itinerary">${leg(legs[0])}<div class="wait">${hm(c.wait)} at ${escape(c.via)}${c.overnight?' · next day':''}</div>${leg(legs[1])}<div class="total">${escape(legs[0].from)} → ${escape(legs[1].to)} · ${hm(total)} in total</div></div>`;
+}
+// The side panel is a pop-up: a flight's details, or an airport's connections. Nothing else lives there.
+function showPanel(){$('panel').hidden=!selected&&!focusAirport;$('panel-title').textContent=selected?'Flight details':focusAirport?'Connections':'';}
+function renderList(){
+ const airport=focusAirport&&geometry?.points.find(p=>p.code===focusAirport);
+ const list=airport&&!selected?visible.filter(f=>touches(f,focusAirport)):[];
+ $('list-title').hidden=!list.length;
+ $('list-title').textContent=airport?`Services at ${airport.name} (${airport.code})`:'';
+ $('flights').innerHTML=list.map(f=>`<button class="service ${inkOf(f)}${selected===f.id?' selected':''}" data-id="${escape(f.id)}"><strong>${escape(f.from)} — ${escape(f.to)} <b>${dot(clockTime(f.departure))}</b></strong><span>${escape(flightNumber(f))} · ${escape(f.days||f.frequency||'#')} · ${escape(aircraftNotation(f.aircraft||''))||'—'} · ${escape(f.operator||f.airline||'Airline unspecified')}</span></button>`).join('');
+}
+
+// Highlight one airport's connections in place: dim everything else, list its services in the panel.
+function focus(code){
+ focusAirport=focusAirport===code?null:code;
+ if(focusAirport&&selected){toggleAll(selected,'selected',false);selected=null;$('diagram').classList.remove('has-selection');}
+ applyFocus();
+ renderList();
+ detail();
+ showPanel();
+}
+function applyFocus(){
+ const diagram=$('diagram');
+ diagram.classList.toggle('has-focus',!!focusAirport);
+ const own=focusAirport?visible.filter(f=>touches(f,focusAirport)):[];
+ const ids=new Set(own.flatMap(f=>f.connection?[f.id,f.connection.id]:[f.id]));
+ for(const node of diagram.querySelectorAll('[data-id]'))node.classList.toggle('focused',ids.has(node.dataset.id));
+ for(const node of diagram.querySelectorAll('[data-code]'))node.classList.toggle('focused',node.dataset.code===focusAirport);
 }
 
 $('flights').addEventListener('click',e=>{const btn=e.target.closest('.service');if(btn?.dataset.id)select(btn.dataset.id,{reveal:true});});
 
-function filterToAirport(code){
- $('query').value=$('query').value.trim().toUpperCase()===code?'':code;
- render();
-}
+function filterToAirport(code){focus(code);}
 
 // Pan (and if needed zoom) so the route is on screen; used for list picks and keyboard focus.
 function reveal(id,{onlyIfHidden=false}={}){
@@ -289,7 +376,6 @@ function toggleAll(id,cls,on){if(!id)return;for(const node of document.querySele
 function hover(id){if(id===hovered)return;toggleAll(hovered,'hover',false);hovered=id;toggleAll(hovered,'hover',true);}
 
 function select(id,{reveal:show=false}={}){
- document.querySelector('.services').open=true;
  const prev=selected;
  selected=selected===id?null:id;
  toggleAll(prev,'selected',false);
@@ -298,18 +384,26 @@ function select(id,{reveal:show=false}={}){
  if(selected){
   toggleAll(selected,'selected',true);
   document.querySelector(`.service[data-id="${CSS.escape(selected)}"]`)?.scrollIntoView({block:'nearest'});
-  if(show)reveal(selected);
+  if(show)glide(()=>reveal(selected));
  }
+ renderList();
+ showPanel();
 }
 
 function detail(){
  const f=visible.find(f=>f.id===selected);
- $('clear').hidden=!f;
- if(!f){$('detail').innerHTML='<p>Select an arrow on the sheet or a service below to see its timetable details.</p>';return;}
+ if(!f&&focusAirport){
+  const a=geometry?.points.find(p=>p.code===focusAirport);
+  const services=visible.filter(x=>touches(x,focusAirport));
+  const destinations=[...new Set(services.map(x=>x.from===focusAirport?x.to:x.from))].sort();
+  $('detail').innerHTML=`<div class="route">${escape(a?.name||focusAirport)}</div><p>${escape(a?.alt||'')}${a?.alt?' · ':''}${escape(focusAirport)}</p><dl><dt>Weekly services</dt><dd>${services.length}</dd><dt>Destinations</dt><dd>${destinations.length}</dd></dl><p class="destinations">${destinations.map(escape).join(' · ')}</p>${services.some(x=>x.connection)?`<h3>Journeys via ${escape([...new Set(services.map(x=>x.connection?.via).filter(Boolean))].join(', '))}</h3>${services.filter(x=>x.connection).map(itineraryHtml).join('')}`:''}`;
+  return;
+ }
+ if(!f){$('detail').innerHTML='';return;}
  const name=code=>geometry?.points.find(a=>a.code===code)?.name||code;
  const minutes=Math.round((Date.parse(f.arrival)-Date.parse(f.departure))/60000);
  const zone=t=>t.endsWith('Z')?'UTC':`UTC${t.slice(-6)}`;
- $('detail').innerHTML=`<div class="route ${inkOf(f)}">${escape(f.from)} → ${escape(f.to)}</div><p>${escape(name(f.from))} → ${escape(name(f.to))}</p>${f.codeshare?`<div class="codeshare-badge">Partner codeshare · operated by ${escape(f.operator||'partner')}${f.operatorFlight?` as ${escape(f.operatorFlight)}`:''}</div>`:''}<dl><dt>Flight</dt><dd>${escape(flightNumber(f))}</dd><dt>Airline</dt><dd>${escape(f.operator||f.airline||'Unspecified')}</dd><dt>Days</dt><dd>${escape(f.days||f.frequency||'Daily (#)')}</dd><dt>Departure</dt><dd>${dot(clockTime(f.departure))} <small>${escape(zone(f.departure))}</small></dd><dt>Arrival</dt><dd>${dot(clockTime(f.arrival))}${f.arrival.slice(0,10)>f.departure.slice(0,10)?' <small>+1</small>':''} <small>${escape(zone(f.arrival))}</small></dd><dt>Duration</dt><dd>${Math.floor(minutes/60)} h ${minutes%60} min</dd><dt>Aircraft</dt><dd>${escape(f.aircraft||'Unspecified')}</dd><dt>Status</dt><dd>${escape(f.status||'Scheduled')}</dd>${f.connection?`<dt>Connection</dt><dd>${f.connection.direction==='out'?`from ${escape(flightNumber({number:f.connection.number}))}, arrives ${dot(f.connection.time)}`:`to ${escape(flightNumber({number:f.connection.number}))}, departs ${dot(f.connection.time)}`}<br><small>${escape(waitText(f.connection))} at ${escape(f.connection.via)}</small></dd>`:f.via?`<dt>Connection</dt><dd>via ${escape(f.via)}</dd>`:''}</dl>`;
+ $('detail').innerHTML=`<div class="route ${inkOf(f)}">${escape(f.from)} → ${escape(f.to)}</div><p>${escape(name(f.from))} → ${escape(name(f.to))}</p>${f.codeshare?`<div class="codeshare-badge">Partner codeshare · operated by ${escape(f.operator||'partner')}${f.operatorFlight?` as ${escape(f.operatorFlight)}`:''}</div>`:''}<dl><dt>Flight</dt><dd>${escape(flightNumber(f))}</dd><dt>Airline</dt><dd>${escape(f.operator||f.airline||'Unspecified')}</dd><dt>Days</dt><dd>${escape(f.days||f.frequency||'Daily (#)')}</dd><dt>Departure</dt><dd>${dot(clockTime(f.departure))} <small>${escape(zone(f.departure))}</small></dd><dt>Arrival</dt><dd>${dot(clockTime(f.arrival))}${f.arrival.slice(0,10)>f.departure.slice(0,10)?' <small>+1</small>':''} <small>${escape(zone(f.arrival))}</small></dd><dt>Duration</dt><dd>${Math.floor(minutes/60)} h ${minutes%60} min</dd><dt>Aircraft</dt><dd>${escape(f.aircraft||'Unspecified')}</dd><dt>Status</dt><dd>${escape(f.status||'Scheduled')}</dd>${f.connection?itineraryHtml(f)+`<dt>Connection</dt><dd>${f.connection.direction==='out'?`from ${escape(flightNumber({number:f.connection.number}))}, arrives ${dot(f.connection.time)}`:`to ${escape(flightNumber({number:f.connection.number}))}, departs ${dot(f.connection.time)}`}<br><small>${escape(waitText(f.connection))} at ${escape(f.connection.via)}</small></dd>`:f.via?`<dt>Connection</dt><dd>via ${escape(f.via)}</dd>`:''}</dl>`;
 }
 
 async function refresh(){
@@ -334,9 +428,17 @@ async function refresh(){
 $('aircraft').onchange=render;
 $('query').oninput=render;
 if($('show-codeshares'))$('show-codeshares').onchange=render;
-$('clear').onclick=()=>select(selected);
+$('clear').onclick=()=>{if(selected)select(selected);if(focusAirport)focus(focusAirport);};
 
-let animFrame=null,lastScaleText='';
+let animFrame=null,lastScaleText='',glideTimer=null;
+// Eased view changes for buttons, keys and list picks; dragging and wheel stay direct.
+function glide(change){
+ const d=$('diagram');
+ clearTimeout(glideTimer);
+ d.classList.add('gliding');
+ change();
+ glideTimer=setTimeout(()=>d.classList.remove('gliding'),360);
+}
 function applyView(){
  $('diagram').style.transform=`translate3d(${panX}px,${panY}px,0) scale(${scale})`;
  const scaleText=`${Math.round(scale*100)}%`;
@@ -364,15 +466,15 @@ function fit(){
  applyView();
 }
 
-$('plus').onclick=()=>zoomAt(scale*1.25);
-$('minus').onclick=()=>zoomAt(scale/1.25);
-$('fit').onclick=fit;
-$('actual').onclick=()=>zoomAt(1);
+$('plus').onclick=()=>glide(()=>zoomAt(scale*1.25));
+$('minus').onclick=()=>glide(()=>zoomAt(scale/1.25));
+$('fit').onclick=()=>glide(fit);
+$('actual').onclick=()=>glide(()=>zoomAt(1));
 
 const viewport=$('viewport'),pointers=new Map();
 let dragged=false;
 
-viewport.addEventListener('dblclick',e=>{e.preventDefault();zoomAt(scale*1.6,e.clientX,e.clientY);});
+viewport.addEventListener('dblclick',e=>{e.preventDefault();glide(()=>zoomAt(scale*1.6,e.clientX,e.clientY));});
 viewport.addEventListener('wheel',e=>{
  e.preventDefault();
  const isPinch=e.ctrlKey;
@@ -423,12 +525,12 @@ viewport.addEventListener('click',e=>{if(dragged){e.stopPropagation();e.preventD
 viewport.addEventListener('keydown',e=>{
  const delta={ArrowLeft:[80,0],ArrowRight:[-80,0],ArrowUp:[0,80],ArrowDown:[0,-80]}[e.key];
  if(delta){e.preventDefault();panX+=delta[0];panY+=delta[1];scheduleApplyView();}
- else if(e.key==='+'||e.key==='=')zoomAt(scale*1.25);
- else if(e.key==='-')zoomAt(scale/1.25);
- else if(e.key==='0')fit();
- else if(e.key==='Escape'&&selected)select(selected);
+ else if(e.key==='+'||e.key==='=')glide(()=>zoomAt(scale*1.25));
+ else if(e.key==='-')glide(()=>zoomAt(scale/1.25));
+ else if(e.key==='0')glide(fit);
+ else if(e.key==='Escape'){if(selected)select(selected);else if(focusAirport)focus(focusAirport);}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&selected&&!e.target.closest('input,select'))select(selected);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.target.closest('input,select')){if(selected)select(selected);else if(focusAirport)focus(focusAirport);}});
 
 $('refresh').onclick=()=>{imported=false;refresh();};
 $('import').onclick=()=>$('file').click();

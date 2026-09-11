@@ -5,8 +5,8 @@ import {validateSchedule, filterFlights} from '../public/schedule.mjs';
 import {layoutAirports, layoutFlights, curvePoint} from '../public/layout.mjs';
 
 test('validates 72 codeshare destinations and partner flights', () => {
-  assert.equal(demo.codeshareAirports.length, 72);
-  assert.equal(demo.codeshareFlights.length, 144);
+  assert.equal(demo.codeshareAirports.length, 80);
+  assert.equal(demo.codeshareFlights.length, 160);
 
   const validated = validateSchedule({
     ...demo,
@@ -14,8 +14,8 @@ test('validates 72 codeshare destinations and partner flights', () => {
     flights: [...demo.flights, ...demo.codeshareFlights]
   });
 
-  assert.equal(validated.airports.length, 194);
-  assert.equal(validated.flights.length, 620);
+  assert.equal(validated.airports.length, 202);
+  assert.equal(validated.flights.length, 636);
 });
 
 test('partner codeshares include key oneworld partner airlines and hubs', () => {
@@ -61,7 +61,7 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   }
 });
 
-test('combined 194-airport network layout has zero box overlaps', () => {
+test('combined 202-airport network layout has zero box overlaps', () => {
   const allAirports = [...demo.airports, ...demo.codeshareAirports];
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const nodes = layoutAirports(allAirports, allFlights);
@@ -96,6 +96,6 @@ test('filterFlights can filter codeshares on or off', () => {
   const allFlights = [...demo.flights, ...demo.codeshareFlights];
   const withCS = filterFlights(allFlights, {codeshares: true});
   const withoutCS = filterFlights(allFlights, {codeshares: false});
-  assert.equal(withCS.length, 620);
+  assert.equal(withCS.length, 636);
   assert.equal(withoutCS.length, 476);
 });

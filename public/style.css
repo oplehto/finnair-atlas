@@ -9,10 +9,13 @@
   --amber-ink: #b36200;
   --ink-dim: #303a34;
   --paper: #f8f7ef;
+  --card: #f6f3e7;
   --box-paper: #fdfcf6;
   --rule: #aaa99b;
+  --rule-dark: #6e6f60;
   --active: #cd7724;
   --active-ink: #975114;
+  --radius: 6px;
 }
 
 * {
@@ -30,20 +33,35 @@ button, input, select {
   color: inherit;
 }
 
+/* Ticket-stub buttons: paper, a thin ink border, softly rounded, letter-spaced capitals. */
 button {
-  background: transparent;
-  border: 1px solid #a8ad9f;
-  padding: 8px 12px;
+  background: var(--box-paper);
+  border: 1px solid var(--rule-dark);
+  border-radius: 4px;
+  padding: 7px 12px;
   cursor: pointer;
+  font: 700 11px/1 'Roboto Condensed', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--blue);
+  box-shadow: inset 0 0 0 1px var(--paper), inset 0 0 0 2px #d9d6c3;
+  transition: background 120ms, color 120ms;
 }
 
 button:hover {
-  background: #e5e8df;
+  background: var(--blue);
+  color: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--blue), inset 0 0 0 2px #a7c4d3;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 :focus-visible {
-  outline: 3px solid #de9437;
-  outline-offset: 3px;
+  outline: 2px solid var(--active);
+  outline-offset: 2px;
 }
 
 [hidden] {
@@ -75,13 +93,14 @@ svg {
   display: block;
 }
 
-/* Floating timetable widgets */
+/* Floating panels: printed cards with a double rule and soft corners. */
 .widget {
   position: fixed;
   z-index: 2;
-  background: #f8f7eff5;
-  border: 1px solid #9c9d8e;
-  box-shadow: 0 3px 16px #49402b1c;
+  background: var(--card);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px #b9b7a4, 0 6px 18px #4a3f2214;
 }
 
 .controls {
@@ -98,20 +117,32 @@ svg {
 
 summary {
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 16px 18px 12px;
   color: var(--blue);
   font-weight: 700;
   list-style: none;
-  border-bottom: 3px double #a7a99a;
+  border-bottom: 3px double #b9b7a4;
   position: relative;
-  padding-right: 34px;
+  padding-right: 40px;
+  margin: 4px 4px 0;
+}
+
+summary::-webkit-details-marker {
+  display: none;
 }
 
 summary::after {
   content: '+';
   position: absolute;
-  right: 14px;
-  top: 16px;
+  right: 12px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--rule-dark);
+  border-radius: 50%;
+  font: 400 15px/18px 'Roboto Condensed', sans-serif;
+  text-align: center;
+  color: var(--blue);
 }
 
 details[open] > summary::after {
@@ -121,19 +152,23 @@ details[open] > summary::after {
 .brand {
   font-family: Oswald, sans-serif;
   font-size: 23px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
 .fold {
   display: block;
-  font-size: 11px;
-  font-weight: 400;
-  color: #58665b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #6b7a70;
   margin-top: 3px;
 }
 
 .widget-body {
-  padding: 16px;
+  padding: 16px 18px 18px;
+  margin: 0 4px 4px;
   max-height: calc(100dvh - 145px);
   overflow: auto;
 }
@@ -143,11 +178,12 @@ details[open] > summary::after {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-height: calc(100dvh - 130px);
 }
 
 #detail {
   flex: 0 0 auto;
-  max-height: 42vh;
+  max-height: 58vh;
   overflow: auto;
 }
 
@@ -157,22 +193,26 @@ details[open] > summary::after {
 
 #flights {
   flex: 1 1 auto;
-  min-height: 120px;
+  min-height: 0;
   overflow: auto;
 }
 
 .edition {
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   margin: 0 0 6px;
   color: #526e72;
 }
 
 h1 {
-  font: 600 32px/1.1 Oswald, sans-serif;
+  font: 600 30px/1.1 Oswald, sans-serif;
   text-transform: uppercase;
+  letter-spacing: 1px;
   color: var(--blue);
-  margin: 0 0 20px;
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #c9c7b3;
 }
 
 .toolbar {
@@ -183,16 +223,19 @@ h1 {
 label {
   display: grid;
   gap: 5px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #526e72;
 }
 
 .codeshare-label {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.6px;
   color: #8c4c00;
   margin-top: 4px;
   cursor: pointer;
@@ -203,35 +246,54 @@ label {
   height: 16px;
   margin: 0;
   cursor: pointer;
+  accent-color: var(--amber-ink);
 }
 
 input, select {
   width: 100%;
   min-width: 0;
   height: 36px;
-  padding: 7px;
-  border: 1px solid #a8ad9f;
-  border-radius: 0;
-  background: var(--paper);
+  padding: 7px 10px;
+  border: 1px solid var(--rule-dark);
+  border-radius: 4px;
+  background: var(--box-paper);
   font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-dim);
+  letter-spacing: 0.2px;
+  box-shadow: inset 0 1px 2px #4a3f2214;
+}
+
+input::placeholder {
+  color: #9a9a88;
+  font-weight: 400;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: inset 0 0 0 1px var(--blue);
 }
 
 .source {
   display: grid;
   gap: 4px;
   margin: 18px 0 12px;
+  padding: 10px 12px;
   font-size: 11px;
   color: #58665b;
+  border: 1px dashed #b9b7a4;
+  border-radius: 4px;
+  background: #faf8ee;
+}
+
+.source strong {
+  color: var(--ink-dim);
 }
 
 .actions {
   display: flex;
   gap: 6px;
-}
-
-.actions button {
-  font-size: 12px;
-  padding: 7px 10px;
 }
 
 .zoom {
@@ -241,25 +303,33 @@ input, select {
   align-items: center;
   gap: 4px;
   padding: 6px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px #b9b7a4, 0 6px 18px #4a3f2214;
 }
 
 .zoom button {
-  border: 0;
+  border-color: transparent;
+  box-shadow: none;
+  border-radius: 999px;
   font-size: 18px;
-  min-width: 36px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
   line-height: 1;
+  letter-spacing: 0;
 }
 
 .zoom #actual, .zoom #fit {
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 0 12px;
 }
 
 .zoom output {
-  font-size: 12px;
-  min-width: 42px;
+  font: 700 12px 'Roboto Condensed', sans-serif;
+  min-width: 44px;
   text-align: center;
+  color: var(--blue);
 }
 
 footer {
@@ -270,23 +340,43 @@ footer {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  background: #f8f7efee;
-  border-top: 1px solid #b9bbae;
+  background: var(--card);
+  border-top: 3px double #b9b7a4;
   padding: 9px 20px;
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #58665b;
   pointer-events: none;
 }
 
-.services summary {
-  font-family: Oswald, sans-serif;
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px 10px;
+  margin: 4px 4px 0;
+  border-bottom: 3px double #b9b7a4;
+}
+
+.panel-head h2 {
+  color: var(--blue);
   font-size: 18px;
-  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+#clear {
+  font-size: 10px;
+  padding: 5px 9px;
 }
 
 #count {
   display: block;
-  font: 400 12px 'Roboto Condensed', sans-serif;
+  font: 400 11px 'Roboto Condensed', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   margin-top: 4px;
+  color: #6b7a70;
 }
 
 .aside-heading {
@@ -298,12 +388,18 @@ footer {
 h2 {
   font: 600 21px Oswald, sans-serif;
   text-transform: uppercase;
+  letter-spacing: 1px;
   margin: 0;
 }
 
 h3 {
-  font-size: 13px;
-  margin-top: 24px;
+  font: 700 10px 'Roboto Condensed', sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #526e72;
+  margin: 22px 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #c9c7b3;
 }
 
 #detail {
@@ -314,7 +410,8 @@ h3 {
 #detail .route {
   font: 600 26px Oswald, sans-serif;
   color: var(--blue);
-  margin-top: 16px;
+  margin-top: 14px;
+  letter-spacing: 0.5px;
 }
 
 #detail .route.prop {
@@ -335,41 +432,118 @@ h3 {
   background: #faeacc;
   color: #8a4800;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
   padding: 4px 8px;
   border: 1px solid #deb578;
+  border-radius: 3px;
   margin: 8px 0 12px;
 }
 
 dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px 8px;
+  margin: 10px 0;
 }
 
 dt {
   color: #62777e;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-top: 3px;
 }
 
 dd {
   margin: 0;
   text-align: right;
+  font-weight: 700;
 }
 
+.itinerary {
+  margin: 10px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid #deb578;
+  border-left: 4px solid var(--amber-ink);
+  border-radius: 4px;
+  background: #fbf7ec;
+  font-size: 12px;
+}
+
+.itinerary .leg b {
+  display: block;
+  font-size: 13px;
+  color: var(--blue);
+}
+
+.itinerary .leg span {
+  color: #4f5a51;
+}
+
+.itinerary .wait {
+  margin: 6px 0;
+  padding-left: 12px;
+  color: #8a4800;
+  border-left: 1px dashed #c9a06a;
+}
+
+.itinerary .total {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dotted #c9a06a;
+  font-weight: 700;
+  color: #303a34;
+}
+
+#detail .destinations {
+  font-size: 12px;
+  color: #4f5a51;
+  line-height: 1.6;
+}
+
+/* Service rows read like timetable lines: route, dotted leader, time. */
 .service {
   display: block;
   width: 100%;
   border: 0;
-  border-bottom: 1px solid #c4c5b5;
-  padding: 12px 0;
+  border-bottom: 1px solid #d5d3c1;
+  border-radius: 0;
+  padding: 10px 4px;
   text-align: left;
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-dim);
+}
+
+.service:hover {
+  background: #efeadb;
+  color: var(--ink-dim);
+  box-shadow: none;
 }
 
 .service strong {
   display: flex;
-  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
   font-size: 15px;
   color: var(--blue);
+}
+
+.service strong::after {
+  content: '';
+  order: 1;
+  flex: 1;
+  border-bottom: 1px dotted #b6b4a2;
+  margin: 0 2px 4px;
+}
+
+.service strong b {
+  order: 2;
 }
 
 .service.prop strong {
@@ -386,16 +560,11 @@ dd {
 }
 
 .service.selected {
-  background: #e1e8df;
+  background: #e7e9dc;
 }
 
 .service.selected strong {
   color: var(--active-ink);
-}
-
-#clear {
-  font-size: 11px;
-  padding: 3px 6px;
 }
 
 #message {
@@ -404,15 +573,27 @@ dd {
   left: 20px;
   max-width: 360px;
   background: #fff0d7;
-  padding: 15px;
+  border: 1px solid #deb578;
+  border-radius: var(--radius);
+  padding: 14px 16px;
   z-index: 4;
+  font-size: 13px;
 }
 
 #empty {
   position: fixed;
   top: 48%;
   left: 35%;
-  padding: 20px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius);
+}
+
+/* Paper scrollbars */
+.widget-body, #detail, #flights {
+  scrollbar-width: thin;
+  scrollbar-color: #b9b7a4 transparent;
 }
 
 /* --- The printed sheet (SVG). Palette and grammar follow the 1974 Finnair network timetable. --- */
@@ -442,6 +623,7 @@ dd {
 }
 
 .sheet-frame {
+  rx: 12px;
   fill: none;
   stroke: #454940;
   stroke-width: 1.4;
@@ -451,6 +633,26 @@ dd {
   font: 600 64px Oswald, sans-serif;
   fill: var(--blue);
   letter-spacing: 3px;
+}
+
+.logotype path,
+.brand-logo path {
+  fill: var(--blue);
+}
+
+.brand-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .sheet-edition {
@@ -466,6 +668,7 @@ dd {
 }
 
 .legend-box {
+  rx: 8px;
   fill: #fbfaf5;
   stroke: #454940;
   stroke-width: 1;
@@ -486,6 +689,11 @@ dd {
 .legend-item {
   font: 400 12px 'Roboto Condensed', sans-serif;
   fill: #303a34;
+}
+
+.legend-fine {
+  font-size: 11px;
+  fill: #58665b;
 }
 
 .legend-rule {
@@ -561,12 +769,68 @@ dd {
 
 .has-selection .flight:not(.selected),
 .has-selection .edge-times:not(.selected),
-.has-selection .label-plate:not(.selected) {
+.has-selection .label-plate:not(.selected),
+.has-focus:not(.has-selection) .flight:not(.focused),
+.has-focus:not(.has-selection) .edge-times:not(.focused),
+.has-focus:not(.has-selection) .label-plate:not(.focused) {
   opacity: 0.12;
+}
+
+.has-focus .airport.focused > polygon,
+.has-focus .airport.focused > rect,
+.has-focus .airport.focused > .hub-outer {
+  stroke: var(--active);
+  stroke-width: 3;
+}
+
+.has-focus .hub-port.focused .hub-port-bg {
+  fill: #fff0d7;
+}
+
+.has-focus .hub-port.focused text {
+  fill: var(--active-ink);
+}
+
+.itinerary {
+  margin: 10px 0 14px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--amber-ink);
+  background: #fbf7ec;
+  font-size: 12px;
+}
+
+.itinerary .leg b {
+  display: block;
+  font-size: 13px;
+  color: var(--blue);
+}
+
+.itinerary .leg span {
+  color: #4f5a51;
+}
+
+.itinerary .wait {
+  margin: 6px 0;
+  padding-left: 12px;
+  color: #8a4800;
+  border-left: 1px dashed #c9a06a;
+}
+
+.itinerary .total {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #303a34;
+}
+
+#detail .destinations {
+  font-size: 12px;
+  color: #4f5a51;
+  line-height: 1.6;
 }
 
 /* Flight labels sit on the route in the route's own ink, on a paper plate that interrupts the line. */
 .label-plate .label-bg {
+  rx: 3px;
   fill: var(--paper);
 }
 
@@ -673,7 +937,34 @@ dd {
   fill: #526e72;
 }
 
-/* Central hub: double rule, a title sized to the box, and a departures board inside. */
+/* Destination codes along the main hub's edges */
+.hub-port {
+  cursor: pointer;
+  outline: none;
+}
+
+.hub-port .hub-port-bg {
+  rx: 3px;
+  fill: #fbfaf3;
+}
+
+.hub-port text {
+  font: 700 10px 'Roboto Condensed', sans-serif;
+  fill: var(--blue);
+  letter-spacing: 0.3px;
+}
+
+.hub-port:hover .hub-port-bg,
+.hub-port:focus .hub-port-bg {
+  fill: #fff0d7;
+}
+
+.hub-port:hover text,
+.hub-port:focus text {
+  fill: var(--active-ink);
+}
+
+/* Central hub: double rule and a title sized to the box. */
 .regional-hub .hub-outer {
   fill: #fbfaf3;
   stroke: var(--blue);
@@ -789,5 +1080,69 @@ dd {
   }
   h1 {
     font-size: 27px;
+  }
+}
+
+/* --- Motion: soft blends for state changes; direct manipulation stays instant. --- */
+.flight, .edge-times, .label-plate, .hub-port {
+  transition: opacity 280ms ease;
+}
+
+.flight .ink, .flight .hit, .airport > polygon, .airport > rect, .airport > .hub-outer, .hub-port text, .hub-port .hub-port-bg, .flight-label, .label-plate .label-bg, .edge-times text {
+  transition: stroke 160ms ease, stroke-width 160ms ease, fill 160ms ease, opacity 160ms ease;
+}
+
+.label-plate.crowded-label {
+  display: block;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.label-plate.crowded-label.hover,
+.label-plate.crowded-label.selected,
+.label-plate.crowded-label.focused {
+  opacity: 1;
+}
+
+.has-selection .label-plate.crowded-label:not(.selected),
+.has-focus:not(.has-selection) .label-plate.crowded-label:not(.focused) {
+  opacity: 0;
+}
+
+#diagram.gliding {
+  transition: transform 340ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.service, button, input, select, summary::after {
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+details[open] > .widget-body,
+aside.widget-body {
+  animation: unfold 240ms ease;
+}
+
+#message, #empty, .itinerary, .codeshare-badge {
+  animation: fade-in 260ms ease;
+}
+
+#detail > * {
+  animation: fade-in 220ms ease;
+}
+
+@keyframes unfold {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
   }
 }

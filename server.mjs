@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {validateSchedule} from './public/schedule.mjs';
 import demo from './public/demo.mjs';
 const root=new URL('./public/',import.meta.url);
-const files={'/':'index.html','/app.mjs':'dist/app.js','/schedule.mjs':'schedule.mjs','/layout.mjs':'layout.mjs','/style.css':'style.css','/fonts.css':'fonts.css'};
+const files={'/':'index.html','/app.mjs':'dist/app.js','/schedule.mjs':'schedule.mjs','/layout.mjs':'layout.mjs','/logo.mjs':'logo.mjs','/style.css':'style.css','/fonts.css':'fonts.css'};
 for(const name of ['oswald-latin-600-normal.woff2','roboto-condensed-latin-400-normal.woff2','roboto-condensed-latin-700-normal.woff2','oswald-LICENSE.txt','roboto-condensed-LICENSE.txt'])files[`/fonts/${name}`]=`dist/fonts/${name}`;
 let cache, cachedAt=0;
 async function schedule(){

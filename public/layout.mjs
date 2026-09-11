@@ -8,59 +8,84 @@ const EAST_CODES = new Set(["DOH","DXB","DEL","BKK","HKT","SIN","HKG","PVG","ICN
 
 // Partner satellites are placed relative to their gateway hub (dx, dy from the hub centre).
 // Every satellite sits on the side of its gateway that faces away from Helsinki so that the
-// hub's own bundles never route around a partner box: in the two outer satellite columns of
-// the west sheet (dx -400 and -670, interleaved so the outer column's routes pass between the
-// inner column's boxes), in the gaps of the outer west column, in rows above Doha in the
-// top-right corner, or in rows below London and Singapore in the two bottom corners.
-// A satellite's port faces its gateway (side ports within the box's aspect cone, otherwise
-// top/bottom), so stacked slots keep at least 170 between centres and rows 280 apart, and a
-// side slot leaves at least 90 between the gateway outline and the satellite, so that the
-// 48-unit port stubs on both ends stay clear of the neighbouring boxes' routing margins.
+// hub's own bundles never route around a partner box: in columns to the left of the west
+// gateways (with a pair above the largest ones), in rows above Doha in the top-right corner,
+// or in rows below Singapore in the bottom-right corner. A satellite's port faces its gateway
+// (side ports within the box's aspect cone, otherwise top/bottom), so stacked slots keep at
+// least 170 between centres and rows 280 apart, and a side slot leaves at least 90 between the
+// gateway outline and the satellite, so that the 48-unit port stubs on both ends stay clear of
+// the neighbouring boxes' routing margins. A stub passing a satellite of the same cluster needs
+// the 26-unit routing clearance beyond its lane spread, which is why an outer column's boxes
+// sit level with the gap between the inner column's boxes rather than beside them.
 const CODESHARE_OFFSETS = {
+  // Every west-side gateway uses the same family of templates, each checked to route with
+  // straight stubs and no crossings: an inner column 400 left of the gateway and an outer
+  // column 700 left of it. Two inner boxes sit 160 above and below the gateway centre (their
+  // ports face down/up, outside the side-port cone) so that the outer boxes' stubs, 85 above
+  // and below, pass between them; a lone third box takes the outer column's centre line.
+  // Two more boxes can sit above the gateway at +/-130 with vertical stubs into its top edge.
+
   // Pacific Northwest & Alaska via SEA (Alaska Airlines)
   ANC: {hub: 'SEA', dx: -400, dy: -85, region: 'west'},
   PDX: {hub: 'SEA', dx: -400, dy: 85, region: 'west'},
 
   // Mexico & Texas via DFW (American Airlines)
-  AUS: {hub: 'DFW', dx: 0, dy: -250, region: 'west'},
-  CUN: {hub: 'DFW', dx: -400, dy: -170, region: 'west'},
-  MEX: {hub: 'DFW', dx: -400, dy: 0, region: 'west'},
+  CUN: {hub: 'DFW', dx: -400, dy: -160, region: 'west'},
+  MEX: {hub: 'DFW', dx: -400, dy: 160, region: 'west'},
+  AUS: {hub: 'DFW', dx: -700, dy: 0, region: 'west'},
+
+  // Midwest via ORD (American Airlines)
+  MSP: {hub: 'ORD', dx: -400, dy: -160, region: 'west'},
+  STL: {hub: 'ORD', dx: -400, dy: 160, region: 'west'},
+  DTW: {hub: 'ORD', dx: -700, dy: -85, region: 'west'},
+  BNA: {hub: 'ORD', dx: -700, dy: 85, region: 'west'},
+
+  // East Coast via JFK (American Airlines)
+  PHL: {hub: 'JFK', dx: -400, dy: -160, region: 'west'},
+  CLT: {hub: 'JFK', dx: -400, dy: 160, region: 'west'},
+  RDU: {hub: 'JFK', dx: -700, dy: -85, region: 'west'},
+  MCO: {hub: 'JFK', dx: -700, dy: 85, region: 'west'},
 
   // Pacific / US West via LAX (American Airlines)
-  SFO: {hub: 'LAX', dx: -120, dy: -225, region: 'west'},
-  HNL: {hub: 'LAX', dx: 120, dy: -225, region: 'west'},
-  PHX: {hub: 'LAX', dx: -400, dy: -170, region: 'west'},
-  LAS: {hub: 'LAX', dx: -400, dy: 0, region: 'west'},
-  DEN: {hub: 'LAX', dx: -670, dy: -85, region: 'west'},
-  SAN: {hub: 'LAX', dx: -670, dy: 85, region: 'west'},
+  SFO: {hub: 'LAX', dx: -130, dy: -258, region: 'west'},
+  HNL: {hub: 'LAX', dx: 130, dy: -258, region: 'west'},
+  PHX: {hub: 'LAX', dx: -400, dy: -160, region: 'west'},
+  LAS: {hub: 'LAX', dx: -400, dy: 160, region: 'west'},
+  DEN: {hub: 'LAX', dx: -700, dy: -85, region: 'west'},
+  SAN: {hub: 'LAX', dx: -700, dy: 85, region: 'west'},
 
-  // South America & Caribbean via MIA (American Airlines)
-  LIM: {hub: 'MIA', dx: -120, dy: -209, region: 'west'},
-  SCL: {hub: 'MIA', dx: 120, dy: -209, region: 'west'},
-  EZE: {hub: 'MIA', dx: -120, dy: 245, region: 'west'},
-  SJU: {hub: 'MIA', dx: 120, dy: 245, region: 'west'},
-  MDE: {hub: 'MIA', dx: -400, dy: -170, region: 'west'},
-  BOG: {hub: 'MIA', dx: -400, dy: 0, region: 'west'},
-  UIO: {hub: 'MIA', dx: -400, dy: 170, region: 'west'},
-  GIG: {hub: 'MIA', dx: -670, dy: -85, region: 'west'},
-  GRU: {hub: 'MIA', dx: -670, dy: 85, region: 'west'},
-  MVD: {hub: 'MIA', dx: -670, dy: 255, region: 'west'},
+  // South America & Caribbean via MIA (American Airlines): two above, two below, and a
+  // three-column fan on the left whose inner boxes sit 250 out so the outer stubs thread
+  // between the middle pair.
+  LIM: {hub: 'MIA', dx: -130, dy: -278, region: 'west'},
+  SCL: {hub: 'MIA', dx: 130, dy: -278, region: 'west'},
+  EZE: {hub: 'MIA', dx: -130, dy: 278, region: 'west'},
+  SJU: {hub: 'MIA', dx: 130, dy: 278, region: 'west'},
+  MDE: {hub: 'MIA', dx: -400, dy: -250, region: 'west'},
+  UIO: {hub: 'MIA', dx: -400, dy: 250, region: 'west'},
+  BOG: {hub: 'MIA', dx: -700, dy: -85, region: 'west'},
+  GRU: {hub: 'MIA', dx: -700, dy: 85, region: 'west'},
+  GIG: {hub: 'MIA', dx: -1000, dy: -300, region: 'west'},
+  MVD: {hub: 'MIA', dx: -1000, dy: 300, region: 'west'},
 
-  // British Airways via London Heathrow (LHR): beside London and in rows below it
-  NCL: {hub: 'LHR', dx: -440, dy: -170, region: 'west'},
-  GLA: {hub: 'LHR', dx: -440, dy: 0, region: 'west'},
-  ABZ: {hub: 'LHR', dx: -440, dy: 170, region: 'west'},
-  BHD: {hub: 'LHR', dx: -120, dy: 292, region: 'west'},
-  JER: {hub: 'LHR', dx: 160, dy: 292, region: 'west'},
-  GIB: {hub: 'LHR', dx: 440, dy: 292, region: 'west'},
-  BOS: {hub: 'LHR', dx: 720, dy: 292, region: 'west'},
-  IAD: {hub: 'LHR', dx: -120, dy: 572, region: 'west'},
-  BDA: {hub: 'LHR', dx: 160, dy: 572, region: 'west'},
-  NAS: {hub: 'LHR', dx: 440, dy: 572, region: 'west'},
-  BGI: {hub: 'LHR', dx: 720, dy: 572, region: 'west'},
-  GCM: {hub: 'LHR', dx: -120, dy: 852, region: 'west'},
-  ACC: {hub: 'LHR', dx: 160, dy: 852, region: 'west'},
-  LOS: {hub: 'LHR', dx: 440, dy: 852, region: 'west'},
+  // British Airways via London Heathrow (LHR): two above London, a four-column fan on the
+  // left (inner pair 300 out, then pairs at 140, 330 and 90 so each column's stubs pass
+  // between the previous one's boxes) and two rows of two below, 300 and 580 under the
+  // bottom edge so the stubs to the second row pass through the first row's centre gap.
+  BHD: {hub: 'LHR', dx: -130, dy: -318, region: 'west'},
+  JER: {hub: 'LHR', dx: 130, dy: -318, region: 'west'},
+  NCL: {hub: 'LHR', dx: -440, dy: -300, region: 'west'},
+  GLA: {hub: 'LHR', dx: -440, dy: 300, region: 'west'},
+  ABZ: {hub: 'LHR', dx: -740, dy: -140, region: 'west'},
+  GIB: {hub: 'LHR', dx: -740, dy: 140, region: 'west'},
+  BOS: {hub: 'LHR', dx: -1040, dy: -330, region: 'west'},
+  IAD: {hub: 'LHR', dx: -1040, dy: 330, region: 'west'},
+  BDA: {hub: 'LHR', dx: -1340, dy: -90, region: 'west'},
+  NAS: {hub: 'LHR', dx: -1340, dy: 90, region: 'west'},
+  BGI: {hub: 'LHR', dx: -270, dy: 500, region: 'west'},
+  GCM: {hub: 'LHR', dx: 270, dy: 500, region: 'west'},
+  ACC: {hub: 'LHR', dx: -150, dy: 780, region: 'west'},
+  LOS: {hub: 'LHR', dx: 150, dy: 780, region: 'west'},
 
   // Middle East, Africa, South Asia via DOH (Qatar Airways): rows above Doha
   CAI: {hub: 'DOH', dx: -327, dy: -422, region: 'east'},
@@ -170,59 +195,67 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   const byCode = new Map(nodes.map(n => [n.code, n]));
   const hub = byCode.get(center.code);
 
-  // Tiers are rows (north, south) or columns (west, east) of boxes spread evenly over the hub
-  // edge plus a per-tier flare. Offsets are measured from the hub outline. They are kept as
-  // tight as the 40-unit box clearance, the room a route bundle needs to pass between two
-  // boxes (twice its routing margin) and a readable label on the shortest hub routes allow.
+  // Tiers are rows (south) or columns (west, east) of boxes spread evenly over the hub edge
+  // plus a per-tier flare, and a fixed fan of rows to the north. Offsets are measured from
+  // the hub outline. They are kept as tight as the 40-unit box clearance, the room a route
+  // bundle needs to pass between two boxes (twice its routing margin) and a readable label
+  // on the shortest hub routes allow.
 
   // --- NORTH (Domestic Finland) ---
-  // The rows stay within the hub width plus a small flare: a wide flare makes the routes of
-  // the near and far rows cross each other in front of the hub.
+  // A compact fan rather than rows spread over the whole hub width. Every domestic bundle
+  // leaves the top edge inside a port comb about 1,450 wide, so a box directly behind a
+  // nearer box, or a far row flared wider than the near rows, forces the far bundle to
+  // detour around the near box and cross its neighbours. The x offsets (from the hub
+  // centre) were chosen by search over the full weekly sheet so that, seen from the port
+  // comb, no box occludes another and the left-to-right port order equals the left-to-right
+  // order of the destinations in every row; the domestic fan then draws without a single
+  // crossing. Geography is soft: Mariehamn and Turku nearest, Tampere and Kuopio next, the
+  // Vaasa-Joensuu belt, then Oulu with Kemi, Kokkola and Lapland on the top row. Tampere
+  // sits east of the fan centre because west of it its bundle has to cut through Turku's.
   const nTiers = [
-    ['MHQ', 'TKU', 'TMP'],
-    ['VAA', 'KOK', 'JYV', 'KUO', 'JOE'],
-    ['KEM', 'OUL', 'KAJ', 'KAO'],
-    ['KTT', 'RVN', 'IVL']
+    [['MHQ', -1100], ['TKU', -300]],
+    [['TMP', 600], ['KUO', 950]],
+    [['VAA', -1100], ['JYV', -850], ['KAJ', 600], ['JOE', 1100], ['KAO', 1500]],
+    [['KOK', -1250], ['KEM', -450], ['OUL', -50], ['RVN', 200], ['KTT', 450], ['IVL', 800]]
   ];
-  const nTierY = [240, 490, 740, 990].map(offset => HEL_Y - hubHeight / 2 - offset);
+  const nTierY = [300, 600, 900, 1200].map(offset => HEL_Y - hubHeight / 2 - offset);
   nTiers.forEach((tier, tIdx) => {
-    const present = tier.map(c => byCode.get(c)).filter(Boolean);
-    const y = nTierY[tIdx];
-    const count = present.length;
-    const flare = 100 * tIdx;
-    const xStart = HEL_X - hubWidth / 2 - flare;
-    const xEnd = HEL_X + hubWidth / 2 + flare;
-    present.forEach((node, cIdx) => {
-      node.y = y;
-      node.x = xStart + ((cIdx + 0.5) / count) * (xEnd - xStart);
-    });
+    for (const [code, dx] of tier) {
+      const node = byCode.get(code);
+      if (!node) continue;
+      node.x = HEL_X + dx;
+      node.y = nTierY[tIdx];
+    }
   });
 
   // --- WEST (Nordics, Iceland, UK, Ireland, North America) ---
-  // Three columns: Sweden/Denmark nearest, Norway with Iceland and northern Britain next,
-  // then the transatlantic gateways with Dublin and London at the foot of the outer column
-  // so that London's partner network can fill the bottom-left corner of the sheet. The outer
-  // column is spread far taller than the hub (the sheet is that tall anyway because of the
-  // domestic and European rows) so that partner satellites fit in its gaps.
-  const wTiers = [
-    ['ALF', 'UME', 'ARN', 'VBY', 'GOT', 'BLL', 'CPH'],
-    ['KEF', 'KKN', 'TOS', 'BOO', 'TRD', 'OSL', 'BGO', 'SVG', 'EDI', 'MAN'],
-    ['SEA', 'YYZ', 'ORD', 'JFK', 'DFW', 'LAX', 'MIA', 'DUB', 'LHR']
+  // Three columns at fixed offsets from the hub outline, each box at an explicit y offset
+  // from the hub centre: Sweden, Denmark and Trondheim nearest; Norway, Iceland, Toronto,
+  // Stockholm and Britain in the middle; the transatlantic gateways with their partner
+  // clusters outermost, London at the foot so its partner rows fill the bottom-left corner.
+  // Every west bundle leaves Helsinki's left edge inside a port comb about 1,880 tall, in
+  // order of bearing, so a box in a near column shadows the bundles whose ports neighbour
+  // its own. The comb is too short for all 26 destinations to be reached by straight lines
+  // (the near boxes' shadows exceed the comb plus the spread the columns allow), so the
+  // offsets were chosen by search over the full weekly sheet to draw the west fan without
+  // any crossing between Helsinki bundles: a small far-north group sits above the Seattle
+  // bundle, Dublin below the London bundle, and in between each near box sits in the gap
+  // between the bundles to the deeper columns, with the few unavoidable bends routed round
+  // a box corner where they cross nothing. Geography is soft within each column; the
+  // top-to-bottom order is fixed and only the spacing was searched.
+  const wCols = [
+    {x: 500, boxes: [['ALF', -1530], ['UME', -1345], ['TRD', -650], ['GOT', 185], ['VBY', 520], ['BLL', 645], ['CPH', 825]]},
+    {x: 950, boxes: [['KKN', -2068], ['TOS', -1315], ['BOO', -1150], ['KEF', -1025], ['YYZ', -685], ['ARN', -475], ['OSL', -160], ['BGO', 35], ['SVG', 290], ['EDI', 505], ['MAN', 1335], ['DUB', 2501]]},
+    {x: 1400, boxes: [['SEA', -1485], ['ORD', -915], ['JFK', -470], ['DFW', -30], ['LAX', 410], ['MIA', 960], ['LHR', 1778]]}
   ];
-  const wTierX = [380, 740, 1180].map(offset => HEL_X - hubWidth / 2 - offset);
-  const wFlare = [100, 250, 800];
-  wTiers.forEach((tier, tIdx) => {
-    const present = tier.map(c => byCode.get(c)).filter(Boolean);
-    const x = wTierX[tIdx];
-    const count = present.length;
-    const flare = wFlare[tIdx];
-    const yStart = HEL_Y - hubHeight / 2 - flare;
-    const yEnd = HEL_Y + hubHeight / 2 + flare;
-    present.forEach((node, cIdx) => {
-      node.x = x;
-      node.y = yStart + ((cIdx + 0.5) / count) * (yEnd - yStart);
-    });
-  });
+  for (const col of wCols) {
+    for (const [code, dy] of col.boxes) {
+      const node = byCode.get(code);
+      if (!node) continue;
+      node.x = HEL_X - hubWidth / 2 - col.x;
+      node.y = HEL_Y + dy;
+    }
+  }
 
   // --- EAST (Middle East, South Asia, East Asia, Japan, Australia) ---
   // Two columns: the Gulf, India and Thailand nearest with Doha at the top so its partner
@@ -290,7 +323,13 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   const hkg = byCode.get('HKG');
   if (hkg && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hkg.height = 160; hkg.width = 280; hkg.isGatewayHub = true; }
   const lhr = byCode.get('LHR');
-  if (lhr && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lhr.height = 320; lhr.width = 460; lhr.isGatewayHub = true; }
+  if (lhr && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lhr.height = 360; lhr.width = 460; lhr.isGatewayHub = true; }
+  // Chicago and New York carry four partner bundles each on their left edge beside the
+  // Helsinki bundle on the right, the same load as Dallas.
+  const ord = byCode.get('ORD');
+  if (ord && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { ord.height = 180; ord.width = 300; ord.isGatewayHub = true; }
+  const jfk = byCode.get('JFK');
+  if (jfk && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { jfk.height = 180; jfk.width = 300; jfk.isGatewayHub = true; }
 
   // Assign codeshare positions relative to partner hubs
   for (const node of nodes) {
@@ -305,7 +344,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     }
   }
 
-  const placed = new Set([...nTiers, ...wTiers, ...eTiers, ...sTiers, Object.keys(CODESHARE_OFFSETS)].flat());
+  const placed = new Set([nTiers.flat().map(([code]) => code), wCols.flatMap(col => col.boxes.map(([code]) => code)), ...eTiers, ...sTiers, Object.keys(CODESHARE_OFFSETS)].flat());
   for (const node of nodes) {
     if (node === hub || placed.has(node.code)) continue;
     if (node.region === 'north') {
@@ -555,14 +594,47 @@ function bundlePath(a, b, obstacles, laneSpread) {
   return [a, b];
 }
 
+// Distance from a box's outline to the segment a-b (0 when they touch).
+function segmentDistance(a, b, r) {
+  const dx = b.x - a.x, dy = b.y - a.y, len2 = dx * dx + dy * dy || 1;
+  const t = Math.max(0, Math.min(1, ((r.x - a.x) * dx + (r.y - a.y) * dy) / len2));
+  const px = a.x + dx * t, py = a.y + dy * t;
+  return Math.hypot(Math.max(0, Math.abs(px - r.x) - r.width / 2), Math.max(0, Math.abs(py - r.y) - r.height / 2));
+}
+
+const rectsIntersect = (r, minX, minY, maxX, maxY) =>
+  r.x + r.width / 2 >= minX && r.x - r.width / 2 <= maxX && r.y + r.height / 2 >= minY && r.y - r.height / 2 <= maxY;
+
 function visibilityPath(a, b, obstacles, margin) {
-  const boxes = obstacles.map(n => ({...n, width: n.width + margin * 2, height: n.height + margin * 2}));
-  if (!boxes.some(r => segmentBlocked(a, b, r))) return [a, b];
+  const all = obstacles.map(n => ({...n, width: n.width + margin * 2, height: n.height + margin * 2}));
+  if (!all.some(r => segmentBlocked(a, b, r))) return [a, b];
+  // Search a corridor around the straight line first; the whole sheet only if nothing fits.
+  let previous = 0;
+  // A detour further than 900 units from the straight line would not be drawn on this sheet anyway.
+  for (const pad of [320 + margin, 900 + margin]) {
+    const corridor = all.filter(r => segmentDistance(a, b, r) <= pad);
+    if (corridor.length === previous) continue;
+    previous = corridor.length;
+    const path = visibilitySearch(a, b, corridor, all);
+    if (path) return path;
+    if (corridor.length === all.length) break;
+  }
+  return null;
+}
+
+// Dijkstra over the corners of the candidate boxes; segments are tested only against the boxes
+// that can reach the hull of those corners, which is every box when candidates are the whole sheet.
+function visibilitySearch(a, b, candidates, all) {
+  // A corner lying inside another expanded box can never be on a valid path; drop it early.
+  const inside = p => all.some(r => r.x - r.width / 2 < p.x && p.x < r.x + r.width / 2 && r.y - r.height / 2 < p.y && p.y < r.y + r.height / 2);
   const vertices = [
     a,
     b,
-    ...boxes.flatMap(r => [-1, 1].flatMap(x => [-1, 1].map(y => ({x: r.x + x * r.width / 2, y: r.y + y * r.height / 2}))))
+    ...candidates.flatMap(r => [-1, 1].flatMap(x => [-1, 1].map(y => ({x: r.x + x * r.width / 2, y: r.y + y * r.height / 2})))).filter(p => !inside(p))
   ];
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const v of vertices) { minX = Math.min(minX, v.x); minY = Math.min(minY, v.y); maxX = Math.max(maxX, v.x); maxY = Math.max(maxY, v.y); }
+  const boxes = candidates === all ? all : all.filter(r => rectsIntersect(r, minX, minY, maxX, maxY));
   const distance = vertices.map(() => Infinity), prev = vertices.map(() => -1), done = new Set();
   distance[0] = 0;
   for (let count = 0; count < vertices.length; count++) {

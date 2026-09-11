@@ -35,6 +35,8 @@ export function validateSchedule(data) {
       ids.add(f.id);
     }
   }
+  if(data.logo!==undefined&&typeof data.logo!=='string') throw Error('Logo must be text.');
+  if(data.copyright!==undefined&&typeof data.copyright!=='string') throw Error('Copyright must be text.');
   return data;
 }
 export function filterFlights(flights,{date='',query='',aircraft='',codeshares=true}={}){
@@ -99,7 +101,7 @@ export function connectionFlights(own,partner,{minMinutes=60}={}){
   const kept=new Map();
   for(const {p,o,wait,overnight,direction} of best.values()){
     const current=kept.get(p.id);
-    if(!current||wait<current.connection.wait)kept.set(p.id,{...p,connection:{via:direction==='out'?p.from:p.to,direction,number:o.number||o.id,time:direction==='out'?o.arrival.slice(11,16):o.departure.slice(11,16),wait,overnight}});
+    if(!current||wait<current.connection.wait)kept.set(p.id,{...p,connection:{via:direction==='out'?p.from:p.to,direction,id:o.id,number:o.number||o.id,time:direction==='out'?o.arrival.slice(11,16):o.departure.slice(11,16),wait,overnight}});
   }
   return partner.filter(p=>kept.has(p.id)).map(p=>kept.get(p.id));
 }
