@@ -39,7 +39,7 @@ for (const s of services) {
   const departure = `${depDate}T${s.departure}:00${offsetAt(ZONES[from], depDate, s.departure)}`;
   const arrival = `${arrDate}T${s.arrival}:00${offsetAt(ZONES[to], arrDate, s.arrival)}`;
   if (Date.parse(arrival) <= Date.parse(departure)) { incomplete.push(`${number} ${from}-${to} arrival before departure`); continue; }
-  flights.push({id: `${number}-${depDate}-${from}-${to}`, number, from, to, departure, arrival, aircraft: s.aircraft || 'Airbus A320', airline: 'Finnair', status: 'Scheduled', days});
+  flights.push({id: `${number}-${depDate}-${from}-${to}`, number, from, to, departure, arrival, aircraft: String(s.aircraft || 'Airbus A320').split(' / ')[0].trim(), airline: 'Finnair', status: 'Scheduled', days});
 }
 const seen = new Map();
 for (const f of flights) { const key = `${f.number}|${f.from}|${f.to}|${f.departure.slice(11, 16)}`; if (!seen.has(key)) seen.set(key, f); }

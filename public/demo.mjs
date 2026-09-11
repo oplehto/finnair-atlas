@@ -824,7 +824,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T01:00:00+02:00",
     "arrival": "2026-09-14T06:30:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②④⑤⑥"
@@ -932,7 +932,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T05:45:00+03:00",
     "arrival": "2026-09-14T06:45:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -968,7 +968,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T06:00:00+03:00",
     "arrival": "2026-09-14T06:35:00+03:00",
-    "aircraft": "ATR 72 / Embraer 190",
+    "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1004,7 +1004,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T06:15:00+03:00",
     "arrival": "2026-09-14T07:15:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A319",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -1196,7 +1196,7 @@ export const flights = [
     "to": "RVN",
     "departure": "2026-09-14T07:05:00+03:00",
     "arrival": "2026-09-14T08:20:00+03:00",
-    "aircraft": "Airbus A319 / Airbus A320 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1268,7 +1268,7 @@ export const flights = [
     "to": "ARN",
     "departure": "2026-09-14T07:15:00+03:00",
     "arrival": "2026-09-14T07:15:00+02:00",
-    "aircraft": "Embraer 190 / Airbus A319",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1364,7 +1364,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T07:25:00+03:00",
     "arrival": "2026-09-14T08:25:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1448,7 +1448,7 @@ export const flights = [
     "to": "CDG",
     "departure": "2026-09-14T07:35:00+03:00",
     "arrival": "2026-09-14T09:40:00+02:00",
-    "aircraft": "Airbus A320 / Airbus A321 / Airbus A319",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1484,7 +1484,7 @@ export const flights = [
     "to": "FRA",
     "departure": "2026-09-14T07:40:00+03:00",
     "arrival": "2026-09-14T09:20:00+02:00",
-    "aircraft": "Airbus A321 / Airbus A320 / Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1520,7 +1520,7 @@ export const flights = [
     "to": "ARN",
     "departure": "2026-09-14T07:40:00+03:00",
     "arrival": "2026-09-14T07:40:00+02:00",
-    "aircraft": "Airbus A319 / Airbus A320",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②④⑤⑥⑦"
@@ -1592,7 +1592,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T07:55:00+03:00",
     "arrival": "2026-09-14T08:55:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A319",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -1604,7 +1604,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T08:00:00+02:00",
     "arrival": "2026-09-14T10:00:00+03:00",
-    "aircraft": "Embraer 190 / Airbus A319",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1628,7 +1628,7 @@ export const flights = [
     "to": "MUC",
     "departure": "2026-09-14T08:00:00+03:00",
     "arrival": "2026-09-14T09:35:00+02:00",
-    "aircraft": "Airbus A350-900 / Airbus A321",
+    "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1688,7 +1688,7 @@ export const flights = [
     "to": "ARN",
     "departure": "2026-09-14T08:10:00+03:00",
     "arrival": "2026-09-14T08:10:00+02:00",
-    "aircraft": "Airbus A321 / Airbus A320",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1904,7 +1904,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T09:00:00+03:00",
     "arrival": "2026-09-14T10:15:00+03:00",
-    "aircraft": "Airbus A319 / Airbus A320 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -1940,7 +1940,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T09:10:00+03:00",
     "arrival": "2026-09-14T10:10:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2252,7 +2252,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T10:50:00+02:00",
     "arrival": "2026-09-14T14:40:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321 / Airbus A319",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2264,7 +2264,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T10:50:00+03:00",
     "arrival": "2026-09-14T11:50:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2312,7 +2312,7 @@ export const flights = [
     "to": "CPH",
     "departure": "2026-09-14T11:00:00+03:00",
     "arrival": "2026-09-14T11:40:00+02:00",
-    "aircraft": "Airbus A321 / Airbus A319 / Embraer 190 / Airbus A320",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2360,7 +2360,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T11:30:00+02:00",
     "arrival": "2026-09-14T14:55:00+03:00",
-    "aircraft": "Airbus A350-900 / Airbus A321",
+    "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2372,7 +2372,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T11:30:00+02:00",
     "arrival": "2026-09-14T14:55:00+03:00",
-    "aircraft": "Airbus A321 / Airbus A320 / Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2552,7 +2552,7 @@ export const flights = [
     "to": "RVN",
     "departure": "2026-09-14T12:20:00+03:00",
     "arrival": "2026-09-14T13:35:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2564,7 +2564,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T12:25:00+02:00",
     "arrival": "2026-09-14T14:25:00+03:00",
-    "aircraft": "Airbus A319 / Airbus A320",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②④⑤⑥⑦"
@@ -2576,7 +2576,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T12:25:00+02:00",
     "arrival": "2026-09-14T15:00:00+03:00",
-    "aircraft": "Airbus A321 / Airbus A319 / Embraer 190 / Airbus A320",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2648,7 +2648,7 @@ export const flights = [
     "to": "CPH",
     "departure": "2026-09-14T12:30:00+03:00",
     "arrival": "2026-09-14T13:10:00+02:00",
-    "aircraft": "Embraer 190 / Airbus A320",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2660,7 +2660,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T12:35:00+03:00",
     "arrival": "2026-09-14T13:35:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2672,7 +2672,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T12:45:00+02:00",
     "arrival": "2026-09-14T14:45:00+03:00",
-    "aircraft": "Airbus A321 / Airbus A320",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2792,7 +2792,7 @@ export const flights = [
     "to": "ARN",
     "departure": "2026-09-14T13:15:00+03:00",
     "arrival": "2026-09-14T13:15:00+02:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -2852,7 +2852,7 @@ export const flights = [
     "to": "TLL",
     "departure": "2026-09-14T13:45:00+03:00",
     "arrival": "2026-09-14T14:15:00+03:00",
-    "aircraft": "Embraer 190 / ATR 72",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -2876,7 +2876,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T13:50:00+02:00",
     "arrival": "2026-09-14T16:20:00+03:00",
-    "aircraft": "Embraer 190 / Airbus A320",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2900,7 +2900,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T13:55:00+02:00",
     "arrival": "2026-09-14T15:55:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -2960,7 +2960,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T14:15:00+03:00",
     "arrival": "2026-09-14T15:15:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2972,7 +2972,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T14:15:00+03:00",
     "arrival": "2026-09-14T15:30:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -2984,7 +2984,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T14:30:00+03:00",
     "arrival": "2026-09-14T15:30:00+03:00",
-    "aircraft": "Boeing 737-800 / Airbus A319 / Embraer 190",
+    "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -3080,7 +3080,7 @@ export const flights = [
     "to": "CPH",
     "departure": "2026-09-14T15:35:00+03:00",
     "arrival": "2026-09-14T16:15:00+02:00",
-    "aircraft": "Embraer 190 / Airbus A320",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑦"
@@ -3152,7 +3152,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T15:55:00+03:00",
     "arrival": "2026-09-14T16:55:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190 / Airbus A320",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3188,7 +3188,7 @@ export const flights = [
     "to": "RVN",
     "departure": "2026-09-14T16:00:00+03:00",
     "arrival": "2026-09-14T17:15:00+03:00",
-    "aircraft": "Embraer 190 / Airbus A319",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3332,7 +3332,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T16:15:00+03:00",
     "arrival": "2026-09-14T17:15:00+03:00",
-    "aircraft": "Boeing 737-800 / Airbus A319 / Embraer 190",
+    "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤"
@@ -3584,7 +3584,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T16:50:00+03:00",
     "arrival": "2026-09-14T17:55:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3596,7 +3596,7 @@ export const flights = [
     "to": "FRA",
     "departure": "2026-09-14T16:55:00+03:00",
     "arrival": "2026-09-14T18:35:00+02:00",
-    "aircraft": "Airbus A321 / Airbus A319 / Airbus A320",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3632,7 +3632,7 @@ export const flights = [
     "to": "ARN",
     "departure": "2026-09-14T16:55:00+03:00",
     "arrival": "2026-09-14T16:55:00+02:00",
-    "aircraft": "Airbus A320 / Airbus A321 / Airbus A319",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3644,7 +3644,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T17:00:00+02:00",
     "arrival": "2026-09-14T19:35:00+03:00",
-    "aircraft": "Embraer 190 / Airbus A320",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑦"
@@ -3800,7 +3800,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T17:35:00+03:00",
     "arrival": "2026-09-14T18:35:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190 / Airbus A320",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3824,7 +3824,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T17:40:00+02:00",
     "arrival": "2026-09-14T19:40:00+03:00",
-    "aircraft": "Airbus A320 / Airbus A321 / Airbus A319",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3908,7 +3908,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T17:55:00+03:00",
     "arrival": "2026-09-14T19:10:00+03:00",
-    "aircraft": "Embraer 190 / Airbus A319",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -3920,7 +3920,7 @@ export const flights = [
     "to": "CPH",
     "departure": "2026-09-14T18:00:00+03:00",
     "arrival": "2026-09-14T18:40:00+02:00",
-    "aircraft": "Boeing 737-800 / Airbus A319 / Embraer 190 / Airbus A321",
+    "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑥"
@@ -4112,7 +4112,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T18:35:00+03:00",
     "arrival": "2026-09-14T19:35:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -4304,7 +4304,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T19:20:00+02:00",
     "arrival": "2026-09-14T22:45:00+03:00",
-    "aircraft": "Airbus A321 / Airbus A319 / Airbus A320",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -4352,7 +4352,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T19:25:00+02:00",
     "arrival": "2026-09-14T22:00:00+03:00",
-    "aircraft": "Boeing 737-800 / Airbus A319 / Embraer 190 / Airbus A321",
+    "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑥"
@@ -4484,7 +4484,7 @@ export const flights = [
     "to": "ARN",
     "departure": "2026-09-14T20:25:00+03:00",
     "arrival": "2026-09-14T20:25:00+02:00",
-    "aircraft": "Embraer 190 / Airbus A321 / Airbus A320 / Airbus A319",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -4520,7 +4520,7 @@ export const flights = [
     "to": "AGP",
     "departure": "2026-09-14T20:30:00+03:00",
     "arrival": "2026-09-15T00:15:00+02:00",
-    "aircraft": "Airbus A320 / Airbus A321",
+    "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①③④⑤⑦"
@@ -4544,7 +4544,7 @@ export const flights = [
     "to": "OUL",
     "departure": "2026-09-14T20:30:00+03:00",
     "arrival": "2026-09-14T21:35:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -4664,7 +4664,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T21:10:00+02:00",
     "arrival": "2026-09-14T23:10:00+03:00",
-    "aircraft": "Embraer 190 / Airbus A321 / Airbus A320 / Airbus A319",
+    "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
@@ -4796,7 +4796,7 @@ export const flights = [
     "to": "HEL",
     "departure": "2026-09-14T22:15:00+03:00",
     "arrival": "2026-09-14T23:15:00+03:00",
-    "aircraft": "Airbus A319 / Embraer 190",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
