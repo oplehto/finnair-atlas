@@ -245,7 +245,7 @@ function render(){
   const f=route.flight;
   const g=el('g',{class:`edge-times ${inkOf(f)}${selected===f.id?' selected':''}`});
   g.dataset.id=f.id;
-  for(const label of endpointLabels(route,points))g.append(el('text',{x:label.x,y:label.y,'text-anchor':label.anchor||'middle','dominant-baseline':'central',transform:`rotate(${label.angle} ${label.x} ${label.y})`},label.text));
+  for(const label of endpointLabels(route,points))g.append(el('text',{x:label.x,y:label.y,class:label.hub?'hub-time':null,'text-anchor':label.anchor||'middle','dominant-baseline':'central',transform:`rotate(${label.angle} ${label.x} ${label.y})`},label.text));
   timesG.append(g);
  }
  svg.append(timesG);
@@ -266,7 +266,7 @@ function render(){
    const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length,cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
    const onTopOrBottom=Math.abs(Math.abs(cy-hub.y)-hub.height/2-8)<0.01;
    const nx=onTopOrBottom?0:Math.sign(cx-hub.x),ny=onTopOrBottom?Math.sign(cy-hub.y):0;
-   const x=cx-nx*54,y=cy-ny*54,w=measure(code,'700 10px "Roboto Condensed"')+7;
+   const x=cx-nx*100,y=cy-ny*100,w=measure(code,'700 10px "Roboto Condensed"')+7;
    const g=el('g',{class:'hub-port',role:'button',tabindex:0,'aria-label':`${byName(code)} (${code}), ${pts.length} services. Activate to show only this airport's flights.`});
    g.dataset.code=code;
    g.append(el('rect',{x:x-w/2,y:y-7,width:w,height:14,class:'hub-port-bg'}),el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central'},code));

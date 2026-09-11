@@ -1017,7 +1017,9 @@ export function endpointLabels(route, nodes) {
       y: p.y + ny * along + (vertical ? 0 : side),
       angle: vertical ? -90 : 0,
       anchor: vertical ? (dy > 0 ? 'end' : 'start') : (dx > 0 ? 'start' : 'end'),
-      text: time.slice(11, 16).replace(':', '.')
+      hub: !!isLargeHub,
+      // The days of operation follow the time at both ends, so each comb reads as a timetable column.
+      text: time.slice(11, 16).replace(':', '.') + ' ' + (route.flight.days || route.flight.frequency || '#')
     };
   });
 }

@@ -913,7 +913,7 @@ h1 .unofficial {
 
 /* Times at the arrow endpoints, set along the lane like the reference. */
 .edge-times {
-  font: 700 9px 'Roboto Condensed', sans-serif;
+  font: 700 8.5px 'Roboto Condensed', sans-serif;
 }
 
 .edge-times text {
@@ -921,6 +921,11 @@ h1 .unofficial {
   stroke: var(--paper);
   stroke-width: 1.8px;
   stroke-linejoin: round;
+}
+
+.edge-times text.hub-time {
+  font-size: 8px;
+  letter-spacing: 0;
 }
 
 .edge-times.jet text { fill: var(--blue-ink); }
