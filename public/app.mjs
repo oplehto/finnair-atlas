@@ -5,6 +5,9 @@ const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const INK={jet:'#09618c',prop:'#454940',codeshare:'#b36200'},PAPER='#f8f7ef';
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 let panX=0,panY=0,hasFit=false,mapWidth=1200,mapHeight=900;
+let keyboardNav=false;
+document.addEventListener('keydown',e=>{if(e.key==='Tab')keyboardNav=true;},true);
+document.addEventListener('pointerdown',()=>{keyboardNav=false;},true);
 let data,visible=[],selected=null,focusAirport=null,hovered=null,scale=0.8,imported=false,busy=false,layoutKey='',geometry,needsFit=false;
 const waitText=c=>`${Math.floor(c.wait/60)} h ${String(c.wait%60).padStart(2,'0')} min${c.overnight?' · seuraavana päivänä / next day':''}`;
 const measureContext=document.createElement('canvas').getContext('2d');
@@ -32,7 +35,7 @@ function message(text){$('message').hidden=!text;$('message').textContent=text;}
 function setData(next){
  validateSchedule(next);
  data=next;
- $('title').innerHTML=next.logo==='finnair-1968'?logotypeHtml(40)+`<span class="visually-hidden">${escape(next.title||'Finnair')}</span>`:escape(next.title||'Airline timetable');
+ $('title').innerHTML=next.logo==='finnair-1968'?logotypeHtml(40)+`<span class="visually-hidden">${escape(next.title||'Finnair')}</span><small class="unofficial">Not an official Finnair site</small>`:escape(next.title||'Airline timetable');
  document.querySelector('.edition').textContent=next.subtitle||'Flight services';
  $('source').textContent=(next.demo?'Example · ':'')+(next.source||'Imported schedule');
  $('updated').textContent=imported?'Local file · weekly services':'Weekly services · Reload picks up a changed schedule';
@@ -53,7 +56,7 @@ function sheetHeader(x,y,k,points){
  const hasLogo=data.logo==='finnair-1968';
  const logoHeight=74,logoWidth=logoHeight*FINNAIR_1968.width/FINNAIR_1968.height;
  const titleWidth=hasLogo?logoWidth:measure(title,'600 64px Oswald')+3*title.length;
- if(hasLogo){const l=logotype(logoHeight);l.setAttribute('transform',`translate(0 4) scale(${logoHeight/FINNAIR_1968.height})`);g.append(l);}
+ if(hasLogo){const l=logotype(logoHeight);l.setAttribute('transform',`translate(0 4) scale(${logoHeight/FINNAIR_1968.height})`);g.append(l,el('text',{x:2,y:100,class:'sheet-unofficial'},'Ei virallinen sivusto · Not an official Finnair site'));}
  const meta=[data.demo?'Havainnollistava esimerkki / Illustrative example':'','Viikkoaikataulu / Veckotidtabell / Weekly timetable',data.source||'',`${points.length} lentoasemaa / airports`,`${visible.length} viikoittaista vuoroa / weekly services`,'Kaikki ajat paikallisaikoja / All times local'].filter(Boolean).join('  ·  ');
  g.append(...[
   hasLogo?null:el('text',{x:0,y:64,class:'sheet-brand'},title),
@@ -195,7 +198,6 @@ function render(){
   const outline=(cls)=>a.polygonPoints?el('polygon',{points:a.polygonPoints,class:cls}):el('rect',{x:-a.width/2,y:-a.height/2,width:a.width,height:a.height,class:cls});
   if(isHub){
    g.append(outline('hub-outer'));
-   if(a.innerPolygonPoints)g.append(el('polygon',{points:a.innerPolygonPoints,class:'hub-inner'}));
    g.append(hubInterior(a));
   }else if(isGateway){
    const t=clamp(a.width/14,18,30);
@@ -251,7 +253,7 @@ function render(){
    const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length,cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
    const onTopOrBottom=Math.abs(Math.abs(cy-hub.y)-hub.height/2-8)<0.01;
    const nx=onTopOrBottom?0:Math.sign(cx-hub.x),ny=onTopOrBottom?Math.sign(cy-hub.y):0;
-   const x=cx-nx*42,y=cy-ny*42,w=measure(code,'700 10px "Roboto Condensed"')+7;
+   const x=cx-nx*54,y=cy-ny*54,w=measure(code,'700 10px "Roboto Condensed"')+7;
    const g=el('g',{class:'hub-port',role:'button',tabindex:0,'aria-label':`${byName(code)} (${code}), ${pts.length} services. Activate to show only this airport's flights.`});
    g.dataset.code=code;
    g.append(el('rect',{x:x-w/2,y:y-7,width:w,height:14,class:'hub-port-bg'}),el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central'},code));
@@ -281,7 +283,7 @@ function render(){
  svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const target=e.target.closest('.flight,.airport,.hub-port');if(target){e.preventDefault();activate(target);}}});
  svg.addEventListener('pointerover',e=>{const target=e.target.closest('.flight');if(target)hover(target.dataset.id);});
  svg.addEventListener('pointerout',e=>{const target=e.target.closest('.flight');if(target&&!target.contains(e.relatedTarget))hover(null);});
- svg.addEventListener('focusin',e=>{const target=e.target.closest('.flight');if(target){hover(target.dataset.id);reveal(target.dataset.id,{onlyIfHidden:true});}});
+ svg.addEventListener('focusin',e=>{const target=e.target.closest('.flight');if(target){hover(target.dataset.id);if(keyboardNav)reveal(target.dataset.id,{onlyIfHidden:true});}});
  svg.addEventListener('focusout',e=>hover(null));
 
  const hiddenLabels=[...labels.values()].filter(l=>l.hidden).length;
@@ -344,7 +346,7 @@ function applyFocus(){
  for(const node of diagram.querySelectorAll('[data-code]'))node.classList.toggle('focused',node.dataset.code===focusAirport);
 }
 
-$('flights').addEventListener('click',e=>{const btn=e.target.closest('.service');if(btn?.dataset.id)select(btn.dataset.id,{reveal:true});});
+$('flights').addEventListener('click',e=>{const btn=e.target.closest('.service');if(btn?.dataset.id)select(btn.dataset.id);});
 
 function filterToAirport(code){focus(code);}
 
@@ -375,14 +377,17 @@ function focusHub(){
 function toggleAll(id,cls,on){if(!id)return;for(const node of document.querySelectorAll(`[data-id="${CSS.escape(id)}"]`))node.classList.toggle(cls,on);}
 function hover(id){if(id===hovered)return;toggleAll(hovered,'hover',false);hovered=id;toggleAll(hovered,'hover',true);}
 
+const linkedOf=id=>visible.find(f=>f.id===id)?.connection?.id||null;
 function select(id,{reveal:show=false}={}){
  const prev=selected;
  selected=selected===id?null:id;
  toggleAll(prev,'selected',false);
+ toggleAll(linkedOf(prev),'linked',false);
  $('diagram').classList.toggle('has-selection',!!selected);
  detail();
  if(selected){
   toggleAll(selected,'selected',true);
+  toggleAll(linkedOf(selected),'linked',true);
   document.querySelector(`.service[data-id="${CSS.escape(selected)}"]`)?.scrollIntoView({block:'nearest'});
   if(show)glide(()=>reveal(selected));
  }
@@ -441,6 +446,7 @@ function glide(change){
 }
 function applyView(){
  $('diagram').style.transform=`translate3d(${panX}px,${panY}px,0) scale(${scale})`;
+ $('diagram').style.setProperty('--hit',`${Math.max(14,Math.min(40,10/scale))}`);
  const scaleText=`${Math.round(scale*100)}%`;
  if(lastScaleText!==scaleText){$('scale').textContent=scaleText;lastScaleText=scaleText;}
 }
@@ -474,7 +480,7 @@ $('actual').onclick=()=>glide(()=>zoomAt(1));
 const viewport=$('viewport'),pointers=new Map();
 let dragged=false;
 
-viewport.addEventListener('dblclick',e=>{e.preventDefault();glide(()=>zoomAt(scale*1.6,e.clientX,e.clientY));});
+viewport.addEventListener('dblclick',e=>{e.preventDefault();if(e.target.closest('.flight,.airport,.hub-port'))return;glide(()=>zoomAt(scale*1.6,e.clientX,e.clientY));});
 viewport.addEventListener('wheel',e=>{
  e.preventDefault();
  const isPinch=e.ctrlKey;
@@ -497,7 +503,7 @@ viewport.addEventListener('pointermove',e=>{
  const old=pointers.get(e.pointerId);
  if(!old)return;
  const next={x:e.clientX,y:e.clientY};
- if(Math.hypot(next.x-old.x,next.y-old.y)>2||dragged){
+ if(Math.hypot(next.x-old.x,next.y-old.y)>6||dragged){
   dragged=true;
   viewport.setPointerCapture(e.pointerId);
   viewport.classList.add('dragging');
@@ -533,23 +539,6 @@ viewport.addEventListener('keydown',e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.target.closest('input,select')){if(selected)select(selected);else if(focusAirport)focus(focusAirport);}});
 
 $('refresh').onclick=()=>{imported=false;refresh();};
-$('import').onclick=()=>$('file').click();
-$('file').onchange=async e=>{
- try{
-  const file=e.target.files[0];
-  if(!file)return;
-  if(file.size>5000000)throw Error('Use a JSON file smaller than 5 MB.');
-  const next=validateSchedule(JSON.parse(await file.text()));
-  imported=true;
-  setData({...next,demo:false});
-  message('');
- }catch(error){
-  message(`Import failed: ${error.message}`);
- }finally{
-  e.target.value='';
- }
-};
-
 $('export').onclick=async()=>{
  const svg=$('diagram').querySelector('svg');
  if(!svg||!visible.length){message('No flights to export.');return;}

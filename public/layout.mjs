@@ -57,12 +57,12 @@ const CODESHARE_OFFSETS = {
   // South America & Caribbean via MIA (American Airlines): two above, two below, and a
   // three-column fan on the left whose inner boxes sit 250 out so the outer stubs thread
   // between the middle pair.
-  LIM: {hub: 'MIA', dx: -130, dy: -278, region: 'west'},
-  SCL: {hub: 'MIA', dx: 130, dy: -278, region: 'west'},
+  LIM: {hub: 'MIA', dx: -230, dy: -278, region: 'west'},
+  SCL: {hub: 'MIA', dx: 30, dy: -278, region: 'west'},
   EZE: {hub: 'MIA', dx: -130, dy: 278, region: 'west'},
   SJU: {hub: 'MIA', dx: 130, dy: 278, region: 'west'},
-  MDE: {hub: 'MIA', dx: -400, dy: -250, region: 'west'},
-  UIO: {hub: 'MIA', dx: -400, dy: 250, region: 'west'},
+  MDE: {hub: 'MIA', dx: -400, dy: -100, region: 'west'},
+  UIO: {hub: 'MIA', dx: -400, dy: 100, region: 'west'},
   BOG: {hub: 'MIA', dx: -700, dy: -85, region: 'west'},
   GRU: {hub: 'MIA', dx: -700, dy: 85, region: 'west'},
   GIG: {hub: 'MIA', dx: -1000, dy: -300, region: 'west'},
@@ -245,8 +245,8 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // top-to-bottom order is fixed and only the spacing was searched.
   const wCols = [
     {x: 500, boxes: [['ALF', -1530], ['UME', -1345], ['TRD', -650], ['GOT', 185], ['VBY', 520], ['BLL', 645], ['CPH', 825]]},
-    {x: 950, boxes: [['KKN', -2068], ['TOS', -1315], ['BOO', -1150], ['KEF', -1025], ['YYZ', -685], ['ARN', -475], ['OSL', -160], ['BGO', 35], ['SVG', 290], ['EDI', 505], ['MAN', 1335], ['DUB', 2501]]},
-    {x: 1400, boxes: [['SEA', -1485], ['ORD', -915], ['JFK', -470], ['DFW', -30], ['LAX', 410], ['MIA', 960], ['LHR', 1778]]}
+    {x: 950, boxes: [['KKN', -2068], ['TOS', -1315], ['BOO', -1150], ['KEF', -1025], ['YYZ', -685], ['ARN', -475], ['OSL', -160], ['BGO', 35], ['SVG', 290], ['EDI', 505], ['MAN', 1335], ['DUB', 2200]]},
+    {x: 1400, boxes: [['SEA', -1485], ['ORD', -915], ['JFK', -470], ['DFW', -30], ['LAX', 410], ['LHR', 1550], ['MIA', 2770]]}
   ];
   for (const col of wCols) {
     for (const [code, dy] of col.boxes) {
@@ -565,30 +565,54 @@ export function curvePoint(route, t) {
   return points[0];
 }
 
-function segmentBlocked(a, b, r) {
-  let lo = 0, hi = 1;
-  for (const [position, delta, min, max] of [
-    [a.x, b.x - a.x, r.x - r.width / 2 + 0.01, r.x + r.width / 2 - 0.01],
-    [a.y, b.y - a.y, r.y - r.height / 2 + 0.01, r.y + r.height / 2 - 0.01]
-  ]) {
-    if (Math.abs(delta) < 1e-8) {
-      if (position <= min || position >= max) return false;
-    } else {
-      const t1 = (min - position) / delta, t2 = (max - position) / delta;
-      lo = Math.max(lo, Math.min(t1, t2));
-      hi = Math.min(hi, Math.max(t1, t2));
-      if (lo >= hi) return false;
-    }
-  }
-  return hi > 0 && lo < 1;
+// Box corners in the order the polygon is built: top-left, top-right, bottom-right, bottom-left.
+const CORNER_SIGNS = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+
+// An obstacle for the router: a box {x, y, width, height} whose corners may carry 45-degree cuts
+// (r.cuts, one leg length per corner in CORNER_SIGNS order). Its open interior is the
+// intersection of the half-planes nx * x + ny * y < limit, shrunk by 0.01 so that a segment
+// running along the outline is not blocked.
+function obstaclePlanes(r) {
+  const hw = r.width / 2 - 0.01, hh = r.height / 2 - 0.01;
+  const planes = [[1, 0, r.x + hw], [-1, 0, hw - r.x], [0, 1, r.y + hh], [0, -1, hh - r.y]];
+  if (r.cuts) CORNER_SIGNS.forEach(([sx, sy], k) => {
+    if (r.cuts[k] > 0) planes.push([sx, sy, sx * r.x + sy * r.y + hw + hh - r.cuts[k]]);
+  });
+  return planes;
 }
 
-function bundlePath(a, b, obstacles, laneSpread) {
+// The box grown by the routing margin. A chamfered corner keeps the same perpendicular
+// clearance from its diagonal as the straight edges keep from theirs, so its leg grows by
+// margin * (2 - sqrt 2). Without chamfers (or for custom shapes) the obstacle is the rectangle.
+function expandObstacle(n, margin, chamfers) {
+  const cuts = chamfers?.get(n.code)?.map(c => c > 0 ? c + margin * (2 - Math.SQRT2) : 0);
+  const r = {x: n.x, y: n.y, width: n.width + margin * 2, height: n.height + margin * 2, cuts};
+  r.planes = obstaclePlanes(r);
+  return r;
+}
+
+const insideObstacle = (p, r) => r.planes.every(([nx, ny, limit]) => nx * p.x + ny * p.y < limit);
+
+// Cyrus-Beck clip: does the segment a-b enter the open interior of the obstacle?
+function segmentBlocked(a, b, r) {
+  const dx = b.x - a.x, dy = b.y - a.y;
+  let lo = 0, hi = 1;
+  for (const [nx, ny, limit] of r.planes) {
+    const fa = nx * a.x + ny * a.y - limit, fb = fa + nx * dx + ny * dy;
+    if (fa >= 0 && fb >= 0) return false;
+    if (fa >= 0) lo = Math.max(lo, fa / (fa - fb));
+    else if (fb >= 0) hi = Math.min(hi, fa / (fa - fb));
+    if (lo >= hi) return false;
+  }
+  return true;
+}
+
+function bundlePath(a, b, obstacles, laneSpread, chamfers) {
   // The spine keeps the outer lanes 26 clear of every unrelated box. A tightly packed group
   // (partner satellites) can leave no corner-to-corner path at that clearance; retry with a
   // smaller one, never below the lane spread, before falling back to a straight line.
   for (const clearance of [26, 14, 6]) {
-    const path = visibilityPath(a, b, obstacles, laneSpread + clearance);
+    const path = visibilityPath(a, b, obstacles, laneSpread + clearance, chamfers);
     if (path) return path;
   }
   return [a, b];
@@ -605,8 +629,8 @@ function segmentDistance(a, b, r) {
 const rectsIntersect = (r, minX, minY, maxX, maxY) =>
   r.x + r.width / 2 >= minX && r.x - r.width / 2 <= maxX && r.y + r.height / 2 >= minY && r.y - r.height / 2 <= maxY;
 
-function visibilityPath(a, b, obstacles, margin) {
-  const all = obstacles.map(n => ({...n, width: n.width + margin * 2, height: n.height + margin * 2}));
+function visibilityPath(a, b, obstacles, margin, chamfers) {
+  const all = obstacles.map(n => expandObstacle(n, margin, chamfers));
   if (!all.some(r => segmentBlocked(a, b, r))) return [a, b];
   // Search a corridor around the straight line first; the whole sheet only if nothing fits.
   let previous = 0;
@@ -626,11 +650,15 @@ function visibilityPath(a, b, obstacles, margin) {
 // that can reach the hull of those corners, which is every box when candidates are the whole sheet.
 function visibilitySearch(a, b, candidates, all) {
   // A corner lying inside another expanded box can never be on a valid path; drop it early.
-  const inside = p => all.some(r => r.x - r.width / 2 < p.x && p.x < r.x + r.width / 2 && r.y - r.height / 2 < p.y && p.y < r.y + r.height / 2);
+  // A corner with a large cut is passable: its two chamfer endpoints replace the box corner.
+  const inside = p => all.some(r => insideObstacle(p, r));
   const vertices = [
     a,
     b,
-    ...candidates.flatMap(r => [-1, 1].flatMap(x => [-1, 1].map(y => ({x: r.x + x * r.width / 2, y: r.y + y * r.height / 2})))).filter(p => !inside(p))
+    ...candidates.flatMap(r => CORNER_SIGNS.flatMap(([sx, sy], k) => {
+      const cx = r.x + sx * r.width / 2, cy = r.y + sy * r.height / 2, cut = r.cuts?.[k] || 0;
+      return cut >= PASSABLE_CUT ? [{x: cx - sx * cut, y: cy}, {x: cx, y: cy - sy * cut}] : [{x: cx, y: cy}];
+    })).filter(p => !inside(p))
   ];
   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   for (const v of vertices) { minX = Math.min(minX, v.x); minY = Math.min(minY, v.y); maxX = Math.max(maxX, v.x); maxY = Math.max(maxY, v.y); }
@@ -714,7 +742,10 @@ function routePorts(nodes, bundles, byCode) {
         ports.set(node.code + ':' + item.key, {
           port,
           normal,
-          escape: {x: port.x + normal.x * 40, y: port.y + normal.y * 40}
+          escape: {x: port.x + normal.x * 40, y: port.y + normal.y * 40},
+          side,
+          along,
+          span: item.span
         });
       }
     }
@@ -722,34 +753,106 @@ function routePorts(nodes, bundles, byCode) {
   return ports;
 }
 
-export function layoutFlights(nodes, flights) {
-  const byCode = new Map(nodes.map(n => [n.code, n])), bundles = new Map(), result = [];
+// Per-corner chamfers, as on the 1974 sheet: a corner that a route bundle bends around or
+// passes diagonally gets a large 45-degree cut so the lanes can hug the box without an extra
+// bend; a quiet corner keeps a small cut so every box still reads as the same family. A cut
+// never reaches within PORT_GAP of a port interval on either adjacent edge.
+const QUIET_CUT = node => node.isRegionalHub ? 44 : node.isGatewayHub ? 8 : 6;
+const LARGE_CUT = node => Math.round(0.4 * Math.min(node.width, node.height));
+const NEAR_CORNER = 48;   // routing clearance (26) plus a lane and a half
+const PORT_GAP = 10;
+const PASSABLE_CUT = 30;  // expanded cut from which the router uses the chamfer endpoints
+const DIAGONAL = Math.tan(Math.PI / 12);
+
+function pointSegmentDistance(p, a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y, len2 = dx * dx + dy * dy || 1;
+  const t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / len2));
+  return Math.hypot(p.x - a.x - dx * t, p.y - a.y - dy * t);
+}
+
+function cornerChamfers(nodes, routes, ports) {
+  const chamfers = new Map();
+  const intervals = new Map(nodes.map(n => [n.code, {top: [], bottom: [], left: [], right: []}]));
+  for (const [id, p] of ports) intervals.get(id.slice(0, id.indexOf(':')))?.[p.side].push([p.along - p.span / 2, p.along + p.span / 2]);
+  const lowest = list => list.length ? Math.min(...list.map(i => i[0])) : Infinity;
+  const highest = list => list.length ? Math.max(...list.map(i => i[1])) : -Infinity;
+  for (const n of nodes) {
+    if ((n.shape && n.shape !== 'octagon') || n.customPolygon) continue;
+    const hw = n.width / 2, hh = n.height / 2, sides = intervals.get(n.code);
+    chamfers.set(n.code, CORNER_SIGNS.map(([sx, sy]) => {
+      const corner = {x: n.x + sx * hw, y: n.y + sy * hh};
+      let active = false;
+      for (const r of routes) {
+        const own = r.flight.from === n.code || r.flight.to === n.code, pts = r.points;
+        for (let i = 0; i < pts.length - 1 && !active; i++) {
+          const a = pts[i], b = pts[i + 1], dx = Math.abs(b.x - a.x), dy = Math.abs(b.y - a.y);
+          // A diagonal lane passing the corner, or (for other bundles) a bend beside it.
+          if (Math.min(dx, dy) > DIAGONAL * Math.max(dx, dy) && pointSegmentDistance(corner, a, b) <= NEAR_CORNER) active = true;
+          else if (!own && i > 0 && Math.max(Math.abs(a.x - corner.x), Math.abs(a.y - corner.y)) <= NEAR_CORNER) active = true;
+        }
+        if (active) break;
+      }
+      // Room left on the two adjacent edges before the nearest port interval.
+      const horizontal = sides[sy < 0 ? 'top' : 'bottom'], vertical = sides[sx < 0 ? 'left' : 'right'];
+      const roomX = sx < 0 ? lowest(horizontal) + hw : hw - highest(horizontal);
+      const roomY = sy < 0 ? lowest(vertical) + hh : hh - highest(vertical);
+      const limit = Math.min(hw - 10, hh - 10, roomX - PORT_GAP, roomY - PORT_GAP);
+      return Math.max(0, Math.min(active ? LARGE_CUT(n) : QUIET_CUT(n), limit));
+    }));
+  }
+  return chamfers;
+}
+
+// Routes every bundle and, as a side effect, refines each node's polygon in place from the
+// routed bundles (node.chamfers, node.polygon, node.polygonPoints), since the cut of a corner
+// depends on the routes that pass it. With passableCorners the bundles are routed a second
+// time treating the large cuts as passable, so a lane may hug a chamfer instead of bending
+// around the box corner; the drawn cuts are then the larger of the two passes, which only
+// removes box area and so keeps every route clear of every box.
+export function layoutFlights(nodes, flights, {passableCorners = true} = {}) {
+  const byCode = new Map(nodes.map(n => [n.code, n])), bundles = new Map();
   for (const f of flights) {
     const key = [f.from, f.to].sort().join(':');
     if (!bundles.has(key)) bundles.set(key, []);
     bundles.get(key).push(f);
   }
   const ports = routePorts(nodes, bundles, byCode);
-  for (const [key, services] of [...bundles].sort(([a], [b]) => a.localeCompare(b))) {
-    const [from, to] = key.split(':'), a = byCode.get(from), b = byCode.get(to);
-    if (!a || !b) continue;
-    const pa = ports.get(from + ':' + key), pb = ports.get(to + ':' + key);
-    const middle = bundlePath(pa.escape, pb.escape, nodes.filter(n => n !== a && n !== b), (services.length - 1) * 7);
-    const spine = [pa.port, ...middle, pb.port];
-    services.sort((a, b) => a.from.localeCompare(b.from) || a.departure.localeCompare(b.departure) || a.id.localeCompare(b.id));
-    services.forEach((flight, i) => {
-      const offset = (i - (services.length - 1) / 2) * 14, points = offsetPath(spine, offset);
-      if (flight.from !== from) points.reverse();
-      const start = points[0], end = points.at(-1);
-      result.push({
-        flight,
-        start,
-        end,
-        points,
-        control: {x: (start.x + end.x) / 2, y: (start.y + end.y) / 2},
-        path: points.map((p, i) => `${i ? 'L' : 'M'} ${p.x} ${p.y}`).join(' ')
+  const route = chamfers => {
+    const result = [];
+    for (const [key, services] of [...bundles].sort(([a], [b]) => a.localeCompare(b))) {
+      const [from, to] = key.split(':'), a = byCode.get(from), b = byCode.get(to);
+      if (!a || !b) continue;
+      const pa = ports.get(from + ':' + key), pb = ports.get(to + ':' + key);
+      const middle = bundlePath(pa.escape, pb.escape, nodes.filter(n => n !== a && n !== b), (services.length - 1) * 7, chamfers);
+      const spine = [pa.port, ...middle, pb.port];
+      services.sort((a, b) => a.from.localeCompare(b.from) || a.departure.localeCompare(b.departure) || a.id.localeCompare(b.id));
+      services.forEach((flight, i) => {
+        const offset = (i - (services.length - 1) / 2) * 14, points = offsetPath(spine, offset);
+        if (flight.from !== from) points.reverse();
+        const start = points[0], end = points.at(-1);
+        result.push({
+          flight,
+          start,
+          end,
+          points,
+          control: {x: (start.x + end.x) / 2, y: (start.y + end.y) / 2},
+          path: points.map((p, i) => `${i ? 'L' : 'M'} ${p.x} ${p.y}`).join(' ')
+        });
       });
-    });
+    }
+    return result;
+  };
+  let result = route(null);
+  let chamfers = cornerChamfers(nodes, result, ports);
+  if (passableCorners) {
+    result = route(chamfers);
+    const again = cornerChamfers(nodes, result, ports);
+    for (const [code, cuts] of chamfers) chamfers.set(code, cuts.map((c, k) => Math.max(c, again.get(code)[k])));
+  }
+  for (const n of nodes) {
+    if (!chamfers.has(n.code)) continue;
+    n.chamfers = chamfers.get(n.code);
+    Object.assign(n, airportPolygon(n));
   }
   return result;
 }
@@ -842,7 +945,7 @@ export function endpointLabels(route, nodes) {
     const nx = vertical ? 0 : Math.sign(p.x - n.x), ny = vertical ? Math.sign(p.y - n.y) : 0;
     // Direction the text runs away from its anchor: outward for small boxes, inward for hubs.
     const dx = isLargeHub ? -nx : nx, dy = isLargeHub ? -ny : ny;
-    const along = isLargeHub ? -4 : 11;
+    const along = isLargeHub ? -12 : 11;
     const side = 6.5;
     return {
       x: p.x + nx * along + (vertical ? side : 0),
@@ -859,11 +962,12 @@ export function airportPolygon(node) {
   const hw = w / 2, hh = h / 2;
   const shape = node.shape || 'octagon';
 
-  if (Array.isArray(node.polygon) && node.polygon.length >= 3) {
+  if (Array.isArray(node.polygon) && node.polygon.length >= 3 && !node.chamfers) {
     const pts = node.polygon.map(p => Array.isArray(p) ? {x: p[0], y: p[1]} : {x: p.x, y: p.y});
     return {
       polygon: pts,
-      polygonPoints: pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')
+      polygonPoints: pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' '),
+      customPolygon: true
     };
   }
 
@@ -912,23 +1016,20 @@ export function airportPolygon(node) {
       [-hw, hh]
     ];
   } else {
-    // Default: 8-sided faceted chamfered octagon
-    let c = node.chamfer ?? (
-      node.code === 'HEL' ? 44 :
-      (node.code === 'DOH' || node.code === 'SIN' || node.code === 'LAX') ? 14 :
-      node.isRegionalHub ? 16 :
-      (node.importance && node.importance > 0.15) ? 12 : 10
-    );
-    c = Math.min(c, hw - 10, hh - 10);
+    // Default: an eight-sided box with a 45-degree cut at each corner. Before routing every
+    // corner carries the quiet cut; layoutFlights then sets node.chamfers per corner
+    // (top-left, top-right, bottom-right, bottom-left) from the bundles that pass each one.
+    const uniform = Math.min(node.chamfer ?? QUIET_CUT(node), hw - 10, hh - 10);
+    const [tl, tr, br, bl] = node.chamfers ?? [uniform, uniform, uniform, uniform];
     vertices = [
-      [-hw + c, -hh],
-      [hw - c, -hh],
-      [hw, -hh + c],
-      [hw, hh - c],
-      [hw - c, hh],
-      [-hw + c, hh],
-      [-hw, hh - c],
-      [-hw, -hh + c]
+      [-hw + tl, -hh],
+      [hw - tr, -hh],
+      [hw, -hh + tr],
+      [hw, hh - br],
+      [hw - br, hh],
+      [-hw + bl, hh],
+      [-hw, hh - bl],
+      [-hw, -hh + tl]
     ];
   }
 
@@ -938,18 +1039,21 @@ export function airportPolygon(node) {
   };
 
   if (node.isRegionalHub) {
+    // The double rule: a second outline 8 inside the first, each cut shortened by the 3 units
+    // a 45-degree edge moves when offset by that inset.
     const inset = 8;
     const ihw = hw - inset, ihh = hh - inset;
-    const c_inner = Math.max(4, (node.chamfer ?? 44) - 3);
+    const uniform = Math.max(4, (node.chamfer ?? 44) - 3);
+    const [tl, tr, br, bl] = (node.chamfers ?? [uniform, uniform, uniform, uniform]).map(c => Math.max(4, c - 3));
     const innerVertices = [
-      [-ihw + c_inner, -ihh],
-      [ihw - c_inner, -ihh],
-      [ihw, -ihh + c_inner],
-      [ihw, ihh - c_inner],
-      [ihw - c_inner, ihh],
-      [-ihw + c_inner, ihh],
-      [-ihw, ihh - c_inner],
-      [-ihw, -ihh + c_inner]
+      [-ihw + tl, -ihh],
+      [ihw - tr, -ihh],
+      [ihw, -ihh + tr],
+      [ihw, ihh - br],
+      [ihw - br, ihh],
+      [-ihw + bl, ihh],
+      [-ihw, ihh - bl],
+      [-ihw, -ihh + tl]
     ];
     result.innerPolygon = innerVertices.map(([x, y]) => ({x, y}));
     result.innerPolygonPoints = innerVertices.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');

@@ -611,10 +611,10 @@ dd {
 
 .airport:hover > polygon,
 .airport:hover > rect,
-.airport:focus > polygon,
-.airport:focus > rect,
+.airport:focus-visible > polygon,
+.airport:focus-visible > rect,
 .airport:hover > .hub-outer,
-.airport:focus > .hub-outer {
+.airport:focus-visible > .hub-outer {
   stroke: var(--active);
 }
 
@@ -644,6 +644,22 @@ dd {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+h1 .unofficial {
+  display: block;
+  margin-top: 6px;
+  font: 700 9px 'Roboto Condensed', sans-serif;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #6b7a70;
+}
+
+.sheet-unofficial {
+  font: 700 10px 'Roboto Condensed', sans-serif;
+  fill: #6b7a70;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
 }
 
 .visually-hidden {
@@ -719,12 +735,12 @@ dd {
 
 .flight .hit {
   stroke: transparent;
-  stroke-width: 14;
+  stroke-width: var(--hit, 14);
   fill: none;
   pointer-events: stroke;
 }
 
-.flight:focus .hit {
+.flight:focus-visible .hit {
   stroke: #de9437;
   opacity: 0.3;
 }
@@ -760,16 +776,17 @@ dd {
 
 .flight:hover .ink,
 .flight.hover .ink,
-.flight:focus .ink,
-.flight.selected .ink {
+.flight:focus-visible .ink,
+.flight.selected .ink,
+.flight.linked .ink {
   stroke: var(--active);
   stroke-width: 3;
   stroke-dasharray: none;
 }
 
-.has-selection .flight:not(.selected),
-.has-selection .edge-times:not(.selected),
-.has-selection .label-plate:not(.selected),
+.has-selection .flight:not(.selected):not(.linked),
+.has-selection .edge-times:not(.selected):not(.linked),
+.has-selection .label-plate:not(.selected):not(.linked),
 .has-focus:not(.has-selection) .flight:not(.focused),
 .has-focus:not(.has-selection) .edge-times:not(.focused),
 .has-focus:not(.has-selection) .label-plate:not(.focused) {
@@ -853,7 +870,8 @@ dd {
 }
 
 .label-plate.hover .flight-label,
-.label-plate.selected .flight-label {
+.label-plate.selected .flight-label,
+.label-plate.linked .flight-label {
   fill: var(--active-ink);
 }
 
@@ -864,13 +882,13 @@ dd {
 
 /* Times at the arrow endpoints, set along the lane like the reference. */
 .edge-times {
-  font: 700 10.5px 'Roboto Condensed', sans-serif;
+  font: 700 9px 'Roboto Condensed', sans-serif;
 }
 
 .edge-times text {
   paint-order: stroke;
   stroke: var(--paper);
-  stroke-width: 2.5px;
+  stroke-width: 1.8px;
   stroke-linejoin: round;
 }
 
@@ -879,7 +897,8 @@ dd {
 .edge-times.codeshare text { fill: var(--amber-ink); }
 
 .edge-times.hover text,
-.edge-times.selected text {
+.edge-times.selected text,
+.edge-times.linked text {
   fill: var(--active-ink);
 }
 
@@ -955,12 +974,12 @@ dd {
 }
 
 .hub-port:hover .hub-port-bg,
-.hub-port:focus .hub-port-bg {
+.hub-port:focus-visible .hub-port-bg {
   fill: #fff0d7;
 }
 
 .hub-port:hover text,
-.hub-port:focus text {
+.hub-port:focus-visible text {
   fill: var(--active-ink);
 }
 
@@ -1100,11 +1119,12 @@ dd {
 
 .label-plate.crowded-label.hover,
 .label-plate.crowded-label.selected,
+.label-plate.crowded-label.linked,
 .label-plate.crowded-label.focused {
   opacity: 1;
 }
 
-.has-selection .label-plate.crowded-label:not(.selected),
+.has-selection .label-plate.crowded-label:not(.selected):not(.linked),
 .has-focus:not(.has-selection) .label-plate.crowded-label:not(.focused) {
   opacity: 0;
 }
@@ -1145,4 +1165,15 @@ aside.widget-body {
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* Nothing on the sheet or in the panels is text to copy by dragging; only the inputs are. */
+.sheet-wrap, .sheet-wrap svg, .sheet-wrap text, .widget, footer {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input, select {
+  user-select: text;
+  -webkit-user-select: text;
 }

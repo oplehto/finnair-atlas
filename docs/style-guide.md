@@ -49,9 +49,9 @@ Airport size communicates service volume and provides room for route ports. Hels
 - Center the city name prominently; place the airport code and service count below it.
 - Preserve a quiet interior and a thin outline. Airport boxes should read as parts of the diagram, not dashboard cards.
 
-Boxes are chamfered octagons with white paper fill (`#fdfcf6`), a thin near-black outline (`#2f3631`, 1.5) and the city name in blue, as on the reference; the secondary name or code sits below in small condensed type. Partner-served codeshare airports use a dashed brown outline and a black name, with a `VIA LHR · British Airways` line. Gateway hubs use a heavier blue outline.
+Boxes are eight-sided with white paper fill (`#fdfcf6`), a thin near-black outline (`#2f3631`, 1.5) and the city name in blue, as on the reference; the secondary name or code sits below in small condensed type. The corners are cut per corner from the routed bundles, as on the 1974 sheet: a corner that a bundle passes diagonally or bends around (a lane within 48 units of it) gets a large 45° cut of up to 40% of the smaller box dimension, never closer than 10 units to a port on either adjacent edge, and the router then treats that cut as passable so the lanes hug the diagonal instead of bending around a square corner; a quiet corner keeps a small 6-unit cut (8 on gateway hubs) so every box still reads as the same family. Partner-served codeshare airports use a dashed brown outline and a black name, with a `VIA LHR · British Airways` line. Gateway hubs use a heavier blue outline.
 
-The central hub carries a double rule and a city title sized to its box (about width ÷ 14, capped at 320), centred in an otherwise empty interior, as on the reference. Along its edges every route bundle carries its destination code, 42 units inside the outline just beyond the times, so the comb of lanes can be read without following each line; the code is clickable and highlights that airport's connections in place. Spoke airports do not repeat this: their one bundle leads back to the hub. A departures board inside the hub was tried and rejected: the sheet is a weekly timetable, and the edge times already carry the departures.
+The central hub carries a single heavier rule and a city title sized to its box (about width ÷ 14, capped at 320), centred in an otherwise empty interior, as on the reference. Along its edges every route bundle carries its destination code, 54 units inside the outline just beyond the times, so the comb of lanes can be read without following each line; the code is clickable and highlights that airport's connections in place. Spoke airports do not repeat this: their one bundle leads back to the hub. A departures board inside the hub was tried and rejected: the sheet is a weekly timetable, and the edge times already carry the departures.
 
 ## Routes and crossings
 
@@ -72,7 +72,7 @@ Use the notation in the timing-detail reference:
 - Aircraft appear as timetable codes (A321, A359, E190, AT72, B738, B789); the legend lists the codes present on the sheet with their full names.
 - Blue or black lettering matched to the route's ink; partner codeshares use the amber ink.
 
-Times run along the lane, 6.5 units to one side of it, starting 11 units beyond the port outside ordinary airport boxes and 4 units inside the outline of large hubs, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
+Times run along the lane, 6.5 units to one side of it, starting 11 units beyond the port outside ordinary airport boxes and 12 units inside the outline of large hubs, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
 
 Use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
 
@@ -106,10 +106,10 @@ These are current SVG drawing units, not immutable visual rules. Adjust them tog
 | Turboprop and codeshare route stroke | 1.4, dashed |
 | Paper crossing under-stroke | 7 |
 | Flight label text | 11 bold, in route ink |
-| Airport-edge time text | 10.5 bold, 2.5 paper knockout |
+| Airport-edge time text | 9 bold, 1.8 paper knockout |
 | Arrow endpoint gap outside airport | 8 |
 | Straight approach stub | 40 before lane offsetting |
-| Time label | 11 beyond the port outside small boxes, 4 inside hubs, 6.5 beside the lane |
+| Time label | 11 beyond the port outside small boxes, 12 inside hubs, 6.5 beside the lane |
 | City name | Oswald 600, 18 |
 | Hub title | width ÷ 14, capped at 320 |
 | Masthead wordmark | 64 × masthead scale |

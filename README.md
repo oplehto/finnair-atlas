@@ -17,7 +17,7 @@ The default sheet is an **illustrative Finnair-style dataset**, not a verified c
 
 ## Use any airline
 
-Click **Import schedule** with a JSON file in the format below. The title, airports and airlines come from that file. The import stays in the browser's memory; pressing Reload returns to the server schedule. Search matches airport codes, airline names and flight numbers, ignoring spaces, so `AY5955` finds `AY 5955` and `HEL OUL` finds the route. Clicking an airport box, or a destination code along the Helsinki edge, highlights that airport's connections in place and opens a panel with its services and, for partner cities, the journeys via the hub; clicking an arrow opens that flight's details. The panel is a pop-up only: Close or Escape dismisses it and restores the full sheet.
+Point the server at a JSON file or feed in the format below (see Schedule sources); the title, airports and airlines come from that file. Search matches airport codes, airline names and flight numbers, ignoring spaces, so `AY5955` finds `AY 5955` and `HEL OUL` finds the route. Clicking an airport box, or a destination code along the Helsinki edge, highlights that airport's connections in place and opens a panel with its services and, for partner cities, the journeys via the hub; clicking an arrow opens that flight's details. The panel is a pop-up only: Close or Escape dismisses it and restores the full sheet.
 
 Flights are collapsed into **weekly services**: one arrow per flight number, route and departure clock time. A `days` field with the day marks (`#` for daily, `①`–`⑦` for Monday to Sunday) is used when present; otherwise the days are derived from the dates in the file, so a file covering a full week produces correct marks on its own.
 

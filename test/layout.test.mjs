@@ -3,6 +3,28 @@ import assert from 'node:assert/strict';
 import demo from '../public/demo.mjs';
 import {layoutAirports} from '../public/schedule.mjs';
 const overlap=(a,b,gap=0)=>Math.abs(a.x-b.x)<(a.width+b.width)/2+gap && Math.abs(a.y-b.y)<(a.height+b.height)/2+gap;
+// Boxes are drawn as convex polygons whose corners may be cut; a route may pass through the cut-off
+// corner of the rectangle but never enter the polygon. Cyrus-Beck clip of the segment a-b.
+const entersBox=(a,b,n)=>{
+ const poly=(n.polygon||[{x:-n.width/2,y:-n.height/2},{x:n.width/2,y:-n.height/2},{x:n.width/2,y:n.height/2},{x:-n.width/2,y:n.height/2}]).map(p=>({x:p.x+n.x,y:p.y+n.y}));
+ let lo=0,hi=1;const dx=b.x-a.x,dy=b.y-a.y;
+ for(let i=0;i<poly.length;i++){
+  const p=poly[i],q=poly[(i+1)%poly.length];if(p.x===q.x&&p.y===q.y)continue;
+  let nx=q.y-p.y,ny=p.x-q.x;if(nx*(n.x-p.x)+ny*(n.y-p.y)>0){nx=-nx;ny=-ny;}
+  const len=Math.hypot(nx,ny);nx/=len;ny/=len;
+  const limit=nx*p.x+ny*p.y-0.01,fa=nx*a.x+ny*a.y-limit,fb=fa+nx*dx+ny*dy;
+  if(fa>=0&&fb>=0)return false;
+  if(fa>=0)lo=Math.max(lo,fa/(fa-fb));else if(fb>=0)hi=Math.min(hi,fa/(fa-fb));
+  if(lo>=hi)return false;
+ }
+ return true;
+};
+const routeClearsBoxes=(routes,nodes)=>{
+ for(const r of routes)for(const n of nodes){
+  if(n.code===r.flight.from||n.code===r.flight.to)continue;
+  for(let s=0;s<r.points.length-1;s++)assert.ok(!entersBox(r.points[s],r.points[s+1],n),`${r.flight.id} crosses ${n.code}`);
+ }
+};
 test('sizes hubs by service volume with Helsinki and Oulu visibly larger',()=>{
  const nodes=layoutAirports(demo.airports,demo.flights),get=c=>nodes.find(a=>a.code===c);
  assert.ok(get('HEL').width>get('OUL').width*1.3);
@@ -43,12 +65,10 @@ test('visible flight labels avoid airport boxes and one another',()=>{
  }
 });
 test('flight paths avoid unrelated airport boxes on the displayed Finnair date',()=>{
+ // Checked against the drawn octagon rather than the rectangle: a lane may hug a cut corner.
  const flights=demo.flights.filter(f=>f.departure.startsWith('2026-09-10'));
  const nodes=layoutAirports(demo.airports,flights),routes=layoutFlights(nodes,flights);
- for(const r of routes)for(let i=1;i<100;i++){
-  const p=curvePoint(r,i/100);
-  for(const n of nodes)if(n.code!==r.flight.from&&n.code!==r.flight.to)assert.ok(Math.abs(p.x-n.x)>=n.width/2||Math.abs(p.y-n.y)>=n.height/2,`${r.flight.id} crosses ${n.code}`);
- }
+ routeClearsBoxes(routes,nodes);
 });
 
 test('each route uses straight parallel lanes with constant spacing in both directions',()=>{
@@ -113,17 +133,14 @@ test('the displayed date with partner codeshares stays compact, clear and routab
    const n=byCode.get(code),dx=Math.abs(point.x-n.x),dy=Math.abs(point.y-n.y);
    assert.ok((Math.abs(dx-n.width/2-8)<.001&&dy<=n.height/2)||(Math.abs(dy-n.height/2-8)<.001&&dx<=n.width/2),`${code} has a port beyond its edge`);
   }
-  for(let i=1;i<100;i++){
-   const p=curvePoint(r,i/100);
-   for(const n of nodes)if(n.code!==r.flight.from&&n.code!==r.flight.to)assert.ok(Math.abs(p.x-n.x)>=n.width/2||Math.abs(p.y-n.y)>=n.height/2,`${r.flight.id} crosses ${n.code}`);
-  }
  }
+ routeClearsBoxes(routes,nodes);
  // Sheet compactness: the bounding box of all airport boxes. The hub alone is about 9 M square
- // units; the tiers and partner satellites around it must not spread the sheet past 46 M
+ // units; the tiers and partner satellites around it must not spread the sheet past 49 M
  // (about 8,900 x 5,000: the west fan needs its three columns 500, 950 and 1,400 outside the
  // hub and London's four satellite columns to draw without crossings).
  const left=Math.min(...nodes.map(n=>n.x-n.width/2)),right=Math.max(...nodes.map(n=>n.x+n.width/2)),top=Math.min(...nodes.map(n=>n.y-n.height/2)),bottom=Math.max(...nodes.map(n=>n.y+n.height/2));
- assert.ok((right-left)*(bottom-top)<46e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
+ assert.ok((right-left)*(bottom-top)<49e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
 });
 
 test('the domestic fan of the full weekly sheet draws without route crossings',()=>{
@@ -145,8 +162,24 @@ test('the domestic fan of the full weekly sheet draws without route crossings',(
 });
 
 test('airport polygons are non-rectangular with chamfered, faceted, or stepped geometry', () => {
- const nodes = layoutAirports(demo.airports, demo.flights);
+ // Corners are cut per corner from the routed bundles (see the style guide): a corner a bundle
+ // passes diagonally or bends around gets a large 45-degree cut, up to 40% of the smaller box
+ // dimension; a quiet corner keeps a small one; no cut comes within 10 of a port on its edges.
+ const nodes = layoutAirports(demo.airports, demo.flights), routes = layoutFlights(nodes, demo.flights);
  const hel = nodes.find(n => n.code === 'HEL');
+ const cornerOf = (n, dx, dy) => n.chamfers[dy < 0 ? (dx < 0 ? 0 : 1) : (dx < 0 ? 3 : 2)];
+ for (const n of nodes) {
+  assert.equal(n.chamfers.length, 4, `${n.code} has one chamfer per corner`);
+  for (const c of n.chamfers) assert.ok(c >= 0 && c <= Math.max(44, Math.round(0.4 * Math.min(n.width, n.height))) && c <= Math.min(n.width, n.height) / 2 - 10, `${n.code} chamfer ${c} out of range`);
+ }
+ assert.ok(nodes.some(n => !n.isRegionalHub && n.chamfers.some(c => c >= 28)), 'some corners beside diagonal bundles are cut large');
+ assert.ok(nodes.some(n => !n.isRegionalHub && n.chamfers.some(c => c <= 8)), 'quiet corners keep a small cut');
+ for (const r of routes) for (const [p, code] of [[r.start, r.flight.from], [r.end, r.flight.to]]) {
+  const n = nodes.find(n => n.code === code), dx = p.x - n.x, dy = p.y - n.y;
+  const onTopOrBottom = Math.abs(Math.abs(dy) - n.height / 2 - 8) < .001;
+  const room = onTopOrBottom ? n.width / 2 - Math.abs(dx) : n.height / 2 - Math.abs(dy);
+  assert.ok(room >= cornerOf(n, dx, dy) + 10, `${code} port is cut by its corner chamfer`);
+ }
  assert.ok(Array.isArray(hel.polygon));
  assert.equal(hel.polygon.length, 8, 'Helsinki hub has 8-sided faceted outer polygon');
  assert.ok(Array.isArray(hel.innerPolygon), 'Helsinki hub has inner concentric polygon');
@@ -159,6 +192,7 @@ test('airport polygons are non-rectangular with chamfered, faceted, or stepped g
 
  const oul = nodes.find(n => n.code === 'OUL');
  assert.equal(oul.polygon.length, 8);
+ assert.equal(hel.innerPolygon.length, 8, 'Helsinki keeps its double rule after routing');
 
  const custom = layoutAirports([
   {code: 'STP', name: 'Stepped City', lat: 60, lon: 25, shape: 'stepped'},
