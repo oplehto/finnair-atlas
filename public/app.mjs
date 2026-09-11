@@ -441,9 +441,10 @@ async function refresh(){
  busy=true;
  $('refresh').disabled=true;
  try{
-  // The Node server answers api/schedule; a static host serves the baked schedule.json instead.
-  let response=await fetch('api/schedule',{signal:AbortSignal.timeout(20000)}).catch(()=>null);
-  if(!response||!response.ok)response=await fetch('schedule.json',{signal:AbortSignal.timeout(20000)});
+  // A static build names its baked schedule in a meta tag; the Node server answers api/schedule.
+  const baked=document.querySelector('meta[name="schedule-source"]')?.content;
+  let response=await fetch(baked||'api/schedule',{signal:AbortSignal.timeout(20000)}).catch(()=>null);
+  if(!baked&&(!response||!response.ok))response=await fetch('schedule.json',{signal:AbortSignal.timeout(20000)});
   if(!response.ok)throw Error('Schedule unavailable. Last successful schedule is still displayed.');
   const next=await response.json();
   if(imported)return;
