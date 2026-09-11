@@ -164,7 +164,7 @@ function render(){
  const portSides=new Map();
  for(const r of routes)for(const [p,code] of [[r.start,r.flight.from],[r.end,r.flight.to]]){const n=byCode.get(code);if(!n)continue;const s=portSides.get(code)||{top:0,bottom:0};if(Math.abs(p.y-(n.y-n.height/2-8))<0.01)s.top++;else if(Math.abs(p.y-(n.y+n.height/2+8))<0.01)s.bottom++;portSides.set(code,s);}
  // Name block: centred by default; in the half away from the ports when only one horizontal edge carries them.
- const nameBlock=a=>{const s=portSides.get(a.code),hh=a.height/2;if(!s||(s.top&&s.bottom)||(!s.top&&!s.bottom))return {name:-7,alt:15};return s.top?{name:hh-30,alt:hh-14}:{name:-hh+24,alt:-hh+40};};
+ const nameBlock=a=>{const s=portSides.get(a.code),hh=a.height/2;if(!s||(s.top&&s.bottom)||(!s.top&&!s.bottom))return {name:-7,alt:15};return s.top?{name:hh-36,alt:hh-20}:{name:-hh+30,alt:-hh+46};};
  const partnerOf=new Map((data.codeshareAirports||[]).filter(a=>a.hub&&a.partner).map(a=>[a.hub,a.partner]));
 
  // Sheet geometry: content bounds, then a scale factor so masthead, frame and legend read at the fit view.
@@ -276,10 +276,10 @@ function render(){
    const onTopOrBottom=Math.abs(Math.abs(cy-hub.y)-hub.height/2-8)<0.01;
    const nx=onTopOrBottom?0:Math.sign(cx-hub.x),ny=onTopOrBottom?Math.sign(cy-hub.y):0;
    const lo=Math.min(...pts.map(p=>onTopOrBottom?p.x:p.y))-6,hi=Math.max(...pts.map(p=>onTopOrBottom?p.x:p.y))+6;
-   const depth=96,tick=6,d=onTopOrBottom
+   const depth=104,tick=6,d=onTopOrBottom
     ?`M ${lo} ${cy-ny*(depth-tick)} L ${lo} ${cy-ny*depth} L ${hi} ${cy-ny*depth} L ${hi} ${cy-ny*(depth-tick)}`
     :`M ${cx-nx*(depth-tick)} ${lo} L ${cx-nx*depth} ${lo} L ${cx-nx*depth} ${hi} L ${cx-nx*(depth-tick)} ${hi}`;
-   const x=cx-nx*(depth+18),y=cy-ny*(depth+18),w=measure(code,'700 13px "Roboto Condensed"')+8;
+   const x=cx-nx*(depth+22),y=cy-ny*(depth+22),w=measure(code,'700 13px "Roboto Condensed"')+8;
    const g=el('g',{class:'hub-port',role:'button',tabindex:0,'aria-label':`${byName(code)} (${code}), ${pts.length} services. Activate to show only this airport's flights.`});
    g.dataset.code=code;
    g.append(el('path',{d,class:'hub-bracket'}),el('rect',{x:x-w/2,y:y-9,width:w,height:18,class:'hub-port-bg'}),el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central'},code));

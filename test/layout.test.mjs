@@ -67,9 +67,10 @@ test('visible flight labels avoid airport boxes and one another',()=>{
 // The sheet is a weekly timetable; the single-day subsets below use the Monday of the published
 // week (14 September 2026), the fullest day, as a second, smaller airport set to lay out.
 const MONDAY='2026-09-14';
-test('flight paths avoid unrelated airport boxes on the displayed Finnair date',()=>{
+test('flight paths avoid unrelated airport boxes on the weekly Finnair sheet',()=>{
  // Checked against the drawn octagon rather than the rectangle: a lane may hug a cut corner.
- const flights=demo.flights.filter(f=>f.departure.startsWith(MONDAY));
+ // The app draws the whole week at once, so that is the sheet under test.
+ const flights=demo.flights;
  const nodes=layoutAirports(demo.airports,flights),routes=layoutFlights(nodes,flights);
  routeClearsBoxes(routes,nodes);
 });

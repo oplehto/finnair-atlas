@@ -30,7 +30,7 @@ const CODESHARE_OFFSETS = {
   PDX: {hub: 'SEA', dx: -400, dy: 85, region: 'west'},
 
   // Mexico & Texas via DFW (American Airlines)
-  CUN: {hub: 'DFW', dx: -400, dy: -160, region: 'west'},
+  CUN: {hub: 'DFW', dx: -400, dy: -150, region: 'west'},
   MEX: {hub: 'DFW', dx: -400, dy: 160, region: 'west'},
   AUS: {hub: 'DFW', dx: -700, dy: 0, region: 'west'},
 
@@ -105,9 +105,9 @@ const CODESHARE_OFFSETS = {
   MLE: {hub: 'DOH', dx: -387, dy: -902, region: 'east'},
 
   // Japan Domestic via HND (Japan Airlines): a short column beside Haneda
-  CTS: {hub: 'HND', dx: 350, dy: -120, region: 'east'},
+  CTS: {hub: 'HND', dx: 350, dy: -130, region: 'east'},
   FUK: {hub: 'HND', dx: 350, dy: 0, region: 'east'},
-  OKA: {hub: 'HND', dx: 350, dy: 120, region: 'east'},
+  OKA: {hub: 'HND', dx: 350, dy: 130, region: 'east'},
 
   // Philippines via HKG (Cathay Pacific)
   CEB: {hub: 'HKG', dx: 350, dy: 0, region: 'east'},
@@ -193,9 +193,10 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
       // Room for the inward times: on a north/south spoke they rise from the port edge, so the height
       // must hold 8 + text + 14 + name block 44 + 10; on a west/east spoke they run in horizontally
       // beside the centred name, so the width must hold that on both sides of it.
-      const textHeight = wide ? 8 + text + 14 + 44 + 10 : 0, textWidth = wide ? 0 : 2 * (18 + text) + nameWidth;
+      // Partner satellites are small daily-only boxes in their gateway's grid; they keep a fixed size.
+      const textHeight = wide && !a.codeshare ? 13 + text + 20 + 44 + 16 : 0, textWidth = wide || a.codeshare ? 0 : 2 * (26 + text) + nameWidth;
       width = Math.round(Math.max(200, nameWidth + 32, textWidth, wide ? along : across));
-      height = Math.round(Math.max(a.codeshare ? 76 : 120, textHeight, wide ? across : along));
+      height = Math.round(Math.max(a.codeshare ? 84 : 120, textHeight, wide ? across : along));
     }
     return {
       ...a,
@@ -795,8 +796,8 @@ function routePorts(nodes, bundles, byCode) {
       // On a spoke that also has ports on one horizontal edge, side-edge ports move into the other half
       // so their inward times stay clear of the column of times rising from that edge.
       let bias = 0;
-      if (vertical && !node.isRegionalHub && (sides.top.length > 0) !== (sides.bottom.length > 0)) {
-        const room = Math.max(0, node.height / 2 - 8 - total / 2);
+      if (vertical && !node.isRegionalHub && !node.isGatewayHub && (sides.top.length > 0) !== (sides.bottom.length > 0)) {
+        const room = Math.max(0, node.height / 2 - 14 - total / 2);
         bias = Math.min(room, node.height / 4) * (sides.top.length ? 1 : -1);
       }
       let cursor = -total / 2 + bias;
@@ -1034,7 +1035,7 @@ export function endpointLabels(route, nodes) {
     const nx = vertical ? 0 : Math.sign(p.x - n.x), ny = vertical ? Math.sign(p.y - n.y) : 0;
     // The text runs inward from the outline at every box, centred on its lane.
     const dx = -nx, dy = -ny;
-    const along = isLargeHub ? -12 : -8;
+    const along = isLargeHub ? -16 : -13;
     const side = 0;
     return {
       x: p.x + nx * along + (vertical ? side : 0),
