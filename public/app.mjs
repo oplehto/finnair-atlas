@@ -22,6 +22,9 @@ const dot=t=>t.replace(':','.');
 const ICAO={AY:'FIN',BA:'BAW',QR:'QTR',QF:'QFA',AA:'AAL',AS:'ASA',JL:'JAL',CX:'CPA',IB:'IBE',AT:'RAM',MH:'MAS',RJ:'RJA',UL:'ALK',WY:'OMA',SK:'SAS',LH:'DLH',KL:'KLM',AF:'AFR',LX:'SWR',OS:'AUA',N7:'NRA'};
 const trackLink=number=>{const n=String(number||'').replace(/\s+/g,'').toUpperCase();const m=n.match(/^([A-Z0-9]{2})(\d{1,4})[A-Z]?$/);if(!m)return '';const callsign=(ICAO[m[1]]||m[1])+m[2];return `<a class="track" href="https://www.flightaware.com/live/flight/${encodeURIComponent(callsign)}" target="_blank" rel="noopener noreferrer">${escape(flightNumber({number:n}))} on FlightAware ↗</a>`;};
 const inkOf=f=>f.codeshare?'codeshare':/ATR|Dash|DHC|Q400/i.test(f.aircraft||'')?'prop':'jet';
+// Reference marks a printed timetable would explain in its notation box: a route that has not opened
+// yet, and one that is suspended. Both keep their ink and change only their stroke.
+const marksOf=f=>`${f.opens?' opens':''}${f.suspended?' suspended':''}`;
 // Worn-print filter: a little ink mottle, a hair of edge wobble and a soft blur, for the logotype only.
 const WORN_FILTER='<feTurbulence type="fractalNoise" baseFrequency="0.28" numOctaves="3" seed="7" result="grain"/><feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.32 1.1" result="mottle"/><feComposite in="SourceGraphic" in2="mottle" operator="in" result="inked"/><feDisplacementMap in="inked" in2="grain" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="wobbled"/><feGaussianBlur in="wobbled" stdDeviation="0.5"/>';
 function wornFilter(id){const f=el('filter',{id,x:'-5%',y:'-10%',width:'110%',height:'120%','color-interpolation-filters':'sRGB'});f.innerHTML=WORN_FILTER;return f;}
@@ -96,14 +99,17 @@ function sheetLegend(x,y,k,width){
  if(types.length>21)item(fleet,2*(colW/3),22+6*20,`… ja ${types.length-20} muuta / and ${types.length-20} more`);
 
  const marks=column(2,'MERKINNÄT — TECKENFÖRKLARING — NOTATION');
- const sample=(y,cls,dash)=>{marks.append(el('path',{d:`M 0 ${y} L 72 ${y}`,class:`legend-sample ${cls}`,'stroke-dasharray':dash,'marker-end':`url(#${cls})`}));};
+ const sample=(y,cls,dash,marker=cls)=>{marks.append(el('path',{d:`M 0 ${y} L 72 ${y}`,class:`legend-sample ${cls}`,'stroke-dasharray':dash,'marker-end':`url(#${marker})`}));};
  sample(18,'jet','none');item(marks,86,22,'Finnair, suihkukone / jet — sininen viiva');
  sample(38,'prop','7 3');item(marks,86,42,'Potkuriturbiini / turboprop — musta katkoviiva');
  sample(58,'codeshare','8 3');item(marks,86,62,'Yhteistyölento / partner codeshare — keltainen katkoviiva');
- item(marks,0,86,'13.35 = lähtö- tai tuloaika lentoaseman reunassa / departure or arrival time at the airport edge');
- item(marks,0,106,'AY 431 # A321 = lennon numero · päivät · kalusto / flight number · days · aircraft');
- item(marks,0,126,'Nuolenkärki = saapuminen / arrival · Katkos viivassa = ylittävä reitti / gap = route passing over');
- item(marks,0,146,'Reunan pituus = vuorojen määrä / edge length = number of services');
+ sample(78,'opens','1.5 4','jet');item(marks,86,82,'Avautuva reitti / route opening later — pisteviiva, ▷ = ensimmäinen päivä / first date');
+ sample(98,'suspended','14 3 2 3','jet');item(marks,86,102,'Keskeytetty reitti / suspended route — pitkä katkoviiva, ei liikennettä / no service');
+ item(marks,0,126,'13.35 = lähtö- tai tuloaika lentoaseman reunassa / departure or arrival time at the airport edge');
+ item(marks,0,146,'AY 431 # A321 = lennon numero · päivät · kalusto / flight number · days · aircraft');
+ item(marks,0,166,'† = vuokrattu kone / aircraft wet-leased  ·  ⁵ = viidennen vapauden osuus / fifth-freedom sector');
+ item(marks,0,186,'Nuolenkärki = saapuminen / arrival · Katkos viivassa = ylittävä reitti / gap = route passing over');
+ item(marks,0,206,'Reunan pituus = vuorojen määrä / edge length = number of services');
  g.append(
   el('line',{x1:0,y1:H-50,x2:W,y2:H-50,class:'legend-rule'}),
   el('text',{x:20,y:H-32,class:'legend-item'},'Aikataulut ja konetyypit voidaan muuttaa ilmoittamatta · Tidtabeller och flygplanstyper kan ändras utan föregående meddelande · Schedules and aircraft types may change without notice'),
@@ -163,7 +169,9 @@ function render(){
  const portSides=new Map();
  for(const r of routes)for(const [p,code] of [[r.start,r.flight.from],[r.end,r.flight.to]]){const n=byCode.get(code);if(!n)continue;const s=portSides.get(code)||{top:0,bottom:0};if(Math.abs(p.y-(n.y-n.height/2-8))<0.01)s.top++;else if(Math.abs(p.y-(n.y+n.height/2+8))<0.01)s.bottom++;portSides.set(code,s);}
  // Name block: centred by default; in the half away from the ports when only one horizontal edge carries them.
- const nameBlock=a=>{const s=portSides.get(a.code),hh=a.height/2;if(!s||(s.top&&s.bottom)||(!s.top&&!s.bottom))return {name:-7,alt:15};return s.top?{name:hh-36,alt:hh-20}:{name:-hh+30,alt:-hh+46};};
+ // Three lines per spoke: the IATA code in small caps above, the city name, then the secondary name.
+ // The block spans 52 units, which layout.mjs reserves when it sizes a box from its text.
+ const nameBlock=a=>{const s=portSides.get(a.code),hh=a.height/2;if(!s||(s.top&&s.bottom)||(!s.top&&!s.bottom))return {code:-22,name:-5,alt:17};return s.top?{code:hh-50,name:hh-33,alt:hh-15}:{code:-hh+24,name:-hh+41,alt:-hh+59};};
  const partnerOf=new Map((data.codeshareAirports||[]).filter(a=>a.hub&&a.partner).map(a=>[a.hub,a.partner]));
 
  // Sheet geometry: content bounds, then a scale factor so masthead, frame and legend read at the fit view.
@@ -196,7 +204,7 @@ function render(){
  const routesG=el('g',{class:'routes'});
  for(const route of routes){
   const f=route.flight,ink=inkOf(f);
-  const g=el('g',{class:`flight ${ink}${selected===f.id?' selected':''}`,tabindex:0,role:'button','aria-label':`${f.number||f.id}: ${f.from} to ${f.to}, ${clockTime(f.departure)} to ${clockTime(f.arrival)}`});
+  const g=el('g',{class:`flight ${ink}${marksOf(f)}${selected===f.id?' selected':''}`,tabindex:0,role:'button','aria-label':`${f.number||f.id}: ${f.from} to ${f.to}, ${clockTime(f.departure)} to ${clockTime(f.arrival)}`});
   g.dataset.id=f.id;
   g.append(
    el('path',{d:route.path,class:'hit'}),
@@ -233,12 +241,13 @@ function render(){
     g.append(
      el('text',{x:0,y:dy-16,'text-anchor':'middle',class:'city-name'},upper(a.name)),
      el('text',{x:0,y:dy+4,'text-anchor':'middle',class:'city-alt'},upper(a.alt||a.code)),
-     el('text',{x:0,y:dy+22,'text-anchor':'middle',class:'city-cs-badge'},`VIA ${a.hub||'HUB'} · ${upper(a.partner||'partner')}`)
+     el('text',{x:0,y:dy+22,'text-anchor':'middle',class:'city-cs-badge'},`${a.code} · VIA ${a.hub||'HUB'} · ${upper(a.partner||'partner')}`)
     );
    }else{
     g.append(
+     el('text',{x:0,y:nb.code,'text-anchor':'middle',class:'city-code'},a.code),
      el('text',{x:0,y:nb.name,'text-anchor':'middle',class:'city-name'},upper(a.name)),
-     el('text',{x:0,y:nb.alt,'text-anchor':'middle',class:'city-alt'},a.alt?upper(a.alt):a.code)
+     ...(a.alt?[el('text',{x:0,y:nb.alt,'text-anchor':'middle',class:'city-alt'},upper(a.alt))]:[])
     );
    }
   }
@@ -250,7 +259,7 @@ function render(){
  const timesG=el('g',{class:'times'});
  for(const route of routes){
   const f=route.flight;
-  const g=el('g',{class:`edge-times ${inkOf(f)}${selected===f.id?' selected':''}`});
+  const g=el('g',{class:`edge-times ${inkOf(f)}${marksOf(f)}${selected===f.id?' selected':''}`});
   g.dataset.id=f.id;
   for(const label of endpointLabels(route,points))g.append(el('text',{x:label.x,y:label.y,class:label.hub?'hub-time':null,'text-anchor':label.anchor||'middle','dominant-baseline':'central',transform:`rotate(${label.angle} ${label.x} ${label.y})`},label.text));
   timesG.append(g);
@@ -292,7 +301,7 @@ function render(){
  for(const route of routes){
   const f=route.flight,label=labels.get(f.id);
   if(!label)continue;
-  const g=el('g',{class:`label-plate ${inkOf(f)}${label.hidden?' crowded-label':''}${selected===f.id?' selected':''}`,transform:`rotate(${label.angle*180/Math.PI} ${label.x} ${label.y})`});
+  const g=el('g',{class:`label-plate ${inkOf(f)}${marksOf(f)}${label.hidden?' crowded-label':''}${selected===f.id?' selected':''}`,transform:`rotate(${label.angle*180/Math.PI} ${label.x} ${label.y})`});
   g.dataset.id=f.id;
   g.append(
    el('rect',{x:label.x-label.width/2,y:label.y-6.5,width:label.width,height:13,class:'label-bg'}),

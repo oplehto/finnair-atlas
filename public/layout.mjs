@@ -3,7 +3,12 @@ import {forceSimulation, forceManyBody, forceX, forceY} from 'd3-force';
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 const DOMESTIC_CODES = new Set(["HEL","TKU","VAA","OUL","RVN","KTT","IVL","KAJ","KUO","JOE","JYV","MHQ","KAO","KEM","KOK","TMP"]);
-const SCANDINAVIA_CODES = new Set(["ARN","OSL","CPH","KEF","GOT","BGO","TOS","TRD","BLL","SVG","BOO","ALF","KKN","UME","VBY","LHR","MAN","EDI","DUB","JFK","ORD","DFW","LAX","SEA","MIA","YYZ"]);
+const SCANDINAVIA_CODES = new Set(["ARN","OSL","CPH","KEF","GOT","BGO","TRD","BLL","SVG","BOO","UME","VBY","LHR","MAN","EDI","DUB","JFK","ORD","DFW","LAX","SEA","MIA","YYZ"]);
+// Norwegian airports Finnair reaches only by continuing a Lapland flight — Tromsø beyond Rovaniemi,
+// Alta beyond Kittilä, Kirkenes beyond Ivalo. They carry no Helsinki bundle at all, so they sit above
+// the domestic fan as spokes of their feeder boxes rather than in the west column, where the leg back
+// to Lapland would cut across Oulu.
+const FAR_NORTH_CODES = new Set(["TOS","ALF","KKN"]);
 const EAST_CODES = new Set(["DOH","DXB","DEL","BKK","HKT","SIN","HKG","PVG","ICN","HND","NRT","KIX","NGO","MEL"]);
 
 // Partner satellites are placed relative to their gateway hub (dx, dy from the hub centre).
@@ -138,7 +143,7 @@ const CODESHARE_OFFSETS = {
 
 
 function regionOf(a) {
-  if (DOMESTIC_CODES.has(a.code)) return "north";
+  if (DOMESTIC_CODES.has(a.code) || FAR_NORTH_CODES.has(a.code)) return "north";
   if (SCANDINAVIA_CODES.has(a.code) || a.lon < -30) return "west";
   if (EAST_CODES.has(a.code) || a.lon > 45) return "east";
   return "south";
@@ -191,10 +196,11 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
       const along = laneSpace + 24, across = Math.round(along / 2), wide = reg === 'north' || reg === 'south';
       const nameWidth = (a.name || a.code).length * 10.5, text = longestTime.get(a.code) || 0;
       // Room for the inward times: on a north/south spoke they rise from the port edge, so the height
-      // must hold 8 + text + 14 + name block 44 + 10; on a west/east spoke they run in horizontally
-      // beside the centred name, so the width must hold that on both sides of it.
+      // must hold 8 + text + 14 + name block 52 + 10; on a west/east spoke they run in horizontally
+      // beside the centred name, so the width must hold that on both sides of it. The name block is
+      // three lines — code, city, secondary name — and 52 units is what those need.
       // Partner satellites are small daily-only boxes in their gateway's grid; they keep a fixed size.
-      const textHeight = wide && !a.codeshare ? 13 + text + 20 + 44 + 16 : 0, textWidth = wide || a.codeshare ? 0 : 2 * (26 + text) + nameWidth;
+      const textHeight = wide && !a.codeshare ? 13 + text + 20 + 52 + 16 : 0, textWidth = wide || a.codeshare ? 0 : 2 * (26 + text) + nameWidth;
       width = Math.round(Math.max(200, nameWidth + 32, textWidth, wide ? along : across));
       height = Math.round(Math.max(a.codeshare ? 84 : 120, textHeight, wide ? across : along));
     }
@@ -236,9 +242,10 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     [['MHQ', -1350]],
     [['JYV', -125], ['KUO', 1175]],
     [['VAA', -1175], ['KAJ', 575], ['JOE', 1150]],
-    [['KOK', -1050], ['KEM', -650], ['OUL', -200], ['RVN', 220], ['KTT', 490], ['IVL', 740], ['KAO', 1225]]
+    [['KOK', -1050], ['KEM', -650], ['OUL', -200], ['RVN', 220], ['KTT', 490], ['IVL', 740], ['KAO', 1225]],
+    [['TOS', 180], ['ALF', 560], ['KKN', 940]]
   ];
-  const nTierY = [300, 600, 900, 1200].map(offset => HEL_Y - hubHeight / 2 - offset);
+  const nTierY = [300, 600, 900, 1200, 1500].map(offset => HEL_Y - hubHeight / 2 - offset);
   nTiers.forEach((tier, tIdx) => {
     for (const [code, dx] of tier) {
       const node = byCode.get(code);
@@ -264,7 +271,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // Miami) needs its slot searched again rather than a guessed offset.
   const wCols = [
     {x: 500, boxes: [['UME', -1445], ['TRD', -725], ['GOT', 135], ['CPH', 750]]},
-    {x: 950, boxes: [['TOS', -1265], ['KEF', -1025], ['ARN', -475], ['OSL', -65], ['BGO', 285], ['SVG', 450], ['EDI', 705], ['MAN', 1335], ['DUB', 2225]]},
+    {x: 950, boxes: [['KEF', -1025], ['ARN', -475], ['OSL', -65], ['BGO', 285], ['SVG', 450], ['EDI', 705], ['MAN', 1335], ['DUB', 2225]]},
     {x: 1400, boxes: [['SEA', -1535], ['ORD', -940], ['JFK', -420], ['DFW', 20], ['LAX', 485], ['LHR', 1550]]}
   ];
   for (const col of wCols) {
@@ -280,15 +287,17 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // Two columns at fixed offsets from the hub outline, each box at an explicit y offset from
   // the hub centre: the Gulf, India and Thailand nearest, with Doha high so its partner grid
   // fills the top-right corner; Korea, China, Japan, Hong Kong and Singapore in the outer
-  // column with Singapore at the foot so its partner network fills the bottom-right. Every
+  // column with Singapore at the foot so its partner network fills the bottom-right. Melbourne
+  // sits at the foot of the inner column, directly below Bangkok: it is reached by continuing the
+  // Bangkok flight, so the leg drops straight down its own column instead of cutting across Hong Kong. Every
   // east bundle leaves Helsinki's right edge inside a short port comb, so the outer column
   // is placed in the gaps of the inner one: Seoul's bundle passes through the 224-unit gap
   // between Doha's top edge and its lowest satellite row, Shanghai's under Doha's bottom
   // corner, and Hong Kong sits at least 371 above Singapore so that Cebu, to the right of
   // Hong Kong, clears Taipei, above right of Singapore.
   const eCols = [
-    {x: 540, boxes: [['DOH', -1000], ['DXB', -500], ['DEL', 0], ['BKK', 600], ['HKT', 900]]},
-    {x: 1020, boxes: [['ICN', -1400], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['MEL', 1000], ['SIN', 1250]]}
+    {x: 540, boxes: [['DOH', -1000], ['DXB', -500], ['DEL', 0], ['BKK', 600], ['HKT', 900], ['MEL', 1180]]},
+    {x: 1020, boxes: [['ICN', -1400], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['SIN', 1250]]}
   ];
   for (const col of eCols) {
     for (const [code, dy] of col.boxes) {
@@ -316,7 +325,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
     [['GVA', 'ZRH', 'INN', 'SZG', 'VIE'], ['VCE', 'MUC', 'LJU']],
     [['BCN', 'NCE', 'TRN', 'MXP', 'LIN', 'BLQ', 'VRN'], ['FLR', 'SPU', 'DBV']],
     [['AGP', 'MAD', 'VLC', 'ALC', 'PMI'], ['FCO', 'CTA', 'GZP', 'NAP', 'SKG', 'ATH', 'TIA', 'KGS']],
-    [['TFS', 'LPA', 'FUE', 'ACE', 'LIS', 'OPO', 'FNC', 'FAO'], ['JTR', 'CFU', 'ZTH', 'CHQ', 'HER', 'RHO', 'PFO', 'AYT', 'LCA']]
+    [['TFS', 'LPA', 'FUE', 'ACE', 'LIS', 'OPO', 'FNC', 'FAO'], ['JTR', 'PVK', 'CFU', 'ZTH', 'CHQ', 'HER', 'RHO', 'PFO', 'AYT', 'LCA']]
   ];
   const sTierY = [320, 590, 860, 1130, 1400, 1670].map(offset => HEL_Y + hubHeight / 2 + offset);
   // Flare per row as [west, east], searched with the rows: the west halves stay inside
@@ -973,7 +982,10 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
     const f = r.flight;
     const freq = f.days || f.frequency || '#';
     const num = String(f.number || f.id).trim().replace(/^([A-Z]{2}|[A-Z]\d|\d[A-Z])\s*(\d+)/i, (m, c, n) => `${c.toUpperCase()} ${n}`);
-    const text = `${num}  ${freq}  ${aircraftNotation(f.aircraft)}`;
+    // Reference marks ride at the end of the label: a dagger for a wet-leased aircraft, a
+    // superscript five for a fifth-freedom sector, and an opening date for a route not yet flying.
+    const notes = [f.wetlease ? '\u2020' : '', f.fifthFreedom ? '\u2075' : '', f.opens ? `\u25b7${f.opens.slice(8)}.${f.opens.slice(5, 7)}.` : ''].filter(Boolean).join(' ');
+    const text = `${num}  ${freq}  ${aircraftNotation(f.aircraft)}${notes ? '  ' + notes : ''}`;
     const width = measure(text) + 12;
     let label;
     for (const t of [0.5, 0.38, 0.62, 0.26, 0.74, 0.17, 0.83]) {

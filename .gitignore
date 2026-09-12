@@ -10,3 +10,4 @@ site/
 !.dev.vars.example
 !.env.example
 .playwright-mcp/
+.cache/

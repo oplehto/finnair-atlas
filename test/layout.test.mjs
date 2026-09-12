@@ -142,11 +142,12 @@ test('the displayed weekly sheet with partner codeshares stays compact, clear an
  }
  routeClearsBoxes(routes,nodes);
  // Sheet compactness: the bounding box of all airport boxes. The hub alone is about 10 M square
- // units; the tiers and partner satellites around it must not spread the sheet past 49 M
- // (about 9,300 x 5,100: the west fan needs its three columns 500, 950 and 1,400 outside the
- // hub and London's four satellite columns to draw without crossings).
+ // units; the tiers and partner satellites around it must not spread the sheet past 52 M
+ // (about 9,430 x 5,400: the west fan needs its three columns 500, 950 and 1,400 outside the
+ // hub and London's four satellite columns to draw without crossings, and the domestic fan
+ // carries a fifth tier for the far-north spokes beyond Lapland).
  const left=Math.min(...nodes.map(n=>n.x-n.width/2)),right=Math.max(...nodes.map(n=>n.x+n.width/2)),top=Math.min(...nodes.map(n=>n.y-n.height/2)),bottom=Math.max(...nodes.map(n=>n.y+n.height/2));
- assert.ok((right-left)*(bottom-top)<49e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
+ assert.ok((right-left)*(bottom-top)<52e6,`sheet ${Math.round(right-left)} x ${Math.round(bottom-top)} is not compact`);
 });
 
 test('the domestic fan of the full weekly sheet draws without route crossings',()=>{
@@ -154,7 +155,9 @@ test('the domestic fan of the full weekly sheet draws without route crossings',(
  const flights=[...demo.flights,...demo.codeshareFlights],codes=new Set(flights.flatMap(f=>[f.from,f.to]));
  const nodes=layoutAirports([...demo.airports,...demo.codeshareAirports].filter(a=>codes.has(a.code)),flights),routes=layoutFlights(nodes,flights),byCode=new Map(nodes.map(n=>[n.code,n])),hub=byCode.get('HEL');
  const north=new Set(nodes.filter(n=>n!==hub&&n.region==='north').map(n=>n.code));
- assert.equal(north.size,13); // Helsinki's domestic destinations on the published sheet
+ // Domestic Finland plus the three Norwegian airports Finnair reaches only by continuing a Lapland
+ // flight: Tromsø beyond Rovaniemi, Alta beyond Kittilä, Kirkenes beyond Ivalo.
+ assert.equal(north.size,16);
  for(const c of north)assert.ok(byCode.get(c).y+byCode.get(c).height/2<hub.y-hub.height/2,`${c} is not above Helsinki`);
  const keyOf=r=>[r.flight.from,r.flight.to].sort().join(':'),touchesNorth=r=>north.has(r.flight.from)||north.has(r.flight.to);
  const cross=(o,a,b)=>(a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x);

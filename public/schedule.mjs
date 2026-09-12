@@ -25,8 +25,10 @@ export function validateSchedule(data) {
     if(ids.has(f.id)) throw Error('Duplicate flight id; include the date for repeated services.');ids.add(f.id);
     for(const key of ['departure','arrival']) if(typeof f[key]!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(f[key])||!Number.isFinite(Date.parse(f[key]))) throw Error(`${key} must be an ISO timestamp with timezone.`);
     if(Date.parse(f.arrival)<=Date.parse(f.departure)) throw Error('Arrival must be after departure.');
-    for(const key of ['airline','aircraft','number','status','days','frequency','operator','operatorFlight','via','connectingFrom','connectingTo']) if(f[key]!==undefined&&typeof f[key]!=='string') throw Error(`${key} must be text.`);
+    for(const key of ['airline','aircraft','number','status','days','frequency','operator','operatorFlight','via','connectingFrom','connectingTo','opens','wetlease','suspendedSince']) if(f[key]!==undefined&&typeof f[key]!=='string') throw Error(`${key} must be text.`);
     if(f.codeshare!==undefined&&typeof f.codeshare!=='boolean') throw Error('Codeshare flag must be boolean.');
+    for(const key of ['suspended','fifthFreedom']) if(f[key]!==undefined&&typeof f[key]!=='boolean') throw Error(`${key} flag must be boolean.`);
+    if(f.opens!==undefined&&!/^\d{4}-\d{2}-\d{2}$/.test(f.opens)) throw Error('opens must be a YYYY-MM-DD date.');
   }
   if(Array.isArray(data.codeshareFlights)){
     for(const f of data.codeshareFlights){

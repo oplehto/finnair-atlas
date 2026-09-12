@@ -34,7 +34,11 @@ For the Finnair international sheet, organize the network around Helsinki:
 | Left / west | Scandinavia and North America, including the US and Canada; Reykjavík belongs with the western group |
 | Below / south | Other European destinations |
 | Right / east | Asia |
-| Above / north | Domestic Finland |
+| Above / north | Domestic Finland, and the far-north spokes beyond it |
+
+Several destinations are reached only by continuing a flight beyond its first stop, and each is drawn as two legs sharing one flight number rather than as a nonstop that does not exist: Umeå beyond Vaasa, Tromsø beyond Rovaniemi, Alta beyond Kittilä, Kirkenes beyond Ivalo, Melbourne beyond Bangkok. A destination like this belongs beside its feeder, not in the region its geography suggests — Tromsø, Alta and Kirkenes are Norwegian but sit in a fifth tier above the domestic fan, because placing them in the west column sends the leg back to Lapland straight across Oulu. Melbourne sits at the foot of the inner east column, directly below Bangkok, so its leg drops down its own column instead of cutting across Hong Kong.
+
+Helsinki's hub box names the airport Seutula beneath the city, as it was called until the 1977 rename to Helsinki-Vantaa; the sheet's 1974 reference would have used that name.
 
 These groups also determine which edge of Helsinki the corresponding route bundles use. Within each group, geography is a soft guide. Relax local latitude and longitude order when that creates shorter connections, better spacing, or clearer crossings. Avoid forcing all destinations into a rigid geographic grid or onto one long column.
 
@@ -76,7 +80,16 @@ Use the notation in the timing-detail reference:
 
 Times run along the lane inside every box, centred on the lane axis, starting 13 units inside the outline (16 at the hub), with the days of operation after the time when the service is not daily; the city name shifts 14 units away from the edge that carries ports, with a thin paper knockout so they stay legible where lanes are close. Avoid repeating both times in a long sentence at the centre of each line. Full aircraft names, dates, UTC offsets, duration, airline, and status belong in the selected-flight panel. Keep timestamps and overnight dates accurate even when the diagram shows only the local clock time.
 
-Use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
+Three reference marks describe services the sheet's own week cannot show. Each keeps the route's ink and changes only its stroke, and each is drawn as a line sample in the notation column:
+
+| Mark | Meaning | Treatment |
+| --- | --- | --- |
+| dotted line, `▷25.10.` | A route that has not opened yet | Fine dots (`1.5 4`), first date after the aircraft code |
+| long dash-dot line | A suspended route, no service in this week | `14 3 2 3`, paper under-stroke and edge times held back |
+| `†` after the flight label | The aircraft is wet-leased from another operator | Ink unchanged; the operator names itself in the flight panel |
+| `⁵` after the flight label | A fifth-freedom sector, sold as a flight of its own | Ink unchanged |
+
+Beyond these, use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
 
 ## Typography and colour
 

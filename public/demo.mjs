@@ -1,5 +1,5 @@
 // Finnair weekly network sheet, baked by scripts/bake-weekly.mjs from published schedule pages
-// (info.flightmapper.net, Finavia) for the week of 2026-09-14: 571 weekly services between 97 airports.
+// (info.flightmapper.net, Finavia) for the week of 2026-09-14: 586 weekly services between 102 airports.
 // Times are local clock times with each airport's offset on that date. Partner connections at oneworld hubs are
 // illustrative highlights, not a feed.
 
@@ -18,6 +18,13 @@ export const airports = [
     "alt": "Elche",
     "lat": 38.282,
     "lon": -0.558,
+    "zone": 2
+  },
+  {
+    "code": "ALF",
+    "name": "Alta",
+    "lat": 69.976,
+    "lon": 23.372,
     "zone": 2
   },
   {
@@ -107,6 +114,14 @@ export const airports = [
     "lat": 49.008,
     "lon": 2.551,
     "zone": 2
+  },
+  {
+    "code": "CFU",
+    "name": "Korfu",
+    "alt": "Kerkyra",
+    "lat": 39.602,
+    "lon": 19.912,
+    "zone": 3
   },
   {
     "code": "CHQ",
@@ -265,7 +280,7 @@ export const airports = [
   {
     "code": "HEL",
     "name": "Helsinki",
-    "alt": "Helsingfors",
+    "alt": "Helsingfors · Seutula",
     "lat": 60.317,
     "lon": 24.963
   },
@@ -384,6 +399,14 @@ export const airports = [
     "zone": 9
   },
   {
+    "code": "KKN",
+    "name": "Kirkkoniemi",
+    "alt": "Kirkenes",
+    "lat": 69.726,
+    "lon": 29.891,
+    "zone": 2
+  },
+  {
     "code": "KOK",
     "name": "Kokkola",
     "alt": "Pietarsaari",
@@ -471,6 +494,14 @@ export const airports = [
     "lat": 53.354,
     "lon": -2.275,
     "zone": 1
+  },
+  {
+    "code": "MEL",
+    "name": "Melbourne",
+    "alt": "Tullamarine",
+    "lat": -37.673,
+    "lon": 144.843,
+    "zone": 10
   },
   {
     "code": "MHQ",
@@ -573,6 +604,14 @@ export const airports = [
     "lat": 31.144,
     "lon": 121.808,
     "zone": 8
+  },
+  {
+    "code": "PVK",
+    "name": "Preveza",
+    "alt": "Aktion, Lefkas",
+    "lat": 38.925,
+    "lon": 20.765,
+    "zone": 3
   },
   {
     "code": "RHO",
@@ -768,6 +807,19 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑥"
+  },
+  {
+    "id": "AY145-2026-09-14-HEL-BKK",
+    "number": "AY145",
+    "from": "HEL",
+    "to": "BKK",
+    "departure": "2026-09-14T00:10:00+03:00",
+    "arrival": "2026-09-14T16:30:00+07:00",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "#",
+    "opens": "2026-10-25"
   },
   {
     "id": "AY1035-2026-09-14-HEL-TLL",
@@ -1151,7 +1203,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④⑥"
+    "days": "①④⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1431-2026-09-14-HEL-BER",
@@ -1175,7 +1228,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑤⑦"
+    "days": "①③⑤⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY361-2026-09-14-HEL-KUO",
@@ -1235,7 +1289,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1582-2026-09-14-CDG-HEL",
@@ -1475,7 +1530,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1411-2026-09-14-HEL-FRA",
@@ -1679,7 +1735,9 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "suspended": true,
+    "suspendedSince": "2026-02-28"
   },
   {
     "id": "AY805-2026-09-14-HEL-ARN",
@@ -1739,7 +1797,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1422-2026-09-14-HAM-HEL",
@@ -1910,6 +1969,18 @@ export const flights = [
     "days": "#"
   },
   {
+    "id": "AY591-2026-09-14-KTT-ALF",
+    "number": "AY591",
+    "from": "KTT",
+    "to": "ALF",
+    "departure": "2026-09-14T09:00:00+03:00",
+    "arrival": "2026-09-14T09:05:00+02:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Times estimated",
+    "days": "①③⑦"
+  },
+  {
     "id": "AY1393-2026-09-14-HEL-DUS",
     "number": "AY1393",
     "from": "HEL",
@@ -1979,7 +2050,20 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④⑥"
+    "days": "①④⑥",
+    "wetlease": "Jettime"
+  },
+  {
+    "id": "AY592-2026-09-14-ALF-KTT",
+    "number": "AY592",
+    "from": "ALF",
+    "to": "KTT",
+    "departure": "2026-09-14T09:35:00+02:00",
+    "arrival": "2026-09-14T11:40:00+03:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Times estimated",
+    "days": "①③⑦"
   },
   {
     "id": "AY1382-2026-09-14-DUB-HEL",
@@ -1991,7 +2075,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1223-2026-09-14-HEL-PRG",
@@ -2006,6 +2091,18 @@ export const flights = [
     "days": "#"
   },
   {
+    "id": "AY541-2026-09-14-RVN-TOS",
+    "number": "AY541",
+    "from": "RVN",
+    "to": "TOS",
+    "departure": "2026-09-14T09:45:00+03:00",
+    "arrival": "2026-09-14T09:45:00+02:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①②③⑥⑦"
+  },
+  {
     "id": "AY1782-2026-09-14-VCE-HEL",
     "number": "AY1782",
     "from": "VCE",
@@ -2015,7 +2112,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑤⑦"
+    "days": "①③⑤⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1013-2026-09-14-HEL-TLL",
@@ -2256,6 +2354,18 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#"
+  },
+  {
+    "id": "AY542-2026-09-14-TOS-RVN",
+    "number": "AY542",
+    "from": "TOS",
+    "to": "RVN",
+    "departure": "2026-09-14T10:50:00+02:00",
+    "arrival": "2026-09-14T12:50:00+03:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①②③⑥⑦"
   },
   {
     "id": "AY436-2026-09-14-OUL-HEL",
@@ -2987,7 +3097,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1048-2026-09-14-TAY-HEL",
@@ -3084,6 +3195,20 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑦"
+  },
+  {
+    "id": "AY146-2026-09-14-MEL-BKK",
+    "number": "AY146",
+    "from": "MEL",
+    "to": "BKK",
+    "departure": "2026-09-14T15:35:00+10:00",
+    "arrival": "2026-09-14T20:45:00+07:00",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "#",
+    "opens": "2026-10-25",
+    "fifthFreedom": true
   },
   {
     "id": "AY1019-2026-09-14-HEL-TLL",
@@ -3335,7 +3460,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY865-2026-09-14-HEL-GOT",
@@ -3359,7 +3485,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1435-2026-09-14-HEL-BER",
@@ -3683,7 +3810,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1981-2026-09-14-HEL-DOH",
@@ -3695,7 +3823,9 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "suspended": true,
+    "suspendedSince": "2026-02-28"
   },
   {
     "id": "AY393-2026-09-14-HEL-KOK",
@@ -3923,7 +4053,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1374-2026-09-14-EDI-HEL",
@@ -3974,6 +4105,20 @@ export const flights = [
     "days": "#"
   },
   {
+    "id": "AY145-2026-09-14-BKK-MEL",
+    "number": "AY145",
+    "from": "BKK",
+    "to": "MEL",
+    "departure": "2026-09-14T18:15:00+07:00",
+    "arrival": "2026-09-15T07:15:00+10:00",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "#",
+    "opens": "2026-10-25",
+    "fifthFreedom": true
+  },
+  {
     "id": "AY1106-2026-09-14-VNO-HEL",
     "number": "AY1106",
     "from": "VNO",
@@ -4007,7 +4152,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY866-2026-09-14-GOT-HEL",
@@ -4187,7 +4333,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1534-2026-09-14-GVA-HEL",
@@ -4238,6 +4385,18 @@ export const flights = [
     "days": "①④"
   },
   {
+    "id": "AY614-2026-09-14-KKN-IVL",
+    "number": "AY614",
+    "from": "KKN",
+    "to": "IVL",
+    "departure": "2026-09-14T19:00:00+02:00",
+    "arrival": "2026-09-14T20:35:00+03:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①⑥⑦"
+  },
+  {
     "id": "AY1476-2026-09-14-VIE-HEL",
     "number": "AY1476",
     "from": "VIE",
@@ -4284,6 +4443,18 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①③⑤⑦"
+  },
+  {
+    "id": "AY613-2026-09-14-IVL-KKN",
+    "number": "AY613",
+    "from": "IVL",
+    "to": "KKN",
+    "departure": "2026-09-14T19:05:00+03:00",
+    "arrival": "2026-09-14T18:40:00+02:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①⑥⑦"
   },
   {
     "id": "AY1604-2026-09-14-NCE-HEL",
@@ -4355,7 +4526,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY416-2026-09-14-KAJ-HEL",
@@ -4838,6 +5010,19 @@ export const flights = [
     "days": "①②③④⑦"
   },
   {
+    "id": "AY146-2026-09-14-BKK-HEL",
+    "number": "AY146",
+    "from": "BKK",
+    "to": "HEL",
+    "departure": "2026-09-14T22:30:00+07:00",
+    "arrival": "2026-09-15T06:05:00+03:00",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "#",
+    "opens": "2026-10-25"
+  },
+  {
     "id": "AY447-2026-09-14-HEL-OUL",
     "number": "AY447",
     "from": "HEL",
@@ -5051,7 +5236,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1805-2026-09-15-HEL-CTA",
@@ -5111,7 +5297,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY922-2026-09-15-BGO-HEL",
@@ -5267,7 +5454,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④⑥"
+    "days": "②④⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1793-2026-09-15-HEL-NAP",
@@ -5351,7 +5539,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④⑥"
+    "days": "②④⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1844-2026-09-15-SPU-HEL",
@@ -5594,6 +5783,30 @@ export const flights = [
     "days": "③"
   },
   {
+    "id": "AY612-2026-09-16-KKN-IVL",
+    "number": "AY612",
+    "from": "KKN",
+    "to": "IVL",
+    "departure": "2026-09-16T10:40:00+02:00",
+    "arrival": "2026-09-16T12:15:00+03:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "③④⑥"
+  },
+  {
+    "id": "AY611-2026-09-16-IVL-KKN",
+    "number": "AY611",
+    "from": "IVL",
+    "to": "KKN",
+    "departure": "2026-09-16T10:45:00+03:00",
+    "arrival": "2026-09-16T10:20:00+02:00",
+    "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "③④⑥"
+  },
+  {
     "id": "AY1725-2026-09-16-HEL-ALC",
     "number": "AY1725",
     "from": "HEL",
@@ -5688,30 +5901,6 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "③"
-  },
-  {
-    "id": "AY945-2026-09-16-HEL-TOS",
-    "number": "AY945",
-    "from": "HEL",
-    "to": "TOS",
-    "departure": "2026-09-16T17:30:00+03:00",
-    "arrival": "2026-09-16T19:20:00+02:00",
-    "aircraft": "ATR 72",
-    "airline": "Finnair",
-    "status": "Scheduled",
-    "days": "③⑤⑦"
-  },
-  {
-    "id": "AY946-2026-09-16-TOS-HEL",
-    "number": "AY946",
-    "from": "TOS",
-    "to": "HEL",
-    "departure": "2026-09-16T17:45:00+02:00",
-    "arrival": "2026-09-16T21:35:00+03:00",
-    "aircraft": "ATR 72",
-    "airline": "Finnair",
-    "status": "Scheduled",
-    "days": "③⑤⑦"
   },
   {
     "id": "AY1106-2026-09-16-VNO-HEL",
@@ -6242,6 +6431,18 @@ export const flights = [
     "days": "⑤"
   },
   {
+    "id": "AY69-2026-09-18-HEL-KIX",
+    "number": "AY69",
+    "from": "HEL",
+    "to": "KIX",
+    "departure": "2026-09-18T17:45:00+03:00",
+    "arrival": "2026-09-19T12:35:00+09:00",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑤"
+  },
+  {
     "id": "AY1778-2026-09-18-TRN-HEL",
     "number": "AY1778",
     "from": "TRN",
@@ -6383,7 +6584,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1711-2026-09-19-HEL-PMI",
@@ -6393,6 +6595,18 @@ export const flights = [
     "departure": "2026-09-19T07:00:00+03:00",
     "arrival": "2026-09-19T10:05:00+02:00",
     "aircraft": "Airbus A321",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑥"
+  },
+  {
+    "id": "AY2081-2026-09-19-HEL-CFU",
+    "number": "AY2081",
+    "from": "HEL",
+    "to": "CFU",
+    "departure": "2026-09-19T07:00:00+03:00",
+    "arrival": "2026-09-19T10:20:00+03:00",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥"
@@ -6431,7 +6645,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1841-2026-09-19-HEL-SPU",
@@ -6573,6 +6788,18 @@ export const flights = [
     "departure": "2026-09-19T11:05:00+03:00",
     "arrival": "2026-09-19T14:55:00+03:00",
     "aircraft": "Airbus A321",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑥"
+  },
+  {
+    "id": "AY2082-2026-09-19-CFU-HEL",
+    "number": "AY2082",
+    "from": "CFU",
+    "to": "HEL",
+    "departure": "2026-09-19T11:20:00+03:00",
+    "arrival": "2026-09-19T14:40:00+03:00",
+    "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥"
@@ -6758,6 +6985,18 @@ export const flights = [
     "days": "⑥"
   },
   {
+    "id": "AY2095-2026-09-19-HEL-PVK",
+    "number": "AY2095",
+    "from": "HEL",
+    "to": "PVK",
+    "departure": "2026-09-19T17:10:00+03:00",
+    "arrival": "2026-09-19T20:35:00+03:00",
+    "aircraft": "Airbus A321",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑥"
+  },
+  {
     "id": "AY1773-2026-09-19-HEL-BLQ",
     "number": "AY1773",
     "from": "HEL",
@@ -6767,7 +7006,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY316-2026-09-19-VAA-HEL",
@@ -6863,7 +7103,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1890-2026-09-19-JTR-HEL",
@@ -6897,6 +7138,18 @@ export const flights = [
     "departure": "2026-09-19T21:00:00+03:00",
     "arrival": "2026-09-19T22:50:00+03:00",
     "aircraft": "ATR 72",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑥"
+  },
+  {
+    "id": "AY2096-2026-09-19-PVK-HEL",
+    "number": "AY2096",
+    "from": "PVK",
+    "to": "HEL",
+    "departure": "2026-09-19T21:30:00+03:00",
+    "arrival": "2026-09-20T00:55:00+03:00",
+    "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥"
@@ -7211,7 +7464,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1025-2026-09-20-HEL-TLL",
@@ -7235,7 +7489,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1927-2026-09-20-HEL-LCA",
@@ -7379,7 +7634,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY1023-2026-09-20-HEL-TLL",
@@ -7427,7 +7683,8 @@ export const flights = [
     "aircraft": "Boeing 737-800",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "wetlease": "Jettime"
   },
   {
     "id": "AY537-2026-09-20-HEL-RVN",
@@ -10624,6 +10881,38 @@ export const codeshareFlights = [
     "frequency": "Daily (#)",
     "codeshare": true,
     "via": "JFK"
+  },
+  {
+    "id": "AY5940a-2026-09-10",
+    "number": "AY 5940",
+    "from": "SIN",
+    "to": "MEL",
+    "departure": "2026-09-10T20:35:00+08:00",
+    "arrival": "2026-09-11T06:05:00+10:00",
+    "airline": "Finnair (op. by Qantas)",
+    "operator": "Qantas",
+    "operatorFlight": "QF 36",
+    "aircraft": "Airbus A330-300",
+    "days": "#",
+    "frequency": "Daily (#)",
+    "codeshare": true,
+    "via": "SIN"
+  },
+  {
+    "id": "AY5940b-2026-09-10",
+    "number": "AY 5941",
+    "from": "MEL",
+    "to": "SIN",
+    "departure": "2026-09-10T14:15:00+10:00",
+    "arrival": "2026-09-10T20:00:00+08:00",
+    "airline": "Finnair (op. by Qantas)",
+    "operator": "Qantas",
+    "operatorFlight": "QF 35",
+    "aircraft": "Airbus A330-300",
+    "days": "#",
+    "frequency": "Daily (#)",
+    "codeshare": true,
+    "via": "SIN"
   }
 ];
 
