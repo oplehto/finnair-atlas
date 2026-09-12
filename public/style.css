@@ -983,7 +983,7 @@ h1 .unofficial {
 /* Airport boxes: white paper, a thin near-black outline and blue city names. */
 .airport rect,
 .airport polygon {
-  fill: url(#box-paper);
+  fill: var(--box-paper);
   stroke: #2f3631;
   stroke-width: 1.5;
 }
@@ -1086,7 +1086,7 @@ h1 .unofficial {
 
 /* Central hub: double rule and a title sized to the box. */
 .regional-hub .hub-outer {
-  fill: url(#hub-paper);
+  fill: #fbfaf3;
   stroke: var(--blue);
   stroke-width: 3;
 }

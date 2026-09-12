@@ -203,14 +203,6 @@ function render(){
   marker.append(el('path',{d:'M 0 1 L 10 5 L 0 9 z',fill:color}));
   defs.append(marker);
  }
- // Warm paper: each box carries a faint radial wash, lighter at the centre and a little tanner
- // toward the edges, as printed stock ages unevenly. Helsinki gets a stronger one — it is the only
- // box large enough for the fall-off to read as paper rather than as a smudge.
- for(const[id,centre,edge,stop]of[['box-paper','#fefdf9','#f4efdf',0.55],['hub-paper','#fefdfa','#efe7cf',0.4]]){
-  const gradient=el('radialGradient',{id,cx:'42%',cy:'34%',r:'78%'});
-  gradient.append(el('stop',{offset:0,'stop-color':centre}),el('stop',{offset:stop,'stop-color':centre}),el('stop',{offset:1,'stop-color':edge}));
-  defs.append(gradient);
- }
  defs.append(wornFilter('worn'));
  svg.append(defs);
  svg.append(el('rect',{x:frameX,y:frameY,width:frameW,height:frameH,class:'sheet-frame'}));
