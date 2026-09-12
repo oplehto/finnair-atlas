@@ -84,10 +84,18 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
     assert.ok(a.partner && a.partner.trim(), `${a.code} names its operating carrier`);
   }
   const satellites = new Map(demo.codeshareAirports.map(a => [a.code, a]));
+  const hubs = new Set(demo.codeshareAirports.map(a => a.hub));
   for (const f of demo.codeshareFlights) {
     const satellite = satellites.get(f.from) || satellites.get(f.to);
-    assert.ok(satellite, `${f.id} touches a partner destination`);
-    assert.ok(f.from === satellite.hub || f.to === satellite.hub, `${f.id} runs to ${satellite.code}'s own gateway`);
+    if (satellite) {
+      assert.ok(f.from === satellite.hub || f.to === satellite.hub, `${f.id} runs to ${satellite.code}'s own gateway`);
+    } else {
+      // A partner leg may run from a gateway to a destination Finnair also flies itself, which keeps
+      // its own box rather than a partner one. Melbourne does both: Qantas beyond Singapore, and
+      // Finnair's own service beyond Bangkok from 25 October.
+      assert.ok(hubs.has(f.from) || hubs.has(f.to), `${f.id} runs from a gateway on the sheet`);
+      assert.ok(demo.airports.some(a => a.code === f.from) && demo.airports.some(a => a.code === f.to), `${f.id} joins two airports the sheet draws`);
+    }
     assert.ok(/^[A-Z]{2} \d+$/.test(f.operatorFlight || ''), `${f.id} carries the operating carrier's flight number`);
   }
 });

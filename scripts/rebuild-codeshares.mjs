@@ -24,7 +24,7 @@ const WEEK = '2026-09-14';
 // Gateway → the destinations drawn from it, one per region it opens up.
 const SELECTION = {
   HKG: {partner: 'Cathay Pacific', region: 'east', codes: ['SYD', 'AKL', 'DPS', 'MNL', 'PEN', 'CEB']},
-  SIN: {partner: 'Qantas', region: 'east', codes: ['DRW', 'NAN', 'KUL', 'HAN', 'USM', 'CMB']},
+  SIN: {partner: 'Qantas', region: 'east', codes: ['MEL', 'DRW', 'NAN', 'KUL', 'HAN', 'USM', 'CMB']},
   DOH: {partner: 'Qatar Airways', region: 'east', codes: ['AMM', 'JED', 'MCT', 'ALA', 'NBO', 'ZNZ', 'JNB', 'CPT', 'MLE', 'SEZ']},
   HND: {partner: 'Japan Airlines', region: 'east', codes: ['CTS', 'FUK', 'OKA']},
   LHR: {partner: 'British Airways', region: 'west', codes: ['GLA', 'INV', 'NCL', 'JER', 'GIB', 'BOS', 'IAD', 'YYZ', 'GRU', 'LOS']},
@@ -81,7 +81,7 @@ function leg(from, to, row, partner, suffix) {
   };
 }
 
-const airports = [], flights = [], gaps = [];
+const airports = [], flights = [], gaps = [], alsoOwn = [];
 for (const [hub, {partner, region, codes}] of Object.entries(SELECTION)) {
   for (const code of codes) {
     if (!ZONES[code] || !ZONES[hub]) { gaps.push(`${hub}-${code}: no time zone`); continue; }
@@ -94,6 +94,10 @@ for (const [hub, {partner, region, codes}] of Object.entries(SELECTION)) {
     if (back) flights.push(leg(code, hub, back, partner, 'b'));
     if (!out) gaps.push(`${hub}-${code}: outbound not published`);
     if (!back) gaps.push(`${code}-${hub}: inbound not published`);
+    // A destination Finnair also flies itself keeps its own box on the sheet and gains a partner leg
+    // beside it. Melbourne is the one that does both: Finnair's own service beyond Bangkok from 25
+    // October, and Qantas beyond Singapore today.
+    if (demo.airports.some(a => a.code === code)) { alsoOwn.push(code); continue; }
     airports.push({code, name: base.name, ...(base.alt ? {alt: base.alt} : {}), lat: base.lat, lon: base.lon, region, hub, partner, codeshare: true});
   }
 }
@@ -127,4 +131,5 @@ export default {
 
 console.log(`${airports.length} partner airports, ${flights.length} partner legs, all from published route pages`);
 for (const [hub, {codes: list}] of Object.entries(SELECTION)) console.log(`  ${hub}: ${list.filter(c => codes.has(c)).join(' ')}`);
+if (alsoOwn.length) console.log(`\nalso Finnair's own destinations, so no partner box: ${alsoOwn.join(' ')}`);
 if (gaps.length) { console.log(`\n${gaps.length} gap(s):`); for (const g of gaps) console.log(`  ${g}`); }

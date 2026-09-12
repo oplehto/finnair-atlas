@@ -8792,6 +8792,38 @@ export const codeshareFlights = [
     "via": "HKG"
   },
   {
+    "id": "AY5013a-2026-09-14",
+    "number": "AY 5013",
+    "from": "SIN",
+    "to": "MEL",
+    "departure": "2026-09-14T20:15:00+08:00",
+    "arrival": "2026-09-15T05:35:00+10:00",
+    "airline": "Finnair (op. by Qantas)",
+    "operator": "Qantas",
+    "operatorFlight": "QF 36",
+    "aircraft": "Airbus A330-200",
+    "days": "#",
+    "frequency": "Daily (#)",
+    "codeshare": true,
+    "via": "SIN"
+  },
+  {
+    "id": "AY5014b-2026-09-14",
+    "number": "AY 5014",
+    "from": "MEL",
+    "to": "SIN",
+    "departure": "2026-09-14T12:05:00+10:00",
+    "arrival": "2026-09-14T18:15:00+08:00",
+    "airline": "Finnair (op. by Qantas)",
+    "operator": "Qantas",
+    "operatorFlight": "QF 35",
+    "aircraft": "Airbus A330-200",
+    "days": "#",
+    "frequency": "Daily (#)",
+    "codeshare": true,
+    "via": "SIN"
+  },
+  {
     "id": "AY4885a-2026-09-14",
     "number": "AY 4885",
     "from": "SIN",
