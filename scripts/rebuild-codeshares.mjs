@@ -77,6 +77,11 @@ function leg(from, to, row, partner, suffix) {
     days: row.marks,
     frequency: row.marks === '#' ? 'Daily (#)' : `Weekly (${row.marks})`,
     codeshare: true,
+    // Some city pairs have no published period covering the sheet's own week; their times come from
+    // the nearest period the source does publish, and the leg says so rather than implying the
+    // sheet verified it for this week.
+    status: row.coveredWeek ? 'Scheduled' : 'Times from the nearest published period, not this week',
+    source: 'flightmapper.net Finnair route page',
     via: from.length === 3 && SELECTION[from] ? from : to
   };
 }
@@ -131,5 +136,7 @@ export default {
 
 console.log(`${airports.length} partner airports, ${flights.length} partner legs, all from published route pages`);
 for (const [hub, {codes: list}] of Object.entries(SELECTION)) console.log(`  ${hub}: ${list.filter(c => codes.has(c)).join(' ')}`);
+const offPeriod = flights.filter(f => f.status !== 'Scheduled');
+if (offPeriod.length) { console.log(`\n${offPeriod.length} leg(s) drawn from a period outside the sheet's week:`); for (const f of offPeriod) console.log(`  ${f.number} ${f.from}-${f.to}`); }
 if (alsoOwn.length) console.log(`\nalso Finnair's own destinations, so no partner box: ${alsoOwn.join(' ')}`);
 if (gaps.length) { console.log(`\n${gaps.length} gap(s):`); for (const g of gaps) console.log(`  ${g}`); }

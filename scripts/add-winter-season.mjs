@@ -44,15 +44,18 @@ for (const w of WINTER) {
   if (!airports.some(a => a.code === w.code)) airports.push(airportOf(w));
   for (const [number, from, to] of w.legs) {
     const id = `${number}-${OPENS}-${from}-${to}`;
-    if (flights.some(f => f.id === id)) continue;
+    const at = flights.findIndex(f => f.id === id);
+    if (at >= 0) flights.splice(at, 1);
     // No departure or arrival: the schema accepts a route marked as opening with no timings.
-    flights.push({id, number, from, to, aircraft: w.aircraft, airline: 'Finnair', status: 'Opens with the winter season', opens: OPENS});
+    flights.push({id, number, from, to, aircraft: w.aircraft, airline: 'Finnair', status: 'Opens with the winter season', opens: OPENS, source: "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"});
     added.push(`${number} ${from}-${to}`);
   }
   if (!w.legs.length) {
     const id = `${w.code}-${OPENS}-opens`;
-    if (!flights.some(f => f.id === id)) {
-      flights.push({id, from: 'HEL', to: w.code, airline: 'Finnair', status: 'Opens with the winter season, timetable not filed', opens: OPENS});
+    const at = flights.findIndex(f => f.id === id);
+    if (at >= 0) flights.splice(at, 1);
+    {
+      flights.push({id, from: 'HEL', to: w.code, airline: 'Finnair', status: 'Opens with the winter season, timetable not filed', opens: OPENS, source: 'route announcement; no timetable filed'});
       added.push(`HEL-${w.code} (no number published)`);
     }
   }

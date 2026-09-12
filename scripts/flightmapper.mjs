@@ -40,7 +40,10 @@ export const flatten = html => html
 
 // An airport code may be followed by its terminal, which is sometimes a number and sometimes a
 // letter (LHR 5, GLA M, CTS D, DOH 1A) and often absent altogether, so the token is optional.
-const ROW = /(?<days>(?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]*) (?<dep>\d{2}:\d{2}) [^()]*\((?<origin>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? (?<arr>\d{2}:\d{2}) [^()]*\((?<dest>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? Finnair AY (?<ay>\d+) (?<body>.{0,700}?)(?= (?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]* \d{2}:\d{2} |$)/g;
+// A row runs until the next row begins, or until the prose that follows the schedule table. That
+// prose marker matters: without it the last row on every page is dropped, and a page carrying a
+// single row yields nothing at all.
+const ROW = /(?<days>(?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]*) (?<dep>\d{2}:\d{2}) [^()]*\((?<origin>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? (?<arr>\d{2}:\d{2}) [^()]*\((?<dest>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? Finnair AY (?<ay>\d+) (?<body>.{0,700}?)(?= (?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]* \d{2}:\d{2} |\s*-->|$)/g;
 
 // "Daily" or a mix of single days and ranges: Mon,Wed,Sat / Tue-Fri / Mon,Wed-Sun.
 export function dayMarks(days) {
@@ -98,7 +101,7 @@ export function parseRows(text, from, to, week) {
 // one running on the most days, so a city pair with several rotations contributes its principal
 // service and always carries the operating flight number the sheet prints.
 export function principalRow(text, from, to, week) {
-  const {rows, chosen} = parseRows(text, from, to, week);
+  const {rows, chosen, coveredWeek} = parseRows(text, from, to, week);
   if (!chosen.length) return null;
   const weight = r => (r.operatorFlight ? 100 : 0) + (r.marks === '#' ? 7 : r.marks.length);
   const row = [...chosen].sort((a, b) => weight(b) - weight(a) || a.dep.localeCompare(b.dep))[0];
@@ -107,7 +110,7 @@ export function principalRow(text, from, to, week) {
   // carefully, not filling a gap with a guess; a flight with no such sibling stays unattributed.
   if (!row.operatorFlight) {
     const sibling = rows.find(r => r !== row && r.ay === row.ay && r.dep === row.dep && r.arr === row.arr && r.operatorFlight);
-    if (sibling) return {...row, operator: sibling.operator, operatorFlight: sibling.operatorFlight, aircraft: row.aircraft || sibling.aircraft};
+    if (sibling) return {...row, coveredWeek, operator: sibling.operator, operatorFlight: sibling.operatorFlight, aircraft: row.aircraft || sibling.aircraft};
   }
-  return row;
+  return {...row, coveredWeek};
 }

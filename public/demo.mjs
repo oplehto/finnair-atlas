@@ -1,5 +1,5 @@
 // Finnair weekly network sheet, baked by scripts/bake-weekly.mjs from published schedule pages
-// (info.flightmapper.net, Finavia) for the week of 2026-09-14: 597 weekly services between 108 airports.
+// (info.flightmapper.net, Finavia) for the week of 2026-09-14: 603 weekly services between 108 airports.
 // Times are local clock times with each airport's offset on that date. Partner connections at oneworld hubs are
 // illustrative highlights, not a feed.
 
@@ -853,7 +853,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY145-2026-09-14-HEL-BKK",
@@ -866,7 +867,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1035-2026-09-14-HEL-TLL",
@@ -878,7 +880,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY131-2026-09-14-HEL-SIN",
@@ -890,7 +893,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY99-2026-09-14-HEL-HKG",
@@ -902,7 +906,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY79-2026-09-14-HEL-NGO",
@@ -914,7 +919,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑤⑦"
+    "days": "①③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1676-2026-09-14-AGP-HEL",
@@ -926,7 +932,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥"
+    "days": "①②④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY418-2026-09-14-KAJ-HEL",
@@ -938,7 +945,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY512-2026-09-14-KEM-HEL",
@@ -950,7 +958,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④"
+    "days": "①②③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY350-2026-09-14-JOE-HEL",
@@ -962,7 +971,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY540-2026-09-14-RVN-HEL",
@@ -974,7 +984,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY380-2026-09-14-KUO-HEL",
@@ -986,7 +997,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1046-2026-09-14-TAY-HEL",
@@ -998,7 +1010,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY450-2026-09-14-OUL-HEL",
@@ -1010,7 +1023,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY396-2026-09-14-KOK-HEL",
@@ -1022,7 +1036,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY431-2026-09-14-HEL-OUL",
@@ -1034,7 +1049,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY322-2026-09-14-VAA-HEL",
@@ -1046,7 +1062,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY290-2026-09-14-JYV-HEL",
@@ -1058,7 +1075,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1036-2026-09-14-TLL-HEL",
@@ -1070,7 +1088,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1855-2026-09-14-HEL-CHQ",
@@ -1082,7 +1101,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1861-2026-09-14-HEL-RHO",
@@ -1094,7 +1114,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY433-2026-09-14-HEL-OUL",
@@ -1106,7 +1127,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY826-2026-09-14-ARN-HEL",
@@ -1118,7 +1140,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY951-2026-09-14-HEL-CPH",
@@ -1130,7 +1153,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④"
+    "days": "①②③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1550-2026-09-14-BRU-HEL",
@@ -1142,7 +1166,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY964-2026-09-14-CPH-HEL",
@@ -1154,7 +1179,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1221-2026-09-14-HEL-PRG",
@@ -1166,7 +1192,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1391-2026-09-14-HEL-DUS",
@@ -1178,7 +1205,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY801-2026-09-14-HEL-ARN",
@@ -1190,7 +1218,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1371-2026-09-14-HEL-EDI",
@@ -1202,7 +1231,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤"
+    "days": "①③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1421-2026-09-14-HEL-HAM",
@@ -1214,7 +1244,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1011-2026-09-14-HEL-TLL",
@@ -1226,7 +1257,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤"
+    "days": "①②④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1071-2026-09-14-HEL-RIX",
@@ -1238,7 +1270,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1201-2026-09-14-HEL-LJU",
@@ -1251,7 +1284,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①④⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1431-2026-09-14-HEL-BER",
@@ -1263,7 +1297,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1781-2026-09-14-HEL-VCE",
@@ -1276,7 +1311,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①③⑤⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY361-2026-09-14-HEL-KUO",
@@ -1288,7 +1324,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY531-2026-09-14-HEL-RVN",
@@ -1300,7 +1337,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY142-2026-09-14-BKK-HEL",
@@ -1312,7 +1350,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1161-2026-09-14-HEL-KRK",
@@ -1324,7 +1363,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY991-2026-09-14-HEL-KEF",
@@ -1337,7 +1377,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1582-2026-09-14-CDG-HEL",
@@ -1349,7 +1390,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY513-2026-09-14-HEL-KEM",
@@ -1361,7 +1403,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY803-2026-09-14-HEL-ARN",
@@ -1373,7 +1416,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY947-2026-09-14-HEL-TRD",
@@ -1385,7 +1429,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑥⑦"
+    "days": "①②④⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1761-2026-09-14-HEL-FCO",
@@ -1397,7 +1442,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1791-2026-09-14-HEL-NAP",
@@ -1409,7 +1455,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④"
+    "days": "①④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1897-2026-09-14-HEL-SKG",
@@ -1421,7 +1468,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑥"
+    "days": "①③⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY861-2026-09-14-HEL-GOT",
@@ -1433,7 +1481,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY802-2026-09-14-ARN-HEL",
@@ -1445,7 +1494,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1831-2026-09-14-HEL-DBV",
@@ -1457,7 +1507,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥"
+    "days": "①②④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY432-2026-09-14-OUL-HEL",
@@ -1469,7 +1520,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY541-2026-09-14-HEL-RVN",
@@ -1481,7 +1533,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑥⑦"
+    "days": "①②③⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY911-2026-09-14-HEL-OSL",
@@ -1493,7 +1546,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY953-2026-09-14-HEL-CPH",
@@ -1505,7 +1559,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1340-2026-09-14-LHR-HEL",
@@ -1517,7 +1572,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1141-2026-09-14-HEL-WAW",
@@ -1529,7 +1585,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1751-2026-09-14-HEL-MXP",
@@ -1541,7 +1598,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1571-2026-09-14-HEL-CDG",
@@ -1553,7 +1611,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1101-2026-09-14-HEL-VNO",
@@ -1565,7 +1624,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥"
+    "days": "①②④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1381-2026-09-14-HEL-DUB",
@@ -1578,7 +1638,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1411-2026-09-14-HEL-FRA",
@@ -1590,7 +1651,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1541-2026-09-14-HEL-BRU",
@@ -1602,7 +1664,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY448-2026-09-14-OUL-HEL",
@@ -1614,7 +1677,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY823-2026-09-14-HEL-ARN",
@@ -1626,7 +1690,21 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥⑦"
+    "days": "①②④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY823-2026-09-14-HEL-SVG",
+    "number": "AY823",
+    "from": "HEL",
+    "to": "SVG",
+    "departure": "2026-09-14T07:40:00+03:00",
+    "arrival": "2026-09-14T09:40:00+02:00",
+    "aircraft": "Airbus A319",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①②④⑥",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY122-2026-09-14-DEL-HEL",
@@ -1638,7 +1716,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY952-2026-09-14-CPH-HEL",
@@ -1650,7 +1729,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④"
+    "days": "①②③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY5072-2026-09-14-HND-HEL",
@@ -1662,7 +1742,8 @@ export const flights = [
     "aircraft": "Boeing 777-300ER",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1012-2026-09-14-TLL-HEL",
@@ -1674,7 +1755,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤"
+    "days": "①②④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1511-2026-09-14-HEL-ZRH",
@@ -1686,7 +1768,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY434-2026-09-14-OUL-HEL",
@@ -1698,7 +1781,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY804-2026-09-14-ARN-HEL",
@@ -1710,7 +1794,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1331-2026-09-14-HEL-LHR",
@@ -1722,7 +1807,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1401-2026-09-14-HEL-MUC",
@@ -1734,7 +1820,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1531-2026-09-14-HEL-GVA",
@@ -1746,7 +1833,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑤⑥"
+    "days": "①②③⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY591-2026-09-14-HEL-KTT",
@@ -1758,7 +1846,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1301-2026-09-14-HEL-AMS",
@@ -1770,7 +1859,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1982-2026-09-14-DOH-HEL",
@@ -1784,7 +1874,8 @@ export const flights = [
     "status": "Scheduled",
     "days": "#",
     "suspended": true,
-    "suspendedSince": "2026-02-28"
+    "suspendedSince": "2026-02-28",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY805-2026-09-14-HEL-ARN",
@@ -1796,7 +1887,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1361-2026-09-14-HEL-MAN",
@@ -1808,7 +1900,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤⑥⑦"
+    "days": "①③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1372-2026-09-14-EDI-HEL",
@@ -1820,7 +1913,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤"
+    "days": "①③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY362-2026-09-14-KUO-HEL",
@@ -1832,7 +1926,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY992-2026-09-14-KEF-HEL",
@@ -1845,7 +1940,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1422-2026-09-14-HAM-HEL",
@@ -1857,7 +1953,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY862-2026-09-14-GOT-HEL",
@@ -1869,7 +1966,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY912-2026-09-14-OSL-HEL",
@@ -1881,7 +1979,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1072-2026-09-14-RIX-HEL",
@@ -1893,7 +1992,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1222-2026-09-14-PRG-HEL",
@@ -1905,7 +2005,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY489-2026-09-14-HEL-KAO",
@@ -1917,7 +2018,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④"
+    "days": "①②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1432-2026-09-14-BER-HEL",
@@ -1929,7 +2031,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY948-2026-09-14-TRD-HEL",
@@ -1941,7 +2044,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑥⑦"
+    "days": "①②④⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY954-2026-09-14-CPH-HEL",
@@ -1953,7 +2057,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1142-2026-09-14-WAW-HEL",
@@ -1965,7 +2070,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1162-2026-09-14-KRK-HEL",
@@ -1977,7 +2083,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1392-2026-09-14-DUS-HEL",
@@ -1989,7 +2096,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1073-2026-09-14-HEL-RIX",
@@ -2001,7 +2109,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY532-2026-09-14-RVN-HEL",
@@ -2013,7 +2122,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY591-2026-09-14-KTT-ALF",
@@ -2025,7 +2135,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Times estimated",
-    "days": "①③⑦"
+    "days": "①③⑦",
+    "source": "Finavia public flight information, Alta leg reconstructed from the Helsinki arrival"
   },
   {
     "id": "AY1393-2026-09-14-HEL-DUS",
@@ -2037,7 +2148,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1102-2026-09-14-VNO-HEL",
@@ -2049,7 +2161,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY435-2026-09-14-HEL-OUL",
@@ -2061,7 +2174,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY514-2026-09-14-KEM-HEL",
@@ -2073,7 +2187,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1471-2026-09-14-HEL-VIE",
@@ -2085,7 +2200,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1202-2026-09-14-LJU-HEL",
@@ -2098,7 +2214,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①④⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY592-2026-09-14-ALF-KTT",
@@ -2110,7 +2227,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Times estimated",
-    "days": "①③⑦"
+    "days": "①③⑦",
+    "source": "Finavia public flight information, Alta leg reconstructed from the Helsinki arrival"
   },
   {
     "id": "AY1382-2026-09-14-DUB-HEL",
@@ -2123,7 +2241,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1223-2026-09-14-HEL-PRG",
@@ -2135,7 +2254,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY541-2026-09-14-RVN-TOS",
@@ -2147,7 +2267,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑥⑦"
+    "days": "①②③⑥⑦",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1782-2026-09-14-VCE-HEL",
@@ -2160,7 +2281,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①③⑤⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1013-2026-09-14-HEL-TLL",
@@ -2172,7 +2294,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1251-2026-09-14-HEL-BUD",
@@ -2184,7 +2307,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1362-2026-09-14-MAN-HEL",
@@ -2196,7 +2320,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤⑥⑦"
+    "days": "①③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1654-2026-09-14-BCN-HEL",
@@ -2208,7 +2333,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY807-2026-09-14-HEL-ARN",
@@ -2220,7 +2346,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1662-2026-09-14-MAD-HEL",
@@ -2232,7 +2359,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1832-2026-09-14-DBV-HEL",
@@ -2244,7 +2372,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥"
+    "days": "①②④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1332-2026-09-14-LHR-HEL",
@@ -2256,7 +2385,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1175-2026-09-14-HEL-GDN",
@@ -2268,7 +2398,21 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑦"
+    "days": "①②④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY824-2026-09-14-SVG-HEL",
+    "number": "AY824",
+    "from": "SVG",
+    "to": "HEL",
+    "departure": "2026-09-14T10:25:00+02:00",
+    "arrival": "2026-09-14T14:25:00+03:00",
+    "aircraft": "Airbus A319",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①②④⑥",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY1762-2026-09-14-FCO-HEL",
@@ -2280,7 +2424,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1074-2026-09-14-RIX-HEL",
@@ -2292,7 +2437,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1752-2026-09-14-MXP-HEL",
@@ -2304,7 +2450,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1792-2026-09-14-NAP-HEL",
@@ -2316,7 +2463,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④"
+    "days": "①④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1165-2026-09-14-HEL-KRK",
@@ -2328,7 +2476,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1423-2026-09-14-HEL-HAM",
@@ -2340,7 +2489,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1856-2026-09-14-CHQ-HEL",
@@ -2352,7 +2502,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY490-2026-09-14-KAO-HEL",
@@ -2364,7 +2515,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④"
+    "days": "①②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1512-2026-09-14-ZRH-HEL",
@@ -2376,7 +2528,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1532-2026-09-14-GVA-HEL",
@@ -2388,7 +2541,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑤⑥"
+    "days": "①②③⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1572-2026-09-14-CDG-HEL",
@@ -2400,7 +2554,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY542-2026-09-14-TOS-RVN",
@@ -2412,7 +2567,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑥⑦"
+    "days": "①②③⑥⑦",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY436-2026-09-14-OUL-HEL",
@@ -2424,7 +2580,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY808-2026-09-14-ARN-HEL",
@@ -2436,7 +2593,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1014-2026-09-14-TLL-HEL",
@@ -2448,7 +2606,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1862-2026-09-14-RHO-HEL",
@@ -2460,7 +2619,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY955-2026-09-14-HEL-CPH",
@@ -2472,7 +2632,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1394-2026-09-14-DUS-HEL",
@@ -2484,7 +2645,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1542-2026-09-14-BRU-HEL",
@@ -2496,7 +2658,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1103-2026-09-14-HEL-VNO",
@@ -2508,7 +2671,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1402-2026-09-14-MUC-HEL",
@@ -2520,7 +2684,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1412-2026-09-14-FRA-HEL",
@@ -2532,7 +2697,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1898-2026-09-14-SKG-HEL",
@@ -2544,7 +2710,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑥"
+    "days": "①③⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1224-2026-09-14-PRG-HEL",
@@ -2556,7 +2723,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1472-2026-09-14-VIE-HEL",
@@ -2568,7 +2736,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1143-2026-09-14-HEL-WAW",
@@ -2580,7 +2749,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY913-2026-09-14-HEL-OSL",
@@ -2592,7 +2762,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY863-2026-09-14-HEL-GOT",
@@ -2604,7 +2775,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1302-2026-09-14-AMS-HEL",
@@ -2616,7 +2788,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1015-2026-09-14-HEL-TLL",
@@ -2628,7 +2801,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1731-2026-09-14-HEL-FNC",
@@ -2640,7 +2814,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑤"
+    "days": "①⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1176-2026-09-14-GDN-HEL",
@@ -2652,7 +2827,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑦"
+    "days": "①②④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1252-2026-09-14-BUD-HEL",
@@ -2664,7 +2840,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1433-2026-09-14-HEL-BER",
@@ -2676,7 +2853,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY365-2026-09-14-HEL-KUO",
@@ -2688,7 +2866,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1575-2026-09-14-HEL-CDG",
@@ -2700,7 +2879,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY533-2026-09-14-HEL-RVN",
@@ -2712,7 +2892,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY824-2026-09-14-ARN-HEL",
@@ -2724,7 +2905,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥⑦"
+    "days": "①②④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY956-2026-09-14-CPH-HEL",
@@ -2736,7 +2918,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1079-2026-09-14-HEL-RIX",
@@ -2748,7 +2931,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY313-2026-09-14-HEL-VAA",
@@ -2760,7 +2944,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥⑦"
+    "days": "①②④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1166-2026-09-14-KRK-HEL",
@@ -2772,7 +2957,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1424-2026-09-14-HAM-HEL",
@@ -2784,7 +2970,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY809-2026-09-14-HEL-ARN",
@@ -2796,7 +2983,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY957-2026-09-14-HEL-CPH",
@@ -2808,7 +2996,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY437-2026-09-14-HEL-OUL",
@@ -2820,7 +3009,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY806-2026-09-14-ARN-HEL",
@@ -2832,7 +3022,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY592-2026-09-14-KTT-HEL",
@@ -2844,7 +3035,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY914-2026-09-14-OSL-HEL",
@@ -2856,7 +3048,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1016-2026-09-14-TLL-HEL",
@@ -2868,7 +3061,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY285-2026-09-14-HEL-JYV",
@@ -2880,7 +3074,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1144-2026-09-14-WAW-HEL",
@@ -2892,7 +3087,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY864-2026-09-14-GOT-HEL",
@@ -2904,7 +3100,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1739-2026-09-14-HEL-LIS",
@@ -2916,7 +3113,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1671-2026-09-14-HEL-AGP",
@@ -2928,7 +3126,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY810-2026-09-14-ARN-HEL",
@@ -2940,7 +3139,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY811-2026-09-14-HEL-ARN",
@@ -2952,7 +3152,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY542-2026-09-14-RVN-HEL",
@@ -2964,7 +3165,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑥⑦"
+    "days": "①②③⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1104-2026-09-14-VNO-HEL",
@@ -2976,7 +3178,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY366-2026-09-14-KUO-HEL",
@@ -2988,7 +3191,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1047-2026-09-14-HEL-TAY",
@@ -3000,7 +3204,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1017-2026-09-14-HEL-TLL",
@@ -3012,7 +3217,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1434-2026-09-14-BER-HEL",
@@ -3024,7 +3230,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY958-2026-09-14-CPH-HEL",
@@ -3036,7 +3243,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY314-2026-09-14-VAA-HEL",
@@ -3048,7 +3256,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY812-2026-09-14-ARN-HEL",
@@ -3060,7 +3269,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1080-2026-09-14-RIX-HEL",
@@ -3072,7 +3282,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1335-2026-09-14-HEL-LHR",
@@ -3084,7 +3295,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY141-2026-09-14-HEL-BKK",
@@ -3096,7 +3308,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY286-2026-09-14-JYV-HEL",
@@ -3108,7 +3321,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY438-2026-09-14-OUL-HEL",
@@ -3120,7 +3334,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY534-2026-09-14-RVN-HEL",
@@ -3132,7 +3347,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY439-2026-09-14-HEL-OUL",
@@ -3145,7 +3361,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1048-2026-09-14-TAY-HEL",
@@ -3157,7 +3374,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1018-2026-09-14-TLL-HEL",
@@ -3169,7 +3387,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1576-2026-09-14-CDG-HEL",
@@ -3181,7 +3400,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1023-2026-09-14-HEL-TLL",
@@ -3193,7 +3413,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1929-2026-09-14-HEL-LCA",
@@ -3205,7 +3426,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY315-2026-09-14-HEL-VAA",
@@ -3217,7 +3439,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1763-2026-09-14-HEL-FCO",
@@ -3229,7 +3452,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY959-2026-09-14-HEL-CPH",
@@ -3241,7 +3465,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY146-2026-09-14-MEL-BKK",
@@ -3255,7 +3480,8 @@ export const flights = [
     "status": "Scheduled",
     "days": "#",
     "opens": "2026-10-25",
-    "fifthFreedom": true
+    "fifthFreedom": true,
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1019-2026-09-14-HEL-TLL",
@@ -3267,7 +3493,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1859-2026-09-14-HEL-CHQ",
@@ -3279,7 +3506,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1863-2026-09-14-HEL-RHO",
@@ -3291,7 +3519,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1105-2026-09-14-HEL-VNO",
@@ -3303,7 +3532,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1603-2026-09-14-HEL-NCE",
@@ -3315,7 +3545,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤⑥⑦"
+    "days": "①③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY441-2026-09-14-HEL-OUL",
@@ -3327,7 +3558,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY813-2026-09-14-HEL-ARN",
@@ -3339,7 +3571,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1337-2026-09-14-HEL-LHR",
@@ -3351,7 +3584,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY535-2026-09-14-HEL-RVN",
@@ -3363,7 +3597,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1-2026-09-14-HEL-LAX",
@@ -3375,7 +3610,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④"
+    "days": "①④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1075-2026-09-14-HEL-RIX",
@@ -3387,7 +3623,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1365-2026-09-14-HEL-MAN",
@@ -3399,7 +3636,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥⑦"
+    "days": "①②④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1533-2026-09-14-HEL-GVA",
@@ -3411,7 +3649,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④⑤⑥⑦"
+    "days": "①④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1336-2026-09-14-LHR-HEL",
@@ -3423,7 +3662,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1024-2026-09-14-TLL-HEL",
@@ -3435,7 +3675,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1577-2026-09-14-HEL-CDG",
@@ -3447,7 +3688,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1755-2026-09-14-HEL-MXP",
@@ -3459,7 +3701,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY915-2026-09-14-HEL-OSL",
@@ -3471,7 +3714,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1405-2026-09-14-HEL-MUC",
@@ -3483,7 +3727,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY369-2026-09-14-HEL-KUO",
@@ -3495,7 +3740,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY440-2026-09-14-OUL-HEL",
@@ -3508,7 +3754,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY865-2026-09-14-HEL-GOT",
@@ -3520,7 +3767,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1255-2026-09-14-HEL-BUD",
@@ -3533,7 +3781,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1435-2026-09-14-HEL-BER",
@@ -3545,7 +3794,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1803-2026-09-14-HEL-VRN",
@@ -3557,7 +3807,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④"
+    "days": "①④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY33-2026-09-14-HEL-SEA",
@@ -3569,7 +3820,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑤"
+    "days": "①⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1021-2026-09-14-HEL-TLL",
@@ -3581,7 +3833,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY613-2026-09-14-HEL-IVL",
@@ -3593,7 +3846,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑥⑦"
+    "days": "①⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1373-2026-09-14-HEL-EDI",
@@ -3605,7 +3859,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②⑥"
+    "days": "①②⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1425-2026-09-14-HEL-HAM",
@@ -3617,7 +3872,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1513-2026-09-14-HEL-ZRH",
@@ -3629,7 +3885,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1740-2026-09-14-LIS-HEL",
@@ -3641,7 +3898,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1395-2026-09-14-HEL-DUS",
@@ -3653,7 +3911,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1773-2026-09-14-HEL-BLQ",
@@ -3665,7 +3924,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY814-2026-09-14-ARN-HEL",
@@ -3677,7 +3937,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1020-2026-09-14-TLL-HEL",
@@ -3689,7 +3950,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1305-2026-09-14-HEL-AMS",
@@ -3701,7 +3963,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1545-2026-09-14-HEL-BRU",
@@ -3713,7 +3976,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1661-2026-09-14-HEL-MAD",
@@ -3725,7 +3989,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY927-2026-09-14-HEL-SVG",
@@ -3737,7 +4002,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY1732-2026-09-14-FNC-HEL",
@@ -3749,7 +4015,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑤"
+    "days": "①⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY443-2026-09-14-HEL-OUL",
@@ -3761,7 +4028,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1415-2026-09-14-HEL-FRA",
@@ -3773,7 +4041,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1475-2026-09-14-HEL-VIE",
@@ -3785,7 +4054,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY316-2026-09-14-VAA-HEL",
@@ -3797,7 +4067,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY815-2026-09-14-HEL-ARN",
@@ -3809,7 +4080,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY960-2026-09-14-CPH-HEL",
@@ -3821,7 +4093,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY345-2026-09-14-HEL-JOE",
@@ -3833,7 +4106,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1653-2026-09-14-HEL-BCN",
@@ -3845,7 +4119,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1163-2026-09-14-HEL-KRK",
@@ -3858,7 +4133,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1981-2026-09-14-HEL-DOH",
@@ -3872,7 +4148,8 @@ export const flights = [
     "status": "Scheduled",
     "days": "#",
     "suspended": true,
-    "suspendedSince": "2026-02-28"
+    "suspendedSince": "2026-02-28",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY393-2026-09-14-HEL-KOK",
@@ -3884,7 +4161,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY916-2026-09-14-OSL-HEL",
@@ -3896,7 +4174,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1022-2026-09-14-TLL-HEL",
@@ -3908,7 +4187,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1145-2026-09-14-HEL-WAW",
@@ -3920,7 +4200,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY15-2026-09-14-HEL-JFK",
@@ -3932,7 +4213,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY41-2026-09-14-HEL-ICN",
@@ -3944,7 +4226,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1672-2026-09-14-AGP-HEL",
@@ -3956,7 +4239,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1225-2026-09-14-HEL-PRG",
@@ -3968,7 +4252,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY442-2026-09-14-OUL-HEL",
@@ -3980,7 +4265,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY34-2026-09-14-SEA-HEL",
@@ -3992,7 +4278,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑤"
+    "days": "①⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY816-2026-09-14-ARN-HEL",
@@ -4004,7 +4291,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1076-2026-09-14-RIX-HEL",
@@ -4016,7 +4304,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY370-2026-09-14-KUO-HEL",
@@ -4028,7 +4317,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY415-2026-09-14-HEL-KAJ",
@@ -4040,7 +4330,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY67-2026-09-14-HEL-KIX",
@@ -4052,7 +4343,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY73-2026-09-14-HEL-NRT",
@@ -4064,7 +4356,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1366-2026-09-14-MAN-HEL",
@@ -4076,7 +4369,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑤⑥⑦"
+    "days": "①②④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY536-2026-09-14-RVN-HEL",
@@ -4088,7 +4382,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY961-2026-09-14-HEL-CPH",
@@ -4101,7 +4396,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1374-2026-09-14-EDI-HEL",
@@ -4113,7 +4409,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②⑥"
+    "days": "①②⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1436-2026-09-14-BER-HEL",
@@ -4125,7 +4422,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1338-2026-09-14-LHR-HEL",
@@ -4137,7 +4435,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1426-2026-09-14-HAM-HEL",
@@ -4149,7 +4448,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY145-2026-09-14-BKK-MEL",
@@ -4163,7 +4463,21 @@ export const flights = [
     "status": "Scheduled",
     "days": "#",
     "opens": "2026-10-25",
-    "fifthFreedom": true
+    "fifthFreedom": true,
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY928-2026-09-14-SVG-HEL",
+    "number": "AY928",
+    "from": "SVG",
+    "to": "HEL",
+    "departure": "2026-09-14T18:20:00+02:00",
+    "arrival": "2026-09-14T22:25:00+03:00",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "①③",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY1106-2026-09-14-VNO-HEL",
@@ -4175,7 +4489,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑥⑦"
+    "days": "①②④⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1437-2026-09-14-HEL-BER",
@@ -4187,7 +4502,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1256-2026-09-14-BUD-HEL",
@@ -4200,7 +4516,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY866-2026-09-14-GOT-HEL",
@@ -4212,7 +4529,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY346-2026-09-14-JOE-HEL",
@@ -4224,7 +4542,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY5073-2026-09-14-HEL-HND",
@@ -4236,7 +4555,8 @@ export const flights = [
     "aircraft": "Boeing 777-300ER",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY121-2026-09-14-HEL-DEL",
@@ -4248,7 +4568,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY519-2026-09-14-HEL-KEM",
@@ -4260,7 +4581,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY61-2026-09-14-HEL-HND",
@@ -4272,7 +4594,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1406-2026-09-14-MUC-HEL",
@@ -4284,7 +4607,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY317-2026-09-14-HEL-VAA",
@@ -4296,7 +4620,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY444-2026-09-14-OUL-HEL",
@@ -4308,7 +4633,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY394-2026-09-14-KOK-HEL",
@@ -4320,7 +4646,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1146-2026-09-14-WAW-HEL",
@@ -4332,7 +4659,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1396-2026-09-14-DUS-HEL",
@@ -4344,7 +4672,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1764-2026-09-14-FCO-HEL",
@@ -4356,7 +4685,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY2-2026-09-14-LAX-HEL",
@@ -4368,7 +4698,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④"
+    "days": "①④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1164-2026-09-14-KRK-HEL",
@@ -4381,7 +4712,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1534-2026-09-14-GVA-HEL",
@@ -4393,7 +4725,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④⑤⑥⑦"
+    "days": "①④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1756-2026-09-14-MXP-HEL",
@@ -4405,7 +4738,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1578-2026-09-14-CDG-HEL",
@@ -4417,7 +4751,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1804-2026-09-14-VRN-HEL",
@@ -4429,7 +4764,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①④"
+    "days": "①④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY614-2026-09-14-KKN-IVL",
@@ -4441,7 +4777,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑥⑦"
+    "days": "①⑥⑦",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1476-2026-09-14-VIE-HEL",
@@ -4453,7 +4790,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1514-2026-09-14-ZRH-HEL",
@@ -4465,7 +4803,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1546-2026-09-14-BRU-HEL",
@@ -4477,7 +4816,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1173-2026-09-14-HEL-GDN",
@@ -4489,7 +4829,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑤⑦"
+    "days": "①③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY613-2026-09-14-IVL-KKN",
@@ -4501,7 +4842,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑥⑦"
+    "days": "①⑥⑦",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1604-2026-09-14-NCE-HEL",
@@ -4513,7 +4855,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤⑥⑦"
+    "days": "①③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1416-2026-09-14-FRA-HEL",
@@ -4525,7 +4868,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1774-2026-09-14-BLQ-HEL",
@@ -4537,7 +4881,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY917-2026-09-14-HEL-OSL",
@@ -4549,7 +4894,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1306-2026-09-14-AMS-HEL",
@@ -4561,7 +4907,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY962-2026-09-14-CPH-HEL",
@@ -4574,7 +4921,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "①②③④⑤⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY416-2026-09-14-KAJ-HEL",
@@ -4586,7 +4934,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1226-2026-09-14-PRG-HEL",
@@ -4598,7 +4947,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1107-2026-09-14-HEL-VNO",
@@ -4610,7 +4960,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1339-2026-09-14-HEL-LHR",
@@ -4622,7 +4973,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY867-2026-09-14-HEL-GOT",
@@ -4634,7 +4986,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1147-2026-09-14-HEL-WAW",
@@ -4646,7 +4999,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑥⑦"
+    "days": "①②④⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1077-2026-09-14-HEL-RIX",
@@ -4658,7 +5012,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1438-2026-09-14-BER-HEL",
@@ -4670,7 +5025,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY928-2026-09-14-ARN-HEL",
@@ -4682,7 +5038,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1027-2026-09-14-HEL-TLL",
@@ -4694,7 +5051,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY819-2026-09-14-HEL-ARN",
@@ -4706,7 +5064,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY918-2026-09-14-OSL-HEL",
@@ -4718,7 +5077,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1581-2026-09-14-HEL-CDG",
@@ -4730,7 +5090,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1675-2026-09-14-HEL-AGP",
@@ -4742,7 +5103,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③④⑤⑦"
+    "days": "①③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1864-2026-09-14-RHO-HEL",
@@ -4754,7 +5116,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY445-2026-09-14-HEL-OUL",
@@ -4766,7 +5129,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY520-2026-09-14-KEM-HEL",
@@ -4778,7 +5142,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1174-2026-09-14-GDN-HEL",
@@ -4790,7 +5155,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑤⑦"
+    "days": "①③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1860-2026-09-14-CHQ-HEL",
@@ -4802,7 +5168,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1930-2026-09-14-LCA-HEL",
@@ -4814,7 +5181,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③"
+    "days": "①③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY868-2026-09-14-GOT-HEL",
@@ -4826,7 +5194,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1549-2026-09-14-HEL-BRU",
@@ -4838,7 +5207,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑦"
+    "days": "①②③④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY100-2026-09-14-HKG-HEL",
@@ -4850,7 +5220,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY614-2026-09-14-IVL-HEL",
@@ -4862,7 +5233,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑥⑦"
+    "days": "①⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY215-2026-09-14-HEL-MHQ",
@@ -4874,7 +5246,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑤⑦"
+    "days": "①⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY820-2026-09-14-ARN-HEL",
@@ -4886,7 +5259,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1148-2026-09-14-WAW-HEL",
@@ -4898,7 +5272,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②④⑥⑦"
+    "days": "①②④⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1028-2026-09-14-TLL-HEL",
@@ -4910,7 +5285,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑥"
+    "days": "①②③④⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1078-2026-09-14-RIX-HEL",
@@ -4922,7 +5298,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1108-2026-09-14-VNO-HEL",
@@ -4934,7 +5311,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY132-2026-09-14-SIN-HEL",
@@ -4946,7 +5324,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1725-2026-09-14-HEL-ALC",
@@ -4958,7 +5337,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①"
+    "days": "①",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY318-2026-09-14-VAA-HEL",
@@ -4970,7 +5350,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY42-2026-09-14-ICN-HEL",
@@ -4982,7 +5363,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY62-2026-09-14-HND-HEL",
@@ -4994,7 +5376,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1031-2026-09-14-HEL-TLL",
@@ -5006,7 +5389,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY446-2026-09-14-OUL-HEL",
@@ -5018,7 +5402,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY68-2026-09-14-KIX-HEL",
@@ -5030,7 +5415,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY216-2026-09-14-MHQ-HEL",
@@ -5042,7 +5428,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①⑤⑦"
+    "days": "①⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY963-2026-09-14-HEL-CPH",
@@ -5054,7 +5441,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑦"
+    "days": "①②③④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY146-2026-09-14-BKK-HEL",
@@ -5067,7 +5455,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "#",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY447-2026-09-14-HEL-OUL",
@@ -5079,7 +5468,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑦"
+    "days": "①②③④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY80-2026-09-14-NGO-HEL",
@@ -5091,7 +5481,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①③⑤⑦"
+    "days": "①③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY16-2026-09-14-JFK-HEL",
@@ -5103,7 +5494,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY511-2026-09-14-HEL-KEM",
@@ -5115,7 +5507,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③⑦"
+    "days": "①②③⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1032-2026-09-14-TLL-HEL",
@@ -5127,7 +5520,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤"
+    "days": "①②③④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY74-2026-09-14-NRT-HEL",
@@ -5139,7 +5533,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY539-2026-09-14-HEL-RVN",
@@ -5151,7 +5546,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY395-2026-09-14-HEL-KOK",
@@ -5163,7 +5559,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑦"
+    "days": "①②③④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY289-2026-09-14-HEL-JYV",
@@ -5175,7 +5572,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1045-2026-09-14-HEL-TAY",
@@ -5187,7 +5585,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY379-2026-09-14-HEL-KUO",
@@ -5199,7 +5598,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑤⑦"
+    "days": "①②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY449-2026-09-14-HEL-OUL",
@@ -5211,7 +5611,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "#"
+    "days": "#",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY825-2026-09-14-HEL-ARN",
@@ -5223,7 +5624,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "①②③④⑦"
+    "days": "①②③④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY87-2026-09-15-HEL-PVG",
@@ -5235,7 +5637,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③⑤⑦"
+    "days": "②③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1726-2026-09-15-ALC-HEL",
@@ -5247,7 +5650,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②"
+    "days": "②",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1703-2026-09-15-HEL-VLC",
@@ -5259,7 +5663,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑥"
+    "days": "②⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY341-2026-09-15-HEL-JOE",
@@ -5271,7 +5676,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④"
+    "days": "②③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1771-2026-09-15-HEL-BLQ",
@@ -5284,7 +5690,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "②④",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1805-2026-09-15-HEL-CTA",
@@ -5296,7 +5703,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑦"
+    "days": "②⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY921-2026-09-15-HEL-BGO",
@@ -5308,7 +5716,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②"
+    "days": "②",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1315-2026-09-15-HEL-LUX",
@@ -5320,7 +5729,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY342-2026-09-15-JOE-HEL",
@@ -5332,7 +5742,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④"
+    "days": "②③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1772-2026-09-15-BLQ-HEL",
@@ -5345,7 +5756,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "②④",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY922-2026-09-15-BGO-HEL",
@@ -5357,7 +5769,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②"
+    "days": "②",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1316-2026-09-15-LUX-HEL",
@@ -5369,7 +5782,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1806-2026-09-15-CTA-HEL",
@@ -5381,7 +5795,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑦"
+    "days": "②⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1704-2026-09-15-VLC-HEL",
@@ -5393,7 +5808,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑥"
+    "days": "②⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1707-2026-09-15-HEL-FAO",
@@ -5405,7 +5821,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY19-2026-09-15-HEL-DFW",
@@ -5417,7 +5834,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑤⑥⑦"
+    "days": "②③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1018-2026-09-15-TLL-HEL",
@@ -5429,7 +5847,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④⑤"
+    "days": "②④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1708-2026-09-15-FAO-HEL",
@@ -5441,7 +5860,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY993-2026-09-15-HEL-KEF",
@@ -5453,7 +5873,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑤⑦"
+    "days": "②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY593-2026-09-15-HEL-KTT",
@@ -5465,7 +5886,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1385-2026-09-15-HEL-DUB",
@@ -5477,7 +5899,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑥"
+    "days": "②③④⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY9-2026-09-15-HEL-ORD",
@@ -5489,7 +5912,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑤⑥⑦"
+    "days": "②③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1783-2026-09-15-HEL-VCE",
@@ -5502,7 +5926,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "②④⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1793-2026-09-15-HEL-NAP",
@@ -5514,7 +5939,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑤"
+    "days": "②⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1843-2026-09-15-HEL-SPU",
@@ -5526,7 +5952,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑤"
+    "days": "②⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY20-2026-09-15-DFW-HEL",
@@ -5538,7 +5965,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑤⑥⑦"
+    "days": "②③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY994-2026-09-15-KEF-HEL",
@@ -5550,7 +5978,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑤⑦"
+    "days": "②③④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1386-2026-09-15-DUB-HEL",
@@ -5562,7 +5991,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑥"
+    "days": "②③④⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY923-2026-09-15-HEL-BGO",
@@ -5574,7 +6004,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1784-2026-09-15-VCE-HEL",
@@ -5587,7 +6018,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "②④⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1844-2026-09-15-SPU-HEL",
@@ -5599,7 +6031,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑤"
+    "days": "②⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1794-2026-09-15-NAP-HEL",
@@ -5611,7 +6044,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②⑤"
+    "days": "②⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY594-2026-09-15-KTT-HEL",
@@ -5623,7 +6057,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY88-2026-09-15-PVG-HEL",
@@ -5635,7 +6070,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③⑤⑦"
+    "days": "②③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY924-2026-09-15-BGO-HEL",
@@ -5647,7 +6083,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②④"
+    "days": "②④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY10-2026-09-15-ORD-HEL",
@@ -5659,7 +6096,8 @@ export const flights = [
     "aircraft": "Airbus A330-300",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②③④⑤⑥⑦"
+    "days": "②③④⑤⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1933-2026-09-15-HEL-GZP",
@@ -5671,7 +6109,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "②"
+    "days": "②",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1934-2026-09-16-GZP-HEL",
@@ -5683,7 +6122,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1711-2026-09-16-HEL-PMI",
@@ -5695,7 +6135,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1011-2026-09-16-HEL-TLL",
@@ -5707,7 +6148,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY921-2026-09-16-HEL-BGO",
@@ -5719,7 +6161,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑤⑦"
+    "days": "③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1101-2026-09-16-HEL-VNO",
@@ -5731,7 +6174,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑦"
+    "days": "③⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1012-2026-09-16-TLL-HEL",
@@ -5743,7 +6187,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1801-2026-09-16-HEL-VRN",
@@ -5755,7 +6200,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑥"
+    "days": "③⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY611-2026-09-16-HEL-IVL",
@@ -5767,7 +6213,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③④"
+    "days": "③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY922-2026-09-16-BGO-HEL",
@@ -5779,7 +6226,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑤⑦"
+    "days": "③⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY823-2026-09-16-HEL-ARN",
@@ -5791,7 +6239,21 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY823-2026-09-16-HEL-SVG",
+    "number": "AY823",
+    "from": "HEL",
+    "to": "SVG",
+    "departure": "2026-09-16T09:15:00+03:00",
+    "arrival": "2026-09-16T11:15:00+02:00",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "③",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY1712-2026-09-16-PMI-HEL",
@@ -5803,7 +6265,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1802-2026-09-16-VRN-HEL",
@@ -5815,7 +6278,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑥"
+    "days": "③⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY313-2026-09-16-HEL-VAA",
@@ -5827,7 +6291,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY612-2026-09-16-KKN-IVL",
@@ -5839,7 +6304,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③④⑥"
+    "days": "③④⑥",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY611-2026-09-16-IVL-KKN",
@@ -5851,7 +6317,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③④⑥"
+    "days": "③④⑥",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1725-2026-09-16-HEL-ALC",
@@ -5863,7 +6330,21 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY824-2026-09-16-SVG-HEL",
+    "number": "AY824",
+    "from": "SVG",
+    "to": "HEL",
+    "departure": "2026-09-16T12:00:00+02:00",
+    "arrival": "2026-09-16T16:00:00+03:00",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "③",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY612-2026-09-16-IVL-HEL",
@@ -5875,7 +6356,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③④"
+    "days": "③④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY824-2026-09-16-ARN-HEL",
@@ -5887,7 +6369,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1935-2026-09-16-HEL-GZP",
@@ -5899,7 +6382,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑥"
+    "days": "③⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1726-2026-09-16-ALC-HEL",
@@ -5911,7 +6395,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY949-2026-09-16-HEL-TRD",
@@ -5923,7 +6408,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑤"
+    "days": "③⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1807-2026-09-16-HEL-CTA",
@@ -5935,7 +6421,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1835-2026-09-16-HEL-DBV",
@@ -5947,7 +6434,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1106-2026-09-16-VNO-HEL",
@@ -5959,7 +6447,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑤"
+    "days": "③⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY950-2026-09-16-TRD-HEL",
@@ -5971,7 +6460,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑤"
+    "days": "③⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1836-2026-09-16-DBV-HEL",
@@ -5983,7 +6473,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1808-2026-09-16-CTA-HEL",
@@ -5995,7 +6486,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③"
+    "days": "③",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1936-2026-09-16-GZP-HEL",
@@ -6007,7 +6499,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "③⑥"
+    "days": "③⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1811-2026-09-17-HEL-FLR",
@@ -6019,7 +6512,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④"
+    "days": "④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY311-2026-09-17-HEL-VAA",
@@ -6031,7 +6525,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④⑤⑦"
+    "days": "④⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY888-2026-09-17-UME-HEL",
@@ -6043,7 +6538,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④"
+    "days": "④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1812-2026-09-17-FLR-HEL",
@@ -6055,7 +6551,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④"
+    "days": "④",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY413-2026-09-17-HEL-KAJ",
@@ -6067,7 +6564,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④⑤"
+    "days": "④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY414-2026-09-17-KAJ-HEL",
@@ -6079,7 +6577,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④⑤"
+    "days": "④⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1847-2026-09-17-HEL-TIA",
@@ -6091,7 +6590,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④⑦"
+    "days": "④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1848-2026-09-17-TIA-HEL",
@@ -6103,7 +6603,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "④⑦"
+    "days": "④⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1879-2026-09-18-HEL-KGS",
@@ -6115,7 +6616,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤⑥"
+    "days": "⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1175-2026-09-18-HEL-GDN",
@@ -6127,7 +6629,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1871-2026-09-18-HEL-HER",
@@ -6139,7 +6642,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤⑦"
+    "days": "⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1601-2026-09-18-HEL-NCE",
@@ -6151,7 +6655,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY341-2026-09-18-HEL-JOE",
@@ -6163,7 +6668,21 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY823-2026-09-18-HEL-SVG",
+    "number": "AY823",
+    "from": "HEL",
+    "to": "SVG",
+    "departure": "2026-09-18T07:40:00+03:00",
+    "arrival": "2026-09-18T09:40:00+02:00",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑤⑦",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY312-2026-09-18-UME-VAA",
@@ -6175,7 +6694,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1176-2026-09-18-GDN-HEL",
@@ -6187,7 +6707,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY311-2026-09-18-VAA-UME",
@@ -6199,7 +6720,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY213-2026-09-18-HEL-MHQ",
@@ -6211,7 +6733,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY342-2026-09-18-JOE-HEL",
@@ -6223,7 +6746,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY489-2026-09-18-HEL-KAO",
@@ -6235,7 +6759,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY312-2026-09-18-UME-HEL",
@@ -6247,7 +6772,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY214-2026-09-18-MHQ-HEL",
@@ -6259,7 +6785,21 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
+  },
+  {
+    "id": "AY824-2026-09-18-SVG-HEL",
+    "number": "AY824",
+    "from": "SVG",
+    "to": "HEL",
+    "departure": "2026-09-18T10:25:00+02:00",
+    "arrival": "2026-09-18T14:25:00+03:00",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Scheduled",
+    "days": "⑤⑦",
+    "source": "flightmapper.net Finnair route page"
   },
   {
     "id": "AY70-2026-09-18-KIX-HEL",
@@ -6271,7 +6811,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1602-2026-09-18-NCE-HEL",
@@ -6283,7 +6824,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY312-2026-09-18-VAA-HEL",
@@ -6295,7 +6837,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤⑦"
+    "days": "⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1880-2026-09-18-KGS-HEL",
@@ -6307,7 +6850,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤⑥"
+    "days": "⑤⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY490-2026-09-18-KAO-HEL",
@@ -6319,7 +6863,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY515-2026-09-18-HEL-KEM",
@@ -6331,19 +6876,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
-  },
-  {
-    "id": "AY824-2026-09-18-SVG-HEL",
-    "number": "AY824",
-    "from": "SVG",
-    "to": "HEL",
-    "departure": "2026-09-18T11:40:00+02:00",
-    "arrival": "2026-09-18T14:25:00+03:00",
-    "aircraft": "Embraer 190",
-    "airline": "Finnair",
-    "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1872-2026-09-18-HER-HEL",
@@ -6355,7 +6889,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤⑦"
+    "days": "⑤⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY806-2026-09-18-BGO-HEL",
@@ -6367,7 +6902,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY391-2026-09-18-HEL-KOK",
@@ -6379,7 +6915,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY516-2026-09-18-KEM-HEL",
@@ -6391,7 +6928,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY821-2026-09-18-HEL-ARN",
@@ -6403,7 +6941,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY392-2026-09-18-KOK-HEL",
@@ -6415,7 +6954,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1025-2026-09-18-HEL-TLL",
@@ -6427,7 +6967,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY822-2026-09-18-ARN-HEL",
@@ -6439,7 +6980,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1026-2026-09-18-TLL-HEL",
@@ -6451,7 +6993,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1933-2026-09-18-HEL-GZP",
@@ -6463,7 +7006,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1777-2026-09-18-HEL-TRN",
@@ -6475,7 +7019,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY69-2026-09-18-HEL-KIX",
@@ -6487,7 +7032,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1778-2026-09-18-TRN-HEL",
@@ -6499,7 +7045,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY318-2026-09-18-UME-VAA",
@@ -6511,7 +7058,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY317-2026-09-18-VAA-UME",
@@ -6523,7 +7071,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY7027-2026-09-18-HEL-KTT",
@@ -6535,7 +7084,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1934-2026-09-18-GZP-HEL",
@@ -6547,7 +7097,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY318-2026-09-18-UME-HEL",
@@ -6559,7 +7110,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1943-2026-09-18-HEL-AYT",
@@ -6571,7 +7123,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY7028-2026-09-18-KTT-HEL",
@@ -6583,7 +7136,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑤"
+    "days": "⑤",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1944-2026-09-19-AYT-HEL",
@@ -6595,7 +7149,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1671-2026-09-19-HEL-AGP",
@@ -6607,7 +7162,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1887-2026-09-19-HEL-JTR",
@@ -6619,7 +7175,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY801-2026-09-19-HEL-ARN",
@@ -6632,7 +7189,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1711-2026-09-19-HEL-PMI",
@@ -6644,7 +7202,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY2081-2026-09-19-HEL-CFU",
@@ -6656,7 +7215,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY571-2026-09-19-HEL-KTT",
@@ -6668,7 +7228,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1013-2026-09-19-HEL-TLL",
@@ -6680,7 +7241,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY802-2026-09-19-ARN-HEL",
@@ -6693,7 +7255,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1841-2026-09-19-HEL-SPU",
@@ -6705,7 +7268,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1175-2026-09-19-HEL-GDN",
@@ -6717,7 +7281,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1014-2026-09-19-TLL-HEL",
@@ -6729,7 +7294,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY611-2026-09-19-HEL-IVL",
@@ -6741,7 +7307,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1176-2026-09-19-GDN-HEL",
@@ -6753,7 +7320,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1015-2026-09-19-HEL-TLL",
@@ -6765,7 +7333,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY572-2026-09-19-KTT-HEL",
@@ -6777,7 +7346,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1842-2026-09-19-SPU-HEL",
@@ -6789,7 +7359,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1016-2026-09-19-TLL-HEL",
@@ -6801,7 +7372,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1672-2026-09-19-AGP-HEL",
@@ -6813,7 +7385,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1712-2026-09-19-PMI-HEL",
@@ -6825,7 +7398,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1888-2026-09-19-JTR-HEL",
@@ -6837,7 +7411,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY2082-2026-09-19-CFU-HEL",
@@ -6849,7 +7424,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY489-2026-09-19-HEL-KAO",
@@ -6861,7 +7437,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1017-2026-09-19-HEL-TLL",
@@ -6873,7 +7450,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1109-2026-09-19-HEL-VNO",
@@ -6885,7 +7463,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY612-2026-09-19-IVL-HEL",
@@ -6897,7 +7476,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY490-2026-09-19-KAO-HEL",
@@ -6909,7 +7489,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1018-2026-09-19-TLL-HEL",
@@ -6921,7 +7502,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1019-2026-09-19-HEL-TLL",
@@ -6933,7 +7515,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1110-2026-09-19-VNO-HEL",
@@ -6945,7 +7528,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1020-2026-09-19-TLL-HEL",
@@ -6957,7 +7541,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1889-2026-09-19-HEL-JTR",
@@ -6969,7 +7554,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY315-2026-09-19-HEL-VAA",
@@ -6981,7 +7567,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY369-2026-09-19-HEL-KUO",
@@ -6993,7 +7580,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY487-2026-09-19-HEL-KAO",
@@ -7005,7 +7593,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1941-2026-09-19-HEL-AYT",
@@ -7017,7 +7606,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY923-2026-09-19-HEL-BGO",
@@ -7029,7 +7619,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY2095-2026-09-19-HEL-PVK",
@@ -7041,7 +7632,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1773-2026-09-19-HEL-BLQ",
@@ -7054,7 +7646,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY316-2026-09-19-VAA-HEL",
@@ -7066,7 +7659,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY370-2026-09-19-KUO-HEL",
@@ -7078,7 +7672,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥⑦"
+    "days": "⑥⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY488-2026-09-19-KAO-HEL",
@@ -7090,7 +7685,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY949-2026-09-19-HEL-TRD",
@@ -7102,7 +7698,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY924-2026-09-19-BGO-HEL",
@@ -7114,7 +7711,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY537-2026-09-19-HEL-RVN",
@@ -7126,7 +7724,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY950-2026-09-19-TRD-HEL",
@@ -7138,7 +7737,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1774-2026-09-19-BLQ-HEL",
@@ -7151,7 +7751,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑥",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1890-2026-09-19-JTR-HEL",
@@ -7163,7 +7764,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1942-2026-09-19-AYT-HEL",
@@ -7175,7 +7777,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY538-2026-09-19-RVN-HEL",
@@ -7187,7 +7790,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY2096-2026-09-19-PVK-HEL",
@@ -7199,7 +7803,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "Finavia public flight information"
   },
   {
     "id": "AY1929-2026-09-19-HEL-LCA",
@@ -7211,7 +7816,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1031-2026-09-19-HEL-TLL",
@@ -7223,7 +7829,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1032-2026-09-19-TLL-HEL",
@@ -7235,7 +7842,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY869-2026-09-19-HEL-GOT",
@@ -7247,7 +7855,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑥"
+    "days": "⑥",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1930-2026-09-20-LCA-HEL",
@@ -7259,7 +7868,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1933-2026-09-20-HEL-GZP",
@@ -7271,7 +7881,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1725-2026-09-20-HEL-ALC",
@@ -7283,7 +7894,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY591-2026-09-20-HEL-KTT",
@@ -7295,7 +7907,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY489-2026-09-20-HEL-KAO",
@@ -7307,7 +7920,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY870-2026-09-20-GOT-HEL",
@@ -7319,7 +7933,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1857-2026-09-20-HEL-CHQ",
@@ -7331,7 +7946,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1775-2026-09-20-HEL-TRN",
@@ -7343,7 +7959,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1541-2026-09-20-HEL-BRU",
@@ -7355,7 +7972,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY490-2026-09-20-KAO-HEL",
@@ -7367,7 +7985,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1102-2026-09-20-VNO-HEL",
@@ -7379,7 +7998,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1776-2026-09-20-TRN-HEL",
@@ -7391,7 +8011,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1934-2026-09-20-GZP-HEL",
@@ -7403,7 +8024,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY285-2026-09-20-HEL-JYV",
@@ -7415,7 +8037,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1726-2026-09-20-ALC-HEL",
@@ -7427,7 +8050,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1333-2026-09-20-HEL-LHR",
@@ -7439,7 +8063,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY592-2026-09-20-KTT-HEL",
@@ -7451,7 +8076,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1858-2026-09-20-CHQ-HEL",
@@ -7463,7 +8089,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY286-2026-09-20-JYV-HEL",
@@ -7475,7 +8102,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1334-2026-09-20-LHR-HEL",
@@ -7487,7 +8115,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY517-2026-09-20-HEL-KEM",
@@ -7499,7 +8128,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY821-2026-09-20-HEL-ARN",
@@ -7512,7 +8142,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1025-2026-09-20-HEL-TLL",
@@ -7524,7 +8155,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY822-2026-09-20-ARN-HEL",
@@ -7537,7 +8169,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1927-2026-09-20-HEL-LCA",
@@ -7549,7 +8182,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1026-2026-09-20-TLL-HEL",
@@ -7561,7 +8195,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY518-2026-09-20-KEM-HEL",
@@ -7573,7 +8208,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1813-2026-09-20-HEL-FLR",
@@ -7585,7 +8221,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY345-2026-09-20-HEL-JOE",
@@ -7597,7 +8234,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1865-2026-09-20-HEL-RHO",
@@ -7609,7 +8247,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1881-2026-09-20-HEL-HER",
@@ -7621,7 +8260,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1021-2026-09-20-HEL-TLL",
@@ -7633,7 +8273,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1022-2026-09-20-TLL-HEL",
@@ -7645,7 +8286,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY346-2026-09-20-JOE-HEL",
@@ -7657,7 +8299,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY415-2026-09-20-HEL-KAJ",
@@ -7669,7 +8312,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY961-2026-09-20-HEL-CPH",
@@ -7682,7 +8326,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1023-2026-09-20-HEL-TLL",
@@ -7694,7 +8339,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY577-2026-09-20-HEL-KTT",
@@ -7706,7 +8352,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1814-2026-09-20-FLR-HEL",
@@ -7718,7 +8365,8 @@ export const flights = [
     "aircraft": "Embraer 190",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY962-2026-09-20-CPH-HEL",
@@ -7731,7 +8379,8 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑦",
-    "wetlease": "Jettime"
+    "wetlease": "Jettime",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY537-2026-09-20-HEL-RVN",
@@ -7743,7 +8392,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1024-2026-09-20-TLL-HEL",
@@ -7755,7 +8405,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY416-2026-09-20-KAJ-HEL",
@@ -7767,7 +8418,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1928-2026-09-20-LCA-HEL",
@@ -7779,7 +8431,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1027-2026-09-20-HEL-TLL",
@@ -7791,7 +8444,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1866-2026-09-20-RHO-HEL",
@@ -7803,7 +8457,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1882-2026-09-20-HER-HEL",
@@ -7815,7 +8470,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY538-2026-09-20-RVN-HEL",
@@ -7827,7 +8483,8 @@ export const flights = [
     "aircraft": "Airbus A319",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY578-2026-09-20-KTT-HEL",
@@ -7839,7 +8496,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1028-2026-09-20-TLL-HEL",
@@ -7851,7 +8509,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1031-2026-09-20-HEL-TLL",
@@ -7863,7 +8522,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1941-2026-09-20-HEL-AYT",
@@ -7875,7 +8535,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1032-2026-09-20-TLL-HEL",
@@ -7887,7 +8548,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY349-2026-09-20-HEL-JOE",
@@ -7899,7 +8561,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY417-2026-09-20-HEL-KAJ",
@@ -7911,7 +8574,8 @@ export const flights = [
     "aircraft": "ATR 72",
     "airline": "Finnair",
     "status": "Scheduled",
-    "days": "⑦"
+    "days": "⑦",
+    "source": "published per-flight schedule pages, reconciled against Finavia"
   },
   {
     "id": "AY1491-2026-10-25-HEL-INN",
@@ -7921,7 +8585,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY1492-2026-10-25-INN-HEL",
@@ -7931,7 +8596,8 @@ export const flights = [
     "aircraft": "Airbus A320",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY151-2026-10-25-HEL-HKT",
@@ -7941,7 +8607,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY152-2026-10-25-HKT-HEL",
@@ -7951,7 +8618,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY1691-2026-10-25-HEL-TFS",
@@ -7961,7 +8629,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY1692-2026-10-25-TFS-HEL",
@@ -7971,7 +8640,8 @@ export const flights = [
     "aircraft": "Airbus A321",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY1721-2026-10-25-HEL-LPA",
@@ -7981,7 +8651,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY1722-2026-10-25-LPA-HEL",
@@ -7991,7 +8662,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY7-2026-10-25-HEL-MIA",
@@ -8001,7 +8673,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "AY8-2026-10-25-MIA-HEL",
@@ -8011,7 +8684,8 @@ export const flights = [
     "aircraft": "Airbus A350-900",
     "airline": "Finnair",
     "status": "Opens with the winter season",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "flightmapper.net Finnair route page, previous season's numbers; winter 2026/27 not published"
   },
   {
     "id": "TMP-2026-10-25-opens",
@@ -8019,7 +8693,8 @@ export const flights = [
     "to": "TMP",
     "airline": "Finnair",
     "status": "Opens with the winter season, timetable not filed",
-    "opens": "2026-10-25"
+    "opens": "2026-10-25",
+    "source": "route announcement; no timetable filed"
   }
 ];
 
@@ -8613,6 +9288,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8629,6 +9306,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8645,6 +9324,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8661,6 +9342,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8677,6 +9360,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8693,6 +9378,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8709,6 +9396,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8725,6 +9414,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8741,6 +9432,8 @@ export const codeshareFlights = [
     "days": "①②④⑦",
     "frequency": "Weekly (①②④⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8757,6 +9450,8 @@ export const codeshareFlights = [
     "days": "①②④⑦",
     "frequency": "Weekly (①②④⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8773,6 +9468,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8789,6 +9486,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HKG"
   },
   {
@@ -8805,6 +9504,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8821,6 +9522,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8828,8 +9531,8 @@ export const codeshareFlights = [
     "number": "AY 4885",
     "from": "SIN",
     "to": "DRW",
-    "departure": "2026-09-14T17:30:00+08:00",
-    "arrival": "2026-09-14T23:55:00+09:30",
+    "departure": "2026-09-14T22:05:00+08:00",
+    "arrival": "2026-09-15T04:30:00+09:30",
     "airline": "Finnair (op. by Qantas)",
     "operator": "Qantas",
     "operatorFlight": "QF 48",
@@ -8837,6 +9540,8 @@ export const codeshareFlights = [
     "days": "①③④⑥",
     "frequency": "Weekly (①③④⑥)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8844,8 +9549,8 @@ export const codeshareFlights = [
     "number": "AY 4886",
     "from": "DRW",
     "to": "SIN",
-    "departure": "2026-09-14T13:05:00+09:30",
-    "arrival": "2026-09-14T16:25:00+08:00",
+    "departure": "2026-09-14T17:40:00+09:30",
+    "arrival": "2026-09-14T21:00:00+08:00",
     "airline": "Finnair (op. by Qantas)",
     "operator": "Qantas",
     "operatorFlight": "QF 47",
@@ -8853,6 +9558,8 @@ export const codeshareFlights = [
     "days": "①③④⑥",
     "frequency": "Weekly (①③④⑥)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8869,6 +9576,8 @@ export const codeshareFlights = [
     "days": "①④",
     "frequency": "Weekly (①④)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8885,6 +9594,8 @@ export const codeshareFlights = [
     "days": "③⑦",
     "frequency": "Weekly (③⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8901,6 +9612,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8917,6 +9630,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8933,6 +9648,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8949,6 +9666,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8965,6 +9684,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8981,6 +9702,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -8997,6 +9720,8 @@ export const codeshareFlights = [
     "days": "②④⑤⑦",
     "frequency": "Weekly (②④⑤⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -9013,6 +9738,8 @@ export const codeshareFlights = [
     "days": "③④⑤⑥",
     "frequency": "Weekly (③④⑤⑥)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SIN"
   },
   {
@@ -9029,6 +9756,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9045,6 +9774,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9061,6 +9792,8 @@ export const codeshareFlights = [
     "days": "①②④⑤⑥⑦",
     "frequency": "Weekly (①②④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9077,38 +9810,44 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
-    "id": "AY6013a-2026-09-15",
+    "id": "AY6013a-2026-09-14",
     "number": "AY 6013",
     "from": "DOH",
     "to": "MCT",
-    "departure": "2026-09-15T01:20:00+03:00",
-    "arrival": "2026-09-15T03:55:00+04:00",
+    "departure": "2026-09-14T01:50:00+03:00",
+    "arrival": "2026-09-14T04:25:00+04:00",
     "airline": "Finnair (op. by Qatar Airways)",
     "operator": "Qatar Airways",
     "operatorFlight": "QR 1148",
-    "aircraft": "Airbus A330-300",
-    "days": "②③④⑤⑥⑦",
-    "frequency": "Weekly (②③④⑤⑥⑦)",
+    "aircraft": "Airbus A330-200",
+    "days": "#",
+    "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
-    "id": "AY6016b-2026-09-15",
+    "id": "AY6016b-2026-09-14",
     "number": "AY 6016",
     "from": "MCT",
     "to": "DOH",
-    "departure": "2026-09-15T05:30:00+04:00",
-    "arrival": "2026-09-15T06:05:00+03:00",
+    "departure": "2026-09-14T05:55:00+04:00",
+    "arrival": "2026-09-14T06:30:00+03:00",
     "airline": "Finnair (op. by Qatar Airways)",
     "operator": "Qatar Airways",
     "operatorFlight": "QR 1149",
-    "aircraft": "Airbus A330-300",
-    "days": "②③④⑤⑥⑦",
-    "frequency": "Weekly (②③④⑤⑥⑦)",
+    "aircraft": "Airbus A330-200",
+    "days": "#",
+    "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9125,6 +9864,8 @@ export const codeshareFlights = [
     "days": "②④⑥",
     "frequency": "Weekly (②④⑥)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9141,6 +9882,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9157,6 +9900,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9173,6 +9918,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9189,6 +9936,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9205,6 +9954,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9221,6 +9972,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9237,6 +9990,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9253,6 +10008,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9269,6 +10026,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9285,6 +10044,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9301,6 +10062,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9317,6 +10080,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DOH"
   },
   {
@@ -9333,6 +10098,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HND"
   },
   {
@@ -9349,6 +10116,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HND"
   },
   {
@@ -9365,6 +10134,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HND"
   },
   {
@@ -9381,6 +10152,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HND"
   },
   {
@@ -9397,6 +10170,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HND"
   },
   {
@@ -9413,6 +10188,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "HND"
   },
   {
@@ -9429,6 +10206,8 @@ export const codeshareFlights = [
     "days": "①③",
     "frequency": "Weekly (①③)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9445,6 +10224,8 @@ export const codeshareFlights = [
     "days": "②⑤⑦",
     "frequency": "Weekly (②⑤⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9461,6 +10242,8 @@ export const codeshareFlights = [
     "days": "①④",
     "frequency": "Weekly (①④)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9477,6 +10260,8 @@ export const codeshareFlights = [
     "days": "③",
     "frequency": "Weekly (③)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9493,6 +10278,8 @@ export const codeshareFlights = [
     "days": "⑦",
     "frequency": "Weekly (⑦)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9509,6 +10296,8 @@ export const codeshareFlights = [
     "days": "④⑤",
     "frequency": "Weekly (④⑤)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9525,6 +10314,8 @@ export const codeshareFlights = [
     "days": "①②⑦",
     "frequency": "Weekly (①②⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9541,6 +10332,8 @@ export const codeshareFlights = [
     "days": "③④⑥⑦",
     "frequency": "Weekly (③④⑥⑦)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9557,6 +10350,8 @@ export const codeshareFlights = [
     "days": "⑥",
     "frequency": "Weekly (⑥)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9573,6 +10368,8 @@ export const codeshareFlights = [
     "days": "①③",
     "frequency": "Weekly (①③)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9589,6 +10386,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9605,6 +10404,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9621,6 +10422,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9637,6 +10440,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9653,6 +10458,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9669,6 +10476,8 @@ export const codeshareFlights = [
     "days": "①②③④⑤⑥",
     "frequency": "Weekly (①②③④⑤⑥)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9685,22 +10494,26 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
-    "id": "AY4426b-2026-09-14",
-    "number": "AY 4426",
+    "id": "AY5890b-2026-09-14",
+    "number": "AY 5890",
     "from": "GRU",
     "to": "LHR",
-    "departure": "2026-09-14T23:50:00-03:00",
-    "arrival": "2026-09-15T15:05:00+01:00",
+    "departure": "2026-09-14T16:25:00-03:00",
+    "arrival": "2026-09-15T06:45:00+01:00",
     "airline": "Finnair (op. by British Airways)",
-    "operator": "LATAM Airlines",
-    "operatorFlight": "LA 8084",
-    "aircraft": "Boeing 777-300",
+    "operator": "British Airways",
+    "operatorFlight": "BA 246",
+    "aircraft": "Airbus A350-1000",
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9717,6 +10530,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9733,6 +10548,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LHR"
   },
   {
@@ -9749,6 +10566,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9765,6 +10584,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9781,6 +10602,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9797,6 +10620,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9813,6 +10638,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9829,6 +10656,26 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
+    "via": "JFK"
+  },
+  {
+    "id": "AY4055a-2026-09-14",
+    "number": "AY 4055",
+    "from": "JFK",
+    "to": "ORF",
+    "departure": "2026-09-14T21:39:00-04:00",
+    "arrival": "2026-09-14T23:15:00-04:00",
+    "airline": "Finnair (op. by American Airlines)",
+    "operator": "American Airlines",
+    "operatorFlight": "AA 4509",
+    "aircraft": "Embraer EMB 175",
+    "days": "#",
+    "frequency": "Daily (#)",
+    "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9845,6 +10692,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "JFK"
   },
   {
@@ -9861,6 +10710,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9877,6 +10728,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9892,6 +10745,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9908,6 +10763,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9924,6 +10781,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9940,6 +10799,8 @@ export const codeshareFlights = [
     "days": "②⑤",
     "frequency": "Weekly (②⑤)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9955,6 +10816,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9971,6 +10834,8 @@ export const codeshareFlights = [
     "days": "②⑤",
     "frequency": "Weekly (②⑤)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "ORD"
   },
   {
@@ -9987,6 +10852,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DFW"
   },
   {
@@ -10003,6 +10870,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DFW"
   },
   {
@@ -10018,6 +10887,8 @@ export const codeshareFlights = [
     "days": "②③⑤⑥⑦",
     "frequency": "Weekly (②③⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DFW"
   },
   {
@@ -10034,6 +10905,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DFW"
   },
   {
@@ -10050,6 +10923,8 @@ export const codeshareFlights = [
     "days": "②③④⑤⑥⑦",
     "frequency": "Weekly (②③④⑤⑥⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DFW"
   },
   {
@@ -10066,6 +10941,8 @@ export const codeshareFlights = [
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "DFW"
   },
   {
@@ -10082,6 +10959,8 @@ export const codeshareFlights = [
     "days": "②⑤⑦",
     "frequency": "Weekly (②⑤⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
@@ -10098,6 +10977,8 @@ export const codeshareFlights = [
     "days": "②⑤⑦",
     "frequency": "Weekly (②⑤⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
@@ -10114,6 +10995,8 @@ export const codeshareFlights = [
     "days": "①④",
     "frequency": "Weekly (①④)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
@@ -10130,22 +11013,26 @@ export const codeshareFlights = [
     "days": "①④",
     "frequency": "Weekly (①④)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
-    "id": "AY3679a-2026-09-14",
-    "number": "AY 3679",
+    "id": "AY4206a-2026-09-15",
+    "number": "AY 4206",
     "from": "LAX",
     "to": "PHX",
-    "departure": "2026-09-14T19:40:00-07:00",
-    "arrival": "2026-09-14T21:07:00-07:00",
+    "departure": "2026-09-15T21:14:00-07:00",
+    "arrival": "2026-09-15T22:41:00-07:00",
     "airline": "Finnair (op. by American Airlines)",
     "operator": "American Airlines",
-    "operatorFlight": "AA 463",
-    "aircraft": "Airbus A321neo",
-    "days": "①④",
-    "frequency": "Weekly (①④)",
+    "operatorFlight": "AA 2784",
+    "aircraft": "Boeing 737-800",
+    "days": "②⑤⑦",
+    "frequency": "Weekly (②⑤⑦)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
@@ -10162,6 +11049,8 @@ export const codeshareFlights = [
     "days": "①④",
     "frequency": "Weekly (①④)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
@@ -10169,31 +11058,35 @@ export const codeshareFlights = [
     "number": "AY 4127",
     "from": "LAX",
     "to": "HNL",
-    "departure": "2026-09-14T19:30:00-07:00",
-    "arrival": "2026-09-14T22:15:00-10:00",
+    "departure": "2026-09-14T19:35:00-07:00",
+    "arrival": "2026-09-14T22:35:00-10:00",
     "airline": "Finnair (op. by American Airlines)",
     "operator": "American Airlines",
-    "operatorFlight": "AA 2888",
+    "operatorFlight": "AA 297",
     "aircraft": "Airbus A321neo",
-    "days": "①③⑤",
-    "frequency": "Weekly (①③⑤)",
+    "days": "①③④⑤",
+    "frequency": "Weekly (①③④⑤)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
-    "id": "AY4060b-2026-09-15",
-    "number": "AY 4060",
+    "id": "AY4071b-2026-09-14",
+    "number": "AY 4071",
     "from": "HNL",
     "to": "LAX",
-    "departure": "2026-09-15T07:00:00-10:00",
-    "arrival": "2026-09-15T14:34:00-07:00",
+    "departure": "2026-09-14T06:00:00-10:00",
+    "arrival": "2026-09-14T14:37:00-07:00",
     "airline": "Finnair (op. by American Airlines)",
     "operator": "American Airlines",
     "operatorFlight": "AA 164",
     "aircraft": "Airbus A321neo",
-    "days": "②④⑦",
-    "frequency": "Weekly (②④⑦)",
+    "days": "①③⑤",
+    "frequency": "Weekly (①③⑤)",
     "codeshare": true,
+    "status": "Times from the nearest published period, not this week",
+    "source": "flightmapper.net Finnair route page",
     "via": "LAX"
   },
   {
@@ -10210,6 +11103,8 @@ export const codeshareFlights = [
     "days": "①⑤",
     "frequency": "Weekly (①⑤)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SEA"
   },
   {
@@ -10226,6 +11121,8 @@ export const codeshareFlights = [
     "days": "①⑤",
     "frequency": "Weekly (①⑤)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SEA"
   },
   {
@@ -10242,6 +11139,8 @@ export const codeshareFlights = [
     "days": "①⑤",
     "frequency": "Weekly (①⑤)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SEA"
   },
   {
@@ -10258,6 +11157,8 @@ export const codeshareFlights = [
     "days": "①⑤",
     "frequency": "Weekly (①⑤)",
     "codeshare": true,
+    "status": "Scheduled",
+    "source": "flightmapper.net Finnair route page",
     "via": "SEA"
   }
 ];

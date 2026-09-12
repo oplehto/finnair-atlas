@@ -160,4 +160,6 @@ Before accepting a visual change, check:
 - Zoom, selection, keyboard access, and narrow-window controls still work.
 - Illustrative data is clearly labelled; the reference is not presented as live service information.
 
+Every service on the sheet records where its schedule was read; see [sources](sources.md) for what each source covers and where it stops.
+
 Implementation entry points: [layout and labels](../public/layout.mjs), [SVG rendering and interaction](../public/app.mjs), [styles](../public/style.css), and [layout checks](../test/layout.test.mjs).

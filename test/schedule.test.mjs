@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateSchedule, filterFlights, layoutAirports} from '../public/schedule.mjs';
+import demo from '../public/demo.mjs';
 const sample = {airports:[{code:'HEL',name:'Helsinki',lat:60,lon:25},{code:'OUL',name:'Oulu',lat:65,lon:25}],flights:[{id:'AY1',from:'HEL',to:'OUL',departure:'2026-09-10T23:30:00+03:00',arrival:'2026-09-11T00:40:00+03:00',airline:'Finnair',aircraft:'A320'}]};
 test('accepts overnight flights with timezone offsets',()=>assert.equal(validateSchedule(sample).flights.length,1));
 test('rejects missing airports and impossible chronology',()=>{assert.throws(()=>validateSchedule({...sample,airports:sample.airports.slice(0,1)}),/airport/i);assert.throws(()=>validateSchedule({...sample,flights:[{...sample.flights[0],arrival:'2026-09-10T00:40:00+03:00'}]}),/arrival/i);});
@@ -44,4 +45,14 @@ test('overnight connections wait for the next day and flight numbers get timetab
  const [kept]=connectionFlights(own,partner);
  assert.equal(kept.connection.wait,1055);assert.equal(kept.connection.overnight,true);
  assert.equal(flightNumber({number:'AY431'}),'AY 431');assert.equal(flightNumber({number:'AY 5955'}),'AY 5955');assert.equal(flightNumber({id:'X'}),'X');
+});
+
+// Every service says where its schedule was read, so any line on the sheet can be questioned.
+// docs/sources.md explains what each source is and where it runs out.
+test('every service on the built-in sheet records its source',()=>{
+  const all=[...demo.flights,...demo.codeshareFlights];
+  const missing=all.filter(f=>typeof f.source!=='string'||!f.source.trim());
+  assert.deepEqual(missing.map(f=>f.id),[],'services without a source');
+  // A route drawn with no timings must say why it has none rather than looking like an omission.
+  for(const f of all.filter(f=>!f.departure)) assert.ok(f.opens&&f.status,`${f.id} explains its missing timetable`);
 });
