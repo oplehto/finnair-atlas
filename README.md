@@ -140,4 +140,6 @@ npm run deploy
 
 That builds first, then uploads.
 
+The baked schedule is written to `site/data/schedule.<hash>.json`, named after a hash of its own contents, and the page's `schedule-source` meta tag points at that name. A deploy therefore changes the name the page asks for and every visitor sees the new sheet immediately. Serving it under a stable name with a finite `max-age` means a returning visitor keeps the old schedule until it expires — which happened twice during development and looked exactly like a failed deploy.
+
 Production deploys are automatic. Cloudflare builds the repository on every push to `main`, running `npm ci && npm test && npm run build` and then `npx wrangler deploy`, so a failing test blocks the deploy. No API token is stored in GitHub. The workflow in `.github/workflows/ci.yml` runs the same tests on pull requests.

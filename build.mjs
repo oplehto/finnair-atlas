@@ -1,5 +1,6 @@
 import {build} from 'esbuild';
 import {mkdir, copyFile, readFile, writeFile, rm, cp} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 
 // 1. Fonts and the browser bundle for the Node server.
 await mkdir('public/dist/fonts', {recursive: true});
@@ -16,10 +17,18 @@ await rm('site', {recursive: true, force: true});
 await mkdir('site', {recursive: true});
 for (const [from, to] of [['public/style.css', 'style.css'], ['public/fonts.css', 'fonts.css'], ['public/dist/app.js', 'app.mjs']]) await copyFile(from, `site/${to}`);
 // The static build reads its schedule from a baked file, so it never probes the Node server's API.
+// The file carries a hash of its own contents in its name: a deploy then changes the name the page
+// asks for, and every visitor sees the new sheet at once. Serving it under a stable name with a
+// finite max-age instead means a returning visitor keeps the old schedule until that expires, which
+// happened here — twice — and looked exactly like a failed deploy.
+const schedule = JSON.stringify(demo);
+const digest = createHash('sha256').update(schedule).digest('hex').slice(0, 12);
+const scheduleFile = `data/schedule.${digest}.json`;
 const page = await readFile('public/index.html', 'utf8');
-await writeFile('site/index.html', page.replace('</head>', '<meta name="schedule-source" content="schedule.json"></head>'));
+await writeFile('site/index.html', page.replace('</head>', `<meta name="schedule-source" content="${scheduleFile}"></head>`));
 await cp('public/dist/fonts', 'site/fonts', {recursive: true});
-await writeFile('site/schedule.json', JSON.stringify(demo));
+await mkdir('site/data', {recursive: true});
+await writeFile(`site/${scheduleFile}`, schedule);
 await writeFile('site/.nojekyll', '');
 await writeFile('site/robots.txt', 'User-agent: *\nAllow: /\n');
 await writeFile('site/_headers', [
@@ -28,6 +37,6 @@ await writeFile('site/_headers', [
   '  Referrer-Policy: strict-origin-when-cross-origin',
   '/fonts/*',
   '  Cache-Control: public, max-age=31536000, immutable',
-  '/schedule.json',
-  '  Cache-Control: public, max-age=3600',
+  '/data/*',
+  '  Cache-Control: public, max-age=31536000, immutable',
   ''].join('\n'));
