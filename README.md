@@ -142,4 +142,6 @@ That builds first, then uploads.
 
 The baked schedule is written to `site/data/schedule.<hash>.json`, named after a hash of its own contents, and the page's `schedule-source` meta tag points at that name. A deploy therefore changes the name the page asks for and every visitor sees the new sheet immediately. Serving it under a stable name with a finite `max-age` means a returning visitor keeps the old schedule until it expires — which happened twice during development and looked exactly like a failed deploy.
 
+The sheet has two homes. Cloudflare serves it at https://finnair-atlas.ollipekka-lehto.workers.dev, and `.github/workflows/pages.yml` publishes the same `site/` build to GitHub Pages on every push to `main`. Both run `npm test` first, so a failing test blocks either. Pages needs the repository to be public, or a paid plan on a private one.
+
 Production deploys are automatic. Cloudflare builds the repository on every push to `main`, running `npm ci && npm test && npm run build` and then `npx wrangler deploy`, so a failing test blocks the deploy. No API token is stored in GitHub. The workflow in `.github/workflows/ci.yml` runs the same tests on pull requests.
