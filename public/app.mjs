@@ -49,7 +49,18 @@ function setData(next){
  document.querySelector('.edition').textContent=next.subtitle||'Flight services';
  $('source').textContent=(next.demo?'Example · ':'')+(next.source||'Imported schedule');
  $('updated').textContent=imported?'Local file · weekly services':'Weekly services · Reload picks up a changed schedule';
- $('notice').textContent=[next.copyright||'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean).join(' · ');
+ // The credit may carry an email, and it is no use as plain text, so it is rendered as a mailto
+ // link. The strip is built from nodes rather than one string for that reason.
+ const withEmail=text=>{
+  const found=/[^\s·]+@[^\s·]+/.exec(text);
+  if(!found)return [document.createTextNode(text)];
+  const link=document.createElement('a');
+  link.href=`mailto:${found[0]}`;
+  link.textContent=found[0];
+  return [document.createTextNode(text.slice(0,found.index)),link,document.createTextNode(text.slice(found.index+found[0].length))];
+ };
+ const lines=[next.copyright||'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean);
+ $('notice').replaceChildren(...lines.flatMap((line,i)=>i?[document.createTextNode(' · '),...withEmail(line)]:withEmail(line)));
  const allFlights=[...data.flights,...(data.codeshareFlights||[])];
  const aircraft=$('aircraft').value;
  $('aircraft').replaceChildren(new Option('All aircraft',''),...[...new Set(allFlights.map(f=>f.aircraft).filter(Boolean))].sort().map(a=>new Option(a,a)));
@@ -461,6 +472,18 @@ async function refresh(){
  try{
   // A static build names its baked schedule in a meta tag; the Node server answers api/schedule.
   const baked=document.querySelector('meta[name="schedule-source"]')?.content;
+ // The static build stamps the commit it was made from; show it beside the source link so a page
+ // can be traced back to the code that drew it. The dev server has no stamp and shows nothing.
+ const commit=document.querySelector('meta[name="build-commit"]')?.content;
+ const commitSlot=document.getElementById('build-commit');
+ if(commit&&commitSlot&&!commitSlot.childElementCount){
+  const link=document.createElement('a');
+  link.href=`https://github.com/oplehto/finnair-atlas/commit/${commit}`;
+  link.target='_blank';
+  link.rel='noopener noreferrer';
+  link.textContent=commit;
+  commitSlot.append(document.createTextNode(' · '),link);
+ }
   let response=await fetch(baked||'api/schedule',{signal:AbortSignal.timeout(20000)}).catch(()=>null);
   if(!baked&&(!response||!response.ok))response=await fetch('schedule.json',{signal:AbortSignal.timeout(20000)});
   if(!response.ok)throw Error('Schedule unavailable. Last successful schedule is still displayed.');

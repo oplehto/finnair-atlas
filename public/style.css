@@ -580,7 +580,19 @@ dd {
 }
 
 /* The strip carries a link back to the source, in the footer's own small letter-spaced type. */
-.footer-source a {
+/* A commit hash is lowercase by convention, so it escapes the strip's uppercasing. */
+#build-commit {
+  text-transform: none;
+}
+
+/* The strip sets pointer-events: none so it never swallows a drag across the sheet beneath it,
+   which also made every link in it dead. The links opt back in. */
+footer a {
+  pointer-events: auto;
+}
+
+.footer-source a,
+#notice a {
   color: var(--blue-ink);
   text-decoration: none;
   border-bottom: 1px solid rgba(8, 97, 140, 0.35);
@@ -588,7 +600,9 @@ dd {
 }
 
 .footer-source a:hover,
-.footer-source a:focus-visible {
+.footer-source a:focus-visible,
+#notice a:hover,
+#notice a:focus-visible {
   color: var(--active-ink);
   border-bottom-color: currentColor;
 }

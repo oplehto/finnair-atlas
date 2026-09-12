@@ -1,6 +1,7 @@
 import {build} from 'esbuild';
 import {mkdir, copyFile, readFile, writeFile, rm, cp} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 
 // 1. Fonts and the browser bundle for the Node server.
 await mkdir('public/dist/fonts', {recursive: true});
@@ -21,6 +22,12 @@ await mkdir('site', {recursive: true});
 // times: twice on the schedule, once on the bundle, each time looking like a failed deploy while
 // the files on the server were perfectly correct.
 const hash = body => createHash('sha256').update(body).digest('hex').slice(0, 12);
+// The commit the sheet was built from, so a published page can be traced back to its source. The
+// workflow checkout carries git history; GITHUB_SHA is the fallback if it ever does not.
+const commit = (() => {
+  try { return execFileSync('git', ['rev-parse', '--short', 'HEAD'], {encoding: 'utf8'}).trim(); }
+  catch { return (process.env.GITHUB_SHA || '').slice(0, 7); }
+})();
 let page = await readFile('public/index.html', 'utf8');
 for (const [from, name, ext] of [['public/style.css', 'style', 'css'], ['public/fonts.css', 'fonts', 'css'], ['public/dist/app.js', 'app', 'mjs']]) {
   const body = await readFile(from);
@@ -33,7 +40,7 @@ for (const [from, name, ext] of [['public/style.css', 'style', 'css'], ['public/
 // The static build reads its schedule from a baked file, so it never probes the Node server's API.
 const schedule = JSON.stringify(demo);
 const scheduleFile = `data/schedule.${hash(schedule)}.json`;
-page = page.replace('</head>', `<meta name="schedule-source" content="${scheduleFile}"></head>`);
+page = page.replace('</head>', `<meta name="schedule-source" content="${scheduleFile}">${commit ? `<meta name="build-commit" content="${commit}">` : ''}</head>`);
 await writeFile('site/index.html', page);
 await cp('public/dist/fonts', 'site/fonts', {recursive: true});
 await mkdir('site/data', {recursive: true});
