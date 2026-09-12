@@ -46,10 +46,10 @@ const CODESHARE_OFFSETS = {
   BNA: {hub: 'ORD', dx: -700, dy: 85, region: 'west'},
 
   // East Coast via JFK (American Airlines)
-  PHL: {hub: 'JFK', dx: -400, dy: -160, region: 'west'},
+  DCA: {hub: 'JFK', dx: -400, dy: -160, region: 'west'},
   CLT: {hub: 'JFK', dx: -400, dy: 160, region: 'west'},
   RDU: {hub: 'JFK', dx: -700, dy: -85, region: 'west'},
-  MCO: {hub: 'JFK', dx: -700, dy: 85, region: 'west'},
+  ORF: {hub: 'JFK', dx: -700, dy: 85, region: 'west'},
 
   // Pacific / US West via LAX (American Airlines)
   SFO: {hub: 'LAX', dx: -130, dy: -258, region: 'west'},
@@ -69,7 +69,6 @@ const CODESHARE_OFFSETS = {
   MDE: {hub: 'MIA', dx: -400, dy: -100, region: 'west'},
   UIO: {hub: 'MIA', dx: -400, dy: 100, region: 'west'},
   BOG: {hub: 'MIA', dx: -700, dy: -85, region: 'west'},
-  GRU: {hub: 'MIA', dx: -700, dy: 85, region: 'west'},
   GIG: {hub: 'MIA', dx: -1000, dy: -300, region: 'west'},
   MVD: {hub: 'MIA', dx: -1000, dy: 300, region: 'west'},
 
@@ -77,7 +76,7 @@ const CODESHARE_OFFSETS = {
   // left (inner pair 300 out, then pairs at 140, 330 and 90 so each column's stubs pass
   // between the previous one's boxes) and two rows of two below, 300 and 580 under the
   // bottom edge so the stubs to the second row pass through the first row's centre gap.
-  BHD: {hub: 'LHR', dx: -130, dy: -318, region: 'west'},
+  INV: {hub: 'LHR', dx: -130, dy: -318, region: 'west'},
   JER: {hub: 'LHR', dx: 130, dy: -318, region: 'west'},
   NCL: {hub: 'LHR', dx: -440, dy: -300, region: 'west'},
   GLA: {hub: 'LHR', dx: -440, dy: 300, region: 'west'},
@@ -85,8 +84,8 @@ const CODESHARE_OFFSETS = {
   GIB: {hub: 'LHR', dx: -740, dy: 140, region: 'west'},
   BOS: {hub: 'LHR', dx: -1040, dy: -330, region: 'west'},
   IAD: {hub: 'LHR', dx: -1040, dy: 330, region: 'west'},
-  BDA: {hub: 'LHR', dx: -1340, dy: -90, region: 'west'},
-  NAS: {hub: 'LHR', dx: -1340, dy: 90, region: 'west'},
+  YYZ: {hub: 'LHR', dx: -1340, dy: -90, region: 'west'},
+  GRU: {hub: 'LHR', dx: -1340, dy: 90, region: 'west'},
   BGI: {hub: 'LHR', dx: -270, dy: 500, region: 'west'},
   GCM: {hub: 'LHR', dx: 270, dy: 500, region: 'west'},
   ACC: {hub: 'LHR', dx: -150, dy: 780, region: 'west'},
@@ -94,7 +93,7 @@ const CODESHARE_OFFSETS = {
 
   // Middle East, Africa, South Asia via DOH (Qatar Airways): rows above Doha, the grid 60
   // left of Doha's centre so its lowest row clears Seoul's box in the outer column
-  CAI: {hub: 'DOH', dx: -387, dy: -422, region: 'east'},
+  ALA: {hub: 'DOH', dx: -387, dy: -422, region: 'east'},
   AMM: {hub: 'DOH', dx: -97, dy: -422, region: 'east'},
   RUH: {hub: 'DOH', dx: 193, dy: -422, region: 'east'},
   JED: {hub: 'DOH', dx: -387, dy: -582, region: 'east'},
@@ -115,30 +114,22 @@ const CODESHARE_OFFSETS = {
   OKA: {hub: 'HND', dx: 350, dy: 130, region: 'east'},
 
   // Philippines via HKG (Cathay Pacific)
-  CEB: {hub: 'HKG', dx: 350, dy: 0, region: 'east'},
+  PEN: {hub: 'HKG', dx: 400, dy: -170, region: 'east'},
+  HKT: {hub: 'HKG', dx: 400, dy: 0, region: 'east'},
+  DPS: {hub: 'HKG', dx: 400, dy: 170, region: 'east'},
+  MNL: {hub: 'HKG', dx: 640, dy: -85, region: 'east'},
+  SYD: {hub: 'HKG', dx: 640, dy: 85, region: 'east'},
+  AKL: {hub: 'HKG', dx: 640, dy: 255, region: 'east'},
 
   // Southeast Asia, Australia & New Zealand via SIN (Qantas / partners): three sides of
   // Singapore (left below the Helsinki approach, right, and rows starting below the left
   // column) so that no edge carries more bundle intervals than its length.
-  SGN: {hub: 'SIN', dx: -470, dy: 85, region: 'east'},
-  PEN: {hub: 'SIN', dx: -470, dy: 255, region: 'east'},
-  KUL: {hub: 'SIN', dx: -470, dy: 425, region: 'east'},
-  TPE: {hub: 'SIN', dx: 460, dy: -255, region: 'east'},
-  MNL: {hub: 'SIN', dx: 460, dy: -85, region: 'east'},
-  HAN: {hub: 'SIN', dx: 460, dy: 85, region: 'east'},
-  CGK: {hub: 'SIN', dx: 460, dy: 255, region: 'east'},
-  DPS: {hub: 'SIN', dx: -330, dy: 575, region: 'east'},
-  DRW: {hub: 'SIN', dx: -50, dy: 575, region: 'east'},
-  PER: {hub: 'SIN', dx: 230, dy: 575, region: 'east'},
-  CNS: {hub: 'SIN', dx: -330, dy: 855, region: 'east'},
-  BNE: {hub: 'SIN', dx: -50, dy: 855, region: 'east'},
-  OOL: {hub: 'SIN', dx: 230, dy: 855, region: 'east'},
-  ADL: {hub: 'SIN', dx: -330, dy: 1135, region: 'east'},
-  SYD: {hub: 'SIN', dx: -50, dy: 1135, region: 'east'},
-  CBR: {hub: 'SIN', dx: 230, dy: 1135, region: 'east'},
-  HBA: {hub: 'SIN', dx: -330, dy: 1415, region: 'east'},
-  AKL: {hub: 'SIN', dx: -50, dy: 1415, region: 'east'},
-  CHC: {hub: 'SIN', dx: 230, dy: 1415, region: 'east'}
+  KUL: {hub: 'SIN', dx: 400, dy: -130, region: 'east'},
+  USM: {hub: 'SIN', dx: 400, dy: 0, region: 'east'},
+  HAN: {hub: 'SIN', dx: 400, dy: 130, region: 'east'},
+  CMB: {hub: 'SIN', dx: 640, dy: -65, region: 'east'},
+  NAN: {hub: 'SIN', dx: 640, dy: 65, region: 'east'},
+  DRW: {hub: 'SIN', dx: 640, dy: 195, region: 'east'},
 };
 
 
@@ -359,7 +350,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   
   // Gateway hub sizing for partner connections
   const sin = byCode.get('SIN');
-  if (sin && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sin.height = 360; sin.width = 520; sin.isGatewayHub = true; }
+  if (sin && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sin.height = 240; sin.width = 400; sin.isGatewayHub = true; }
   const doh = byCode.get('DOH');
   if (doh && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { doh.height = 320; doh.width = 600; doh.isGatewayHub = true; }
   const lax = byCode.get('LAX');
@@ -373,7 +364,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   const hnd = byCode.get('HND');
   if (hnd && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hnd.height = 160; hnd.width = 280; hnd.isGatewayHub = true; }
   const hkg = byCode.get('HKG');
-  if (hkg && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hkg.height = 160; hkg.width = 280; hkg.isGatewayHub = true; }
+  if (hkg && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hkg.height = 360; hkg.width = 420; hkg.isGatewayHub = true; }
   const lhr = byCode.get('LHR');
   if (lhr && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lhr.height = 360; lhr.width = 460; lhr.isGatewayHub = true; }
   // Chicago and New York carry four partner bundles each on their left edge beside the

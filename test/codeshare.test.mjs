@@ -35,22 +35,35 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='Cathay Pacific')).map(a=>a.hub))];assert.ok(cathayFlights.length>0||hubCodes.length===0,'Cathay Pacific flights present when their gateway is on the sheet');}
   {const hubCodes=[...new Set(demo.codeshareAirports.filter(a=>demo.codeshareFlights.some(f=>(f.from===a.code||f.to===a.code)&&f.operator==='British Airways')).map(a=>a.hub))];assert.ok(baFlights.length>0||hubCodes.length===0,'British Airways flights present when their gateway is on the sheet');}
 
-  const britishAirways = ['GLA', 'BHD', 'ABZ', 'NCL', 'JER', 'GIB', 'GCM', 'BOS', 'IAD', 'BDA', 'BGI', 'NAS', 'LOS', 'ACC'];
+  // The drawn selection per gateway, verified against published Finnair route pages: one destination
+  // per region the gateway opens up. Finnair places no code on London–Caribbean at all, so Bermuda,
+  // Barbados, Nassau, Grand Cayman and Accra are gone; Inverness, Toronto and São Paulo are real.
+  const britishAirways = ['GLA', 'INV', 'NCL', 'JER', 'GIB', 'BOS', 'IAD', 'YYZ', 'GRU', 'LOS'];
   for (const code of demo.airports.some(a => a.code === 'LHR') ? britishAirways : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes British Airways destination ${code}`);
   }
 
-  const australasia = ['SYD', 'BNE', 'PER', 'ADL', 'AKL', 'CBR', 'CHC', 'CNS', 'DRW', 'HBA', 'OOL'];
-  for (const code of demo.airports.some(a => a.code === 'SIN') ? australasia : []) {
-    assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Australasia destination ${code}`);
+  // Australia and New Zealand hang off Hong Kong, not Singapore: Cathay Pacific carries a Finnair
+  // code to Sydney and Auckland, while Singapore's Qantas codeshare does not reach Adelaide, Cairns,
+  // Canberra, Hobart, the Gold Coast or Christchurch at all. One destination per country, not four
+  // Australian cities: Hong Kong's grid reads as the region it opens up.
+  const australasia = ['SYD', 'AKL'];
+  for (const code of demo.airports.some(a => a.code === 'HKG') ? australasia : []) {
+    const a = demo.codeshareAirports.find(a => a.code === code);
+    assert.ok(a, `Includes Australasia destination ${code}`);
+    assert.equal(a.hub, 'HKG', `${code} hangs off Hong Kong`);
+  }
+  if (demo.airports.some(a => a.code === 'SIN')) {
+    const drw = demo.codeshareAirports.find(a => a.code === 'DRW');
+    assert.ok(drw && drw.hub === 'SIN', 'Darwin is the Australian destination Singapore carries');
   }
 
-  const southAmerica = ['BOG', 'LIM', 'MDE', 'UIO', 'SCL', 'GIG', 'GRU', 'MVD', 'EZE'];
+  const southAmerica = ['BOG', 'LIM', 'MDE', 'UIO', 'SCL', 'GIG', 'MVD', 'EZE'];
   for (const code of demo.airports.some(a => a.code === 'MIA') ? southAmerica : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes South America destination ${code}`);
   }
 
-  const africa = ['JNB', 'CPT', 'NBO', 'CAI', 'ZNZ'];
+  const africa = ['JNB', 'CPT', 'NBO', 'ZNZ'];
   for (const code of demo.airports.some(a => a.code === 'DOH') ? africa : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Africa destination ${code}`);
   }
@@ -58,6 +71,22 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
   const japan = ['CTS', 'FUK', 'OKA'];
   for (const code of demo.airports.some(a => a.code === 'HND') ? japan : []) {
     assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes Japan destination ${code}`);
+  }
+
+  // Every partner destination names a gateway that is on the sheet and the carrier that flies it,
+  // and every partner leg touches its own gateway. A leg between two partner destinations, or one
+  // hanging off a gateway the sheet does not draw, means the selection and the data disagree.
+  const gateways = new Set(demo.airports.map(a => a.code));
+  for (const a of demo.codeshareAirports) {
+    assert.ok(gateways.has(a.hub), `${a.code} hangs off ${a.hub}, which is on the sheet`);
+    assert.ok(a.partner && a.partner.trim(), `${a.code} names its operating carrier`);
+  }
+  const satellites = new Map(demo.codeshareAirports.map(a => [a.code, a]));
+  for (const f of demo.codeshareFlights) {
+    const satellite = satellites.get(f.from) || satellites.get(f.to);
+    assert.ok(satellite, `${f.id} touches a partner destination`);
+    assert.ok(f.from === satellite.hub || f.to === satellite.hub, `${f.id} runs to ${satellite.code}'s own gateway`);
+    assert.ok(/^[A-Z]{2} \d+$/.test(f.operatorFlight || ''), `${f.id} carries the operating carrier's flight number`);
   }
 });
 

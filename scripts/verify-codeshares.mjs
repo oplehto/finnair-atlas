@@ -8,75 +8,13 @@
 // reference here is info.flightmapper.net, which publishes one page per Finnair route listing the
 // AY marketing number, the operating carrier and its flight number, the equipment and the times.
 // Pages are cached under .cache/flightmapper so a re-run costs nothing.
-import {mkdir, readFile, writeFile} from 'node:fs/promises';
+import {writeFile} from 'node:fs/promises';
 import demo from '../public/demo.mjs';
+import {fetchRoute, flatten, parseRows} from './flightmapper.mjs';
 
 const WEEK = '2026-09-14';
-const CACHE = '.cache/flightmapper';
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36';
 const args = process.argv.slice(2);
 const jsonOut = args.includes('--json') ? args[args.indexOf('--json') + 1] : null;
-
-await mkdir(CACHE, {recursive: true});
-
-async function page(from, to) {
-  const file = `${CACHE}/AY_${from}_${to}.html`;
-  try { return await readFile(file, 'utf8'); } catch { /* not cached yet */ }
-  // A slow or refused page must not abandon the whole audit: try twice, then record the gap.
-  for (const attempt of [1, 2]) {
-    try {
-      const response = await fetch(`https://info.flightmapper.net/route/Finnair_AY_${from}_${to}`, {headers: {'user-agent': UA}, signal: AbortSignal.timeout(45000)});
-      // A route Finnair does not serve redirects to the carrier-agnostic YY page, which 404s. That
-      // is the source saying "no Finnair code here", not a fetch problem, so cache it as an answer.
-      if (response.status === 404 || /\/route\/YY_/.test(response.url)) { await writeFile(file, ''); return ''; }
-      if (!response.ok) break;
-      const body = await response.text();
-      await writeFile(file, body);
-      return body;
-    } catch { if (attempt === 2) return ''; }
-  }
-  return '';
-}
-
-// The pages are ordinary HTML; flattening the tags leaves one readable run of text per schedule row.
-const flatten = html => html
-  .replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/g, ' ')
-  .replace(/<[^>]+>/g, ' ')
-  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#(\d+);/g, (m, d) => String.fromCharCode(+d))
-  .replace(/\s+/g, ' ');
-
-// An airport code may be followed by its terminal, which is sometimes a number and sometimes a
-// letter (LHR 5, GLA M, CTS D, DOH 1A) and often absent altogether, so the token is optional.
-const ROW = /(?<days>(?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]*) (?<dep>\d{2}:\d{2}) [^()]*\((?<origin>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? (?<arr>\d{2}:\d{2}) [^()]*\((?<dest>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? Finnair AY (?<ay>\d+) (?<body>.{0,260}?)(?= (?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]* \d{2}:\d{2} |$)/g;
-
-// Each row carries either "Valid until <date>", "Effective <date> through <date>" or neither; keep
-// the rows whose window covers the sheet's week, and fall back to every row when none does.
-function rowsFor(text, from, to) {
-  const rows = [];
-  for (const m of text.matchAll(ROW)) {
-    const {days, dep, arr, origin, dest, ay, body} = m.groups;
-    if (origin !== from || dest !== to) continue;
-    const operated = /Codeshare flight, operated by ([^.]+)\.\(\s*([A-Z0-9]{2})\s*(\d+)\s*\)/.exec(body);
-    const aircraft = /((?:Airbus|Boeing|Embraer|ATR|Bombardier|De Havilland|McDonnell)[A-Za-z0-9 .-]*?)\s*\([A-Z0-9]{3,4}\)/.exec(body);
-    const until = /Valid until (\d{4}-\d{2}-\d{2})/.exec(body);
-    const window = /Effective (\d{4}-\d{2}-\d{2}) through (\d{4}-\d{2}-\d{2})/.exec(body);
-    const from_ = /Effective (\d{4}-\d{2}-\d{2})(?! through)/.exec(body);
-    let covers = true;
-    if (window) covers = window[1] <= WEEK && WEEK <= window[2];
-    else if (until) covers = WEEK <= until[1];
-    else if (from_) covers = from_[1] <= WEEK;
-    rows.push({
-      days, dep, arr, ay: `AY${ay}`,
-      operator: operated ? operated[1].trim() : null,
-      operatorFlight: operated ? `${operated[2]}${operated[3]}` : null,
-      aircraft: aircraft ? aircraft[1].trim() : null,
-      validity: window ? `${window[1]}..${window[2]}` : until ? `..${until[1]}` : from_ ? `${from_[1]}..` : 'unstated',
-      covers
-    });
-  }
-  const inWeek = rows.filter(r => r.covers);
-  return {rows, chosen: inWeek.length ? inWeek : rows, coveredWeek: inWeek.length > 0};
-}
 
 const legs = demo.codeshareFlights.map(f => ({
   from: f.from, to: f.to,
@@ -89,9 +27,9 @@ const legs = demo.codeshareFlights.map(f => ({
 
 const report = [];
 for (const leg of legs) {
-  const text = flatten(await page(leg.from, leg.to));
+  const text = flatten(await fetchRoute(leg.from, leg.to));
   if (!text.trim()) { report.push({...leg, verdict: 'NO FINNAIR CODESHARE'}); continue; }
-  const {chosen, coveredWeek, rows} = rowsFor(text, leg.from, leg.to);
+  const {chosen, coveredWeek, rows} = parseRows(text, leg.from, leg.to, WEEK);
   if (!rows.length) {
     const anyFinnair = /Finnair AY \d+/.test(text);
     report.push({...leg, verdict: anyFinnair ? 'NO SUCH DIRECTION' : 'NO FINNAIR CODESHARE'});
@@ -100,7 +38,7 @@ for (const leg of legs) {
   const match = chosen.find(r => r.ay === leg.ay) || null;
   const operators = [...new Set(chosen.map(r => r.operator).filter(Boolean))];
   const numbers = [...new Set(chosen.map(r => r.ay))];
-  const opFlights = [...new Set(chosen.map(r => r.operatorFlight).filter(Boolean))];
+  const opFlights = [...new Set(chosen.map(r => r.operatorFlight?.replace(/\s+/g, '')).filter(Boolean))];
   const problems = [];
   if (!match) problems.push(`AY number ${leg.ay} not published (published: ${numbers.join(', ')})`);
   if (leg.operatorFlight && opFlights.length && !opFlights.includes(leg.operatorFlight)) problems.push(`operating flight ${leg.operatorFlight} not published (published: ${opFlights.join(', ')})`);
