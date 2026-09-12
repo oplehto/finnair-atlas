@@ -15,17 +15,26 @@ await build({entryPoints: ['public/app.mjs'], bundle: true, format: 'esm', outfi
 const {default: demo} = await import('./public/demo.mjs');
 await rm('site', {recursive: true, force: true});
 await mkdir('site', {recursive: true});
-for (const [from, to] of [['public/style.css', 'style.css'], ['public/fonts.css', 'fonts.css'], ['public/dist/app.js', 'app.mjs']]) await copyFile(from, `site/${to}`);
+// Every asset the page names carries a hash of its own contents in its filename, so a publish
+// changes what the page asks for and a returning visitor can never be served yesterday's code
+// against today's page. A stable name leaves that to cache expiry, which bit this project three
+// times: twice on the schedule, once on the bundle, each time looking like a failed deploy while
+// the files on the server were perfectly correct.
+const hash = body => createHash('sha256').update(body).digest('hex').slice(0, 12);
+let page = await readFile('public/index.html', 'utf8');
+for (const [from, name, ext] of [['public/style.css', 'style', 'css'], ['public/fonts.css', 'fonts', 'css'], ['public/dist/app.js', 'app', 'mjs']]) {
+  const body = await readFile(from);
+  const named = `${name}.${hash(body)}.${ext}`;
+  await writeFile(`site/${named}`, body);
+  const referenced = `${name}.${ext === 'mjs' ? 'mjs' : 'css'}`;
+  if (!page.includes(referenced)) throw Error(`the page never references ${referenced}`);
+  page = page.replaceAll(referenced, named);
+}
 // The static build reads its schedule from a baked file, so it never probes the Node server's API.
-// The file carries a hash of its own contents in its name: a deploy then changes the name the page
-// asks for, and every visitor sees the new sheet at once. Serving it under a stable name with a
-// finite max-age instead means a returning visitor keeps the old schedule until that expires, which
-// happened here — twice — and looked exactly like a failed deploy.
 const schedule = JSON.stringify(demo);
-const digest = createHash('sha256').update(schedule).digest('hex').slice(0, 12);
-const scheduleFile = `data/schedule.${digest}.json`;
-const page = await readFile('public/index.html', 'utf8');
-await writeFile('site/index.html', page.replace('</head>', `<meta name="schedule-source" content="${scheduleFile}"></head>`));
+const scheduleFile = `data/schedule.${hash(schedule)}.json`;
+page = page.replace('</head>', `<meta name="schedule-source" content="${scheduleFile}"></head>`);
+await writeFile('site/index.html', page);
 await cp('public/dist/fonts', 'site/fonts', {recursive: true});
 await mkdir('site/data', {recursive: true});
 await writeFile(`site/${scheduleFile}`, schedule);
