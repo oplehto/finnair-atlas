@@ -50,6 +50,10 @@ await mkdir(`${OUT}/data`, {recursive: true});
 await writeFile(`${OUT}/${scheduleFile}`, schedule);
 await writeFile(`${OUT}/.nojekyll`, '');
 await writeFile(`${OUT}/robots.txt`, 'User-agent: *\nAllow: /\n');
+// The social card image keeps a stable, unhashed name: the platforms that scrape it cache by URL,
+// and a changing name would orphan every post already shared. It is a hand-rendered snapshot of the
+// sheet — regenerate it when the design changes, or it ages the way preview.svg did.
+await copyFile('public/og-preview.png', `${OUT}/og-preview.png`);
 // No _headers file: GitHub Pages does not read one, so promising cache or security headers here
 // would be decoration. The schedule is safe to cache regardless, because its filename carries a
 // hash of its contents — a new sheet is a new name, not a stale one.

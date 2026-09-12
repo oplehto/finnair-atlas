@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Fetches Finavia's public flight information (all Finnish airports, roughly today and tomorrow) and writes
-// it as an Airline Atlas schedule file. Reads the API key from FINAVIA_KEY or ~/finavia and never prints it.
+// it as an Finnair Atlas schedule file. Reads the API key from FINAVIA_KEY or ~/finavia and never prints it.
 //
 //   node scripts/finavia.mjs --out schedule.json            # Finnair services touching Finland
 //   node scripts/finavia.mjs --out schedule.json --merge    # add today's flights to an existing file (build a week)

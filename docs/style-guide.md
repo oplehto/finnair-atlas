@@ -1,4 +1,4 @@
-# Airline Atlas style guide
+# Finnair Atlas style guide
 
 The design should feel like a carefully typeset airline timetable: compact, precise, and rich in useful information. The primary reference is the 1974 Finnair international network sheet. Preserve its parallel lanes, clear airport edges, condensed lettering, and economical use of space while supporting a modern interactive canvas.
 

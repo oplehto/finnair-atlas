@@ -1,4 +1,4 @@
-# Airline Atlas
+# Finnair Atlas
 
 A scrollable, interactive weekly flight timetable inspired by vintage Finnair network diagrams. Each weekly service is one arrow with its departure time, flight number, days of operation, aircraft code and arrival time. Airport locations are schematic. The sheet is a printed-timetable view of a season, not a live departures board.
 
@@ -133,6 +133,8 @@ Code and documentation are released under the [MIT License](LICENSE); see [NOTIC
 `npm run build` also writes a self-contained static site to `site/`: the page, bundle, fonts, cache and `nosniff` headers, and the baked `schedule.json`. The static page names that file in a `schedule-source` meta tag, so it reads the baked schedule directly and never calls `api/schedule`. Any host that serves the folder as is will work.
 
 Every asset the page names carries a hash of its own contents in its filename — `app.<hash>.mjs`, `style.<hash>.css`, `data/schedule.<hash>.json` — so a publish changes what the page asks for and a returning visitor can never be served yesterday's code against today's page. Leaving that to cache expiry bit this project three times: twice on the schedule and once on the bundle, each time looking exactly like a failed deploy while the files on the server were perfectly correct. `test/build.test.mjs` rebuilds the site and fails if any named asset lacks a hash, or if a hash no longer matches its file.
+
+`public/og-preview.png` is the social card image, 1200×630, rendered by hand from a built sheet with the app chrome hidden. It is referenced by absolute URL and keeps a stable name, because the platforms that scrape it cache by URL and a changing name would orphan every post already shared. It is the one artifact in the repository that does not regenerate itself, so refresh it when the sheet's design changes.
 
 The source is at [github.com/oplehto/finnair-atlas](https://github.com/oplehto/finnair-atlas), linked from the strip at the foot of the sheet.
 

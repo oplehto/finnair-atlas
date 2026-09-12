@@ -19,4 +19,4 @@ Conclusion: similar tools definitely exist. The potential distinction is a reada
 
 [Finavia's developer portal](https://apiportal.finavia.fi/) advertises a free public-flights API for Finnish airports with signup. It is a candidate for a Finland-first feed, not evidence of complete global Finnair schedule coverage. Endpoint schemas and credentials still need to be obtained and tested before building a provider-specific adapter.
 
-A full multi-airline schedule product needs a confirmed data source with suitable coverage and redistribution terms. Airline Atlas currently accepts a documented common format from any such source and refreshes it. No current schedule feed has been connected, and the default dataset is synthetic.
+A full multi-airline schedule product needs a confirmed data source with suitable coverage and redistribution terms. Finnair Atlas currently accepts a documented common format from any such source and refreshes it. No current schedule feed has been connected, and the default dataset is synthetic.

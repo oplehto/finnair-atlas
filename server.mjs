@@ -26,4 +26,4 @@ export function createServer(){return http.createServer(async(req,res)=>{
  const file=files[path];res.writeHead(200,{'Content-Type':file.endsWith('.woff2')?'font/woff2':file.endsWith('.txt')?'text/plain':file.endsWith('.css')?'text/css':(file.endsWith('.mjs')||file.endsWith('.js'))?'text/javascript':'text/html','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL(file,root)));
  }catch{res.writeHead(502,{'Content-Type':'application/json'});res.end(JSON.stringify({error:'Could not load the schedule. Check the feed configuration and data format.'}));}
  });}
-if(process.argv[1]===fileURLToPath(import.meta.url))createServer().listen(Number(process.env.PORT)||4173,'127.0.0.1',()=>console.log(`Airline Atlas: http://localhost:${process.env.PORT||4173}`));
+if(process.argv[1]===fileURLToPath(import.meta.url))createServer().listen(Number(process.env.PORT)||4173,'127.0.0.1',()=>console.log(`Finnair Atlas: http://localhost:${process.env.PORT||4173}`));
