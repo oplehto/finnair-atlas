@@ -1039,9 +1039,13 @@ export function endpointLabels(route, nodes) {
     const isLargeHub = n && (n.isRegionalHub || (n.width >= 340 && n.height >= 240));
     const vertical = Math.abs(Math.abs(p.y - n.y) - n.height / 2 - 8) < 0.01;
     const nx = vertical ? 0 : Math.sign(p.x - n.x), ny = vertical ? Math.sign(p.y - n.y) : 0;
-    // The text runs inward from the outline at every box, centred on its lane.
-    const dx = -nx, dy = -ny;
-    const along = isLargeHub ? -16 : -13;
+    // The text runs inward from the outline, centred on its lane — but only where the box reserved
+    // room for it. A partner satellite is a fixed 200 by 84 holding a three-line name block, and a
+    // vertical time needs about 40 more, so an inward time lands squarely on the city name. Those
+    // read outward instead, along the lane beyond the outline, as the small boxes always did.
+    const outward = !!n && !!n.codeshare;
+    const dx = outward ? nx : -nx, dy = outward ? ny : -ny;
+    const along = outward ? 11 : isLargeHub ? -16 : -13;
     const side = 0;
     return {
       x: p.x + nx * along + (vertical ? side : 0),

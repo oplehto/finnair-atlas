@@ -46,7 +46,7 @@ test('airport input order does not change the layout',()=>{
  assert.deepEqual(a,b);
 });
 
-import {layoutFlights,placeFlightLabels,rectanglesOverlap,curvePoint} from '../public/layout.mjs';
+import {layoutFlights,placeFlightLabels,rectanglesOverlap,curvePoint,endpointLabels} from '../public/layout.mjs';
 test('flight endpoints remain outside variable-sized airport boxes and use distinct ports',()=>{
  const nodes=layoutAirports(demo.airports,demo.flights),routes=layoutFlights(nodes,demo.flights),ports=new Set();
  assert.equal(routes.length,demo.flights.length);
@@ -216,4 +216,29 @@ test('airport polygons are non-rectangular with chamfered, faceted, or stepped g
  assert.equal(hex.polygon.length, 6, 'Hexagon shape has 6 vertices');
  const cst = custom.find(n => n.code === 'CST');
  assert.equal(cst.polygon.length, 5, 'Custom polygon preserves 5 vertices');
+});
+
+// Edge times are only safe inside a box that reserved room for them. A partner satellite is a fixed
+// 200 by 84 carrying a three-line name block, and a vertical time needs roughly 40 more, so an
+// inward time there lands on the city name — which is what happened, on every partner box at once,
+// while every existing test passed. A time must also never stray into a box it does not belong to.
+test('edge times stay clear of airport box text',()=>{
+ const flights=[...demo.flights,...demo.codeshareFlights];
+ const codes=new Set(flights.flatMap(f=>[f.from,f.to]));
+ const nodes=layoutAirports([...demo.airports,...demo.codeshareAirports].filter(a=>codes.has(a.code)),flights);
+ const routes=layoutFlights(nodes,flights);
+ const inside=(label,n)=>Math.abs(n.x-label.x)<n.width/2-2&&Math.abs(n.y-label.y)<n.height/2-2;
+ let checked=0;
+ for(const r of routes){
+  for(const label of endpointLabels(r,nodes)){
+   if(!label.text)continue;
+   checked++;
+   for(const n of nodes){
+    if(!inside(label,n))continue;
+    assert.ok(!n.codeshare,`${r.flight.id}: an edge time sits on ${n.code}'s name block, which has no room for it`);
+    assert.ok(n.code===r.flight.from||n.code===r.flight.to,`${r.flight.id}: an edge time sits inside ${n.code}, which it does not serve`);
+   }
+  }
+ }
+ assert.ok(checked>1000,`checked ${checked} edge times`);
 });
