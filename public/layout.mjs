@@ -115,7 +115,7 @@ const CODESHARE_OFFSETS = {
 
   // Philippines via HKG (Cathay Pacific)
   PEN: {hub: 'HKG', dx: 400, dy: -170, region: 'east'},
-  HKT: {hub: 'HKG', dx: 400, dy: 0, region: 'east'},
+  CEB: {hub: 'HKG', dx: 400, dy: 0, region: 'east'},
   DPS: {hub: 'HKG', dx: 400, dy: 170, region: 'east'},
   MNL: {hub: 'HKG', dx: 640, dy: -85, region: 'east'},
   SYD: {hub: 'HKG', dx: 640, dy: 85, region: 'east'},
@@ -166,7 +166,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // Longest edge-time string each airport must hold inside its box ("12.15 ①②③④⑤" at 7.5 px, in
   // sheet units) so the box is sized from its text: times run inward from the port edge and must
   // clear the name block (44) on the far side.
-  const timeTextLength = f => 5 * 4.1 + (f.days && f.days !== '#' ? 2.2 + [...f.days].length * 7.2 : 0);
+  const timeTextLength = f => (f.departure ? 5 * 4.1 : 0) + (f.days && f.days !== '#' ? 2.2 + [...f.days].length * 7.2 : 0);
   const longestTime = new Map();
   for (const f of flightList) for (const code of [f.from, f.to]) longestTime.set(code, Math.max(longestTime.get(code) || 0, timeTextLength(f)));
 
@@ -226,12 +226,15 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // order of the destinations in every row; the domestic fan then draws without a single
   // crossing. Geography is soft: Mariehamn nearest and far left, Jyväskylä and Kuopio next,
   // the Vaasa-Kajaani-Joensuu belt, then Kokkola, Kemi and Oulu with Lapland and Kuusamo on
-  // the top row. Vaasa is the westernmost box of the fan because it also carries the
+  // the top row. Tampere, opening with the winter season, sits at the outer right of its tier rather than
+  // beside Mariehamn where its geography belongs: every slot on the fan's west side is taken, and
+  // inserting one there breaks the searched port order and puts crossings into the Kokkola, Kemi
+  // and Vaasa bundles. Vaasa is the westernmost box of the fan because it also carries the
   // Umeå-Vaasa service from the west column, which must reach it without crossing a
   // Helsinki bundle.
   const nTiers = [
     [['MHQ', -1350]],
-    [['JYV', -125], ['KUO', 1175]],
+    [['JYV', -125], ['KUO', 1175], ['TMP', 1450]],
     [['VAA', -1175], ['KAJ', 575], ['JOE', 1150]],
     [['KOK', -1050], ['KEM', -650], ['OUL', -200], ['RVN', 220], ['KTT', 490], ['IVL', 740], ['KAO', 1225]],
     [['TOS', 180], ['ALF', 560], ['KKN', 940]]
@@ -263,7 +266,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   const wCols = [
     {x: 500, boxes: [['UME', -1445], ['TRD', -725], ['GOT', 135], ['CPH', 750]]},
     {x: 950, boxes: [['KEF', -1025], ['ARN', -475], ['OSL', -65], ['BGO', 285], ['SVG', 450], ['EDI', 705], ['MAN', 1335], ['DUB', 2225]]},
-    {x: 1400, boxes: [['SEA', -1535], ['ORD', -940], ['JFK', -420], ['DFW', 20], ['LAX', 485], ['LHR', 1550]]}
+    {x: 1400, boxes: [['SEA', -1535], ['ORD', -940], ['JFK', -420], ['DFW', 20], ['LAX', 485], ['MIA', 850], ['LHR', 1550]]}
   ];
   for (const col of wCols) {
     for (const [code, dy] of col.boxes) {
@@ -348,31 +351,34 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
 
   // Any non-predefined airports placed in an outer tier according to their region
   
-  // Gateway hub sizing for partner connections
+  // Gateway hub sizing for partner connections. A hub earns the wider box and the gateway badge
+  // only when partner destinations of its own are on the sheet; Miami is listed here for when its
+  // winter service returns, and must not be badged as a gateway before its satellites are drawn.
+  const hasSatellites = hub => sortedAirports.some(a => CODESHARE_OFFSETS[a.code]?.hub === hub);
   const sin = byCode.get('SIN');
-  if (sin && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sin.height = 240; sin.width = 400; sin.isGatewayHub = true; }
+  if (sin && hasSatellites('SIN')) { sin.height = 240; sin.width = 400; sin.isGatewayHub = true; }
   const doh = byCode.get('DOH');
-  if (doh && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { doh.height = 320; doh.width = 600; doh.isGatewayHub = true; }
+  if (doh && hasSatellites('DOH')) { doh.height = 320; doh.width = 600; doh.isGatewayHub = true; }
   const lax = byCode.get('LAX');
-  if (lax && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lax.height = 200; lax.width = 320; lax.isGatewayHub = true; }
+  if (lax && hasSatellites('LAX')) { lax.height = 200; lax.width = 320; lax.isGatewayHub = true; }
   const sea = byCode.get('SEA');
-  if (sea && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { sea.height = 160; sea.width = 280; sea.isGatewayHub = true; }
+  if (sea && hasSatellites('SEA')) { sea.height = 160; sea.width = 280; sea.isGatewayHub = true; }
   const dfw = byCode.get('DFW');
-  if (dfw && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { dfw.height = 180; dfw.width = 300; dfw.isGatewayHub = true; }
+  if (dfw && hasSatellites('DFW')) { dfw.height = 180; dfw.width = 300; dfw.isGatewayHub = true; }
   const mia = byCode.get('MIA');
-  if (mia && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { mia.height = 240; mia.width = 360; mia.isGatewayHub = true; }
+  if (mia && hasSatellites('MIA')) { mia.height = 240; mia.width = 360; mia.isGatewayHub = true; }
   const hnd = byCode.get('HND');
-  if (hnd && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hnd.height = 160; hnd.width = 280; hnd.isGatewayHub = true; }
+  if (hnd && hasSatellites('HND')) { hnd.height = 160; hnd.width = 280; hnd.isGatewayHub = true; }
   const hkg = byCode.get('HKG');
-  if (hkg && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { hkg.height = 360; hkg.width = 420; hkg.isGatewayHub = true; }
+  if (hkg && hasSatellites('HKG')) { hkg.height = 360; hkg.width = 420; hkg.isGatewayHub = true; }
   const lhr = byCode.get('LHR');
-  if (lhr && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { lhr.height = 360; lhr.width = 460; lhr.isGatewayHub = true; }
+  if (lhr && hasSatellites('LHR')) { lhr.height = 360; lhr.width = 460; lhr.isGatewayHub = true; }
   // Chicago and New York carry four partner bundles each on their left edge beside the
   // Helsinki bundle on the right, the same load as Dallas.
   const ord = byCode.get('ORD');
-  if (ord && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { ord.height = 180; ord.width = 300; ord.isGatewayHub = true; }
+  if (ord && hasSatellites('ORD')) { ord.height = 180; ord.width = 300; ord.isGatewayHub = true; }
   const jfk = byCode.get('JFK');
-  if (jfk && sortedAirports.some(a => CODESHARE_OFFSETS[a.code])) { jfk.height = 180; jfk.width = 300; jfk.isGatewayHub = true; }
+  if (jfk && hasSatellites('JFK')) { jfk.height = 180; jfk.width = 300; jfk.isGatewayHub = true; }
 
   // Assign codeshare positions relative to partner hubs
   for (const node of nodes) {
@@ -897,7 +903,8 @@ export function layoutFlights(nodes, flights, {passableCorners = true} = {}) {
       const spine = [pa.port, ...middle, pb.port];
       // Lanes are grouped by direction, then ordered by departure clock time; on screen the order runs
       // earliest to latest left to right (vertical spines) or top to bottom (horizontal spines).
-      const clock = f => f.departure.slice(11, 16);
+      // A route with no published times yet sorts last in its direction.
+      const clock = f => f.departure ? f.departure.slice(11, 16) : '99:99';
       services.sort((a, b) => a.from.localeCompare(b.from) || clock(a).localeCompare(clock(b)) || a.id.localeCompare(b.id));
       const sdx = spine[1].x - spine[0].x, sdy = spine[1].y - spine[0].y, nx = -sdy, ny = sdx;
       const flip = Math.abs(nx) >= Math.abs(ny) ? nx < 0 : ny < 0;
@@ -971,12 +978,14 @@ export function placeFlightLabels(routes, nodes, measure = text => text.length *
   };
   for (const r of [...routes].sort((a, b) => Math.hypot(b.end.x - b.start.x, b.end.y - b.start.y) - Math.hypot(a.end.x - a.start.x, a.end.y - a.start.y) || a.flight.id.localeCompare(b.flight.id))) {
     const f = r.flight;
-    const freq = f.days || f.frequency || '#';
-    const num = String(f.number || f.id).trim().replace(/^([A-Z]{2}|[A-Z]\d|\d[A-Z])\s*(\d+)/i, (m, c, n) => `${c.toUpperCase()} ${n}`);
+    // A route with no published timings claims no frequency either, and one with no filed flight
+    // number shows none: its label carries the opening mark alone rather than its own id.
+    const freq = f.departure ? (f.days || f.frequency || '#') : '';
+    const num = f.number ? String(f.number).trim().replace(/^([A-Z]{2}|[A-Z]\d|\d[A-Z])\s*(\d+)/i, (m, c, n) => `${c.toUpperCase()} ${n}`) : '';
     // Reference marks ride at the end of the label: a dagger for a wet-leased aircraft, a
     // superscript five for a fifth-freedom sector, and an opening date for a route not yet flying.
     const notes = [f.wetlease ? '\u2020' : '', f.fifthFreedom ? '\u2075' : '', f.opens ? `\u25b7${f.opens.slice(8)}.${f.opens.slice(5, 7)}.` : ''].filter(Boolean).join(' ');
-    const text = `${num}  ${freq}  ${aircraftNotation(f.aircraft)}${notes ? '  ' + notes : ''}`;
+    const text = [num, freq, aircraftNotation(f.aircraft), notes].filter(Boolean).join('  ');
     const width = measure(text) + 12;
     let label;
     for (const t of [0.5, 0.38, 0.62, 0.26, 0.74, 0.17, 0.83]) {
@@ -1047,7 +1056,8 @@ export function endpointLabels(route, nodes) {
       anchor: vertical ? (dy > 0 ? 'end' : 'start') : (dx > 0 ? 'start' : 'end'),
       hub: !!isLargeHub,
       // The days of operation follow the time at both ends, so each comb reads as a timetable column.
-      text: time.slice(11, 16).replace(':', '.') + ((route.flight.days || '') && route.flight.days !== '#' ? ' ' + route.flight.days : '')
+      // No timing yet on a route that has not opened: the label carries its opening date instead.
+      text: time ? time.slice(11, 16).replace(':', '.') + ((route.flight.days || '') && route.flight.days !== '#' ? ' ' + route.flight.days : '') : ''
     };
   });
 }

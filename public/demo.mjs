@@ -1,5 +1,5 @@
 // Finnair weekly network sheet, baked by scripts/bake-weekly.mjs from published schedule pages
-// (info.flightmapper.net, Finavia) for the week of 2026-09-14: 586 weekly services between 102 airports.
+// (info.flightmapper.net, Finavia) for the week of 2026-09-14: 597 weekly services between 108 airports.
 // Times are local clock times with each airport's offset on that date. Partner connections at oneworld hubs are
 // illustrative highlights, not a feed.
 
@@ -301,6 +301,14 @@ export const airports = [
     "zone": 8
   },
   {
+    "code": "HKT",
+    "name": "Phuket",
+    "alt": "Thaimaa",
+    "lat": 8.113,
+    "lon": 98.317,
+    "zone": 7
+  },
+  {
     "code": "HND",
     "name": "Tokyo",
     "alt": "Haneda",
@@ -315,6 +323,14 @@ export const airports = [
     "lat": 37.46,
     "lon": 126.441,
     "zone": 9
+  },
+  {
+    "code": "INN",
+    "name": "Innsbruck",
+    "alt": "Tiroli",
+    "lat": 47.26,
+    "lon": 11.344,
+    "zone": 2
   },
   {
     "code": "IVL",
@@ -474,6 +490,14 @@ export const airports = [
     "zone": 2
   },
   {
+    "code": "LPA",
+    "name": "Las Palmas",
+    "alt": "Gran Canaria",
+    "lat": 27.932,
+    "lon": -15.387,
+    "zone": 1
+  },
+  {
     "code": "LUX",
     "name": "Luxembourg",
     "lat": 49.63,
@@ -509,6 +533,14 @@ export const airports = [
     "alt": "Maarianhamina",
     "lat": 60.122,
     "lon": 19.898
+  },
+  {
+    "code": "MIA",
+    "name": "Miami",
+    "alt": "Florida",
+    "lat": 25.796,
+    "lon": -80.287,
+    "zone": -4
   },
   {
     "code": "MUC",
@@ -685,6 +717,14 @@ export const airports = [
     "zone": 3
   },
   {
+    "code": "TFS",
+    "name": "Teneriffa",
+    "alt": "Tenerife Sur",
+    "lat": 28.044,
+    "lon": -16.572,
+    "zone": 1
+  },
+  {
     "code": "TIA",
     "name": "Tirana",
     "alt": "Albania",
@@ -699,6 +739,13 @@ export const airports = [
     "lat": 59.413,
     "lon": 24.833,
     "zone": 3
+  },
+  {
+    "code": "TMP",
+    "name": "Tampere",
+    "alt": "Pirkkala",
+    "lat": 61.414,
+    "lon": 23.604
   },
   {
     "code": "TOS",
@@ -7865,6 +7912,114 @@ export const flights = [
     "airline": "Finnair",
     "status": "Scheduled",
     "days": "⑦"
+  },
+  {
+    "id": "AY1491-2026-10-25-HEL-INN",
+    "number": "AY1491",
+    "from": "HEL",
+    "to": "INN",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY1492-2026-10-25-INN-HEL",
+    "number": "AY1492",
+    "from": "INN",
+    "to": "HEL",
+    "aircraft": "Airbus A320",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY151-2026-10-25-HEL-HKT",
+    "number": "AY151",
+    "from": "HEL",
+    "to": "HKT",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY152-2026-10-25-HKT-HEL",
+    "number": "AY152",
+    "from": "HKT",
+    "to": "HEL",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY1691-2026-10-25-HEL-TFS",
+    "number": "AY1691",
+    "from": "HEL",
+    "to": "TFS",
+    "aircraft": "Airbus A321",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY1692-2026-10-25-TFS-HEL",
+    "number": "AY1692",
+    "from": "TFS",
+    "to": "HEL",
+    "aircraft": "Airbus A321",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY1721-2026-10-25-HEL-LPA",
+    "number": "AY1721",
+    "from": "HEL",
+    "to": "LPA",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY1722-2026-10-25-LPA-HEL",
+    "number": "AY1722",
+    "from": "LPA",
+    "to": "HEL",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY7-2026-10-25-HEL-MIA",
+    "number": "AY7",
+    "from": "HEL",
+    "to": "MIA",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "AY8-2026-10-25-MIA-HEL",
+    "number": "AY8",
+    "from": "MIA",
+    "to": "HEL",
+    "aircraft": "Airbus A350-900",
+    "airline": "Finnair",
+    "status": "Opens with the winter season",
+    "opens": "2026-10-25"
+  },
+  {
+    "id": "TMP-2026-10-25-opens",
+    "from": "HEL",
+    "to": "TMP",
+    "airline": "Finnair",
+    "status": "Opens with the winter season, timetable not filed",
+    "opens": "2026-10-25"
   }
 ];
 
@@ -7925,10 +8080,11 @@ export const codeshareAirports = [
     "codeshare": true
   },
   {
-    "code": "HKT",
-    "name": "Phuket",
-    "lat": 8.113,
-    "lon": 98.317,
+    "code": "CEB",
+    "name": "Cebu",
+    "alt": "Mactan",
+    "lat": 10.307,
+    "lon": 123.979,
     "region": "east",
     "hub": "HKG",
     "partner": "Cathay Pacific",
@@ -8604,31 +8760,31 @@ export const codeshareFlights = [
     "via": "HKG"
   },
   {
-    "id": "AY5851a-2026-09-14",
-    "number": "AY 5851",
+    "id": "AY5113a-2026-09-14",
+    "number": "AY 5113",
     "from": "HKG",
-    "to": "HKT",
-    "departure": "2026-09-14T08:30:00+08:00",
-    "arrival": "2026-09-14T11:20:00+07:00",
+    "to": "CEB",
+    "departure": "2026-09-14T07:55:00+08:00",
+    "arrival": "2026-09-14T10:50:00+08:00",
     "airline": "Finnair (op. by Cathay Pacific)",
     "operator": "Cathay Pacific",
-    "operatorFlight": "CX 787",
-    "aircraft": "Airbus A321neo",
+    "operatorFlight": "CX 2921",
+    "aircraft": "Airbus A330-300",
     "days": "#",
     "frequency": "Daily (#)",
     "codeshare": true,
     "via": "HKG"
   },
   {
-    "id": "AY6555b-2026-09-14",
-    "number": "AY 6555",
-    "from": "HKT",
+    "id": "AY6558b-2026-09-14",
+    "number": "AY 6558",
+    "from": "CEB",
     "to": "HKG",
-    "departure": "2026-09-14T11:50:00+07:00",
-    "arrival": "2026-09-14T16:50:00+08:00",
+    "departure": "2026-09-14T12:30:00+08:00",
+    "arrival": "2026-09-14T15:25:00+08:00",
     "airline": "Finnair (op. by Cathay Pacific)",
     "operator": "Cathay Pacific",
-    "operatorFlight": "CX 770",
+    "operatorFlight": "CX 922",
     "aircraft": "Airbus A330-300",
     "days": "#",
     "frequency": "Daily (#)",

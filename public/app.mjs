@@ -17,7 +17,9 @@ const LABEL_FONT='700 9.5px "Roboto Condensed"';
 function measure(text,font=LABEL_FONT){measureContext.font=font;return measureContext.measureText(text).width;}
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const upper=s=>String(s??'').toUpperCase();
-const dot=t=>t.replace(':','.');
+const dot=t=>t?t.replace(':','.'):'—';
+// A route marked as opening later may have no published times at all.
+const timed=f=>!!f.departure&&!!f.arrival;
 // FlightAware tracks by ICAO callsign (Finnair AY 431 is FIN431); map the airline prefix, then the number.
 const ICAO={AY:'FIN',BA:'BAW',QR:'QTR',QF:'QFA',AA:'AAL',AS:'ASA',JL:'JAL',CX:'CPA',IB:'IBE',AT:'RAM',MH:'MAS',RJ:'RJA',UL:'ALK',WY:'OMA',SK:'SAS',LH:'DLH',KL:'KLM',AF:'AFR',LX:'SWR',OS:'AUA',N7:'NRA'};
 const trackLink=number=>{const n=String(number||'').replace(/\s+/g,'').toUpperCase();const m=n.match(/^([A-Z0-9]{2})(\d{1,4})[A-Z]?$/);if(!m)return '';const callsign=(ICAO[m[1]]||m[1])+m[2];return `<a class="track" href="https://www.flightaware.com/live/flight/${encodeURIComponent(callsign)}" target="_blank" rel="noopener noreferrer">${escape(flightNumber({number:n}))} on FlightAware ↗</a>`;};
@@ -136,7 +138,7 @@ function render(){
  const activeAirports=[...data.airports,...(showCodeshare?(data.codeshareAirports||[]):[])];
  const own=weeklyServices(data.flights);
  const partner=showCodeshare?connectionFlights(own,weeklyServices(data.codeshareFlights||[])):[];
- visible=filterFlights([...own,...partner],{query:$('query').value,aircraft:$('aircraft').value,codeshares:showCodeshare}).sort((a,b)=>(a.codeshare?1:0)-(b.codeshare?1:0)||clockTime(a.departure).localeCompare(clockTime(b.departure))||a.from.localeCompare(b.from)||a.to.localeCompare(b.to)||a.id.localeCompare(b.id));
+ visible=filterFlights([...own,...partner],{query:$('query').value,aircraft:$('aircraft').value,codeshares:showCodeshare}).sort((a,b)=>(a.codeshare?1:0)-(b.codeshare?1:0)||(clockTime(a.departure)||'99:99').localeCompare(clockTime(b.departure)||'99:99')||a.from.localeCompare(b.from)||a.to.localeCompare(b.to)||a.id.localeCompare(b.id));
  if(!visible.some(f=>f.id===selected))selected=null;
  if(!visible.length){
   $('diagram').replaceChildren();$('diagram').hidden=true;$('empty').hidden=false;
@@ -204,7 +206,7 @@ function render(){
  const routesG=el('g',{class:'routes'});
  for(const route of routes){
   const f=route.flight,ink=inkOf(f);
-  const g=el('g',{class:`flight ${ink}${marksOf(f)}${selected===f.id?' selected':''}`,tabindex:0,role:'button','aria-label':`${f.number||f.id}: ${f.from} to ${f.to}, ${clockTime(f.departure)} to ${clockTime(f.arrival)}`});
+  const g=el('g',{class:`flight ${ink}${marksOf(f)}${selected===f.id?' selected':''}`,tabindex:0,role:'button','aria-label':`${f.number||f.id}: ${f.from} to ${f.to}${timed(f)?`, ${clockTime(f.departure)} to ${clockTime(f.arrival)}`:f.opens?`, opening ${f.opens}`:''}`});
   g.dataset.id=f.id;
   g.append(
    el('path',{d:route.path,class:'hit'}),
@@ -341,7 +343,7 @@ function render(){
 }
 
 const touches=(f,code)=>f.from===code||f.to===code;
-const minutesOf=f=>Math.round((Date.parse(f.arrival)-Date.parse(f.departure))/60000);
+const minutesOf=f=>timed(f)?Math.round((Date.parse(f.arrival)-Date.parse(f.departure))/60000):null;
 const hm=m=>`${Math.floor(m/60)} h ${String(m%60).padStart(2,'0')} min`;
 // The full journey a partner connection belongs to: Finnair leg to the hub, the wait, then the partner leg (or the reverse).
 function itineraryHtml(f){
@@ -440,9 +442,9 @@ function detail(){
  }
  if(!f){$('detail').innerHTML='';return;}
  const name=code=>geometry?.points.find(a=>a.code===code)?.name||code;
- const minutes=Math.round((Date.parse(f.arrival)-Date.parse(f.departure))/60000);
+ const minutes=minutesOf(f)??0;
  const zone=t=>t.endsWith('Z')?'UTC':`UTC${t.slice(-6)}`;
- $('detail').innerHTML=`<div class="route ${inkOf(f)}">${escape(f.from)} → ${escape(f.to)}</div><p>${escape(name(f.from))} → ${escape(name(f.to))}</p>${f.codeshare?`<div class="codeshare-badge">Partner codeshare · operated by ${escape(f.operator||'partner')}${f.operatorFlight?` as ${escape(f.operatorFlight)}`:''}</div>`:''}<dl><dt>Flight</dt><dd>${escape(flightNumber(f))}</dd><dt>Airline</dt><dd>${escape(f.operator||f.airline||'Unspecified')}</dd><dt>Days</dt><dd>${escape(f.days||f.frequency||'Daily (#)')}</dd><dt>Departure</dt><dd>${dot(clockTime(f.departure))} <small>${escape(zone(f.departure))}</small></dd><dt>Arrival</dt><dd>${dot(clockTime(f.arrival))}${f.arrival.slice(0,10)>f.departure.slice(0,10)?' <small>+1</small>':''} <small>${escape(zone(f.arrival))}</small></dd><dt>Duration</dt><dd>${Math.floor(minutes/60)} h ${minutes%60} min</dd><dt>Aircraft</dt><dd>${escape(f.aircraft||'Unspecified')}</dd><dt>Status</dt><dd>${escape(f.status||'Scheduled')}</dd><dt>Track</dt><dd>${trackLink(f.codeshare&&f.operatorFlight?f.operatorFlight.split(',')[0]:(f.number||f.id))}</dd>${f.connection?itineraryHtml(f)+`<dt>Connection</dt><dd>${f.connection.direction==='out'?`from ${escape(flightNumber({number:f.connection.number}))}, arrives ${dot(f.connection.time)}`:`to ${escape(flightNumber({number:f.connection.number}))}, departs ${dot(f.connection.time)}`}<br><small>${escape(waitText(f.connection))} at ${escape(f.connection.via)}</small></dd>`:f.via?`<dt>Connection</dt><dd>via ${escape(f.via)}</dd>`:''}</dl>`;
+ $('detail').innerHTML=`<div class="route ${inkOf(f)}">${escape(f.from)} → ${escape(f.to)}</div><p>${escape(name(f.from))} → ${escape(name(f.to))}</p>${f.codeshare?`<div class="codeshare-badge">Partner codeshare · operated by ${escape(f.operator||'partner')}${f.operatorFlight?` as ${escape(f.operatorFlight)}`:''}</div>`:''}<dl><dt>Flight</dt><dd>${escape(flightNumber(f))}</dd><dt>Airline</dt><dd>${escape(f.operator||f.airline||'Unspecified')}</dd><dt>Days</dt><dd>${escape(f.days||f.frequency||'Daily (#)')}</dd>${timed(f)?`<dt>Departure</dt><dd>${dot(clockTime(f.departure))} <small>${escape(zone(f.departure))}</small></dd><dt>Arrival</dt><dd>${dot(clockTime(f.arrival))}${f.arrival.slice(0,10)>f.departure.slice(0,10)?' <small>+1</small>':''} <small>${escape(zone(f.arrival))}</small></dd><dt>Duration</dt><dd>${Math.floor(minutes/60)} h ${minutes%60} min</dd>`:'<dt>Timetable</dt><dd>not published yet</dd>'}<dt>Aircraft</dt><dd>${escape(f.aircraft||'Unspecified')}</dd><dt>Status</dt><dd>${f.opens?`opens ${escape(f.opens)}`:f.suspended?'suspended':escape(f.status||'Scheduled')}</dd>${f.wetlease?`<dt>Aircraft leased from</dt><dd>${escape(f.wetlease)}</dd>`:''}${f.fifthFreedom?'<dt>Traffic right</dt><dd>fifth freedom, sold as its own flight</dd>':''}<dt>Track</dt><dd>${trackLink(f.codeshare&&f.operatorFlight?f.operatorFlight.split(',')[0]:(f.number||f.id))}</dd>${f.connection?itineraryHtml(f)+`<dt>Connection</dt><dd>${f.connection.direction==='out'?`from ${escape(flightNumber({number:f.connection.number}))}, arrives ${dot(f.connection.time)}`:`to ${escape(flightNumber({number:f.connection.number}))}, departs ${dot(f.connection.time)}`}<br><small>${escape(waitText(f.connection))} at ${escape(f.connection.via)}</small></dd>`:f.via?`<dt>Connection</dt><dd>via ${escape(f.via)}</dd>`:''}</dl>`;
 }
 
 async function refresh(){

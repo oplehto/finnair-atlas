@@ -23,7 +23,7 @@ const WEEK = '2026-09-14';
 
 // Gateway → the destinations drawn from it, one per region it opens up.
 const SELECTION = {
-  HKG: {partner: 'Cathay Pacific', region: 'east', codes: ['SYD', 'AKL', 'DPS', 'MNL', 'PEN', 'HKT']},
+  HKG: {partner: 'Cathay Pacific', region: 'east', codes: ['SYD', 'AKL', 'DPS', 'MNL', 'PEN', 'CEB']},
   SIN: {partner: 'Qantas', region: 'east', codes: ['DRW', 'NAN', 'KUL', 'HAN', 'USM', 'CMB']},
   DOH: {partner: 'Qatar Airways', region: 'east', codes: ['AMM', 'JED', 'MCT', 'ALA', 'NBO', 'ZNZ', 'JNB', 'CPT', 'MLE', 'SEZ']},
   HND: {partner: 'Japan Airlines', region: 'east', codes: ['CTS', 'FUK', 'OKA']},
@@ -37,7 +37,7 @@ const SELECTION = {
 
 // Destinations the sheet has not drawn before and so has no coordinates for.
 const NEW_AIRPORTS = {
-  HKT: {name: 'Phuket', lat: 8.113, lon: 98.317},
+  CEB: {name: 'Cebu', alt: 'Mactan', lat: 10.307, lon: 123.979},
   NAN: {name: 'Nadi', alt: 'Fiji', lat: -17.755, lon: 177.443},
   USM: {name: 'Koh Samui', alt: 'Thailand', lat: 9.548, lon: 100.062},
   ALA: {name: 'Almaty', alt: 'Kazakhstan', lat: 43.352, lon: 77.041},
@@ -85,6 +85,8 @@ const airports = [], flights = [], gaps = [];
 for (const [hub, {partner, region, codes}] of Object.entries(SELECTION)) {
   for (const code of codes) {
     if (!ZONES[code] || !ZONES[hub]) { gaps.push(`${hub}-${code}: no time zone`); continue; }
+    const base = known.get(code) || NEW_AIRPORTS[code];
+    if (!base) { gaps.push(`${code}: no coordinates, skipped`); continue; }
     const out = principalRow(flatten(await fetchRoute(hub, code)), hub, code, WEEK);
     const back = principalRow(flatten(await fetchRoute(code, hub)), code, hub, WEEK);
     if (!out && !back) { gaps.push(`${hub}-${code}: no published Finnair schedule either way`); continue; }
@@ -92,8 +94,6 @@ for (const [hub, {partner, region, codes}] of Object.entries(SELECTION)) {
     if (back) flights.push(leg(code, hub, back, partner, 'b'));
     if (!out) gaps.push(`${hub}-${code}: outbound not published`);
     if (!back) gaps.push(`${code}-${hub}: inbound not published`);
-    const base = known.get(code) || NEW_AIRPORTS[code];
-    if (!base) { gaps.push(`${code}: no coordinates`); continue; }
     airports.push({code, name: base.name, ...(base.alt ? {alt: base.alt} : {}), lat: base.lat, lon: base.lon, region, hub, partner, codeshare: true});
   }
 }

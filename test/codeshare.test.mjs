@@ -58,9 +58,11 @@ test('partner codeshares include key oneworld partner airlines and hubs', () => 
     assert.ok(drw && drw.hub === 'SIN', 'Darwin is the Australian destination Singapore carries');
   }
 
-  const southAmerica = ['BOG', 'LIM', 'MDE', 'UIO', 'SCL', 'GIG', 'MVD', 'EZE'];
-  for (const code of demo.airports.some(a => a.code === 'MIA') ? southAmerica : []) {
-    assert.ok(demo.codeshareAirports.some(a => a.code === code), `Includes South America destination ${code}`);
+  // Miami is on the sheet as a winter destination that has not opened yet, so it carries no partner
+  // destinations of its own and must not be badged as a gateway. Its South American satellites are
+  // positioned in layout.mjs for when the service and its connections are actually drawn.
+  if (demo.airports.some(a => a.code === 'MIA')) {
+    assert.equal(demo.codeshareAirports.filter(a => a.hub === 'MIA').length, 0, 'Miami has no partner destinations drawn yet');
   }
 
   const africa = ['JNB', 'CPT', 'NBO', 'ZNZ'];

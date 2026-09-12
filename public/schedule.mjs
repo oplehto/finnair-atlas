@@ -23,8 +23,13 @@ export function validateSchedule(data) {
     if(!codes.has(f.from)||!codes.has(f.to)||f.from===f.to) throw Error('Flight references an invalid airport.');
     if(typeof f.id!=='string'||!f.id.trim()) throw Error('Each flight needs an id.');
     if(ids.has(f.id)) throw Error('Duplicate flight id; include the date for repeated services.');ids.add(f.id);
-    for(const key of ['departure','arrival']) if(typeof f[key]!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(f[key])||!Number.isFinite(Date.parse(f[key]))) throw Error(`${key} must be an ISO timestamp with timezone.`);
-    if(Date.parse(f.arrival)<=Date.parse(f.departure)) throw Error('Arrival must be after departure.');
+    // A route marked as opening later may carry no timings: its schedule is not published yet, and
+    // the sheet says so with the opening date rather than inventing clock times.
+    const timeless=f.opens&&f.departure===undefined&&f.arrival===undefined;
+    if(!timeless){
+      for(const key of ['departure','arrival']) if(typeof f[key]!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(f[key])||!Number.isFinite(Date.parse(f[key]))) throw Error(`${key} must be an ISO timestamp with timezone.`);
+      if(Date.parse(f.arrival)<=Date.parse(f.departure)) throw Error('Arrival must be after departure.');
+    }
     for(const key of ['airline','aircraft','number','status','days','frequency','operator','operatorFlight','via','connectingFrom','connectingTo','opens','wetlease','suspendedSince']) if(f[key]!==undefined&&typeof f[key]!=='string') throw Error(`${key} must be text.`);
     if(f.codeshare!==undefined&&typeof f.codeshare!=='boolean') throw Error('Codeshare flag must be boolean.');
     for(const key of ['suspended','fifthFreedom']) if(f[key]!==undefined&&typeof f[key]!=='boolean') throw Error(`${key} flag must be boolean.`);
@@ -43,12 +48,12 @@ export function validateSchedule(data) {
 }
 export function filterFlights(flights,{date='',query='',aircraft='',codeshares=true}={}){
   const needle=query.replace(/\s+/g,'').toLowerCase();
-  return flights.filter(f=>(codeshares||!f.codeshare)&&(!date||f.departure.slice(0,10)===date)&&(!aircraft||f.aircraft===aircraft)&&(!needle||[f.id,f.number,f.from,f.to,f.airline,f.operator,f.operatorFlight].filter(Boolean).join(' ').replace(/\s+/g,'').toLowerCase().includes(needle)));
+  return flights.filter(f=>(codeshares||!f.codeshare)&&(!date||f.departure?.slice(0,10)===date)&&(!aircraft||f.aircraft===aircraft)&&(!needle||[f.id,f.number,f.from,f.to,f.airline,f.operator,f.operatorFlight].filter(Boolean).join(' ').replace(/\s+/g,'').toLowerCase().includes(needle)));
 }
 // Timetable form of a flight number: carrier code, a space, then the digits ("AY 431").
 export const flightNumber=f=>String(f.number||f.id).trim().replace(/^([A-Z]{2}|[A-Z]\d|\d[A-Z])\s*(\d+)/i,(m,c,n)=>`${c.toUpperCase()} ${n}`);
 export {layoutAirports} from './layout.mjs';
-export const clockTime = value => value.slice(11,16);
+export const clockTime = value => value ? value.slice(11,16) : '';
 
 // --- Weekly timetable model ---------------------------------------------------------------
 const DAY_MARKS=['①','②','③','④','⑤','⑥','⑦'];
@@ -61,10 +66,12 @@ const minuteOfDay=t=>Number(t.slice(11,13))*60+Number(t.slice(14,16));
 // time. Explicit days marks are kept; otherwise the days are derived from the dates present.
 export function weeklyServices(flights){
   const groups=new Map();
-  for(const f of flights){const key=[f.number||f.id,f.from,f.to,f.departure.slice(11,16)].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(f);}
+  // A route marked as opening later has no departure to group or to derive days from, so it stands
+  // as its own service and keeps whatever it was given.
+  for(const f of flights){const key=[f.number||f.id,f.from,f.to,f.departure?f.departure.slice(11,16):'opens'].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(f);}
   return [...groups.values()].map(group=>{
-    const [first]=[...group].sort((a,b)=>a.departure.localeCompare(b.departure));
-    if(first.days||first.frequency)return first;
+    const [first]=[...group].sort((a,b)=>(a.departure||'').localeCompare(b.departure||''));
+    if(first.days||first.frequency||!first.departure)return first;
     const days=[...new Set(group.map(f=>isoWeekday(f.departure.slice(0,10))))].sort();
     return {...first,days:days.length===7?'#':days.map(d=>DAY_MARKS[d-1]).join('')};
   });
@@ -76,7 +83,9 @@ export function weeklyServices(flights){
 // Each kept flight carries a `connection` describing the own flight it pairs with.
 export function connectionFlights(own,partner,{minMinutes=60}={}){
   const arrivals=new Map(),departures=new Map();
+  // A route with no published timings cannot anchor a connection, so it takes no part in the match.
   for(const f of own){
+    if(!f.departure||!f.arrival)continue;
     if(!arrivals.has(f.to))arrivals.set(f.to,[]);arrivals.get(f.to).push(f);
     if(!departures.has(f.from))departures.set(f.from,[]);departures.get(f.from).push(f);
   }

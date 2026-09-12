@@ -85,9 +85,15 @@ Three reference marks describe services the sheet's own week cannot show. Each k
 | Mark | Meaning | Treatment |
 | --- | --- | --- |
 | dotted line, `▷25.10.` | A route that has not opened yet | Fine dots (`1.5 4`), first date after the aircraft code |
+| dotted line with no times | A route whose season is not published yet | As above, and the label drops its frequency mark: an unpublished schedule claims no days |
 | long dash-dot line | A suspended route, no service in this week | `14 3 2 3`, paper under-stroke and edge times held back |
 | `†` after the flight label | The aircraft is wet-leased from another operator | Ink unchanged; the operator names itself in the flight panel |
 | `⁵` after the flight label | A fifth-freedom sector, sold as a flight of its own | Ink unchanged |
+
+A route may be drawn with no timings at all when its schedule is not yet filed. This is the honest form for a
+season the sources do not cover: the real flight number, the real equipment, the opening date, and nothing
+where the times would be. A label with no filed number shows only its opening mark. Never fill such a gap
+with a plausible time — the sheet's whole claim is that what it prints was published somewhere.
 
 Beyond these, use only symbols supported by actual data. Do not copy historical operating-day marks, airline codes, or equipment symbols as decoration. Explain any new notation in the legend.
 
