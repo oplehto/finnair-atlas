@@ -1,6 +1,7 @@
 import {layoutFlights,placeFlightLabels,endpointLabels,aircraftNotation} from './layout.mjs';
 import {FINNAIR_1968} from './logo.mjs';
 import {validateSchedule,filterFlights,layoutAirports,clockTime,flightNumber,weeklyServices,connectionFlights} from './schedule.mjs';
+import {stylesheetHref,fontUrls} from './assets.mjs';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const INK={jet:'#09618c',prop:'#454940',codeshare:'#b36200'},PAPER='#f8f7ef';
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
@@ -619,17 +620,18 @@ $('export').onclick=async()=>{
   for(const node of clone.querySelectorAll('.hover'))node.classList.remove('hover');
   // The page's stylesheets carry a content hash in their filenames on the static build, so the
   // export asks the document which files it actually loaded rather than guessing their names.
-  const sheetHref=name=>[...document.querySelectorAll('link[rel="stylesheet"]')].map(l=>l.getAttribute('href')).find(href=>href&&href.split('/').pop().startsWith(name))||`${name}.css`;
+  const pageSheets=[...document.querySelectorAll('link[rel="stylesheet"]')].map(l=>l.getAttribute('href'));
+  const sheetHref=name=>stylesheetHref(pageSheets,name);
   const response=await fetch(sheetHref('fonts'));
   if(!response.ok)throw Error('Font stylesheet could not be loaded.');
   let fontCss=await response.text();
-  for(const match of [...fontCss.matchAll(/url\('([^']+)'\)/g)]){
-   const r=await fetch(match[1]);
+  for(const face of fontUrls(fontCss)){
+   const r=await fetch(face.url);
    if(!r.ok)throw Error('A font could not be loaded.');
    const bytes=new Uint8Array(await r.arrayBuffer());
    let binary='';
    for(const byte of bytes)binary+=String.fromCharCode(byte);
-   fontCss=fontCss.replace(match[0],`url('data:font/woff2;base64,${btoa(binary)}')`);
+   fontCss=fontCss.replace(face.match,`url('data:font/woff2;base64,${btoa(binary)}')`);
   }
   const stylesheet=await fetch(sheetHref('style'));
   if(!stylesheet.ok)throw Error('Timetable styles could not be loaded.');

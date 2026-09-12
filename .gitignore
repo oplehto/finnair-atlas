@@ -6,3 +6,4 @@ site/
 
 .playwright-mcp/
 .cache/
+site-test-*/

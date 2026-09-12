@@ -1,7 +1,7 @@
-import test from 'node:test';
+import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
-import {readFile, access} from 'node:fs/promises';
+import {readFile, access, rm} from 'node:fs/promises';
 
 // Every asset the published page names must carry a hash of its own contents, so that a publish
 // changes what the page asks for. A stable name leaves freshness to cache expiry, and a returning
@@ -10,8 +10,12 @@ import {readFile, access} from 'node:fs/promises';
 // on the server were correct. The fonts are exempt: they sit in their own directory and change only
 // with the @fontsource version.
 test('the published page names only content-hashed assets', async () => {
-  execFileSync('node', ['build.mjs'], {stdio: 'pipe'});
-  const page = await readFile('site/index.html', 'utf8');
+  // Build into a directory of this test's own: node --test runs files in parallel, and the build
+  // clears its output directory first, so a shared one means each run can delete the other's.
+  const OUT = `site-test-build`;
+  after(() => rm(OUT, {recursive: true, force: true}));
+  execFileSync('node', ['build.mjs'], {stdio: 'pipe', env: {...process.env, SITE_DIR: OUT}});
+  const page = await readFile(`${OUT}/index.html`, 'utf8');
 
   const referenced = [...page.matchAll(/(?:href|src)="([^"]+)"/g)].map(m => m[1])
     .concat([...page.matchAll(/<meta name="schedule-source" content="([^"]+)"/g)].map(m => m[1]))
@@ -23,13 +27,13 @@ test('the published page names only content-hashed assets', async () => {
   for (const ref of referenced) {
     if (ref.startsWith('fonts/')) continue; // versioned by the font package, in their own directory
     assert.match(ref, hashed, `${ref} is named without a content hash, so a publish cannot invalidate it`);
-    await assert.doesNotReject(access(`site/${ref}`), `${ref} is referenced but not written`);
+    await assert.doesNotReject(access(`${OUT}/${ref}`), `${ref} is referenced but not written`);
   }
 
   // The hash has to follow the contents, or it is decoration.
   const {createHash} = await import('node:crypto');
   for (const ref of referenced.filter(r => hashed.test(r))) {
-    const body = await readFile(`site/${ref}`);
+    const body = await readFile(`${OUT}/${ref}`);
     const expected = createHash('sha256').update(body).digest('hex').slice(0, 12);
     assert.equal(ref.match(/\.([0-9a-f]{12})\./)[1], expected, `${ref} does not match the hash of its own contents`);
   }

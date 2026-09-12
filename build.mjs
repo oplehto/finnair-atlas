@@ -12,10 +12,13 @@ for (const [family, weight] of [['oswald', 600], ['roboto-condensed', 400], ['ro
 }
 await build({entryPoints: ['public/app.mjs'], bundle: true, format: 'esm', outfile: 'public/dist/app.js'});
 
-// 2. A static site in site/ for GitHub Pages or any file host: the same files plus the baked schedule.
+// 2. A static site for GitHub Pages or any file host: the same files plus the baked schedule.
+// The output directory is configurable so that two things building at once — the tests, which each
+// assert on a fresh build — cannot delete the directory the other is reading.
+const OUT = process.env.SITE_DIR || 'site';
 const {default: demo} = await import('./public/demo.mjs');
-await rm('site', {recursive: true, force: true});
-await mkdir('site', {recursive: true});
+await rm(OUT, {recursive: true, force: true});
+await mkdir(OUT, {recursive: true});
 // Every asset the page names carries a hash of its own contents in its filename, so a publish
 // changes what the page asks for and a returning visitor can never be served yesterday's code
 // against today's page. A stable name leaves that to cache expiry, which bit this project three
@@ -32,7 +35,7 @@ let page = await readFile('public/index.html', 'utf8');
 for (const [from, name, ext] of [['public/style.css', 'style', 'css'], ['public/fonts.css', 'fonts', 'css'], ['public/dist/app.js', 'app', 'mjs']]) {
   const body = await readFile(from);
   const named = `${name}.${hash(body)}.${ext}`;
-  await writeFile(`site/${named}`, body);
+  await writeFile(`${OUT}/${named}`, body);
   const referenced = `${name}.${ext === 'mjs' ? 'mjs' : 'css'}`;
   if (!page.includes(referenced)) throw Error(`the page never references ${referenced}`);
   page = page.replaceAll(referenced, named);
@@ -41,12 +44,12 @@ for (const [from, name, ext] of [['public/style.css', 'style', 'css'], ['public/
 const schedule = JSON.stringify(demo);
 const scheduleFile = `data/schedule.${hash(schedule)}.json`;
 page = page.replace('</head>', `<meta name="schedule-source" content="${scheduleFile}">${commit ? `<meta name="build-commit" content="${commit}">` : ''}</head>`);
-await writeFile('site/index.html', page);
-await cp('public/dist/fonts', 'site/fonts', {recursive: true});
-await mkdir('site/data', {recursive: true});
-await writeFile(`site/${scheduleFile}`, schedule);
-await writeFile('site/.nojekyll', '');
-await writeFile('site/robots.txt', 'User-agent: *\nAllow: /\n');
+await writeFile(`${OUT}/index.html`, page);
+await cp('public/dist/fonts', `${OUT}/fonts`, {recursive: true});
+await mkdir(`${OUT}/data`, {recursive: true});
+await writeFile(`${OUT}/${scheduleFile}`, schedule);
+await writeFile(`${OUT}/.nojekyll`, '');
+await writeFile(`${OUT}/robots.txt`, 'User-agent: *\nAllow: /\n');
 // No _headers file: GitHub Pages does not read one, so promising cache or security headers here
 // would be decoration. The schedule is safe to cache regardless, because its filename carries a
 // hash of its contents — a new sheet is a new name, not a stale one.
