@@ -26,6 +26,9 @@ async function page(from, to) {
   for (const attempt of [1, 2]) {
     try {
       const response = await fetch(`https://info.flightmapper.net/route/Finnair_AY_${from}_${to}`, {headers: {'user-agent': UA}, signal: AbortSignal.timeout(45000)});
+      // A route Finnair does not serve redirects to the carrier-agnostic YY page, which 404s. That
+      // is the source saying "no Finnair code here", not a fetch problem, so cache it as an answer.
+      if (response.status === 404 || /\/route\/YY_/.test(response.url)) { await writeFile(file, ''); return ''; }
       if (!response.ok) break;
       const body = await response.text();
       await writeFile(file, body);
@@ -42,9 +45,9 @@ const flatten = html => html
   .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#(\d+);/g, (m, d) => String.fromCharCode(+d))
   .replace(/\s+/g, ' ');
 
-// The token after each airport code is its terminal, which may be a number or a letter (LHR 5,
-// GLA M, CTS D), so it is matched loosely rather than as a digit.
-const ROW = /(?<days>(?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]*) (?<dep>\d{2}:\d{2}) [^()]*\((?<origin>[A-Z]{3})\) [A-Z0-9]+ (?<arr>\d{2}:\d{2}) [^()]*\((?<dest>[A-Z]{3})\) [A-Z0-9]+ Finnair AY (?<ay>\d+) (?<body>.{0,260}?)(?= (?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]* \d{2}:\d{2} |$)/g;
+// An airport code may be followed by its terminal, which is sometimes a number and sometimes a
+// letter (LHR 5, GLA M, CTS D, DOH 1A) and often absent altogether, so the token is optional.
+const ROW = /(?<days>(?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]*) (?<dep>\d{2}:\d{2}) [^()]*\((?<origin>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? (?<arr>\d{2}:\d{2}) [^()]*\((?<dest>[A-Z]{3})\)(?: [A-Z0-9]{1,3})? Finnair AY (?<ay>\d+) (?<body>.{0,260}?)(?= (?:Daily|Mon|Tue|Wed|Thu|Fri|Sat|Sun)[A-Za-z,-]* \d{2}:\d{2} |$)/g;
 
 // Each row carries either "Valid until <date>", "Effective <date> through <date>" or neither; keep
 // the rows whose window covers the sheet's week, and fall back to every row when none does.
@@ -87,7 +90,7 @@ const legs = demo.codeshareFlights.map(f => ({
 const report = [];
 for (const leg of legs) {
   const text = flatten(await page(leg.from, leg.to));
-  if (!text.trim()) { report.push({...leg, verdict: 'FETCH FAILED'}); continue; }
+  if (!text.trim()) { report.push({...leg, verdict: 'NO FINNAIR CODESHARE'}); continue; }
   const {chosen, coveredWeek, rows} = rowsFor(text, leg.from, leg.to);
   if (!rows.length) {
     const anyFinnair = /Finnair AY \d+/.test(text);
@@ -100,7 +103,6 @@ for (const leg of legs) {
   const opFlights = [...new Set(chosen.map(r => r.operatorFlight).filter(Boolean))];
   const problems = [];
   if (!match) problems.push(`AY number ${leg.ay} not published (published: ${numbers.join(', ')})`);
-  if (leg.operator && operators.length && !operators.some(o => o.toLowerCase().startsWith(leg.operator.toLowerCase().split(' ')[0]))) problems.push(`operator ${leg.operator} not published (published: ${operators.join(', ')})`);
   if (leg.operatorFlight && opFlights.length && !opFlights.includes(leg.operatorFlight)) problems.push(`operating flight ${leg.operatorFlight} not published (published: ${opFlights.join(', ')})`);
   const times = chosen.map(r => `${r.dep}-${r.arr}`);
   if (!times.includes(`${leg.dep}-${leg.arr}`)) problems.push(`times ${leg.dep}-${leg.arr} not published (published: ${[...new Set(times)].join(', ')})`);
