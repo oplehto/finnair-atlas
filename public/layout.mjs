@@ -105,7 +105,6 @@ const CODESHARE_OFFSETS = {
   SEZ: {hub: 'DOH', dx: -97, dy: -742, region: 'east'},
   BOM: {hub: 'DOH', dx: 193, dy: -742, region: 'east'},
   BLR: {hub: 'DOH', dx: 483, dy: -742, region: 'east'},
-  CMB: {hub: 'DOH', dx: 773, dy: -742, region: 'east'},
   MLE: {hub: 'DOH', dx: -387, dy: -902, region: 'east'},
 
   // Japan Domestic via HND (Japan Airlines): a short column beside Haneda
