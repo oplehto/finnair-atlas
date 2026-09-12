@@ -59,6 +59,28 @@ Boxes are eight-sided with white paper fill (`#fdfcf6`), a thin near-black outli
 
 The central hub carries a single heavier rule and a city title sized to its box (about width ÷ 14, capped at 320), centred in an otherwise empty interior, as on the reference. Along its edges every route bundle carries a thin square bracket spanning its lanes, 104 units inside the outline just beyond the times, with the destination code (13 px) beyond the bracket; the times at the hub carry the days of operation after the clock time at 8 px when the service is not daily, so the comb of lanes can be read without following each line; the code is clickable and highlights that airport's connections in place. Spoke airports do not repeat this: their one bundle leads back to the hub. A departures board inside the hub was tried and rejected: the sheet is a weekly timetable, and the edge times already carry the departures.
 
+## Partner grids
+
+A gateway's partner destinations form a fan from one edge of its box, so the geometry that keeps such
+a fan clean is worth stating plainly: **every route must leave the gateway on its own bearing, and no
+box may stand between the gateway and another box.** Satisfy that and crossings are impossible rather
+than merely unlikely.
+
+Two shapes satisfy it. A **single column** beside the gateway, each box at a distinct height — Hong
+Kong and Singapore each carry four this way. A **row** above the gateway, each box at a distinct
+horizontal offset, which can be stacked into a second row further out — Doha carries eight so.
+
+A second column beside a column does not satisfy it. The deeper boxes then sit behind the nearer
+ones, and their routes must thread the corridors between them; when a corridor is too narrow for the
+router, it goes right around the outside of the grid and crosses everything on the way. Singapore was
+once drawn that way and carried 24 crossings and a route that ran 4.4 times its own straight-line
+distance. The port comb along a gateway edge is also much shorter than the column it serves, so
+routes leave at steep angles: keep the column far enough out that those angles stay shallow, or the
+router will approach a box from its top edge and sweep back across its neighbours.
+
+This is measured, not eyeballed: `test/codeshare.test.mjs` asserts that no two routes in a gateway's
+grid cross and that no route exceeds 1.6 times its straight-line distance.
+
 ## Routes and crossings
 
 Each arrow represents one flight. Flights between the same two airports share a route spine, with straight parallel lanes and consistent perpendicular spacing. Bends are sharp and geometric. Keep corresponding segments parallel through bends; do not fan individual lanes toward a shared point.

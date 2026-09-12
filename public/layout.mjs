@@ -93,19 +93,19 @@ const CODESHARE_OFFSETS = {
 
   // Middle East, Africa, South Asia via DOH (Qatar Airways): rows above Doha, the grid 60
   // left of Doha's centre so its lowest row clears Seoul's box in the outer column
-  ALA: {hub: 'DOH', dx: -387, dy: -422, region: 'east'},
-  AMM: {hub: 'DOH', dx: -97, dy: -422, region: 'east'},
+  ALA: {hub: 'DOH', dx: -387, dy: -620, region: 'east'},
+  AMM: {hub: 'DOH', dx: -97, dy: -620, region: 'east'},
   RUH: {hub: 'DOH', dx: 193, dy: -422, region: 'east'},
-  JED: {hub: 'DOH', dx: -387, dy: -582, region: 'east'},
+  JED: {hub: 'DOH', dx: 193, dy: -620, region: 'east'},
   MCT: {hub: 'DOH', dx: -97, dy: -582, region: 'east'},
-  NBO: {hub: 'DOH', dx: 193, dy: -582, region: 'east'},
-  ZNZ: {hub: 'DOH', dx: 483, dy: -582, region: 'east'},
-  JNB: {hub: 'DOH', dx: 773, dy: -582, region: 'east'},
-  CPT: {hub: 'DOH', dx: -387, dy: -742, region: 'east'},
+  NBO: {hub: 'DOH', dx: 483, dy: -620, region: 'east'},
+  ZNZ: {hub: 'DOH', dx: 483, dy: -900, region: 'east'},
+  JNB: {hub: 'DOH', dx: -387, dy: -900, region: 'east'},
+  CPT: {hub: 'DOH', dx: 193, dy: -900, region: 'east'},
   SEZ: {hub: 'DOH', dx: -97, dy: -742, region: 'east'},
   BOM: {hub: 'DOH', dx: 193, dy: -742, region: 'east'},
   BLR: {hub: 'DOH', dx: 483, dy: -742, region: 'east'},
-  MLE: {hub: 'DOH', dx: -387, dy: -902, region: 'east'},
+  MLE: {hub: 'DOH', dx: -97, dy: -900, region: 'east'},
 
   // Japan Domestic via HND (Japan Airlines): a short column beside Haneda
   CTS: {hub: 'HND', dx: 350, dy: -130, region: 'east'},
@@ -114,21 +114,16 @@ const CODESHARE_OFFSETS = {
 
   // Philippines via HKG (Cathay Pacific)
   PEN: {hub: 'HKG', dx: 400, dy: -170, region: 'east'},
-  CEB: {hub: 'HKG', dx: 400, dy: 0, region: 'east'},
-  DPS: {hub: 'HKG', dx: 400, dy: 170, region: 'east'},
-  MNL: {hub: 'HKG', dx: 640, dy: -85, region: 'east'},
-  SYD: {hub: 'HKG', dx: 640, dy: 85, region: 'east'},
-  AKL: {hub: 'HKG', dx: 640, dy: 255, region: 'east'},
+  MNL: {hub: 'HKG', dx: 520, dy: -210, region: 'east'},
+  DPS: {hub: 'HKG', dx: 520, dy: -70, region: 'east'},
+  SYD: {hub: 'HKG', dx: 520, dy: 70, region: 'east'},
+  AKL: {hub: 'HKG', dx: 520, dy: 210, region: 'east'},
 
-  // Southeast Asia, Australia & New Zealand via SIN (Qantas / partners): three sides of
-  // Singapore (left below the Helsinki approach, right, and rows starting below the left
-  // column) so that no edge carries more bundle intervals than its length.
-  KUL: {hub: 'SIN', dx: 400, dy: -130, region: 'east'},
-  USM: {hub: 'SIN', dx: 400, dy: 0, region: 'east'},
-  HAN: {hub: 'SIN', dx: 400, dy: 130, region: 'east'},
-  CMB: {hub: 'SIN', dx: 640, dy: -65, region: 'east'},
-  NAN: {hub: 'SIN', dx: 640, dy: 65, region: 'east'},
-  DRW: {hub: 'SIN', dx: 640, dy: 195, region: 'east'},
+  // Singapore, Qantas
+  KUL: {hub: 'SIN', dx: 520, dy: -210, region: 'east'},
+  CMB: {hub: 'SIN', dx: 520, dy: -70, region: 'east'},
+  NAN: {hub: 'SIN', dx: 520, dy: 70, region: 'east'},
+  DRW: {hub: 'SIN', dx: 520, dy: 210, region: 'east'},
 };
 
 
@@ -290,7 +285,7 @@ function buildTieredLayout(airportList, flightList, center, counts, largestBundl
   // Hong Kong, clears Taipei, above right of Singapore.
   const eCols = [
     {x: 540, boxes: [['DOH', -1000], ['DXB', -500], ['DEL', 0], ['BKK', 600], ['HKT', 900], ['MEL', 1180]]},
-    {x: 1020, boxes: [['ICN', -1400], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['SIN', 1250]]}
+    {x: 1020, boxes: [['ICN', -1400], ['PVG', -800], ['HND', -470], ['NRT', -157], ['NGO', 157], ['KIX', 470], ['HKG', 784], ['SIN', 1330]]}
   ];
   for (const col of eCols) {
     for (const [code, dy] of col.boxes) {

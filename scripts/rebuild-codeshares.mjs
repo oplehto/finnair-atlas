@@ -21,11 +21,15 @@ import {fetchRoute, flatten, principalRow} from './flightmapper.mjs';
 
 const WEEK = '2026-09-14';
 
-// Gateway → the destinations drawn from it, one per region it opens up.
+// Gateway → the destinations drawn from it, one per region it opens up. The counts are limited by
+// geometry as much as by editorial taste: each grid is a single column, so every route leaves the
+// gateway's edge on its own bearing and no two can cross. A second column needs the deeper boxes to
+// sit in the corridors between the nearer ones, and those corridors have to be wide enough for the
+// router to actually use — when they are not, it goes right around the grid and crosses everything.
 const SELECTION = {
-  HKG: {partner: 'Cathay Pacific', region: 'east', codes: ['SYD', 'AKL', 'DPS', 'MNL', 'PEN', 'CEB']},
-  SIN: {partner: 'Qantas', region: 'east', codes: ['MEL', 'DRW', 'NAN', 'KUL', 'HAN', 'USM', 'CMB']},
-  DOH: {partner: 'Qatar Airways', region: 'east', codes: ['AMM', 'JED', 'MCT', 'ALA', 'NBO', 'ZNZ', 'JNB', 'CPT', 'MLE', 'SEZ']},
+  HKG: {partner: 'Cathay Pacific', region: 'east', codes: ['SYD', 'AKL', 'DPS', 'MNL']},
+  SIN: {partner: 'Qantas', region: 'east', codes: ['MEL', 'DRW', 'NAN', 'KUL', 'CMB']},
+  DOH: {partner: 'Qatar Airways', region: 'east', codes: ['AMM', 'JED', 'ALA', 'NBO', 'JNB', 'MLE', 'CPT', 'ZNZ']},
   HND: {partner: 'Japan Airlines', region: 'east', codes: ['CTS', 'FUK', 'OKA']},
   LHR: {partner: 'British Airways', region: 'west', codes: ['GLA', 'INV', 'NCL', 'JER', 'GIB', 'BOS', 'IAD', 'YYZ', 'GRU', 'LOS']},
   JFK: {partner: 'American Airlines', region: 'west', codes: ['CLT', 'RDU', 'DCA', 'ORF']},
@@ -37,7 +41,8 @@ const SELECTION = {
 
 // Destinations the sheet has not drawn before and so has no coordinates for.
 const NEW_AIRPORTS = {
-  CEB: {name: 'Cebu', alt: 'Mactan', lat: 10.307, lon: 123.979},
+  CPT: {name: 'Kapkaupunki', alt: 'Cape Town', lat: -33.965, lon: 18.602},
+  ZNZ: {name: 'Zanzibar', alt: 'Tansania', lat: -6.222, lon: 39.225},
   NAN: {name: 'Nadi', alt: 'Fiji', lat: -17.755, lon: 177.443},
   USM: {name: 'Koh Samui', alt: 'Thailand', lat: 9.548, lon: 100.062},
   ALA: {name: 'Almaty', alt: 'Kazakhstan', lat: 43.352, lon: 77.041},

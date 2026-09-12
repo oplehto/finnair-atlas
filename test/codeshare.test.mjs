@@ -152,3 +152,47 @@ test('filterFlights can filter codeshares on or off', () => {
   assert.equal(withCS.length, demo.flights.length + demo.codeshareFlights.length);
   assert.equal(withoutCS.length, demo.flights.length);
 });
+
+// A partner grid is a fan from one hub edge: every route leaves the gateway and ends at one of its
+// own satellites, so the grid has no business containing a crossing or a detour. Both were missed
+// for a long time because the crossing test only ever looked at the domestic fan, and nothing
+// measured path length at all — a route the router could not take directly would loop right around
+// the grid, crossing everything, and no test complained.
+test('partner grids draw without crossings or detours', () => {
+  const flights = [...demo.flights, ...demo.codeshareFlights];
+  const codes = new Set(flights.flatMap(f => [f.from, f.to]));
+  const nodes = layoutAirports([...demo.airports, ...demo.codeshareAirports].filter(a => codes.has(a.code)), flights);
+  const routes = layoutFlights(nodes, flights);
+  const satellites = new Map(demo.codeshareAirports.map(a => [a.code, a]));
+  const gatewayOf = r => { const s = satellites.get(r.flight.from) || satellites.get(r.flight.to); return s ? s.hub : null; };
+
+  const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+  const segmentsCross = (p1, p2, p3, p4) => { const e = 1e-6, d1 = cross(p3, p4, p1), d2 = cross(p3, p4, p2), d3 = cross(p1, p2, p3), d4 = cross(p1, p2, p4); return ((d1 > e && d2 < -e) || (d1 < -e && d2 > e)) && ((d3 > e && d4 < -e) || (d3 < -e && d4 > e)); };
+  const pairKey = r => [r.flight.from, r.flight.to].sort().join(':');
+
+  const byGateway = new Map();
+  for (const r of routes) { const g = gatewayOf(r); if (g) { if (!byGateway.has(g)) byGateway.set(g, []); byGateway.get(g).push(r); } }
+  assert.ok(byGateway.size >= 8, 'every gateway contributes routes to check');
+
+  for (const [gateway, grid] of byGateway) {
+    for (let i = 0; i < grid.length; i++) for (let j = i + 1; j < grid.length; j++) {
+      if (pairKey(grid[i]) === pairKey(grid[j])) continue; // the two directions of one city pair share a spine
+      for (let a = 0; a < grid[i].points.length - 1; a++) for (let b = 0; b < grid[j].points.length - 1; b++) {
+        assert.ok(!segmentsCross(grid[i].points[a], grid[i].points[a + 1], grid[j].points[b], grid[j].points[b + 1]),
+          `${gateway} grid: ${pairKey(grid[i])} crosses ${pairKey(grid[j])}`);
+      }
+    }
+  }
+
+  // A route that wanders is a routing failure the eye catches immediately. A short approach stub and
+  // a bend or two put the honest ceiling near 1.5; beyond that the router went around something.
+  for (const r of routes) {
+    const gateway = gatewayOf(r);
+    if (!gateway) continue;
+    let path = 0;
+    for (let i = 0; i < r.points.length - 1; i++) path += Math.hypot(r.points[i + 1].x - r.points[i].x, r.points[i + 1].y - r.points[i].y);
+    const direct = Math.hypot(r.end.x - r.start.x, r.end.y - r.start.y);
+    assert.ok(path <= Math.max(direct * 1.6, direct + 120),
+      `${gateway} grid: ${r.flight.from}-${r.flight.to} detours ${(path / direct).toFixed(2)}x (${Math.round(path)} for ${Math.round(direct)})`);
+  }
+});
