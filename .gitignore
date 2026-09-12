@@ -1,0 +1,8 @@
+node_modules/
+public/dist/
+.env
+schedule.json
+site/
+
+.playwright-mcp/
+.cache/
