@@ -112,7 +112,7 @@ The sheet is composed like a printed timetable: a masthead with the title, editi
 
 ## Licence
 
-Code and documentation are released under the [Apache License 2.0](LICENSE); see [NOTICE](NOTICE) for what is excluded: the Finnair name and logotype (Finnair Oyj trademarks, used for illustration only), the reference scans, and the fonts under their own licences. The schedule data is illustrative and must not be relied on for travel.
+Code and documentation are released under the [MIT License](LICENSE); see [NOTICE](NOTICE) for what is excluded: the Finnair name and logotype (Finnair Oyj trademarks, used for illustration only), the reference scans, and the fonts under their own licences. The schedule data is illustrative and must not be relied on for travel.
 
 ## Publishing
 
