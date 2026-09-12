@@ -6,8 +6,8 @@ Licensed under the MIT License (see LICENSE).
 Not covered by this licence:
 - The Finnair name and the 1968 Finnair logotype (public/logo.mjs) are trademarks of Finnair Oyj,
   used here for illustration only in an unofficial fan project.
-- The reference scans under docs/references/ are third-party material kept for design reference;
-  they are not served by the app and no redistribution right is granted.
+- The 1974 Finnair timetable scan used as the design reference is not included in this repository;
+  see docs/references/README.md for where to find it. No redistribution right is granted.
 - The Oswald and Roboto Condensed fonts are distributed under their own licences
   (see public/dist/fonts/*-LICENSE.txt after a build).
 - The schedule data is illustrative and must not be relied on for travel.

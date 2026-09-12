@@ -1,15 +1,20 @@
 # Visual references
 
-These files preserve the user-supplied images used to develop Airline Atlas. Originals were copied without conversion or editing; SHA-256 comparisons verified the copies.
+Airline Atlas was developed against a scan of Finnair's printed international timetable for
+1 May – 31 October 1974. That scan is **not** kept in this repository: it is Finnair material and
+this project has no right to redistribute it. A copy is published at
+[Timetable Images](https://www.timetableimages.com/ttimages/ay/ay74/ay74-4.jpg), which is the
+reference to consult when working on the sheet's composition.
+
+What the sheet takes from it is recorded in prose in the [style guide](../style-guide.md), so the
+design intent survives without the image: parallel lanes at even spacing, large hub boxes with
+bracketed bundles along each edge, times set beside the airport edge that owns them, flight and
+equipment notation riding on the lane itself, blue ink for the airline's own services and a second
+ink for everything else, and crossings broken rather than avoided.
 
 | File | Provenance and role |
 | --- | --- |
-| `finnair-1974-international.png` | User-supplied scan of Finnair's international timetable, dated 1 May–31 October 1974. Primary composition reference. The same image was attached twice; one copy is retained. |
-| `finnair-1974-timing-detail.png` | User-supplied close-up of the historic timetable showing edge times, parallel arrows, and flight/equipment notation. |
-| `hub-crossing-problem.png` | User-supplied screenshot of an earlier Airline Atlas layout. Negative reference for congested hub approaches. |
+| `hub-crossing-problem.png` | Screenshot of an earlier Airline Atlas layout, authored by this project. Negative reference: different bundles converging and crossing at the hub edge. |
 
-The historical sheet was also linked at [Timetable Images](https://www.timetableimages.com/ttimages/ay/ay74/ay74-4.jpg). The PNGs here are the supplied attachments, not newly downloaded archive files.
-
-The scans are reference material, not project-authored artwork; retaining them here does not establish a redistribution licence. They are not served by the app or included in SVG exports.
-
-The [style guide](../style-guide.md) records which qualities to reproduce and which earlier behaviours to avoid.
+The Finnair name and the 1968 logotype are trademarks of Finnair Oyj, used here for illustration
+only in an unofficial project. See [NOTICE](../../NOTICE).

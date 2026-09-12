@@ -8,17 +8,18 @@ The sheet is a **weekly timetable**, like the reference: one arrow per weekly se
 
 ## Reference images
 
-| Image | What to learn from it |
+The primary reference is Finnair's printed international timetable for 1 May – 31 October 1974.
+The scan is Finnair material and is not redistributed here; consult the copy published at
+[Timetable Images](https://www.timetableimages.com/ttimages/ay/ay74/ay74-4.jpg). What the sheet
+takes from it is written out below, so the design intent does not depend on having the image open.
+
+| Reference | What to learn from it |
 | --- | --- |
-| [1974 international sheet](references/finnair-1974-international.png) | Overall density, large hubs, short connections, angular routes, blue/black ink, and organized crossings. |
-| [Timing detail](references/finnair-1974-timing-detail.png) | Times beside individual airport ports; flight and aircraft notation along each lane; closely spaced parallel arrows. |
+| 1974 international sheet (external) | Overall density, large hubs, short connections, angular routes, blue/black ink, and organized crossings. |
+| Its timing detail (external) | Times beside individual airport ports; flight and aircraft notation along each lane; closely spaced parallel arrows. |
 | [Hub crossing problem](references/hub-crossing-problem.png) | A negative example from an earlier app version: different bundles converge and cross immediately at the hub edge. Avoid this arrangement. |
 
-![Primary reference: Finnair international timetable, 1974](references/finnair-1974-international.png)
-
-![Detail of timing notation at an airport edge](references/finnair-1974-timing-detail.png)
-
-See [reference provenance](references/README.md) for source information. The earlier and later full-sheet attachments were identical and are stored once.
+See [reference provenance](references/README.md) for source information.
 
 ## Composition and geography
 
