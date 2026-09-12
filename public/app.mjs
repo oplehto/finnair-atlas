@@ -49,7 +49,7 @@ function setData(next){
  document.querySelector('.edition').textContent=next.subtitle||'Flight services';
  $('source').textContent=(next.demo?'Example · ':'')+(next.source||'Imported schedule');
  $('updated').textContent=imported?'Local file · weekly services':'Weekly services · Reload picks up a changed schedule';
- $('notice').textContent=[next.copyright?`Courtesy of ${next.copyright}`:'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean).join(' · ');
+ $('notice').textContent=[next.copyright||'','Not to be relied on for travel',next.logo==='finnair-1968'?'Finnair name and logo are the property of Finnair Oyj':''].filter(Boolean).join(' · ');
  const allFlights=[...data.flights,...(data.codeshareFlights||[])];
  const aircraft=$('aircraft').value;
  $('aircraft').replaceChildren(new Option('All aircraft',''),...[...new Set(allFlights.map(f=>f.aircraft).filter(Boolean))].sort().map(a=>new Option(a,a)));
@@ -76,8 +76,14 @@ function sheetHeader(x,y,k,points){
 }
 
 // Explanations box at the foot of the sheet, three columns like the 1974 reference.
+// The notation column is the tallest, so the box's height follows its last line rather than being
+// guessed: 68 for the column's own offset, the last line, a gap, then the closing rule and the two
+// fine-print lines beneath it. The height was previously a literal 274 here while the frame reserved
+// 252, and adding three notation lines pushed the column straight through both.
+const NOTATION_LAST_Y = 206;
+const LEGEND_H = 68 + NOTATION_LAST_Y + 20 + 52;
 function sheetLegend(x,y,k,width){
- const W=width/k,H=274;
+ const W=width/k,H=LEGEND_H;
  const g=el('g',{class:'sheet-legend',transform:`translate(${x} ${y}) scale(${k})`});
  g.append(
   el('rect',{x:0,y:0,width:W,height:H,class:'legend-box'}),
@@ -111,12 +117,12 @@ function sheetLegend(x,y,k,width){
  item(marks,0,146,'AY 431 # A321 = lennon numero · päivät · kalusto / flight number · days · aircraft');
  item(marks,0,166,'† = vuokrattu kone / aircraft wet-leased  ·  ⁵ = viidennen vapauden osuus / fifth-freedom sector');
  item(marks,0,186,'Nuolenkärki = saapuminen / arrival · Katkos viivassa = ylittävä reitti / gap = route passing over');
- item(marks,0,206,'Reunan pituus = vuorojen määrä / edge length = number of services');
+ item(marks,0,NOTATION_LAST_Y,'Reunan pituus = vuorojen määrä / edge length = number of services');
  g.append(
   el('line',{x1:0,y1:H-50,x2:W,y2:H-50,class:'legend-rule'}),
   el('text',{x:20,y:H-32,class:'legend-item'},'Aikataulut ja konetyypit voidaan muuttaa ilmoittamatta · Tidtabeller och flygplanstyper kan ändras utan föregående meddelande · Schedules and aircraft types may change without notice'),
   el('text',{x:W-20,y:H-32,'text-anchor':'end',class:'legend-item'},data.demo?'Havainnollistava aineisto, ei matkasuunnitteluun / Illustrative data, not for travel planning':(data.source||'')),
-  el('text',{x:20,y:H-12,class:'legend-item legend-fine'},[data.copyright?`Kartan tarjoaa ${data.copyright} / Courtesy of ${data.copyright}`:'',`Tätä karttaa ei tule käyttää matkasuunnitteluun eikä siihen tule luottaa / This sheet must not be relied on for travel or any other purpose`,data.logo==='finnair-1968'?'Finnair-nimi ja -tunnus ovat Finnair Oyj:n omaisuutta, tässä vain havainnollistamassa / The Finnair name and logo are the property of Finnair Oyj, shown for illustration only':''].filter(Boolean).join('  ·  '))
+  el('text',{x:20,y:H-12,class:'legend-item legend-fine'},[data.copyright||'',`Tätä karttaa ei tule käyttää matkasuunnitteluun eikä siihen tule luottaa / This sheet must not be relied on for travel or any other purpose`,data.logo==='finnair-1968'?'Finnair-nimi ja -tunnus ovat Finnair Oyj:n omaisuutta, tässä vain havainnollistamassa / The Finnair name and logo are the property of Finnair Oyj, shown for illustration only':''].filter(Boolean).join('  ·  '))
  );
  return g;
 }
@@ -185,7 +191,7 @@ function render(){
  if(cr-cl<1400){const mid=(cl+cr)/2;cl=mid-700;cr=mid+700;}
  if(cb-ct<500)cb=ct+500;
  const k=clamp((cr-cl)/3000,1,3.4),kh=clamp((cr-cl)/2300,1,4.4);
- const pad=48*k,gap=30*k,headH=112*kh,legendH=252*k;
+ const pad=48*k,gap=30*k,headH=112*kh,legendH=LEGEND_H*k;
  const frameX=cl-gap,frameY=ct-gap,frameW=(cr-cl)+2*gap;
  const legendY=cb+gap,frameH=legendY+legendH+gap-frameY;
  const left=frameX-pad,top=frameY-headH-pad,width=frameW+2*pad,height=frameH+headH+2*pad;
@@ -196,6 +202,14 @@ function render(){
   const marker=el('marker',{id,viewBox:'0 0 10 10',refX:9.5,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'});
   marker.append(el('path',{d:'M 0 1 L 10 5 L 0 9 z',fill:color}));
   defs.append(marker);
+ }
+ // Warm paper: each box carries a faint radial wash, lighter at the centre and a little tanner
+ // toward the edges, as printed stock ages unevenly. Helsinki gets a stronger one — it is the only
+ // box large enough for the fall-off to read as paper rather than as a smudge.
+ for(const[id,centre,edge,stop]of[['box-paper','#fefdf9','#f4efdf',0.55],['hub-paper','#fefdfa','#efe7cf',0.4]]){
+  const gradient=el('radialGradient',{id,cx:'42%',cy:'34%',r:'78%'});
+  gradient.append(el('stop',{offset:0,'stop-color':centre}),el('stop',{offset:stop,'stop-color':centre}),el('stop',{offset:1,'stop-color':edge}));
+  defs.append(gradient);
  }
  defs.append(wornFilter('worn'));
  svg.append(defs);
@@ -588,7 +602,10 @@ $('export').onclick=async()=>{
   const clone=svg.cloneNode(true),style=el('style');
   for(const plate of clone.querySelectorAll('.crowded-label'))plate.classList.remove('crowded-label');
   for(const node of clone.querySelectorAll('.hover'))node.classList.remove('hover');
-  const response=await fetch('fonts.css');
+  // The page's stylesheets carry a content hash in their filenames on the static build, so the
+  // export asks the document which files it actually loaded rather than guessing their names.
+  const sheetHref=name=>[...document.querySelectorAll('link[rel="stylesheet"]')].map(l=>l.getAttribute('href')).find(href=>href&&href.split('/').pop().startsWith(name))||`${name}.css`;
+  const response=await fetch(sheetHref('fonts'));
   if(!response.ok)throw Error('Font stylesheet could not be loaded.');
   let fontCss=await response.text();
   for(const match of [...fontCss.matchAll(/url\('([^']+)'\)/g)]){
@@ -599,7 +616,7 @@ $('export').onclick=async()=>{
    for(const byte of bytes)binary+=String.fromCharCode(byte);
    fontCss=fontCss.replace(match[0],`url('data:font/woff2;base64,${btoa(binary)}')`);
   }
-  const stylesheet=await fetch('style.css');
+  const stylesheet=await fetch(sheetHref('style'));
   if(!stylesheet.ok)throw Error('Timetable styles could not be loaded.');
   style.textContent=fontCss+await stylesheet.text();
   clone.prepend(style);

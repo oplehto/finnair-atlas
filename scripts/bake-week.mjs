@@ -60,7 +60,7 @@ export default {
   codeshareFlights,
   title: "Finnair, by air",
   logo: "finnair-1968",
-  copyright: "Olli-Pekka Lehto",
+  copyright: "2026 - Olli-Pekka Lehto - ollipekka.lehto@gmail.com",
   subtitle: "Ulkomaan ja kotimaan liikenne — Utrikes- och inrikestrafiken",
   source: "Finnairin viikkoaikataulu Finavian lentotiedoista / Weekly pattern from Finavia flight data · syksy / autumn 2026",
   demo: true,
